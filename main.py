@@ -5,14 +5,18 @@ import numpy as np
 import multiprocessing
 import pickle
 import datetime
-import pytz
 from io import StringIO
+import pytz
 pacific = pytz.timezone('US/Pacific')
 
+'''
+Warning: do not use .replace(tzinfo=pacific) to replace timezone, which has a fault!
+'''
+
 def main():
-    al = analysis(outputName='data_-1to0min.csv', logExist=1)
+    al = analysis(outputName='data_0to1min_nodestall.csv', logExist=1)
     al.runtime()
-    al.process()
+    al.process(mode='nodestall', counterSaved=0)
 
 def getfiles(path):
     # get all the files with full path.
@@ -24,7 +28,7 @@ def getfiles(path):
     return fileList
 
 def unix2string(unixTime):
-    thisTime = datetime.datetime.utcfromtimestamp(unixTime).replace(tzinfo=datetime.timezone.utc).astimezone(tz=pacific)
+    thisTime = pytz.utc.localize(datetime.datetime.utcfromtimestamp(unixTime)).astimezone(tz=pacific)
     timestr = thisTime.strftime('%Y-%m-%d %H:%M:%S')
     return timestr
 
@@ -283,12 +287,13 @@ class ldms:
         '''
         Only select the routers we are interested in.
         '''
-        print('Selecting routers..')
+        #print('Selecting routers..')
         sel = data[data['aries_rtr_id'].isin(routers)].copy()
         return sel
 
     def removeDuplicate(self, data):
         '''
+        component_id is the producer name.
         Only select the producer with a smaller node id.
         A few routers are only collected by one producer.
         '''
@@ -307,6 +312,7 @@ class ldms:
     def getDiff(self, data):
         #print('Calculating the difference..')
         data['HTime'] = data['#Time'].apply(unix2string)
+        #print(data.iloc[0][['#Time','HTime']])
         #data['HTime'] = pd.to_datetime(data['#Time'], unit='s') # this will be converted to utc time, and tz cannot be set.
         nonAccumCol = ['HTime','Time_usec','ProducerName','component_id']
         nonAccum = data[nonAccumCol]
@@ -332,6 +338,22 @@ class ldms:
         #regu['#Time'] = regu['HTime'].apply(lambda x: x - pd.Timedelta(microseconds=x.microsecond))
         return regu
 
+    def calcNodeStall(self, data, nodes):
+        nodevalue = []
+        for node in nodes:
+            cname = self.getCName(node)
+            thisRouter = data[data['aries_rtr_id'] == cname[:-1] + '0']
+            if len(thisRouter) > 0:
+                thisNodeRatio = thisRouter['AR_NL_PRF_REQ_PTILES_TO_NIC_%s_STALLED' % cname[-1]].mean()
+                nodevalue.append(thisNodeRatio)
+            else:
+                continue
+        if len(nodevalue) > 0:
+            avg = sum(nodevalue)/len(nodevalue)
+        else:
+            avg = -1
+        return avg
+
     def calcRouterStall(self, data):
         '''
         Calculate the avg stall of the 40 tiles in all the routers.
@@ -341,12 +363,68 @@ class ldms:
         Metrics = []
         for r in range(5):
             for c in range(8):
-                data['VCsum_%d_%d' % (r,c)] = data[['AR_RTR_%d_%d_INQ_PRF_INCOMING_FLIT_VC%d' % (r,c,v) for v in range(8)]].sum(axis=1)
-                Metrics.append('VCsum_%d_%d' % (r, c))
+                #data['VCsum_%d_%d' % (r,c)] = data[['AR_RTR_%d_%d_INQ_PRF_INCOMING_FLIT_VC%d' % (r,c,v) for v in range(8)]].sum(axis=1)
+                #Metrics.append('VCsum_%d_%d' % (r, c))
+                Metrics.append('AR_RTR_%d_%d_INQ_PRF_ROWBUS_STALL_CNT' % (r,c))
         data.fillna(0, inplace=True)
-        data['PortAvgStall'] = data[Metrics].mean(axis=1)
-        avgStall = data['PortAvgStall'].mean(axis=0)
+        data['PortAvgStall'] = data[Metrics].mean(axis=1) # average over ports.
+        avgStall = data['PortAvgStall'].mean(axis=0) # average over router and time.
         return avgStall
+
+    def calcRouterMetric(self, data):
+        '''
+        Calculate router stall to flit ratio.
+        '''
+        filterElec, filterOpt = 5410794, 933 # the median value
+            # the filter is necessary to avoid spikes created by a few flits.
+        #print('Filter: %s, FilterElec: %d, FilterOpt: %d' % (str(filterOn), filterElec, filterOpt))
+        Metrics = []
+        for r in range(5):
+            for c in range(8):
+                data['VCsum_%d_%d' % (r,c)] = data[['AR_RTR_%d_%d_INQ_PRF_INCOMING_FLIT_VC%d' % (r,c,v) for v in range(8)]].sum(axis=1)
+                if r==0 and c>=1 and c<=6 or r==1 and c>=2 and c<=5:
+                    filterTile = filterOpt
+                else:
+                    filterTile = filterElec
+                data['Ratio_%d_%d' % (r,c)] = data['AR_RTR_%d_%d_INQ_PRF_ROWBUS_STALL_CNT' % (r,c)].apply(lambda x: x if x>filterTile else 0) / data['VCsum_%d_%d' % (r,c)]
+                Metrics.append('Ratio_%d_%d' % (r, c))
+        data.fillna(0, inplace=True)
+        data['Congestion_rtr'] = data[Metrics].mean(axis=1)
+        timerouterAvg = data['Congestion_rtr'].mean(axis=0)
+        return timerouterAvg
+
+    def calcNodeMetric(self, data, nodes, filterOn=True):
+        '''
+        Calculate the node congestion by computing for each node the stall/flit.
+        '''
+        filterREQ = 1019 # the median value over 100 1-second samples is 1099. over 1800 second is 1019.
+        filterRSP = 0 # seems have a problem.
+            # the filter is necessary to avoid spikes created by a few flits.
+        #print('Filter: %s, FilterREQ: %d, FilterRSP: %d' % (str(filterOn), filterREQ, filterRSP))
+        for nic in range(4):
+            if filterOn:
+                firstDiv = data['AR_NL_PRF_REQ_PTILES_TO_NIC_%d_STALLED' % nic].apply(lambda x: x if x>filterREQ else 0) / data['AR_NL_PRF_REQ_PTILES_TO_NIC_%d_FLITS' % nic]
+                secondDiv = data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_STALLED' % nic].apply(lambda x: x if x>filterRSP else 0) / data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_FLITS' % nic]
+            else:
+                firstDiv = data['AR_NL_PRF_REQ_PTILES_TO_NIC_%d_STALLED' % nic] / data['AR_NL_PRF_REQ_PTILES_TO_NIC_%d_FLITS' % nic]
+                secondDiv = data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_STALLED' % nic] / data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_FLITS' % nic]
+            firstDiv.fillna(0, inplace=True)
+            secondDiv.fillna(0, inplace=True)
+            data['Congestion_REQ_nic%d' % nic] = firstDiv
+            data['Congestion_RSP_nic%d' % nic] = secondDiv
+            data['Congestion_nic%d' % nic] = firstDiv + secondDiv
+        data.fillna(0, inplace=True)
+        nodevalue = []
+        for node in nodes:
+            cname = self.getCName(node)
+            thisRouter = data[data['aries_rtr_id'] == cname[:-1] + '0']
+            thisNodeRatio = thisRouter['Congestion_nic%s' % cname[-1]].mean()
+            nodevalue.append(thisNodeRatio)
+        if len(nodevalue) > 0:
+            ratio = sum(nodevalue)/len(nodevalue)
+        else:
+            ratio = -1
+        return ratio
 
 class analysis(ldms):
     def __init__(self, outputName, logExist):
@@ -354,6 +432,10 @@ class analysis(ldms):
         self.outputName = outputName
 
     def runtime(self):
+        '''
+        Get the valid run list.
+        Get exec time and reported time.
+        '''
         fs = getfiles('../miniMD/results')
         self.timeDict, self.t = {}, {}
         for f in fs:
@@ -385,13 +467,13 @@ class analysis(ldms):
         with open('../miniMD/results/run%d.out' % run, 'r') as o:
             firstline = o.readline()
         if firstline[:-1].split()[4] == 'PDT':
-            timeStart = datetime.datetime.strptime(firstline[:-1], '%a %b %d %H:%M:%S PDT %Y').replace(tzinfo=pacific).timestamp()
+            timeStart = pacific.localize(datetime.datetime.strptime(firstline[:-1], '%a %b %d %H:%M:%S PDT %Y')).timestamp()
         elif firstline[:-1].split()[4] == 'PST':
-            timeStart = datetime.datetime.strptime(firstline[:-1], '%a %b %d %H:%M:%S PST %Y').replace(tzinfo=pacific).timestamp()
-        #queryTime = pd.Timestamp(timeStart, unit='s', tz='US/Pacific')
-        #queryEnd = queryTime + pd.Timedelta(seconds=deltaTime)
-        queryEnd = pd.Timestamp(timeStart, unit='s', tz='US/Pacific')
-        queryTime = queryEnd - pd.Timedelta(seconds=deltaTime)
+            timeStart = pacific.localize(datetime.datetime.strptime(firstline[:-1], '%a %b %d %H:%M:%S PST %Y')).timestamp()
+        queryTime = pd.Timestamp(timeStart, unit='s', tz='US/Pacific')
+        queryEnd = queryTime + pd.Timedelta(seconds=deltaTime)
+        #queryEnd = pd.Timestamp(timeStart, unit='s', tz='US/Pacific')
+        #queryTime = queryEnd - pd.Timedelta(seconds=deltaTime)
         return queryTime, queryEnd
 
     def getRouter(self):
@@ -399,43 +481,65 @@ class analysis(ldms):
         Build a dict recording the routers that each job is running on.
         '''
         nodelist = pd.read_csv('nodelist.csv', sep='|')
-        self.routers = {}
+        self.routers, self.nodes = {}, {}
         for idx, row in nodelist.iterrows():
             run = idx
             jobid, nodeString = row[['JobID','NodeList']]
-            nodes = super().parseNodeList(nodeString)
+            self.nodes[run] = super().parseNodeList(nodeString)
             thisRouters = []
-            for node in nodes:
+            for node in self.nodes[run]:
                 router = super().getCName(node)[:-1] + '0' # replace the nic value by 0.
                 if router not in thisRouters:
                     thisRouters.append(router)
             self.routers[run] = thisRouters
 
-    def process(self):
+    def process(self, mode, counterSaved):
+        '''
+        mode: metric, count, nodemetric.
+        '''
         self.getRouter()
         self.avgStall = []
         with open(self.outputName, 'w') as o:
-            o.write('run,execTime,avgStall,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n')
+            if mode in ['nodestall','rtrstall']:
+                name = 'avgStall'
+            elif mode == 'rtrmetric':
+                name = 'congestion'
+            elif mode == 'nodemetric':
+                name = 'ratio'
+            o.write('run,execTime,%s,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n' % name)
         for run in reversed(self.validRuns):
-            if run >= 50:
-                continue # jump latest runs without counter data.
+            if run >= 69:
+                continue # jump latest runs without counter data permission.
             print('Processing run %d..' % run)
-            queryTime, queryEnd = self.getTimeRange(run)
-            qd = super().fetchData(queryTime, queryEnd, 'rtr')
-            sel = super().selectRouter(qd, self.routers[run])
+            if counterSaved:
+                sel = pd.read_csv('counter/run%d.csv' % run)
+            else:
+                queryTime, queryEnd = self.getTimeRange(run)
+                qd = super().fetchData(queryTime, queryEnd, 'rtr')
+                #print(qd.iloc[0]['#Time'])
+                #print(qd.iloc[-1]['#Time'])
+                sel = super().selectRouter(qd, self.routers[run])
+                sel.to_csv('counter/run%d.csv' % run, index=0)
             rmDup, jump = super().removeDuplicate(sel)
             if not jump:
                 diff = super().getDiff(rmDup)
                 regu = super().regularize(diff)
-                thisStall = super().calcRouterStall(regu)
-                self.avgStall.append(thisStall)
+                if mode == 'rtrstall':
+                    value = super().calcRouterStall(regu)
+                elif mode == 'rtrmetric':
+                    value = super().calcRouterMetric(regu)
+                elif mode == 'nodestall':
+                    value = super().calcNodeStall(regu, self.nodes[run])
+                elif mode == 'nodemetric':
+                    value = super().calcNodeMetric(regu, self.nodes[run])
+                print(value)
+                self.avgStall.append(value)
                 with open(self.outputName, 'a') as o:
-                    writeline = '%d,%f,%f' % (run, self.timeDict[run], thisStall)
+                    writeline = '%d,%f,%f' % (run, self.timeDict[run], value)
                     for i in range(6):
                         writeline = writeline + ',' + str(self.t[run][i])
                     writeline += '\n'
                     o.write(writeline)
-                print(thisStall)
 
     def drawCorr(self):
         ax.plot(self.execTime, self.avgStall, '.')

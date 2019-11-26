@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --account=m3229
+#SBATCH --account=m3410
 #SBATCH -q regular
 #SBATCH -J miniMD
 #SBATCH -d singleton
 #SBATCH -C haswell
 #SBATCH -t 00:10:00
 #SBATCH --nodes=64
-#SBATCH --mail-type=END
+# --mail-type=END
 
 module load openmpi
 cd ~/miniMD/ref
