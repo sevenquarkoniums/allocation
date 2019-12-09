@@ -8,15 +8,17 @@ import datetime
 from io import StringIO
 import pytz
 pacific = pytz.timezone('US/Pacific')
+import re
 
 '''
 Warning: do not use .replace(tzinfo=pacific) to replace timezone, which has a fault!
 '''
 
 def main():
-    al = analysis(outputName='data_0to1min_nodestall.csv', logExist=1)
+    al = analysis(outputName='data_0to1min_all.csv', logExist=1)
+        # do change queryTime when adjusting range.
     al.runtime()
-    al.process(mode='nodestall', counterSaved=0)
+    al.process(mode='rtrall', counterSaved=1, saveFolder='counter0to1')
 
 def getfiles(path):
     # get all the files with full path.
@@ -34,6 +36,7 @@ def unix2string(unixTime):
 
 class ldms:
     def __init__(self, logExist=False):
+        self.allrtrmetrics = ['flit','stallvc','stallrowbus']
         nprocs = multiprocessing.cpu_count()
         self.pool = multiprocessing.Pool(nprocs)
         if logExist:
@@ -84,6 +87,7 @@ class ldms:
         log_starts = {}
         log_mods = {}
         for agg in aggs:
+            print(str(agg))
             log_starts[agg] = {}
             log_mods[agg] = {}
             for f in files[agg]:
@@ -269,10 +273,10 @@ class ldms:
         unixEnd = datetimeEnd.value // 10**9
         pargs = [(f, unixTime, unixEnd) for f in files]
         fetched = self.pool.starmap(self.subsetLinesToDF, pargs)
-        queryData = pd.concat(fetched, ignore_index=True)
-        if len(queryData) == 0:
+        if len(fetched) == 0:
             print('No data for this time %s.' % str(datetimeStart))
             return None
+        queryData = pd.concat(fetched, ignore_index=True)
         return queryData
 
     def __getstate__(self):
@@ -302,12 +306,13 @@ class ldms:
         #print('All producer number: %d' % len(producers['component_id'].unique()))
         selectedProducer = list( producers.groupby(['aries_rtr_id']).min()['component_id'] )
             # all the 'aries_rtr_id' fields end with 'a0'.
+        numSelectedProducer = len(selectedProducer)
         print('Selected producer number: %d' % len(selectedProducer))
         rmDup = data[data['component_id'].isin(selectedProducer)].copy()
         jump = 1 if len(selectedProducer)==0 else 0
         if jump:
             print('### No counter data for this run ###')
-        return rmDup, jump
+        return rmDup, jump, numSelectedProducer
 
     def getDiff(self, data):
         #print('Calculating the difference..')
@@ -346,8 +351,6 @@ class ldms:
             if len(thisRouter) > 0:
                 thisNodeRatio = thisRouter['AR_NL_PRF_REQ_PTILES_TO_NIC_%s_STALLED' % cname[-1]].mean()
                 nodevalue.append(thisNodeRatio)
-            else:
-                continue
         if len(nodevalue) > 0:
             avg = sum(nodevalue)/len(nodevalue)
         else:
@@ -370,6 +373,35 @@ class ldms:
         data['PortAvgStall'] = data[Metrics].mean(axis=1) # average over ports.
         avgStall = data['PortAvgStall'].mean(axis=0) # average over router and time.
         return avgStall
+
+    def calcRouterFlit(self, data):
+        Metrics = []
+        for r in range(5):
+            for c in range(8):
+                data['VCsum_%d_%d' % (r,c)] = data[['AR_RTR_%d_%d_INQ_PRF_INCOMING_FLIT_VC%d' % (r,c,v) for v in range(8)]].sum(axis=1)
+                Metrics.append('VCsum_%d_%d' % (r, c))
+        data.fillna(0, inplace=True)
+        data['PortAvgStall'] = data[Metrics].mean(axis=1) # average over ports.
+        avg = data['PortAvgStall'].mean(axis=0) # average over router and time.
+        return avg
+
+    def calcRouterAll(self, data):
+        Metrics, rowbusMetrics, stallMetrics = [], [], []
+        for r in range(5):
+            for c in range(8):
+                data['VCsum_%d_%d' % (r,c)] = data[['AR_RTR_%d_%d_INQ_PRF_INCOMING_FLIT_VC%d' % (r,c,v) for v in range(8)]].sum(axis=1)
+                Metrics.append('VCsum_%d_%d' % (r, c))
+                data['stall_%d_%d' % (r,c)] = data[['AR_RTR_%d_%d_INQ_PRF_INCOMING_PKT_VC%d_FILTER_FLIT%d_CNT' % (r,c,v,v) for v in range(8)]].sum(axis=1)
+                stallMetrics.append('stall_%d_%d' % (r, c))
+                rowbusMetrics.append('AR_RTR_%d_%d_INQ_PRF_ROWBUS_STALL_CNT' % (r,c))
+        data.fillna(0, inplace=True)
+        data['PortAvgFlit'] = data[Metrics].mean(axis=1) # average over ports.
+        flit = data['PortAvgFlit'].mean(axis=0) # average over router and time.
+        data['stallvc'] = data[stallMetrics].mean(axis=1) # average over ports.
+        stallvc = data['stallvc'].mean(axis=0) # average over router and time.
+        data['stallrowbus'] = data[rowbusMetrics].mean(axis=1) # average over ports.
+        stallrowbus = data['stallrowbus'].mean(axis=0) # average over router and time.
+        return flit, stallvc, stallrowbus
 
     def calcRouterMetric(self, data):
         '''
@@ -404,27 +436,40 @@ class ldms:
         for nic in range(4):
             if filterOn:
                 firstDiv = data['AR_NL_PRF_REQ_PTILES_TO_NIC_%d_STALLED' % nic].apply(lambda x: x if x>filterREQ else 0) / data['AR_NL_PRF_REQ_PTILES_TO_NIC_%d_FLITS' % nic]
-                secondDiv = data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_STALLED' % nic].apply(lambda x: x if x>filterRSP else 0) / data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_FLITS' % nic]
+                #secondDiv = data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_STALLED' % nic].apply(lambda x: x if x>filterRSP else 0) / data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_FLITS' % nic]
             else:
                 firstDiv = data['AR_NL_PRF_REQ_PTILES_TO_NIC_%d_STALLED' % nic] / data['AR_NL_PRF_REQ_PTILES_TO_NIC_%d_FLITS' % nic]
-                secondDiv = data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_STALLED' % nic] / data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_FLITS' % nic]
-            firstDiv.fillna(0, inplace=True)
-            secondDiv.fillna(0, inplace=True)
-            data['Congestion_REQ_nic%d' % nic] = firstDiv
-            data['Congestion_RSP_nic%d' % nic] = secondDiv
-            data['Congestion_nic%d' % nic] = firstDiv + secondDiv
+                #secondDiv = data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_STALLED' % nic] / data['AR_NL_PRF_RSP_PTILES_TO_NIC_%d_FLITS' % nic]
+            #firstDiv.fillna(0, inplace=True)
+            #secondDiv.fillna(0, inplace=True)
+            #data['Congestion_REQ_nic%d' % nic] = firstDiv
+            #data['Congestion_RSP_nic%d' % nic] = secondDiv
+            data['Congestion_nic%d' % nic] = firstDiv# + secondDiv
         data.fillna(0, inplace=True)
         nodevalue = []
         for node in nodes:
             cname = self.getCName(node)
             thisRouter = data[data['aries_rtr_id'] == cname[:-1] + '0']
-            thisNodeRatio = thisRouter['Congestion_nic%s' % cname[-1]].mean()
-            nodevalue.append(thisNodeRatio)
+            if len(thisRouter) > 0:
+                thisNodeRatio = thisRouter['Congestion_nic%s' % cname[-1]].mean()
+                nodevalue.append(thisNodeRatio)
         if len(nodevalue) > 0:
             ratio = sum(nodevalue)/len(nodevalue)
         else:
             ratio = -1
         return ratio
+
+    def calcGroup(self, name):
+        if name == None:
+            return None
+        r = re.compile("(c)([0-9]+)(-)([0-9]+)(c)([0-9]+)(s)([0-9]+)")
+        m = r.match(name)
+        group = int(m.group(4))*6+np.floor(int(m.group(2))/2)
+        return int(group)
+
+    def groupsSpanned(self, cnamelist):
+        # From a list of cnames calculate the number of groups spanned 
+        return list(set([self.calcGroup(name) for name in cnamelist]))
 
 class analysis(ldms):
     def __init__(self, outputName, logExist):
@@ -481,19 +526,22 @@ class analysis(ldms):
         Build a dict recording the routers that each job is running on.
         '''
         nodelist = pd.read_csv('nodelist.csv', sep='|')
-        self.routers, self.nodes = {}, {}
+        self.routers, self.nodes, self.cnames = {}, {}, {}
         for idx, row in nodelist.iterrows():
             run = idx
             jobid, nodeString = row[['JobID','NodeList']]
             self.nodes[run] = super().parseNodeList(nodeString)
-            thisRouters = []
+            thisRouters, thisCnames = [], []
             for node in self.nodes[run]:
-                router = super().getCName(node)[:-1] + '0' # replace the nic value by 0.
+                cname = super().getCName(node)
+                thisCnames.append(cname)
+                router = cname[:-1] + '0' # replace the nic value by 0.
                 if router not in thisRouters:
                     thisRouters.append(router)
             self.routers[run] = thisRouters
+            self.cnames[run] = thisCnames
 
-    def process(self, mode, counterSaved):
+    def process(self, mode, counterSaved, saveFolder):
         '''
         mode: metric, count, nodemetric.
         '''
@@ -502,40 +550,62 @@ class analysis(ldms):
         with open(self.outputName, 'w') as o:
             if mode in ['nodestall','rtrstall']:
                 name = 'avgStall'
+                o.write('run,execTime,%s,avgFlit,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n' % name)
             elif mode == 'rtrmetric':
                 name = 'congestion'
+                o.write('run,execTime,%s,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n' % name)
             elif mode == 'nodemetric':
                 name = 'ratio'
-            o.write('run,execTime,%s,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n' % name)
+                o.write('run,execTime,%s,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n' % name)
+            elif mode == 'rtrall':
+                title = 'run,selectedProducer,numRouter,numGroup,'
+                title += ','.join(self.allrtrmetrics)
+                title += ',execTime,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n'
+                o.write(title)
         for run in reversed(self.validRuns):
-            if run >= 69:
+            if run >= 110:
                 continue # jump latest runs without counter data permission.
             print('Processing run %d..' % run)
             if counterSaved:
-                sel = pd.read_csv('counter/run%d.csv' % run)
+                if os.path.isfile('%s/run%d.csv' % (saveFolder, run)):
+                    sel = pd.read_csv('%s/run%d.csv' % (saveFolder, run))
+                else:
+                    continue
             else:
                 queryTime, queryEnd = self.getTimeRange(run)
                 qd = super().fetchData(queryTime, queryEnd, 'rtr')
+                if qd is None:
+                    continue
                 #print(qd.iloc[0]['#Time'])
                 #print(qd.iloc[-1]['#Time'])
                 sel = super().selectRouter(qd, self.routers[run])
-                sel.to_csv('counter/run%d.csv' % run, index=0)
-            rmDup, jump = super().removeDuplicate(sel)
+                sel.to_csv('%s/run%d.csv' % (saveFolder, run), index=0)
+            rmDup, jump, numSelectedProducer = super().removeDuplicate(sel)
             if not jump:
                 diff = super().getDiff(rmDup)
                 regu = super().regularize(diff)
+                numRouter = len(self.routers[run])
+                numGroup = len(super().groupsSpanned(self.cnames[run]))
                 if mode == 'rtrstall':
                     value = super().calcRouterStall(regu)
+                    value2 = super().calcRouterFlit(regu)
                 elif mode == 'rtrmetric':
                     value = super().calcRouterMetric(regu)
                 elif mode == 'nodestall':
                     value = super().calcNodeStall(regu, self.nodes[run])
                 elif mode == 'nodemetric':
                     value = super().calcNodeMetric(regu, self.nodes[run])
-                print(value)
+                elif mode == 'rtrall':
+                    value = super().calcRouterAll(regu)
+                print(str(value))
                 self.avgStall.append(value)
                 with open(self.outputName, 'a') as o:
-                    writeline = '%d,%f,%f' % (run, self.timeDict[run], value)
+                    if mode == 'rtrstall':
+                        writeline = '%d,%f,%f,%f' % (run, self.timeDict[run], value, value2)
+                    elif mode == 'rtrall':
+                        writeline = '%d,%d,%d,%d,%f,%f,%f,%f' % (run, numSelectedProducer, numRouter, numGroup, value[0], value[1], value[2], self.timeDict[run])
+                    else:
+                        writeline = '%d,%f,%f' % (run, self.timeDict[run], value)
                     for i in range(6):
                         writeline = writeline + ',' + str(self.t[run][i])
                     writeline += '\n'
