@@ -3,8 +3,8 @@ import subprocess
 
 def main():
     w = withOSU()
-    w.testOSU()
-    #w.together()
+    #w.testOSU()
+    w.together()
 
 class withOSU:
     def __init__(self):
@@ -54,9 +54,23 @@ class withOSU:
         #osu = subprocess.Popen(command, preexec_fn=os.setsid, shell=True)
 
     def together(self):
+        N = 32
+        ntasks = 32*N
+        msize = 4096
+        osulist = self.abbrev(self.jumpOne(self.nodelist, N))
         exe = '/global/homes/z/zhangyj/osu/osu-micro-benchmarks-5.6.2/install/libexec/osu-micro-benchmarks/mpi/collective/osu_alltoall'
-        command = 'time srun -N 32 --ntasks-per-node=32 -C haswell %s -m 4096:4096 -i 1000\n' % exe
+        command = 'time srun -N %d --ntasks %d --nodelist=%s -C haswell %s -m %d:%d -i 1000\n' % (N, ntasks, osulist, exe, msize, msize)
         osu = subprocess.Popen(command, preexec_fn=os.setsid, shell=True)
+
+        N = 32
+        ntasks = 32*N
+        applist = self.abbrev([x for x in self.nodelist if x not in self.jumpOne(self.nodelist, N)])
+        appcmd = 'module load openmpi; cd ~/miniMD/ref; date; '
+        appcmd += 'time mpirun -np %d --host %s ./miniMD_openmpi -n 160000; ' % (ntasks, applist)
+        appcmd += 'date;'
+        apprun = subprocess.Popen(appcmd, stdout=subprocess.PIPE, shell=True)
+        output = process.communicate()[0].strip()
+        print(output)
 
 if __name__ == '__main__':
     main()
