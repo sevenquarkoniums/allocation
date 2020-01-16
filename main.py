@@ -17,8 +17,9 @@ Warning: do not use .replace(tzinfo=pacific) to replace timezone, which has a fa
 def main():
     al = analysis(outputName='data_0to1min_all.csv', logExist=1)
         # do change queryTime when adjusting range.
-    al.runtime()
-    al.process(mode='rtrall', counterSaved=1, saveFolder='counter0to1')
+    #al.runtime()
+    #al.process(mode='rtrall', counterSaved=1, saveFolder='counter0to1')
+    al.onlyTime()
 
 def getfiles(path):
     # get all the files with full path.
@@ -475,6 +476,36 @@ class analysis(ldms):
     def __init__(self, outputName, logExist):
         super().__init__(logExist)
         self.outputName = outputName
+
+    def onlyTime(self):
+        fs = getfiles('OSUresults')
+        self.withCong, self.noCong, self.Cong16c = [], [], []
+        for f in fs:
+            name = f.split('/')[-1]
+            with open(f, 'r') as o:
+                for line in o:
+                    if line.startswith('real'):
+                        finish = 1
+                        minute = float(line.split()[1].split('m')[0])
+                        sec = float(line.split()[1].split('m')[1][:-1])
+                        t = minute * 60 + sec
+                        if name.startswith('withCong'):
+                            self.withCong.append(t)
+                        elif name.startswith('noCong'):
+                            self.noCong.append(t)
+                        elif name.startswith('Cong16c'):
+                            self.Cong16c.append(t)
+        print('withCong:')
+        for x in self.withCong:
+            print(x)
+
+        print('noCong:')
+        for x in self.noCong:
+            print(x)
+
+        print('Cong16c:')
+        for x in self.Cong16c:
+            print(x)
 
     def runtime(self):
         '''

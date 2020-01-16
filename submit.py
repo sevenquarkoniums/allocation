@@ -4,7 +4,7 @@ from subprocess import call
 def main():
     s = submit()
     #s.miniMD()
-    s.withOSU(timelimit='00:30:00', isSingle=0, isMail=0)
+    s.withOSU(timelimit='00:30:00', isSingle=1, isMail=0)
 
 class submit:
     def miniMD(self):
@@ -15,8 +15,8 @@ class submit:
     def withOSU(self, timelimit, isSingle, isMail):
         singleton = '-d singleton ' if isSingle else ''
         mail = '--mail-type=END ' if isMail else ''
-        for run in range(1, 2):
-            command = 'sbatch -N 64 --account=m3410 -q premium -C haswell %s-t %s -J withOSU %s-o $HOME/miniMD/OSUresults/run%d.out withOSU.py' % (mail, timelimit, singleton, run)
+        for run in range(0, 20):
+            command = 'sbatch -N 64 --account=m3410 -q regular -C haswell %s-t %s -J withOSU %s-o $HOME/allocation/OSUresults/Cong24c_%d.out withOSU.py' % (mail, timelimit, singleton, run)
             call(command, shell=True)
 
 if __name__ == '__main__':
