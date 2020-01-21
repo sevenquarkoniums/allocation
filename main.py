@@ -15,11 +15,10 @@ Warning: do not use .replace(tzinfo=pacific) to replace timezone, which has a fa
 '''
 
 def main():
-    al = analysis(outputName='data_0to1min_all.csv', logExist=1)
+    al = analysis(outputName='data_osuratio.csv', logExist=1)
         # do change queryTime when adjusting range.
     #al.runtime()
-    #al.process(mode='rtrall', counterSaved=1, saveFolder='counter0to1')
-    al.onlyTime()
+    al.process(mode='rtrmetric', counterSaved=1, saveFolder='counterOSU')
 
 def getfiles(path):
     # get all the files with full path.
@@ -308,12 +307,13 @@ class ldms:
         selectedProducer = list( producers.groupby(['aries_rtr_id']).min()['component_id'] )
             # all the 'aries_rtr_id' fields end with 'a0'.
         numSelectedProducer = len(selectedProducer)
-        print('Selected producer number: %d' % len(selectedProducer))
+        prodnum = len(selectedProducer)
+        print('Selected producer number: %d' % prodnum)
         rmDup = data[data['component_id'].isin(selectedProducer)].copy()
         jump = 1 if len(selectedProducer)==0 else 0
         if jump:
             print('### No counter data for this run ###')
-        return rmDup, jump, numSelectedProducer
+        return rmDup, jump, numSelectedProducer, prodnum
 
     def getDiff(self, data):
         #print('Calculating the difference..')
@@ -477,35 +477,42 @@ class analysis(ldms):
         super().__init__(logExist)
         self.outputName = outputName
 
-    def onlyTime(self):
+    def timeToUnixPST(self, line):
+        return pacific.localize(datetime.datetime.strptime(line, '%a %b %d %H:%M:%S PST %Y')).timestamp()
+
+    def parseJob(self):
         fs = getfiles('OSUresults')
-        self.withCong, self.noCong, self.Cong16c = [], [], []
+        out = open('jobparse.csv', 'w')
+        out.write('mode,jobid,execTime,startUnix,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n')
         for f in fs:
             name = f.split('/')[-1]
             with open(f, 'r') as o:
+                mode = ''
                 for line in o:
+                    if line.startswith('startTime: '):
+                        thisTime = self.timeToUnixPST(line[11:-1])
+                        started = self.jobnodelist[self.jobnodelist['startUnix']<=thisTime]
+                        jobid = started.loc[started['startUnix'].idxmax(axis=0)]['JobID']
                     if line.startswith('real'):
                         finish = 1
                         minute = float(line.split()[1].split('m')[0])
                         sec = float(line.split()[1].split('m')[1][:-1])
                         t = minute * 60 + sec
                         if name.startswith('withCong'):
-                            self.withCong.append(t)
+                            mode = 'OSU_32c'
                         elif name.startswith('noCong'):
-                            self.noCong.append(t)
+                            mode = 'no_OSU'
                         elif name.startswith('Cong16c'):
-                            self.Cong16c.append(t)
-        print('withCong:')
-        for x in self.withCong:
-            print(x)
-
-        print('noCong:')
-        for x in self.noCong:
-            print(x)
-
-        print('Cong16c:')
-        for x in self.Cong16c:
-            print(x)
+                            mode = 'OSU_16c'
+                    if line.startswith('1024 1'):
+                        spl = line.split()
+                        decompose = [spl[x] for x in [4,5,6,7,8,-1]]
+                if mode == '':
+                    print('Imcomplete output: %s' % name)
+                else:
+                    out.write('%s,%d,%f,%d,' % (mode, jobid, t, thisTime) + ','.join(decompose) + '\n')
+        out.close()
+        self.joblist = pd.read_csv('jobparse.csv', index_col='jobid')
 
     def runtime(self):
         '''
@@ -534,45 +541,102 @@ class analysis(ldms):
         self.validRuns.sort()
         self.queryTime = [self.timeDict[x] for x in self.validRuns]
 
-    def getTimeRange(self, run):
+    def getTimeRange(self, jobid):
         '''
         Get the query time start and end, in forms of pandas.Timestamp
         '''
         # currently getting 1 min since app start.
         deltaTime = 60
-        with open('../miniMD/results/run%d.out' % run, 'r') as o:
-            firstline = o.readline()
-        if firstline[:-1].split()[4] == 'PDT':
-            timeStart = pacific.localize(datetime.datetime.strptime(firstline[:-1], '%a %b %d %H:%M:%S PDT %Y')).timestamp()
-        elif firstline[:-1].split()[4] == 'PST':
-            timeStart = pacific.localize(datetime.datetime.strptime(firstline[:-1], '%a %b %d %H:%M:%S PST %Y')).timestamp()
-        queryTime = pd.Timestamp(timeStart, unit='s', tz='US/Pacific')
+        queryTime = pd.Timestamp(self.joblist.loc[jobid]['startUnix'], unit='s', tz='US/Pacific')
         queryEnd = queryTime + pd.Timedelta(seconds=deltaTime)
         #queryEnd = pd.Timestamp(timeStart, unit='s', tz='US/Pacific')
         #queryTime = queryEnd - pd.Timedelta(seconds=deltaTime)
         return queryTime, queryEnd
 
+    def timeToUnix(self, line):
+        return pacific.localize(datetime.datetime.strptime(line, '%Y-%m-%dT%H:%M:%S')).timestamp()
+
     def getRouter(self):
         '''
         Build a dict recording the routers that each job is running on.
+        warning: dict index is changed to jobid.
         '''
-        nodelist = pd.read_csv('nodelist.csv', sep='|')
+        self.jobnodelist = pd.read_csv('nodelist_withOSU.csv', sep='|')
         self.routers, self.nodes, self.cnames = {}, {}, {}
-        for idx, row in nodelist.iterrows():
-            run = idx
+        self.jobnodelist['startUnix'] = self.jobnodelist.apply(lambda x: self.timeToUnix(x['Start']), axis=1)
+        self.jobnodelist = self.jobnodelist.astype({'startUnix': int})
+        for idx, row in self.jobnodelist.iterrows():
             jobid, nodeString = row[['JobID','NodeList']]
-            self.nodes[run] = super().parseNodeList(nodeString)
+            self.nodes[jobid] = super().parseNodeList(nodeString)
             thisRouters, thisCnames = [], []
-            for node in self.nodes[run]:
+            for node in self.nodes[jobid]:
                 cname = super().getCName(node)
                 thisCnames.append(cname)
                 router = cname[:-1] + '0' # replace the nic value by 0.
                 if router not in thisRouters:
                     thisRouters.append(router)
-            self.routers[run] = thisRouters
-            self.cnames[run] = thisCnames
+            self.routers[jobid] = thisRouters
+            self.cnames[jobid] = thisCnames
 
     def process(self, mode, counterSaved, saveFolder):
+        '''
+        mode: metric, count, nodemetric.
+        '''
+        self.getRouter()
+        self.parseJob()
+        with open(self.outputName, 'w') as o:
+            if mode == 'rtrstall':
+                name = 'avgStall'
+                o.write('producerNum,mode,jobid,execTime,%s,avgFlit,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n' % name)
+            elif mode == 'rtrmetric':
+                name = 'congestion'
+                o.write('producerNum,mode,jobid,execTime,%s,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n' % name)
+        i = 0
+        for idx, row in self.joblist.iterrows():
+            jobid, jobmode, execTime = idx, row['mode'], row['execTime']
+            i += 1
+            print('Processing run %d, jobid %d..' % (i, jobid))
+            if counterSaved:
+                if os.path.isfile('%s/jobid%d.csv' % (saveFolder, jobid)):
+                    sel = pd.read_csv('%s/jobid%d.csv' % (saveFolder, jobid))
+                else:
+                    continue
+            else:
+                queryTime, queryEnd = self.getTimeRange(jobid)
+                qd = super().fetchData(queryTime, queryEnd, 'rtr')
+                if qd is None:
+                    print('No counter data.')
+                    continue
+                if len(qd) == 0:
+                    print('Empty counter data.')
+                    continue
+                #print(qd.iloc[0]['#Time'])
+                #print(qd.iloc[-1]['#Time'])
+                sel = super().selectRouter(qd, self.routers[jobid])
+                sel.to_csv('%s/jobid%d.csv' % (saveFolder, jobid), index=0)
+            rmDup, jump, numSelectedProducer, prodnum = super().removeDuplicate(sel)
+            if not jump:
+                diff = super().getDiff(rmDup)
+                regu = super().regularize(diff)
+                numRouter = len(self.routers[jobid])
+                numGroup = len(super().groupsSpanned(self.cnames[jobid]))
+                if mode == 'rtrstall':
+                    value = super().calcRouterStall(regu)
+                    value2 = super().calcRouterFlit(regu)
+                elif mode == 'rtrmetric':
+                    value = super().calcRouterMetric(regu)
+                print(str(value))
+                with open(self.outputName, 'a') as o:
+                    if mode == 'rtrstall':
+                        writeline = '%d,%s,%d,%f,%f,%f,' % (prodnum, jobmode, jobid, execTime, value, value2)
+                    else:
+                        writeline = '%d,%s,%d,%f,%f,' % (prodnum, jobmode, jobid, execTime, value)
+                    f1, f2, f3, f4, f5, f6 = row[['t_total','t_force','t_neigh','t_comm','t_other','t_extra']]
+                    writeline += ','.join([str(x) for x in [f1, f2, f3, f4, f5, f6]])
+                    writeline += '\n'
+                    o.write(writeline)
+
+    def oldprocess(self, mode, counterSaved, saveFolder):
         '''
         mode: metric, count, nodemetric.
         '''
@@ -611,7 +675,7 @@ class analysis(ldms):
                 #print(qd.iloc[-1]['#Time'])
                 sel = super().selectRouter(qd, self.routers[run])
                 sel.to_csv('%s/run%d.csv' % (saveFolder, run), index=0)
-            rmDup, jump, numSelectedProducer = super().removeDuplicate(sel)
+            rmDup, jump, numSelectedProducer, prodnum = super().removeDuplicate(sel)
             if not jump:
                 diff = super().getDiff(rmDup)
                 regu = super().regularize(diff)
@@ -641,9 +705,6 @@ class analysis(ldms):
                         writeline = writeline + ',' + str(self.t[run][i])
                     writeline += '\n'
                     o.write(writeline)
-
-    def drawCorr(self):
-        ax.plot(self.execTime, self.avgStall, '.')
 
 if __name__ == '__main__':
     main()
