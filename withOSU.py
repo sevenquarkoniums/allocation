@@ -10,7 +10,7 @@ def main():
     w = withOSU()
     #w.testOSU()
     #w.congestion(withCongestor=1, core=32, instance=int(sys.argv[1]))
-    w.allocation(instance=int(sys.argv[1])
+    w.allocation(instance=int(sys.argv[1]))
 
 class withOSU:
     def __init__(self):
@@ -88,6 +88,7 @@ class withOSU:
         if withCongestor:
             procs = self.startOSU(N=32, core=core, instance=instance)
         else:
+            self.usedNodes = self.nodelist
             print('osu not started due to setting.')
 
         self.startApp(N=32, alloc='bad')

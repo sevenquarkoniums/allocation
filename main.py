@@ -15,10 +15,10 @@ Warning: do not use .replace(tzinfo=pacific) to replace timezone, which has a fa
 '''
 
 def main():
-    al = analysis(outputName='data_osuratio.csv', logExist=1)
+    al = analysis(outputName='data_osu5.csv', logExist=1)
         # do change queryTime when adjusting range.
     #al.runtime()
-    al.process(mode='rtrmetric', counterSaved=1, saveFolder='counterOSU')
+    al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
 
 def getfiles(path):
     # get all the files with full path.
@@ -514,6 +514,48 @@ class analysis(ldms):
         out.close()
         self.joblist = pd.read_csv('jobparse.csv', index_col='jobid')
 
+    def parseTwoJob(self):
+        fs = getfiles('OSUresults')
+        out = open('jobparse.csv', 'w')
+        out.write('mode,jobid,execTime1,startUnix1,execTime2,startUnix2\n')
+        for f in fs:
+            name = f.split('/')[-1]
+            if not name.startswith('alloc_c32_ins5'):
+                continue
+            with open(f, 'r') as o:
+                mode = ''
+                startTimeCount, realCount = 0, 0
+                t, thisTime = {}, {}
+                for line in o:
+                    if line.startswith('startTime:'):
+                        startTimeCount += 1
+                        thisTime[startTimeCount] = self.timeToUnixPST(line.lstrip('startTime:').lstrip('good:').lstrip('bad:')[:-1])
+                        if startTimeCount == 1:
+                            started = self.jobnodelist[self.jobnodelist['startUnix']<=thisTime[startTimeCount]]
+                            jobid = started.loc[started['startUnix'].idxmax(axis=0)]['JobID']
+                    if line.startswith('real'):
+                        realCount += 1
+                        minute = float(line.split()[1].split('m')[0])
+                        sec = float(line.split()[1].split('m')[1][:-1])
+                        t[realCount] = minute * 60 + sec
+                        if name.startswith('withCong'):
+                            mode = 'OSU_32c'
+                        elif name.startswith('noCong'):
+                            mode = 'no_OSU'
+                        elif name.startswith('Cong16c'):
+                            mode = 'OSU_16c'
+                        elif name.startswith('alloc'):
+                            mode = 'alloc_c32_ins5'
+                    if line.startswith('1024 1'):
+                        spl = line.split()
+                        decompose = [spl[x] for x in [4,5,6,7,8,-1]]
+                if mode == '':
+                    print('Imcomplete output: %s' % name)
+                else:
+                    out.write('%s,%d,%f,%d,%f,%d\n' % (mode, jobid, t[1], thisTime[1], t[2], thisTime[2]))
+        out.close()
+        self.joblist = pd.read_csv('jobparse.csv', index_col='jobid')
+
     def runtime(self):
         '''
         Get the valid run list.
@@ -541,13 +583,13 @@ class analysis(ldms):
         self.validRuns.sort()
         self.queryTime = [self.timeDict[x] for x in self.validRuns]
 
-    def getTimeRange(self, jobid):
+    def getTimeRange(self, jobid, index):
         '''
         Get the query time start and end, in forms of pandas.Timestamp
         '''
         # currently getting 1 min since app start.
         deltaTime = 60
-        queryTime = pd.Timestamp(self.joblist.loc[jobid]['startUnix'], unit='s', tz='US/Pacific')
+        queryTime = pd.Timestamp(self.joblist.loc[jobid]['startUnix%d' % index], unit='s', tz='US/Pacific')
         queryEnd = queryTime + pd.Timedelta(seconds=deltaTime)
         #queryEnd = pd.Timestamp(timeStart, unit='s', tz='US/Pacific')
         #queryTime = queryEnd - pd.Timedelta(seconds=deltaTime)
@@ -562,79 +604,77 @@ class analysis(ldms):
         warning: dict index is changed to jobid.
         '''
         self.jobnodelist = pd.read_csv('nodelist_withOSU.csv', sep='|')
-        self.routers, self.nodes, self.cnames = {}, {}, {}
+        self.routers1, self.routers2, self.nodes, self.cnames1, self.cnames2 = {}, {}, {}, {}, {}
+
         self.jobnodelist['startUnix'] = self.jobnodelist.apply(lambda x: self.timeToUnix(x['Start']), axis=1)
         self.jobnodelist = self.jobnodelist.astype({'startUnix': int})
         for idx, row in self.jobnodelist.iterrows():
             jobid, nodeString = row[['JobID','NodeList']]
             self.nodes[jobid] = super().parseNodeList(nodeString)
             thisRouters, thisCnames = [], []
-            for node in self.nodes[jobid]:
+
+            for node in self.nodes[jobid][-32:]:
                 cname = super().getCName(node)
                 thisCnames.append(cname)
                 router = cname[:-1] + '0' # replace the nic value by 0.
                 if router not in thisRouters:
                     thisRouters.append(router)
-            self.routers[jobid] = thisRouters
-            self.cnames[jobid] = thisCnames
+            self.routers1[jobid] = thisRouters
+            self.cnames1[jobid] = thisCnames
+
+            for node in [self.nodes[jobid][2*i] for i in range(32)]:
+                cname = super().getCName(node)
+                thisCnames.append(cname)
+                router = cname[:-1] + '0' # replace the nic value by 0.
+                if router not in thisRouters:
+                    thisRouters.append(router)
+            self.routers2[jobid] = thisRouters
+            self.cnames2[jobid] = thisCnames
 
     def process(self, mode, counterSaved, saveFolder):
         '''
-        mode: metric, count, nodemetric.
         '''
         self.getRouter()
-        self.parseJob()
+        self.parseTwoJob()
         with open(self.outputName, 'w') as o:
             if mode == 'rtrstall':
-                name = 'avgStall'
-                o.write('producerNum,mode,jobid,execTime,%s,avgFlit,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n' % name)
-            elif mode == 'rtrmetric':
-                name = 'congestion'
-                o.write('producerNum,mode,jobid,execTime,%s,t_total,t_force,t_neigh,t_comm,t_other,t_extra\n' % name)
+                o.write('mode,jobid,producerNum1,execTime1,avgStall1,producerNum2,execTime2,avgStall2\n')
         i = 0
         for idx, row in self.joblist.iterrows():
-            jobid, jobmode, execTime = idx, row['mode'], row['execTime']
+            jobid, jobmode, execTime1, execTime2 = idx, row['mode'], row['execTime1'], row['execTime2']
             i += 1
             print('Processing run %d, jobid %d..' % (i, jobid))
-            if counterSaved:
-                if os.path.isfile('%s/jobid%d.csv' % (saveFolder, jobid)):
-                    sel = pd.read_csv('%s/jobid%d.csv' % (saveFolder, jobid))
-                else:
-                    continue
-            else:
-                queryTime, queryEnd = self.getTimeRange(jobid)
+            prodnum, value = {}, {}
+            for index in [1,2]:
+                queryTime, queryEnd = self.getTimeRange(jobid, index)
                 qd = super().fetchData(queryTime, queryEnd, 'rtr')
                 if qd is None:
                     print('No counter data.')
-                    continue
+                    break
                 if len(qd) == 0:
                     print('Empty counter data.')
-                    continue
+                    break
                 #print(qd.iloc[0]['#Time'])
                 #print(qd.iloc[-1]['#Time'])
-                sel = super().selectRouter(qd, self.routers[jobid])
-                sel.to_csv('%s/jobid%d.csv' % (saveFolder, jobid), index=0)
-            rmDup, jump, numSelectedProducer, prodnum = super().removeDuplicate(sel)
-            if not jump:
-                diff = super().getDiff(rmDup)
-                regu = super().regularize(diff)
-                numRouter = len(self.routers[jobid])
-                numGroup = len(super().groupsSpanned(self.cnames[jobid]))
-                if mode == 'rtrstall':
-                    value = super().calcRouterStall(regu)
-                    value2 = super().calcRouterFlit(regu)
-                elif mode == 'rtrmetric':
-                    value = super().calcRouterMetric(regu)
-                print(str(value))
-                with open(self.outputName, 'a') as o:
-                    if mode == 'rtrstall':
-                        writeline = '%d,%s,%d,%f,%f,%f,' % (prodnum, jobmode, jobid, execTime, value, value2)
+                if index == 1:
+                    sel = super().selectRouter(qd, self.routers1[jobid])
+                else:
+                    sel = super().selectRouter(qd, self.routers2[jobid])
+                rmDup, jump, numSelectedProducer, prodnum[index] = super().removeDuplicate(sel)
+                if not jump:
+                    diff = super().getDiff(rmDup)
+                    regu = super().regularize(diff)
+                    if index == 1:
+                        numGroup = len(super().groupsSpanned(self.cnames1[jobid]))
                     else:
-                        writeline = '%d,%s,%d,%f,%f,' % (prodnum, jobmode, jobid, execTime, value)
-                    f1, f2, f3, f4, f5, f6 = row[['t_total','t_force','t_neigh','t_comm','t_other','t_extra']]
-                    writeline += ','.join([str(x) for x in [f1, f2, f3, f4, f5, f6]])
-                    writeline += '\n'
-                    o.write(writeline)
+                        numGroup = len(super().groupsSpanned(self.cnames2[jobid]))
+                    value[index] = super().calcRouterStall(regu)
+                    print(str(value[index]))
+                else:
+                    break
+            with open(self.outputName, 'a') as o:
+                writeline = '%s,%d,%d,%f,%f,%d,%f,%f\n' % (jobmode, jobid, prodnum[1], execTime1, value[1], prodnum[2], execTime2, value[2])
+                o.write(writeline)
 
     def oldprocess(self, mode, counterSaved, saveFolder):
         '''

@@ -24,8 +24,8 @@ class submit:
     def allocation(self, timelimit, isSingle, isMail):
         singleton = '-d singleton ' if isSingle else ''
         mail = '--mail-type=END ' if isMail else ''
-        for run in range(0, 1):
-            command = 'sbatch -N 96 --account=m888 -q premium -C haswell %s-t %s -J withOSU %s-o $HOME/allocation/OSUresults/alloc_c32_ins10_%d.out withOSU.py 10' % (mail, timelimit, singleton, run)
+        for run in range(20, 25):
+            command = 'sbatch -N 96 --account=m888 -q premium -C haswell %s-t %s -J withOSU %s-o $HOME/allocation/OSUresults/alloc_c32_ins5_%d.out withOSU.py 5' % (mail, timelimit, singleton, run)
             call(command, shell=True)
 
 if __name__ == '__main__':
