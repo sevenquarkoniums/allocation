@@ -18,7 +18,9 @@ def main():
     al = analysis(outputName='data_osu5.csv', logExist=1)
         # do change queryTime when adjusting range.
     #al.runtime()
-    al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
+    #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
+    #al.analyzeAlloc()
+    al.processFix()
 
 def getfiles(path):
     # get all the files with full path.
@@ -514,18 +516,41 @@ class analysis(ldms):
         out.close()
         self.joblist = pd.read_csv('jobparse.csv', index_col='jobid')
 
+    def common(self, a, b):
+        '''
+        count the common appearance in sorted list a, b
+        '''
+        count, i, j = 0, 0, 0
+        while i < len(a) and j < len(b):
+            if a[i] == b[j]:
+                count += 1
+                i += 1
+                j += 1
+            elif a[i] < b[j]:
+                i += 1
+            elif a[i] > b[j]:
+                j += 1
+        return count
+
     def parseTwoJob(self):
+        '''
+        Build a table of the experiment output info.
+        rt is the real time from the time command.
+        et is the execution reported by app.
+        '''
+        N = 32
         fs = getfiles('OSUresults')
         out = open('jobparse.csv', 'w')
-        out.write('mode,jobid,execTime1,startUnix1,execTime2,startUnix2\n')
+        out.write('index,mode,jobid,realTime1,execTime1,startUnix1,routerShare1,groupSpan1,routerSpan1,realTime2,execTime2,startUnix2,routerShare2,groupSpan2,routerSpan2,nodes\n')
         for f in fs:
             name = f.split('/')[-1]
             if not name.startswith('alloc_c32_ins5'):
                 continue
+            index = int(name.split('.')[0].split('_')[-1])
             with open(f, 'r') as o:
                 mode = ''
-                startTimeCount, realCount = 0, 0
-                t, thisTime = {}, {}
+                startTimeCount, realCount, execCount = 0, 0, 0
+                rt, et, thisTime = {}, {}, {}
                 for line in o:
                     if line.startswith('startTime:'):
                         startTimeCount += 1
@@ -537,7 +562,7 @@ class analysis(ldms):
                         realCount += 1
                         minute = float(line.split()[1].split('m')[0])
                         sec = float(line.split()[1].split('m')[1][:-1])
-                        t[realCount] = minute * 60 + sec
+                        rt[realCount] = minute * 60 + sec
                         if name.startswith('withCong'):
                             mode = 'OSU_32c'
                         elif name.startswith('noCong'):
@@ -547,14 +572,37 @@ class analysis(ldms):
                         elif name.startswith('alloc'):
                             mode = 'alloc_c32_ins5'
                     if line.startswith('1024 1'):
+                        execCount += 1
                         spl = line.split()
                         decompose = [spl[x] for x in [4,5,6,7,8,-1]]
+                        et[execCount] = float(decompose[0])
+                    if line.startswith('['):
+                        # parse the allocation.
+                        nodes = [int(x) for x in line[1:-2].split(', ')]
+                        alloc = '_'.join([str(x) for x in nodes])
+                        grey = [nodes[2*x+1] for x in range(N)]# osu.
+                        green = nodes[-32:]# separate.
+                        yellow = [nodes[2*x] for x in range(N)]# intertwinned.
+
+                        greyRouter = [n//4*4 for n in grey]
+                        greenRouter = [n//4*4 for n in green]
+                        yellowRouter = [n//4*4 for n in yellow]
+                        gg = self.common(greyRouter, greenRouter)
+                        gy = self.common(greyRouter, yellowRouter)
+                        ggCoef = gg/len(greenRouter)*100
+                        gyCoef = gy/len(yellowRouter)*100
+
+                        gSpan = len(set([n//384 for n in green]))
+                        ySpan = len(set([n//384 for n in yellow]))
+                        gRSpan = len(set([n//4 for n in green]))
+                        yRSpan = len(set([n//4 for n in yellow]))
                 if mode == '':
                     print('Imcomplete output: %s' % name)
                 else:
-                    out.write('%s,%d,%f,%d,%f,%d\n' % (mode, jobid, t[1], thisTime[1], t[2], thisTime[2]))
+                    out.write('%d,%s,%d,%f,%f,%d,%.1f,%d,%d,%f,%f,%d,%.1f,%d,%d,%s\n' % (index, mode, jobid, rt[1], et[1], thisTime[1], ggCoef, gSpan, gRSpan, rt[2], et[2], thisTime[2], gyCoef, ySpan, yRSpan, alloc))
         out.close()
         self.joblist = pd.read_csv('jobparse.csv', index_col='jobid')
+        print('jobparse.csv written.')
 
     def runtime(self):
         '''
@@ -630,6 +678,32 @@ class analysis(ldms):
                     thisRouters.append(router)
             self.routers2[jobid] = thisRouters
             self.cnames2[jobid] = thisCnames
+
+    def analyzeAlloc(self):
+        '''
+        Analyze the allocation of the runs.
+        '''
+        self.getRouter()
+        self.parseTwoJob()
+
+    def processFix(self):
+        f = 'OSUresults/fixAlloc_ins10.out'
+        with open(f, 'r') as o:
+            et = {}
+            count = 0
+            for line in o:
+                if line.startswith('1024 1'):
+                    count += 1
+                    spl = line.split()
+                    decompose = [spl[x] for x in [4,5,6,7,8,-1]]
+                    et[count] = float(decompose[0])
+        df = pd.DataFrame(columns=['run','green','yellow','greenOSU','yellowOSU'])
+        df['run'] = list(range(20))
+        df['green'] = [et[x] for x in range(1, 81, 4)]
+        df['yellow'] = [et[x] for x in range(2, 81, 4)]
+        df['greenOSU'] = [et[x] for x in range(3, 81, 4)]
+        df['yellowOSU'] = [et[x] for x in range(4, 81, 4)]
+        df.to_csv('resultFix.csv', index=False)
 
     def process(self, mode, counterSaved, saveFolder):
         '''
