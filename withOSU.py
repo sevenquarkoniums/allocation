@@ -35,8 +35,8 @@ class withOSU:
         return nodelist
 
     def getNodelist(self):
-        #output = subprocess.check_output('sacct --name=withOSU -n -P -X -o nodelist'.split(' ')).decode('utf-8')
-        output = subprocess.check_output('echo $SLURM_NODELIST'.split(' ')).decode('utf-8')
+        output = subprocess.check_output('sacct --name=withOSU -n -P -X -o nodelist'.split(' ')).decode('utf-8')
+        #output = subprocess.check_output('echo $SLURM_NODELIST'.split(' ')).decode('utf-8')
         self.nodelist = self.parseNodeList(output.rstrip('\n').split('\n')[-1])
         print('current nodes:')
         print(self.nodelist)
@@ -68,8 +68,9 @@ class withOSU:
     def startGPC(self, N, instance, nodes):
         ntasks = 32*N
         procs = []
+        gpclist = self.abbrev(nodes)
         for i in range(instance):
-            command = 'export MPICH_ALLOC_MEM_PG_SZ=2M;export MPICH_SHARED_MEM_COLL_OPT=0;srun -n %d -c 1 --cpu_bind=cores /global/homes/z/zhangyj/GPCNET/netework_load_test > gpc_N%d_run%d.out;' % (ntasks, N, self.gpcRun)
+            command = 'srun -N %d --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > gpc_N%d_run%d.out' % (N, ntasks, gpclist, N, self.gpcRun)
             gpc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             print('gpc %d started.' % i)
             procs.append(gpc)
@@ -162,9 +163,10 @@ class withOSU:
             self.appOnNodes(N=N, nodes=yellowNodes)
             print('is congestor running:')
             for j in range(instance):
-                osu = procs.pop()
-                print(osu.poll() == None)
-                os.killpg(os.getpgid(osu.pid), signal.SIGTERM)
+                cong = procs.pop()
+                print(cong.poll() == None)
+                if cong.poll() == None:
+                    os.killpg(os.getpgid(cong.pid), signal.SIGTERM)
 
 
 if __name__ == '__main__':
