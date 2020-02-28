@@ -15,7 +15,7 @@ Warning: do not use .replace(tzinfo=pacific) to replace timezone, which has a fa
 '''
 
 def main():
-    al = analysis(outputName='data_osu5.csv', logExist=1)
+    al = analysis(outputName='data_gpc5.csv', logExist=1)
         # do change queryTime when adjusting range.
     #al.runtime()
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
@@ -687,23 +687,26 @@ class analysis(ldms):
         self.parseTwoJob()
 
     def processFix(self):
-        f = 'OSUresults/fixAlloc_ins10.out'
+        run = 10
+        task = 2048
+        f = 'results/fixAlloc_gpc5.out'
         with open(f, 'r') as o:
             et = {}
             count = 0
             for line in o:
-                if line.startswith('1024 1'):
+                if line.startswith('%d 1' % task):
                     count += 1
                     spl = line.split()
                     decompose = [spl[x] for x in [4,5,6,7,8,-1]]
                     et[count] = float(decompose[0])
-        df = pd.DataFrame(columns=['run','green','yellow','greenOSU','yellowOSU'])
-        df['run'] = list(range(20))
-        df['green'] = [et[x] for x in range(1, 81, 4)]
-        df['yellow'] = [et[x] for x in range(2, 81, 4)]
-        df['greenOSU'] = [et[x] for x in range(3, 81, 4)]
-        df['yellowOSU'] = [et[x] for x in range(4, 81, 4)]
-        df.to_csv('resultFix.csv', index=False)
+        df = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
+        df['run'] = list(range(run))
+        df['green'] = [et[x] for x in range(1, 4*run+1, 4)]
+        df['yellow'] = [et[x] for x in range(2, 4*run+1, 4)]
+        df['greenGPC'] = [et[x] for x in range(3, 4*run+1, 4)]
+        df['yellowGPC'] = [et[x] for x in range(4, 4*run+1, 4)]
+        df.to_csv('resultFixGPC5.csv', index=False)
+        print('Finish processing.')
 
     def process(self, mode, counterSaved, saveFolder):
         '''

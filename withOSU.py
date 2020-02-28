@@ -70,7 +70,7 @@ class withOSU:
         procs = []
         gpclist = self.abbrev(nodes)
         for i in range(instance):
-            command = 'srun -N %d --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > gpc_N%d_run%d.out' % (N, ntasks, gpclist, N, self.gpcRun)
+            command = 'srun -N %d --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/gpc_N%d_run%d.out' % (N, ntasks, gpclist, N, self.gpcRun)
             gpc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             print('gpc %d started.' % i)
             procs.append(gpc)
@@ -143,7 +143,7 @@ class withOSU:
 
     def fixAllocation(self, iteration, instance):
         self.gpcRun = 0
-        N = 32
+        N = 64
         rotate = 3*N // iteration
         for i in range(iteration):
             print('iteration:%d' % i)
