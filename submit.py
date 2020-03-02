@@ -33,7 +33,7 @@ class submit:
     def fixAllocation(self, timelimit, isSingle, isMail):
         singleton = '-d singleton ' if isSingle else ''
         mail = '--mail-type=END ' if isMail else ''
-        command = 'sbatch -N 192 --account=m3231 -q premium -C haswell %s-t %s -J withOSU %s-o $HOME/allocation/results/fixAlloc_gpc1.out withOSU.py' % (mail, timelimit, singleton)
+        command = 'sbatch -N 192 --account=m888 -q premium -C haswell %s-t %s -J withOSU %s-o $HOME/allocation/results/fixAlloc_gpc1.out withOSU.py' % (mail, timelimit, singleton)
         call(command, shell=True)
 
 if __name__ == '__main__':

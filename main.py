@@ -15,7 +15,7 @@ Warning: do not use .replace(tzinfo=pacific) to replace timezone, which has a fa
 '''
 
 def main():
-    al = analysis(outputName='data_gpc5.csv', logExist=1)
+    al = analysis(outputName='temp.csv', logExist=1)
         # do change queryTime when adjusting range.
     #al.runtime()
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
@@ -474,6 +474,15 @@ class ldms:
         # From a list of cnames calculate the number of groups spanned 
         return list(set([self.calcGroup(name) for name in cnamelist]))
 
+    def nodeToRouter(self, nodelist):
+        thisRouters = []
+        for node in nodelist:
+            cname = self.getCName(node)
+            router = cname[:-1] + '0' # replace the nic value by 0.
+            if router not in thisRouters:
+                thisRouters.append(router)
+        return thisRouters
+
 class analysis(ldms):
     def __init__(self, outputName, logExist):
         super().__init__(logExist)
@@ -690,6 +699,7 @@ class analysis(ldms):
         run = 10
         task = 2048
         f = 'results/fixAlloc_gpc5.out'
+        print('Getting exec time..')
         with open(f, 'r') as o:
             et = {}
             count = 0
@@ -706,7 +716,52 @@ class analysis(ldms):
         df['greenGPC'] = [et[x] for x in range(3, 4*run+1, 4)]
         df['yellowGPC'] = [et[x] for x in range(4, 4*run+1, 4)]
         df.to_csv('resultFixGPC5.csv', index=False)
-        print('Finish processing.')
+
+        print('Getting router data..')
+        with open(f, 'r') as o:
+            stall, ratio = {}, {}
+            count = 0
+            for line in o:
+                if line.startswith('app-node list'):
+                    count += 1
+                if count >= 1 and line.startswith('['):
+                    appnodes = [int(x) for x in line[1:-2].split(', ')]
+                    routers = super().nodeToRouter(appnodes)
+                if line.startswith('startTime:'):
+                    deltaTime = 50
+                    queryStart = pd.Timestamp(self.timeToUnixPST(line.lstrip('startTime:')[:-1]), unit='s', tz='US/Pacific')
+                    queryEnd = queryStart + pd.Timedelta(seconds=deltaTime)
+                    qd = super().fetchData(queryStart, queryEnd, 'rtr')
+                    if qd is None:
+                        stall[count] = -1
+                        ratio[count] = -1
+                        continue
+                    sel = super().selectRouter(qd, routers)
+                    rmDup, jump, numSelectedProducer, prodnum = super().removeDuplicate(sel)
+                    if jump:
+                        stall[count] = -2
+                        ratio[count] = -2
+                        continue
+                    diff = super().getDiff(rmDup)
+                    regu = super().regularize(diff)
+                    stall[count] = super().calcRouterStall(regu)
+                    ratio[count] = super().calcRouterMetric(regu)
+
+        dfStall = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
+        dfStall['run'] = list(range(run))
+        dfStall['green'] = [stall[x] for x in range(1, 4*run+1, 4)]
+        dfStall['yellow'] = [stall[x] for x in range(2, 4*run+1, 4)]
+        dfStall['greenGPC'] = [stall[x] for x in range(3, 4*run+1, 4)]
+        dfStall['yellowGPC'] = [stall[x] for x in range(4, 4*run+1, 4)]
+        dfStall.to_csv('fixGPC5_stall.csv', index=False)
+
+        dfRatio = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
+        dfRatio['run'] = list(range(run))
+        dfRatio['green'] = [ratio[x] for x in range(1, 4*run+1, 4)]
+        dfRatio['yellow'] = [ratio[x] for x in range(2, 4*run+1, 4)]
+        dfRatio['greenGPC'] = [ratio[x] for x in range(3, 4*run+1, 4)]
+        dfRatio['yellowGPC'] = [ratio[x] for x in range(4, 4*run+1, 4)]
+        dfRatio.to_csv('fixGPC5_ratio.csv', index=False)
 
     def process(self, mode, counterSaved, saveFolder):
         '''

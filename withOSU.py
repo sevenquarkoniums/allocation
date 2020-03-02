@@ -11,7 +11,7 @@ def main():
     #w.testOSU()
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
-    w.fixAllocation(iteration=1, instance=1)
+    w.fixAllocation(iteration=10, instance=1)
 
 class withOSU:
     def __init__(self):
