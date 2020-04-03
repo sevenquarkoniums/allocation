@@ -20,7 +20,8 @@ def main():
     #al.runtime()
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
-    al.processFix()
+    al.processFix(app='nekbone')
+    #al.calcNode()
 
 def getfiles(path):
     # get all the files with full path.
@@ -491,6 +492,9 @@ class analysis(ldms):
     def timeToUnixPST(self, line):
         return pacific.localize(datetime.datetime.strptime(line, '%a %b %d %H:%M:%S PST %Y')).timestamp()
 
+    def timeToUnixPDT(self, line):
+        return pacific.localize(datetime.datetime.strptime(line, '%a %b %d %H:%M:%S PDT %Y')).timestamp()
+
     def parseJob(self):
         fs = getfiles('OSUresults')
         out = open('jobparse.csv', 'w')
@@ -695,27 +699,88 @@ class analysis(ldms):
         self.getRouter()
         self.parseTwoJob()
 
-    def processFix(self):
+    def calcNode(self):
+        '''
+        Calculate the node list for app and congestor used in experiments.
+        '''
+        N = 64
+        iteration = 10
+        rotate = 3*N // iteration
+        nodelist = [746, 759, 760, 761, 762, 763, 764, 765, 766, 805, 806, 807, 808, 809, 810, 811, 812, 813, 814, 815, 816, 817, 818, 819, 820, 909, 910, 911, 912, 913, 914, 915, 916, 920, 921, 922, 923, 924, 925, 926, 927, 928, 929, 930, 931, 932, 998, 999, 1000, 1001, 1002, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1163, 1164, 1165, 1166, 1167, 1339, 1340, 1341, 1342, 1343, 1369, 1370, 1371, 1372, 1373, 1374, 1375, 1376, 1377, 1378, 1379, 1380, 1381, 1382, 1383, 1384, 1385, 1386, 1387, 1388, 1389, 1390, 1391, 1407, 1463, 1464, 1465, 1466, 1467, 1468, 1469, 1470, 1471, 1472, 1520, 1521, 1522, 1523, 1524, 1525, 1526, 1527, 1528, 1529, 1530, 1531, 1532, 1618, 1619, 1620, 1621, 1622, 1623, 1624, 1625, 1626, 1755, 1756, 1757, 1758, 1763, 1764, 1765, 1766, 1767, 1768, 1769, 1770, 1771, 1772, 1910, 1911, 1912, 1913, 1979, 1980, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2169, 2170, 2171, 2172, 2267, 12723, 12753, 12776, 12812, 12813, 12814, 12815, 12816, 12817, 12818, 12819, 12820, 12821, 12822, 12823, 12824, 12825, 12826, 12827, 12828, 12829, 12830, 12831, 12918, 12968, 12992]
+        for i in range(iteration):
+            print()
+            print('===========================')
+            print('iteration:%d' % i)
+            allNodes = nodelist[i*rotate:] + nodelist[:i*rotate]
+            congestNodes = [allNodes[2*x+1] for x in range(N)]
+            greenNodes = allNodes[-N:]
+            yellowNodes = [allNodes[2*x] for x in range(N)]
+            print('congestor:' + str(congestNodes))
+            print('green:' + str(greenNodes))
+            print('yellow:' + str(yellowNodes))
+
+    def processFix(self, app='nekbone'):
+        '''
+        app: miniMD, nekbone.
+        '''
         run = 10
         task = 2048
-        f = 'results/fixAlloc_gpc5.out'
+        if app == 'miniMD':
+            f = 'results/fixAlloc_gpc5.out'
+        elif app == 'nekbone':
+            f = 'results/fixAlloc_nekbone.out'
         print('Getting exec time..')
         with open(f, 'r') as o:
             et = {}
             count = 0
             for line in o:
-                if line.startswith('%d 1' % task):
-                    count += 1
-                    spl = line.split()
-                    decompose = [spl[x] for x in [4,5,6,7,8,-1]]
-                    et[count] = float(decompose[0])
+                if app == 'miniMD':
+                    if line.startswith('%d 1' % task):
+                        count += 1
+                        spl = line.split()
+                        decompose = [spl[x] for x in [4,5,6,7,8,-1]]
+                        et[count] = float(decompose[0])
+                elif app == 'nekbone':
+                    if line.startswith('Avg MFlops'):
+                        count += 1
+                        et[count] = float(line.split()[3].split('E')[0]) * 10**6
+                    #if line.startswith('startTime:'):
+                    #    start = self.timeToUnixPDT(line.lstrip('startTime:')[:-1])
+                    #if line.startswith('endTime:'):
+                    #    count += 1
+                    #    end = self.timeToUnixPDT(line.lstrip('endTime:')[:-1])
+                    #    et[count] = end - start
         df = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
         df['run'] = list(range(run))
         df['green'] = [et[x] for x in range(1, 4*run+1, 4)]
         df['yellow'] = [et[x] for x in range(2, 4*run+1, 4)]
         df['greenGPC'] = [et[x] for x in range(3, 4*run+1, 4)]
         df['yellowGPC'] = [et[x] for x in range(4, 4*run+1, 4)]
-        df.to_csv('resultFixGPC5.csv', index=False)
+        if app == 'miniMD':
+            df.to_csv('resultFixGPC5.csv', index=False)
+        elif app == 'nekbone':
+            df.to_csv('resultFix_nekbone.csv', index=False)
+        asdf
+
+        print('Getting span data..')
+        with open(f, 'r') as o:
+            routerSpan = {}
+            count = 0
+            for line in o:
+                if line.startswith('app-node list'):
+                    count += 1
+                if count >= 1 and line.startswith('['):
+                    appnodes = [int(x) for x in line[1:-2].split(', ')]
+                    routers = super().nodeToRouter(appnodes)
+                    routerSpan[count] = len(routers)
+
+        df = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
+        df['run'] = list(range(run))
+        df['green'] = [routerSpan[x] for x in range(1, 4*run+1, 4)]
+        df['yellow'] = [routerSpan[x] for x in range(2, 4*run+1, 4)]
+        df['greenGPC'] = [routerSpan[x] for x in range(3, 4*run+1, 4)]
+        df['yellowGPC'] = [routerSpan[x] for x in range(4, 4*run+1, 4)]
+        df.to_csv('fixGPC5_routerSpan.csv', index=False)
 
         print('Getting router data..')
         with open(f, 'r') as o:
@@ -753,7 +818,7 @@ class analysis(ldms):
         dfStall['yellow'] = [stall[x] for x in range(2, 4*run+1, 4)]
         dfStall['greenGPC'] = [stall[x] for x in range(3, 4*run+1, 4)]
         dfStall['yellowGPC'] = [stall[x] for x in range(4, 4*run+1, 4)]
-        dfStall.to_csv('fixGPC5_stall.csv', index=False)
+        dfStall.to_csv('fixGPC1_stall.csv', index=False)
 
         dfRatio = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
         dfRatio['run'] = list(range(run))
@@ -761,7 +826,7 @@ class analysis(ldms):
         dfRatio['yellow'] = [ratio[x] for x in range(2, 4*run+1, 4)]
         dfRatio['greenGPC'] = [ratio[x] for x in range(3, 4*run+1, 4)]
         dfRatio['yellowGPC'] = [ratio[x] for x in range(4, 4*run+1, 4)]
-        dfRatio.to_csv('fixGPC5_ratio.csv', index=False)
+        dfRatio.to_csv('fixGPC1_ratio.csv', index=False)
 
     def process(self, mode, counterSaved, saveFolder):
         '''
