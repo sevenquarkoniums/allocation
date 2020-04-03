@@ -11,7 +11,7 @@ def main():
     #w.testOSU()
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
-    w.fixAllocation(iteration=1, instance=5)
+    w.fixAllocation(appName='milc', iteration=1, instance=5)
 
 class withOSU:
     def __init__(self):
@@ -71,7 +71,7 @@ class withOSU:
         procs = []
         gpclist = self.abbrev(nodes)
         for i in range(instance):
-            command = 'srun -N %d --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/gpc_N%d_run%d.out' % (N, ntasks, gpclist, N, self.gpcRun)
+            command = 'srun -N %d --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/gpc_%s_N%d_run%d.out' % (N, ntasks, gpclist, self.appName, N, self.gpcRun)
             gpc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             print('gpc %d started.' % i)
             procs.append(gpc)
@@ -116,14 +116,19 @@ class withOSU:
             appcmd += 'mpirun -np %d --host %s ./nekbone ex1; ' % (ntasks, liststr)
         elif app == 'lammps':
             appcmd += 'cd $HOME/allocation/lammps/testrun; '
-            appcmd += 'mpirun -np %d --host %s /project/projectdirs/m3410/applications/withoutIns/LAMMPS/src/LAMMPS -in in.vacf.2d; ' % (ntasks, liststr)
+            appcmd += 'srun -N %d --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/LAMMPS/src/LAMMPS -in in.vacf.2d; ' % (N, liststr)
         elif app == 'miniamr':
             appcmd += 'cd $HOME/allocation/miniamr/testrun; '
-            appcmd += 'srun -N %d --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1             --npx 16 --npy 16 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2             --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0             --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0             --num_tsteps 20 --stages_per_ts 125 --report_perf 4; ' % (N, liststr)
+            appcmd += 'srun -N %d --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1             --npx 16 --npy 16 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2             --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0             --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0             --num_tsteps 10 --stages_per_ts 125 --report_perf 4; ' % (N, liststr)
         elif app == 'hacc':
             appcmd += 'cd $HOME/allocation/hacc/testrun; '
-            #appcmd += 'mpirun -np %d --host %s /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC indat cmbM000.tf m000 INIT ALL_TO_ALL -w -R -N 64 -a final -f refresh -t 16x16x8; ' % (ntasks, liststr)
             appcmd += 'srun -N %d --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC indat cmbM000.tf m000 INIT ALL_TO_ALL -w -R -N 64 -a final -f refresh -t 16x16x8; ' % (N, liststr)
+        elif app == 'graph500':
+            appcmd += 'cd $HOME/allocation/graph500/src; export SKIP_VALIDATION=1; '
+            appcmd += 'mpirun -np %d --host %s ./graph500_reference_bfs_sssp 26; ' % (ntasks, liststr)
+        elif app == 'milc':
+            appcmd += 'cd $HOME/milc_qcd-7.8.1/ks_imp_dyn/test; '
+            appcmd += 'srun -N %d --ntasks-per-node=32 --nodelist=%s ../su3_rmd myinput.in; ' % (N, liststr)
         print('startTime:' + subprocess.check_output(['date']).decode('utf-8'))
         apprun = subprocess.Popen(appcmd, stdout=subprocess.PIPE, shell=True)
         output = apprun.communicate()[0].strip()
@@ -161,9 +166,9 @@ class withOSU:
             print(osu.poll() == None)
             os.killpg(os.getpgid(osu.pid), signal.SIGTERM)
 
-    def fixAllocation(self, iteration, instance):
-        appName = 'miniamr'
+    def fixAllocation(self, appName, iteration, instance):
         self.gpcRun = 0
+        self.appName = appName
         N = 64
         rotate = 3*N // iteration
         for i in range(iteration):

@@ -6,7 +6,7 @@ def main():
     #s.miniMD(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.withOSU(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.allocation(timelimit='00:30:00', isSingle=1, isMail=1)
-    s.fixAllocation(timelimit='03:00:00', isSingle=1, isMail=1)
+    s.fixAllocation(timelimit='00:20:00', isSingle=0, isMail=1)
 
 class submit:
     def miniMD(self, timelimit, isSingle, isMail):
@@ -33,7 +33,7 @@ class submit:
     def fixAllocation(self, timelimit, isSingle, isMail):
         singleton = '-d singleton ' if isSingle else ''
         mail = '--mail-type=END ' if isMail else ''
-        command = 'sbatch -N 192 --account=m888 -q regular -C haswell %s-t %s -J withOSU %s-o $HOME/allocation/results/fixAlloc_hacc.out withOSU.py' % (mail, timelimit, singleton)
+        command = 'sbatch -N 192 --account=m888 -q premium -C haswell %s-t %s -J milc %s-o $HOME/allocation/results/fixAlloc_milc.out withOSU.py' % (mail, timelimit, singleton)
         call(command, shell=True)
 
 if __name__ == '__main__':
