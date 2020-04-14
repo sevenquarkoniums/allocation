@@ -4,6 +4,7 @@ import os
 import signal
 import time
 import sys
+import random
 
 def main():
     time.sleep(10)
@@ -11,7 +12,8 @@ def main():
     #w.testOSU()
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
-    w.fixAllocation(appName='milc', iteration=1, instance=5)
+    w.fixAllocation(appName='milc', iteration=10, instance=5)
+    #w.CADD(appName='miniMD', iteration=1)
 
 class withOSU:
     def __init__(self):
@@ -66,7 +68,8 @@ class withOSU:
             procs.append(osu)
         return procs
 
-    def startGPC(self, N, instance, nodes):
+    def startGPC(self, instance, nodes):
+        N = len(nodes)
         ntasks = 32*N
         procs = []
         gpclist = self.abbrev(nodes)
@@ -183,7 +186,7 @@ class withOSU:
             self.appOnNodes(app=appName, N=N, nodes=yellowNodes)
 
             # run with congestor.
-            procs = self.startGPC(N=N, instance=instance, nodes=congestNodes)
+            procs = self.startGPC(instance=instance, nodes=congestNodes)
             #procs = self.startOSU(N=N, core=32, instance=instance, nodes=congestNodes)
             self.appOnNodes(app=appName, N=N, nodes=greenNodes)
             self.appOnNodes(app=appName, N=N, nodes=yellowNodes)
@@ -194,6 +197,34 @@ class withOSU:
                 if cong.poll() == None:
                     os.killpg(os.getpgid(cong.pid), signal.SIGTERM)
 
+    def continualGPC(self, instance, nodes):
+        pass
+
+    def runLDMS(self, seconds):
+        pass
+
+    def sortCongestion(self):
+        pass
+
+    def CADD(self, appName, iteration):
+        '''
+        Experiment for the Congestion-Aware Data-Driven allocation policy.
+        '''
+        for i in range(iteration):
+            print('====================')
+            print('iteration %d' % i)
+            congNodes = random.sample(self.nodelist, 64)
+            self.continualGPC(instance=1, nodes=congNodes) # subprocess.
+            self.runLDMS(seconds=300) # subprocess.
+            time.sleep(310)
+            nodeCongPair = self.sortCongestion() # from low to high congestion.
+            greenNodes = [nodeCongPair[x][0] for x in range(64)]
+            yellowNodes = [nodeCongPair[x][0] for x in range(64, 128)]
+            self.appOnNodes(app=appName, N=64, nodes=greenNodes)
+            self.appOnNodes(app=appName, N=64, nodes=greenNodes)
+            self.stopGPC()
+            print()
+            time.sleep(5)
 
 if __name__ == '__main__':
     main()

@@ -9,6 +9,7 @@ from io import StringIO
 import pytz
 pacific = pytz.timezone('US/Pacific')
 import re
+import sys
 
 '''
 Warning: do not use .replace(tzinfo=pacific) to replace timezone, which has a fault!
@@ -20,7 +21,7 @@ def main():
     #al.runtime()
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
-    al.processFix(app='nekbone')
+    al.processFix(app='hacc', onlyTime=1)
     #al.calcNode()
 
 def getfiles(path):
@@ -719,16 +720,15 @@ class analysis(ldms):
             print('green:' + str(greenNodes))
             print('yellow:' + str(yellowNodes))
 
-    def processFix(self, app='nekbone'):
+    def processFix(self, app, onlyTime):
         '''
-        app: miniMD, nekbone.
         '''
         run = 10
         task = 2048
         if app == 'miniMD':
             f = 'results/fixAlloc_gpc5.out'
-        elif app == 'nekbone':
-            f = 'results/fixAlloc_nekbone.out'
+        elif app in ['nekbone','miniamr','lammps','graph500','hacc']:
+            f = 'results/fixAlloc_%s.out' % app
         print('Getting exec time..')
         with open(f, 'r') as o:
             et = {}
@@ -744,12 +744,51 @@ class analysis(ldms):
                     if line.startswith('Avg MFlops'):
                         count += 1
                         et[count] = float(line.split()[3].split('E')[0]) * 10**6
+                elif app == 'miniamr':
+                    if line.startswith('startTime:'):
+                        count += 1
+                        sumTime = 0
+                    if 'Time: ave' in line:
+                        sumTime += float(line.split()[6])
+                    if line.startswith('endTime:'):
+                        et[count] = sumTime
+                elif app == 'lammps':
+                    if line.startswith('Total wall time'):
+                        count += 1
+                        if 'srun' in line:
+                            timestring = line.split()[3][:-5].split(':')
+                        else:
+                            timestring = line.split()[3].split(':')
+                        thisTime = int(timestring[1]) * 60 + int(timestring[2])
+                        et[count] = thisTime
+                elif app == 'graph500':
+                    if line.startswith('startTime:'):
+                        count += 1
+                    if line.startswith('bfs  mean_time'):
+                        bfs = float(line.split()[2])
+                    if line.startswith('sssp mean_time'):
+                        sssp = float(line.split()[2])
+                    if line.startswith('endTime:'):
+                        thisTime = (bfs + sssp) * 64
+                        et[count] = thisTime
+                elif app == 'hacc':
+                    if line.startswith('startTime:'):
+                        count += 1
+                    if line.startswith('step   max'):
+                        timestring = line.split()[5].split('e+')
+                        thisTime = float(timestring[0]) * 10**int(timestring[1])
+                    if line.startswith('endTime:'):
+                        et[count] = thisTime
                     #if line.startswith('startTime:'):
                     #    start = self.timeToUnixPDT(line.lstrip('startTime:')[:-1])
                     #if line.startswith('endTime:'):
                     #    count += 1
                     #    end = self.timeToUnixPDT(line.lstrip('endTime:')[:-1])
                     #    et[count] = end - start
+        if app in ['lammps','hacc']:
+            if len(et) < 40:
+                for idx in range(len(et)+1, 41):
+                    et[idx] = 0 # add missing cases.
         df = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
         df['run'] = list(range(run))
         df['green'] = [et[x] for x in range(1, 4*run+1, 4)]
@@ -758,9 +797,11 @@ class analysis(ldms):
         df['yellowGPC'] = [et[x] for x in range(4, 4*run+1, 4)]
         if app == 'miniMD':
             df.to_csv('resultFixGPC5.csv', index=False)
-        elif app == 'nekbone':
-            df.to_csv('resultFix_nekbone.csv', index=False)
-        asdf
+        elif app in ['nekbone','miniamr','lammps','graph500','hacc']:
+            df.to_csv('resultFix_%s.csv' % app, index=False)
+
+        if onlyTime:
+            sys.exit(0)
 
         print('Getting span data..')
         with open(f, 'r') as o:
