@@ -21,7 +21,7 @@ def main():
     #al.runtime()
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
-    al.processFix(app='hacc', onlyTime=1)
+    al.processFix(app='nekbone', onlyTime=1, getSpan=0)
     #al.calcNode()
 
 def getfiles(path):
@@ -568,7 +568,7 @@ class analysis(ldms):
                 for line in o:
                     if line.startswith('startTime:'):
                         startTimeCount += 1
-                        thisTime[startTimeCount] = self.timeToUnixPST(line.lstrip('startTime:').lstrip('good:').lstrip('bad:')[:-1])
+                        thisTime[startTimeCount] = self.timeToUnixPST(line.lstrip('startTime:').lstrip('good:').lstrip('bad:')[:-1])# cannot use lstrip.
                         if startTimeCount == 1:
                             started = self.jobnodelist[self.jobnodelist['startUnix']<=thisTime[startTimeCount]]
                             jobid = started.loc[started['startUnix'].idxmax(axis=0)]['JobID']
@@ -720,15 +720,12 @@ class analysis(ldms):
             print('green:' + str(greenNodes))
             print('yellow:' + str(yellowNodes))
 
-    def processFix(self, app, onlyTime):
+    def processFix(self, app, onlyTime, getSpan):
         '''
         '''
         run = 10
         task = 2048
-        if app == 'miniMD':
-            f = 'results/fixAlloc_gpc5.out'
-        elif app in ['nekbone','miniamr','lammps','graph500','hacc']:
-            f = 'results/fixAlloc_%s.out' % app
+        f = 'results/fixAlloc_%s.out' % app
         print('Getting exec time..')
         with open(f, 'r') as o:
             et = {}
@@ -744,6 +741,13 @@ class analysis(ldms):
                     if line.startswith('Avg MFlops'):
                         count += 1
                         et[count] = float(line.split()[3].split('E')[0]) * 10**6
+                    #if line.startswith('startTime:'):
+                    #    count += 1
+                    #    startTime = pd.Timestamp(self.timeToUnixPDT(line[10:-1]), unit='s', tz='US/Pacific')
+                    #if line.startswith('endTime:'):
+                    #    endTime = pd.Timestamp(self.timeToUnixPDT(line[8:-1]), unit='s', tz='US/Pacific')
+                    #    delta = (endTime - startTime).seconds
+                    #    et[count] = delta
                 elif app == 'miniamr':
                     if line.startswith('startTime:'):
                         count += 1
@@ -803,25 +807,26 @@ class analysis(ldms):
         if onlyTime:
             sys.exit(0)
 
-        print('Getting span data..')
-        with open(f, 'r') as o:
-            routerSpan = {}
-            count = 0
-            for line in o:
-                if line.startswith('app-node list'):
-                    count += 1
-                if count >= 1 and line.startswith('['):
-                    appnodes = [int(x) for x in line[1:-2].split(', ')]
-                    routers = super().nodeToRouter(appnodes)
-                    routerSpan[count] = len(routers)
+        if getSpan:
+            print('Getting span data..')
+            with open(f, 'r') as o:
+                routerSpan = {}
+                count = 0
+                for line in o:
+                    if line.startswith('app-node list'):
+                        count += 1
+                    if count >= 1 and line.startswith('['):
+                        appnodes = [int(x) for x in line[1:-2].split(', ')]
+                        routers = super().nodeToRouter(appnodes)
+                        routerSpan[count] = len(routers)
 
-        df = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
-        df['run'] = list(range(run))
-        df['green'] = [routerSpan[x] for x in range(1, 4*run+1, 4)]
-        df['yellow'] = [routerSpan[x] for x in range(2, 4*run+1, 4)]
-        df['greenGPC'] = [routerSpan[x] for x in range(3, 4*run+1, 4)]
-        df['yellowGPC'] = [routerSpan[x] for x in range(4, 4*run+1, 4)]
-        df.to_csv('fixGPC5_routerSpan.csv', index=False)
+            df = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
+            df['run'] = list(range(run))
+            df['green'] = [routerSpan[x] for x in range(1, 4*run+1, 4)]
+            df['yellow'] = [routerSpan[x] for x in range(2, 4*run+1, 4)]
+            df['greenGPC'] = [routerSpan[x] for x in range(3, 4*run+1, 4)]
+            df['yellowGPC'] = [routerSpan[x] for x in range(4, 4*run+1, 4)]
+            df.to_csv('fixGPC5_routerSpan.csv', index=False)
 
         print('Getting router data..')
         with open(f, 'r') as o:
@@ -834,9 +839,20 @@ class analysis(ldms):
                     appnodes = [int(x) for x in line[1:-2].split(', ')]
                     routers = super().nodeToRouter(appnodes)
                 if line.startswith('startTime:'):
-                    deltaTime = 50
-                    queryStart = pd.Timestamp(self.timeToUnixPST(line.lstrip('startTime:')[:-1]), unit='s', tz='US/Pacific')
-                    queryEnd = queryStart + pd.Timedelta(seconds=deltaTime)
+                    if app == 'miniMD':
+                        startTime = pd.Timestamp(self.timeToUnixPST(line[10:-1]), unit='s', tz='US/Pacific')
+                    else:
+                        startTime = pd.Timestamp(self.timeToUnixPDT(line[10:-1]), unit='s', tz='US/Pacific')
+                if line.startswith('endTime:'):
+                    if app == 'miniMD':
+                        endTime = pd.Timestamp(self.timeToUnixPST(line[8:-1]), unit='s', tz='US/Pacific')
+                    else:
+                        endTime = pd.Timestamp(self.timeToUnixPDT(line[8:-1]), unit='s', tz='US/Pacific')
+                    delta = (endTime - startTime).seconds
+                    print('duration: %d' % delta)
+                    deltaTime = min(delta, 100)
+                    queryStart = endTime - pd.Timedelta(seconds=deltaTime)
+                    queryEnd = endTime
                     qd = super().fetchData(queryStart, queryEnd, 'rtr')
                     if qd is None:
                         stall[count] = -1
@@ -853,13 +869,21 @@ class analysis(ldms):
                     stall[count] = super().calcRouterStall(regu)
                     ratio[count] = super().calcRouterMetric(regu)
 
+        if app in ['lammps','hacc']:
+            if len(stall) < 40:
+                for idx in range(len(stall)+1, 41):
+                    stall[idx] = -3 # add missing cases.
+            if len(ratio) < 40:
+                for idx in range(len(ratio)+1, 41):
+                    ratio[idx] = -3 # add missing cases.
+
         dfStall = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
         dfStall['run'] = list(range(run))
         dfStall['green'] = [stall[x] for x in range(1, 4*run+1, 4)]
         dfStall['yellow'] = [stall[x] for x in range(2, 4*run+1, 4)]
         dfStall['greenGPC'] = [stall[x] for x in range(3, 4*run+1, 4)]
         dfStall['yellowGPC'] = [stall[x] for x in range(4, 4*run+1, 4)]
-        dfStall.to_csv('fixGPC1_stall.csv', index=False)
+        dfStall.to_csv('fixGPC_autotime_%s_stall.csv' % app, index=False)
 
         dfRatio = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
         dfRatio['run'] = list(range(run))
@@ -867,7 +891,8 @@ class analysis(ldms):
         dfRatio['yellow'] = [ratio[x] for x in range(2, 4*run+1, 4)]
         dfRatio['greenGPC'] = [ratio[x] for x in range(3, 4*run+1, 4)]
         dfRatio['yellowGPC'] = [ratio[x] for x in range(4, 4*run+1, 4)]
-        dfRatio.to_csv('fixGPC1_ratio.csv', index=False)
+        dfRatio.to_csv('fixGPC_autotime_%s_ratio.csv' % app, index=False)
+        print('finished.')
 
     def process(self, mode, counterSaved, saveFolder):
         '''
