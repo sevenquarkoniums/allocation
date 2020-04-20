@@ -5,6 +5,8 @@ import signal
 import time
 import sys
 import random
+import multiprocessing
+import pandas as pd
 
 def main():
     time.sleep(10)
@@ -12,8 +14,8 @@ def main():
     #w.testOSU()
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
-    w.fixAllocation(appName='milc', iteration=10, instance=5)
-    #w.CADD(appName='miniMD', iteration=1)
+    #w.fixAllocation(appName='milc', iteration=10, instance=5)
+    w.CADD(appName='miniMD', iteration=1)
 
 class withOSU:
     def __init__(self):
@@ -197,14 +199,63 @@ class withOSU:
                 if cong.poll() == None:
                     os.killpg(os.getpgid(cong.pid), signal.SIGTERM)
 
-    def continualGPC(self, instance, nodes):
-        pass
+    def startContGPC(self, nodes):
+        print('start GPC checker.')
+        self.GPCnodes = nodes
+        self.GPCchecker = multiprocessing.Process(target=self.continualGPC)
+        self.GPCchecker.start()
 
-    def runLDMS(self, seconds):
-        pass
+    def continualGPC(self):
+        '''
+        Only 1 instace.
+        '''
+        print(self.GPCnodes)
+        N = len(self.GPCnodes)
+        ntasks = 32*N
+        gpclist = self.abbrev(self.GPCnodes)
+        command = 'srun -N %d --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out' % (N, ntasks, gpclist)
+        print(command)
+        self.GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
+        print('continual GPC started.')
+        while 1:
+            time.sleep(0.5)
+            if self.GPCproc.poll() != None: # if finished.
+                print('restarting GPC..')
+                self.GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
+
+    def stopGPC(self):
+        '''
+        may not run due to srun problem.
+        '''
+        self.GPCchecker.stop()
+        print('GPC running:')
+        print(self.GPCproc.poll() == None)
+        if self.GPCproc.poll() == None: # if not finished.
+            os.killpg(os.getpgid(self.GPCproc.pid), signal.SIGTERM)
+        print('GPC killed.')
+
+    def runLDMS(self, foldername, seconds):
+        '''
+        Additional 30s to start sampler is not counted.
+        '''
+        print('starting LDMS..')
+        proc = subprocess.call('./startLDMS.sh %s %d' % (foldername, seconds), shell=True)
+        print('LDMS ended.')
+        self.ldmsdir = '/project/projectdirs/m3231/yijia/csv/%s' % foldername
 
     def sortCongestion(self):
-        pass
+        df = pd.read_csv('%s/cray_aries_r' % self.ldmsdir)
+        print('%.1f seconds collected.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
+        df['stalled_sum'] = data[['stalled_%03d (ns)' % x for x in range(48)]].sum(axis=1)
+        nodeCong = []
+        for node in self.idleNodes:
+            select = df[df['component_id']==node]
+            if len(select) == 0:
+                print('No data for node %d' % node)
+            stall = ( select.iloc[-1]['stalled_sum'] - select.iloc[0]['stalled_sum'] ) / ( select.iloc[-1]['#Time'] - select.iloc[0]['#Time'] )
+            nodeCong.append((node, stall))
+        nodeCongPair = sorted(nodeCong, key=lambda x: x[1]) # ascending.
+        return nodeCongPair
 
     def CADD(self, appName, iteration):
         '''
@@ -213,18 +264,20 @@ class withOSU:
         for i in range(iteration):
             print('====================')
             print('iteration %d' % i)
-            congNodes = random.sample(self.nodelist, 64)
-            self.continualGPC(instance=1, nodes=congNodes) # subprocess.
-            self.runLDMS(seconds=300) # subprocess.
-            time.sleep(310)
+            congNodes = random.sample(self.nodelist, 16)
+            self.idleNodes = [x for x in self.nodelist if x not in congNodes]
+            self.startContGPC(nodes=congNodes) # subprocess.
+            self.runLDMS(foldername='%s_%d' % (os.environ['SLURM_JOB_ID'], i), seconds=120)
+            time.sleep(130)
             nodeCongPair = self.sortCongestion() # from low to high congestion.
-            greenNodes = [nodeCongPair[x][0] for x in range(64)]
-            yellowNodes = [nodeCongPair[x][0] for x in range(64, 128)]
-            self.appOnNodes(app=appName, N=64, nodes=greenNodes)
-            self.appOnNodes(app=appName, N=64, nodes=greenNodes)
-            self.stopGPC()
-            print()
-            time.sleep(5)
+            print(nodeCongPair)
+        #    greenNodes = [nodeCongPair[x][0] for x in range(64)]
+        #    yellowNodes = [nodeCongPair[x][0] for x in range(64, 128)]
+        #    self.appOnNodes(app=appName, N=64, nodes=greenNodes)
+        #    self.appOnNodes(app=appName, N=64, nodes=greenNodes)
+        #    self.stopGPC()
+        #    print()
+        #    time.sleep(5)
 
 if __name__ == '__main__':
     main()
