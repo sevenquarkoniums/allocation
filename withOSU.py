@@ -15,7 +15,7 @@ def main():
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
     #w.fixAllocation(appName='milc', iteration=10, instance=5)
-    w.CADD(appName='miniMD', iteration=1)
+    w.CADD(appName='miniMD', iteration=10)
 
 class withOSU:
     def __init__(self):
@@ -202,10 +202,11 @@ class withOSU:
     def startContGPC(self, nodes):
         print('start GPC checker.')
         self.GPCnodes = nodes
-        self.GPCchecker = multiprocessing.Process(target=self.continualGPC)
+        self.q = multiprocessing.Queue()
+        self.GPCchecker = multiprocessing.Process(target=self.continualGPC, args=(self.q,))
         self.GPCchecker.start()
 
-    def continualGPC(self):
+    def continualGPC(self, q):
         '''
         Only 1 instace.
         '''
@@ -215,23 +216,31 @@ class withOSU:
         gpclist = self.abbrev(self.GPCnodes)
         command = 'srun -N %d --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out' % (N, ntasks, gpclist)
         print(command)
-        self.GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
+        GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
         print('continual GPC started.')
         while 1:
             time.sleep(0.5)
-            if self.GPCproc.poll() != None: # if finished.
+            if not q.empty():
+                message = q.get()
+                if message == 'stop':
+                    if GPCproc.poll() == None: # if not finished.
+                        os.killpg(os.getpgid(GPCproc.pid), signal.SIGTERM)
+                        print('GPC killed in continualGPC().')
+                    break
+            if GPCproc.poll() != None: # if finished.
                 print('restarting GPC..')
-                self.GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
+                #GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
 
     def stopGPC(self):
         '''
         may not run due to srun problem.
         '''
-        self.GPCchecker.stop()
-        print('GPC running:')
-        print(self.GPCproc.poll() == None)
-        if self.GPCproc.poll() == None: # if not finished.
-            os.killpg(os.getpgid(self.GPCproc.pid), signal.SIGTERM)
+        self.q.put('stop')
+        #self.GPCchecker.terminate()
+        self.GPCchecker.join()
+        print('continualGPC() finished.')
+        self.q.close()
+        self.q.join_thread()
         print('GPC killed.')
 
     def runLDMS(self, foldername, seconds):
@@ -242,42 +251,65 @@ class withOSU:
         proc = subprocess.call('./startLDMS.sh %s %d' % (foldername, seconds), shell=True)
         print('LDMS ended.')
         self.ldmsdir = '/project/projectdirs/m3231/yijia/csv/%s' % foldername
+        print('runLDMS() finish.')
 
     def sortCongestion(self):
+        print('Reading cray csv..')
         df = pd.read_csv('%s/cray_aries_r' % self.ldmsdir)
-        print('%.1f seconds collected.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
-        df['stalled_sum'] = data[['stalled_%03d (ns)' % x for x in range(48)]].sum(axis=1)
+        print('%.1f seconds collected in total.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
+        print('Calculating stall sum..')
+        df['stalled_sum'] = df[['stalled_%03d (ns)' % x for x in range(48)]].sum(axis=1)
+        print('Calculating node stall..')
         nodeCong = []
+        selectTime = df[ (df['#Time'] >= self.monitorstart) & (df['#Time'] <= self.monitorend) ]
         for node in self.idleNodes:
-            select = df[df['component_id']==node]
+            select = selectTime[selectTime['component_id']==node]
             if len(select) == 0:
                 print('No data for node %d' % node)
             stall = ( select.iloc[-1]['stalled_sum'] - select.iloc[0]['stalled_sum'] ) / ( select.iloc[-1]['#Time'] - select.iloc[0]['#Time'] )
             nodeCong.append((node, stall))
+        print('Sorting nodes..')
         nodeCongPair = sorted(nodeCong, key=lambda x: x[1]) # ascending.
+        print(nodeCongPair)
         return nodeCongPair
 
     def CADD(self, appName, iteration):
         '''
         Experiment for the Congestion-Aware Data-Driven allocation policy.
         '''
+        #self.runLDMS(foldername='%s_%d' % (os.environ['SLURM_JOB_ID'], 0), seconds=120)
+        #sys.exit(0)
+        jobid = os.environ['SLURM_JOB_ID']
+        print('jobid: ' + str(jobid))
+
         for i in range(iteration):
             print('====================')
             print('iteration %d' % i)
-            congNodes = random.sample(self.nodelist, 16)
-            self.idleNodes = [x for x in self.nodelist if x not in congNodes]
-            self.startContGPC(nodes=congNodes) # subprocess.
-            self.runLDMS(foldername='%s_%d' % (os.environ['SLURM_JOB_ID'], i), seconds=120)
-            time.sleep(130)
-            nodeCongPair = self.sortCongestion() # from low to high congestion.
-            print(nodeCongPair)
-        #    greenNodes = [nodeCongPair[x][0] for x in range(64)]
-        #    yellowNodes = [nodeCongPair[x][0] for x in range(64, 128)]
-        #    self.appOnNodes(app=appName, N=64, nodes=greenNodes)
-        #    self.appOnNodes(app=appName, N=64, nodes=greenNodes)
-        #    self.stopGPC()
-        #    print()
-        #    time.sleep(5)
+            congNodes = random.sample(self.nodelist[1:], 10) # skip the 1st node for LDMS.
+            print('Congestor nodes:')
+            print(congNodes)
+            self.idleNodes = [x for x in self.nodelist[1:] if x not in congNodes]
+            self.startContGPC(nodes=congNodes)
+
+            self.monitorstart = int(time.time())
+            if i == 0:
+                self.runLDMS(foldername='%s_%d' % (jobid, i), seconds=120)
+            else:
+                time.sleep(120)
+            self.monitorend = int(time.time())
+
+            print('Starting sortCongestion()..')
+            nodeCongPair = self.sortCongestion() # sort idle nodes from low to high congestion.
+            greenNodes = [nodeCongPair[x][0] for x in range(4)]
+            yellowNodes = [nodeCongPair[x][0] for x in range(4, 8)]
+            print('Run green job.')
+            self.appOnNodes(app=appName, N=4, nodes=greenNodes)
+            print('Run yellow job.')
+            self.appOnNodes(app=appName, N=4, nodes=yellowNodes)
+            self.stopGPC()
+            time.sleep(5)
+            print('Iteration end.')
+            print()
 
 if __name__ == '__main__':
     main()

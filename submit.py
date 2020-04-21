@@ -39,7 +39,7 @@ class submit:
 
     def CADD(self, timelimit, isMail):
         mail = '--mail-type=END ' if isMail else ''
-        command = 'sbatch -N 32 --account=m3231 -q premium -C haswell %s-t %s -J CADD -o $HOME/allocation/results/CADD.out withOSU.py' % (mail, timelimit)
+        command = 'sbatch -N 19 --account=m3231 -q premium -C haswell %s-t %s -J CADD -o $HOME/allocation/results/CADD.out runwith.sh' % (mail, timelimit)
         call(command, shell=True)
 
 if __name__ == '__main__':

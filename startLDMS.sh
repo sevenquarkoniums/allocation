@@ -1,4 +1,7 @@
 #!/bin/bash
+#module unload python/3.6-anaconda-5.2
+#module load python/2.7-anaconda-4.4
+
 date
 
 export TOP=/project/projectdirs/m3231/yijia/ldms/ovis/build
@@ -36,8 +39,8 @@ sleep $2
 
 date
 
-echo "kill ldmsd"
-srun -n ${SLURM_NNODES} -m cyclic --mem=1G pkill ldmsd # may be delayed by srun problem.
+#echo "kill ldmsd"
+#srun -n ${SLURM_NNODES} -m cyclic --mem=1G pkill ldmsd # may be delayed by srun problem.
 
 date
 
