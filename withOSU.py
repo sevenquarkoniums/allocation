@@ -72,12 +72,15 @@ class withOSU:
         return procs
 
     def startGPC(self, instance, nodes):
+        '''
+        obsolete
+        '''
         N = len(nodes)
         ntasks = 32*N
         procs = []
         gpclist = self.abbrev(nodes)
         for i in range(instance):
-            command = 'srun -N %d --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/gpc_%s_N%d_run%d.out' % (N, ntasks, gpclist, self.appName, N, self.gpcRun)
+            command = 'srun -N %d --mem=100G --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/gpc_%s_N%d_run%d.out' % (N, ntasks, gpclist, self.appName, N, self.gpcRun)
             gpc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             print('gpc %d started.' % i)
             procs.append(gpc)
@@ -85,6 +88,9 @@ class withOSU:
         return procs
 
     def startApp(self, N, alloc):
+        '''
+        obsolete
+        '''
         print('Allocation method: %s' % alloc)
         ntasks = 32*N
         unUsedNodes = [x for x in self.nodelist if x not in self.usedNodes]
@@ -122,19 +128,19 @@ class withOSU:
             appcmd += 'mpirun -np %d --host %s ./nekbone ex1; ' % (ntasks, liststr)
         elif app == 'lammps':
             appcmd += 'cd $HOME/allocation/lammps/testrun; '
-            appcmd += 'srun -N %d --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/LAMMPS/src/LAMMPS -in in.vacf.2d; ' % (N, liststr)
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/LAMMPS/src/LAMMPS -in in.vacf.2d; ' % (N, liststr)
         elif app == 'miniamr':
             appcmd += 'cd $HOME/allocation/miniamr/testrun; '
-            appcmd += 'srun -N %d --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1             --npx 16 --npy 16 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2             --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0             --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0             --num_tsteps 10 --stages_per_ts 125 --report_perf 4; ' % (N, liststr)
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1             --npx 16 --npy 16 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2             --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0             --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0             --num_tsteps 10 --stages_per_ts 125 --report_perf 4; ' % (N, liststr)
         elif app == 'hacc':
             appcmd += 'cd $HOME/allocation/hacc/testrun; '
-            appcmd += 'srun -N %d --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC indat cmbM000.tf m000 INIT ALL_TO_ALL -w -R -N 64 -a final -f refresh -t 16x16x8; ' % (N, liststr)
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC indat cmbM000.tf m000 INIT ALL_TO_ALL -w -R -N 64 -a final -f refresh -t 16x16x8; ' % (N, liststr)
         elif app == 'graph500':
             appcmd += 'cd $HOME/allocation/graph500/src; export SKIP_VALIDATION=1; '
             appcmd += 'mpirun -np %d --host %s ./graph500_reference_bfs_sssp 26; ' % (ntasks, liststr)
         elif app == 'milc':
             appcmd += 'cd $HOME/milc_qcd-7.8.1/ks_imp_dyn/test; '
-            appcmd += 'srun -N %d --ntasks-per-node=32 --nodelist=%s ../su3_rmd myinput.in; ' % (N, liststr)
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s ../su3_rmd myinput.in; ' % (N, liststr)
         print('startTime:' + subprocess.check_output(['date']).decode('utf-8'))
         apprun = subprocess.Popen(appcmd, stdout=subprocess.PIPE, shell=True)
         output = apprun.communicate()[0].strip()
@@ -143,6 +149,9 @@ class withOSU:
         print()
 
     def congestion(self, withCongestor, core, instance):
+        '''
+        obsolete
+        '''
         N = 32
         self.usedNodes = self.jumpOne(self.nodelist, N)
         if withCongestor:
@@ -160,6 +169,9 @@ class withOSU:
                 os.killpg(os.getpgid(osu.pid), signal.SIGTERM)
 
     def allocation(self, instance, core=32):
+        '''
+        obsolete
+        '''
         N = 32
         self.usedNodes = self.jumpOne(self.nodelist, N)
         procs = self.startOSU(N=N, core=core, instance=instance, nodes=self.usedNodes)
@@ -219,7 +231,7 @@ class withOSU:
         N = len(self.GPCnodes)
         ntasks = 32*N
         gpclist = self.abbrev(self.GPCnodes)
-        command = 'srun -N %d --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out' % (N, ntasks, gpclist)
+        command = 'srun -N %d --mem=64G --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out' % (N, ntasks, gpclist)
         print(command)
         GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
         print('continual GPC started.')
@@ -249,13 +261,13 @@ class withOSU:
         self.q.join_thread()
         print('GPC killed.')
 
-    def runLDMS(self, foldername, seconds):
+    def runLDMS(self, foldername, storeNode, seconds):
         '''
         Start LDMS.
         Additional 30s to start sampler is not counted.
         '''
         print('starting LDMS..')
-        proc = subprocess.call('./startLDMS.sh %s %d' % (foldername, seconds), shell=True)
+        proc = subprocess.call('./startLDMS.sh %s %s %d' % (foldername, storeNode, seconds), shell=True)
         self.ldmsdir = '/project/projectdirs/m3231/yijia/csv/%s' % foldername
         print('runLDMS() finish.')
 
@@ -285,7 +297,7 @@ class withOSU:
 
     def sortCongestion(self):
         '''
-        Sort nodes according to their network metrics.
+        Sort idle nodes according to their network metrics.
         '''
         print('Copying file..')
         copyfile('%s/cray_aries_r' % self.ldmsdir, '%s/temp.csv' % self.ldmsdir)
@@ -323,15 +335,17 @@ class withOSU:
         for i in range(iteration):
             print('====================')
             print('iteration %d' % i)
-            congNodes = random.sample(self.nodelist[1:], 10) # skip the 1st node for LDMS.
+            # use 1st node for this python code; 2nd node for LDMS store; the rest for congestor and app.
+            storeNode = 'nid%05d' % self.nodelist[1]
+            congNodes = random.sample(self.nodelist[2:], 10) # skip the 1st node for LDMS.
             print('Congestor nodes:')
             print(congNodes)
-            self.idleNodes = [x for x in self.nodelist[1:] if x not in congNodes]
+            self.idleNodes = [x for x in self.nodelist[2:] if x not in congNodes]
             self.startContGPC(nodes=congNodes)
 
             self.monitorstart = int(time.time())
             if i == 0:
-                self.runLDMS(foldername='%s_%d' % (jobid, i), seconds=120)
+                self.runLDMS(foldername='%s_%d' % (jobid, i), storeNode=storeNode, seconds=120)
             else:
                 time.sleep(120)
             self.monitorend = int(time.time())
