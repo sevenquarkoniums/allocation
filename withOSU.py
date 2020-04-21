@@ -7,6 +7,7 @@ import sys
 import random
 import multiprocessing
 import pandas as pd
+from shutil import copyfile
 
 def main():
     time.sleep(10)
@@ -200,11 +201,11 @@ class withOSU:
                     os.killpg(os.getpgid(cong.pid), signal.SIGTERM)
 
     def startContGPC(self, nodes):
-        print('start GPC checker.')
         self.GPCnodes = nodes
         self.q = multiprocessing.Queue()
         self.GPCchecker = multiprocessing.Process(target=self.continualGPC, args=(self.q,))
         self.GPCchecker.start()
+        print('GPC checker started.')
 
     def continualGPC(self, q):
         '''
@@ -229,7 +230,7 @@ class withOSU:
                     break
             if GPCproc.poll() != None: # if finished.
                 print('restarting GPC..')
-                #GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
+                GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
 
     def stopGPC(self):
         '''
@@ -249,13 +250,37 @@ class withOSU:
         '''
         print('starting LDMS..')
         proc = subprocess.call('./startLDMS.sh %s %d' % (foldername, seconds), shell=True)
-        print('LDMS ended.')
         self.ldmsdir = '/project/projectdirs/m3231/yijia/csv/%s' % foldername
         print('runLDMS() finish.')
 
+    def deleteLastLine(self, f):
+        with open(f, 'r+', encoding = "utf-8") as file:
+            # Move the pointer (similar to a cursor in a text editor) to the end of the file
+            file.seek(0, os.SEEK_END)
+            # This code means the following code skips the very last character in the file -
+            # i.e. in the case the last line is null we delete the last line
+            # and the penultimate one
+            pos = file.tell() - 1
+            # Read each character in the file one at a time from the penultimate
+            # character going backwards, searching for a newline character
+            # If we find a new line, exit the search
+            while pos > 0 and file.read(1) != "\n":
+                pos -= 1
+                file.seek(pos, os.SEEK_SET)
+            # So long as we're not at the start of the file, delete all the characters ahead
+            # of this position
+            if pos > 0:
+                file.seek(pos, os.SEEK_SET)
+                file.truncate()
+        print('deleteLastLine() finished.')
+
     def sortCongestion(self):
+        print('Copying file..')
+        copyfile('%s/cray_aries_r' % self.ldmsdir, '%s/temp.csv' % self.ldmsdir)
+        print('Removing last line..')
+        self.deleteLastLine('%s/temp.csv' % self.ldmsdir)
         print('Reading cray csv..')
-        df = pd.read_csv('%s/cray_aries_r' % self.ldmsdir)
+        df = pd.read_csv('%s/temp.csv' % self.ldmsdir)
         print('%.1f seconds collected in total.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
         print('Calculating stall sum..')
         df['stalled_sum'] = df[['stalled_%03d (ns)' % x for x in range(48)]].sum(axis=1)
@@ -279,6 +304,7 @@ class withOSU:
         '''
         #self.runLDMS(foldername='%s_%d' % (os.environ['SLURM_JOB_ID'], 0), seconds=120)
         #sys.exit(0)
+        print(subprocess.check_output(['date']).decode('utf-8'))
         jobid = os.environ['SLURM_JOB_ID']
         print('jobid: ' + str(jobid))
 
