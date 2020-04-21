@@ -201,6 +201,9 @@ class withOSU:
                     os.killpg(os.getpgid(cong.pid), signal.SIGTERM)
 
     def startContGPC(self, nodes):
+        '''
+        Start the continualGPC() process. Use self.q for communication.
+        '''
         self.GPCnodes = nodes
         self.q = multiprocessing.Queue()
         self.GPCchecker = multiprocessing.Process(target=self.continualGPC, args=(self.q,))
@@ -209,6 +212,7 @@ class withOSU:
 
     def continualGPC(self, q):
         '''
+        The process for running GPCNET network congestor.
         Only 1 instace.
         '''
         print(self.GPCnodes)
@@ -234,6 +238,7 @@ class withOSU:
 
     def stopGPC(self):
         '''
+        Stop the GPCNET congestor.
         may not run due to srun problem.
         '''
         self.q.put('stop')
@@ -246,6 +251,7 @@ class withOSU:
 
     def runLDMS(self, foldername, seconds):
         '''
+        Start LDMS.
         Additional 30s to start sampler is not counted.
         '''
         print('starting LDMS..')
@@ -254,6 +260,9 @@ class withOSU:
         print('runLDMS() finish.')
 
     def deleteLastLine(self, f):
+        '''
+        Delete the last line of a file (may be incomplete).
+        '''
         with open(f, 'r+', encoding = "utf-8") as file:
             # Move the pointer (similar to a cursor in a text editor) to the end of the file
             file.seek(0, os.SEEK_END)
@@ -275,6 +284,9 @@ class withOSU:
         print('deleteLastLine() finished.')
 
     def sortCongestion(self):
+        '''
+        Sort nodes according to their network metrics.
+        '''
         print('Copying file..')
         copyfile('%s/cray_aries_r' % self.ldmsdir, '%s/temp.csv' % self.ldmsdir)
         print('Removing last line..')
