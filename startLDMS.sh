@@ -25,7 +25,7 @@ LDMSSCRIPT=/global/homes/z/zhangyj/allocation/ldmsrun.py
 # set the machine name
 export Machine=cori
 
-srun -n ${SLURM_NNODES} -m cyclic --mem=8G ${LDMSSCRIPT} sampler &
+srun -n ${SLURM_NNODES} -m cyclic --mem=4G ${LDMSSCRIPT} sampler &
 # allow to start up
 sleep 30
 
@@ -33,9 +33,10 @@ date
 
 # run ldms storage daemon only on first node
 echo "starting store daemon"
+#srun -N 1 --nodelist=$2 --mem=64G ${LDMSSCRIPT} store & # will fail if not on this node.
 ${LDMSSCRIPT} store &
 
-sleep $2
+sleep $3
 
 date
 

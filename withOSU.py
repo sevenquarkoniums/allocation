@@ -16,7 +16,7 @@ def main():
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
     #w.fixAllocation(appName='milc', iteration=10, instance=5)
-    w.CADD(appName='miniMD', iteration=10)
+    w.CADD(appName='miniamr', iteration=10)
 
 class withOSU:
     def __init__(self):
@@ -267,6 +267,7 @@ class withOSU:
         Additional 30s to start sampler is not counted.
         '''
         print('starting LDMS..')
+        #proc = subprocess.call('./runStartLDMS.sh %s %s %d' % (foldername, storeNode, seconds), shell=True)
         proc = subprocess.call('./startLDMS.sh %s %s %d' % (foldername, storeNode, seconds), shell=True)
         self.ldmsdir = '/project/projectdirs/m3231/yijia/csv/%s' % foldername
         print('runLDMS() finish.')
@@ -315,8 +316,22 @@ class withOSU:
             select = selectTime[selectTime['component_id']==node]
             if len(select) == 0:
                 print('No data for node %d' % node)
-            stall = ( select.iloc[-1]['stalled_sum'] - select.iloc[0]['stalled_sum'] ) / ( select.iloc[-1]['#Time'] - select.iloc[0]['#Time'] )
+                stall = -1
+            elif len(select) == 1:
+                print('Only one timestamp.')
+                stall = -1
+            else:
+                stall = ( select.iloc[-1]['stalled_sum'] - select.iloc[0]['stalled_sum'] ) / ( select.iloc[-1]['#Time'] - select.iloc[0]['#Time'] )
             nodeCong.append((node, stall))
+        print('Replacing no-value data..')
+        positive = [x[1] for x in nodeCong]
+        mean = sum(positive) / len(positive)
+        if mean == -1:
+            pass
+        else:
+            for idx, pair in enumerate(nodeCong):
+                if pair[1] == -1:
+                    nodeCong[idx] = (pair[0], mean)
         print('Sorting nodes..')
         nodeCongPair = sorted(nodeCong, key=lambda x: x[1]) # ascending.
         print(nodeCongPair)
@@ -335,8 +350,8 @@ class withOSU:
         for i in range(iteration):
             print('====================')
             print('iteration %d' % i)
-            # use 1st node for this python code; 2nd node for LDMS store; the rest for congestor and app.
-            storeNode = 'nid%05d' % self.nodelist[1]
+            # use 1st node for this python code; skip 2nd node; the rest for congestor and app.
+            storeNode = 'nid%05d' % self.nodelist[0]
             congNodes = random.sample(self.nodelist[2:], 10) # skip the 1st node for LDMS.
             print('Congestor nodes:')
             print(congNodes)
@@ -355,8 +370,12 @@ class withOSU:
             greenNodes = [nodeCongPair[x][0] for x in range(4)]
             yellowNodes = [nodeCongPair[x][0] for x in range(4, 8)]
             print('Run green job.')
+            with open('asdf.txt', 'w') as f:
+                f.write('Starting green job.\n')
             self.appOnNodes(app=appName, N=4, nodes=greenNodes)
             print('Run yellow job.')
+            with open('asdf.txt', 'a') as f:
+                f.write('Starting yellow job.\n')
             self.appOnNodes(app=appName, N=4, nodes=yellowNodes)
             self.stopGPC()
             time.sleep(5)
