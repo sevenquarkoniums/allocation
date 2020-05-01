@@ -21,7 +21,7 @@ def main():
     #al.runtime()
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
-    al.processFix(app='nekbone', onlyTime=1, getSpan=0)
+    al.processFix(app='hpcg', onlyTime=1, getSpan=0)
     #al.calcNode()
 
 def getfiles(path):
@@ -731,7 +731,9 @@ class analysis(ldms):
             et = {}
             count = 0
             for line in o:
-                if app == 'miniMD':
+                if app == 'hpcg':
+                    pass
+                elif app == 'miniMD':
                     if line.startswith('%d 1' % task):
                         count += 1
                         spl = line.split()
@@ -775,6 +777,19 @@ class analysis(ldms):
                     if line.startswith('endTime:'):
                         thisTime = (bfs + sssp) * 64
                         et[count] = thisTime
+                elif app == 'milc':
+                    if line.startswith('startTime:'):
+                        count += 1
+                        sumTime, countTimeLine = 0, 0
+                    if line.startswith('Time ='):
+                        countTimeLine += 1
+                        tsplit = line.split()[2].split('e')
+                        sumTime += float(tsplit[0]) * 10**int(tsplit[1][1:])
+                    if line.startswith('total_iters = 23190'):
+                        if countTimeLine == 2:
+                            et[count] = sumTime
+                        else:
+                            et[count] = -1
                 elif app == 'hacc':
                     if line.startswith('startTime:'):
                         count += 1
@@ -783,15 +798,31 @@ class analysis(ldms):
                         thisTime = float(timestring[0]) * 10**int(timestring[1])
                     if line.startswith('endTime:'):
                         et[count] = thisTime
+                elif app == 'qmcpack':
+                    if line.startswith('  Total Execution time'):
+                        count += 1
+                        et[count] = float(line.split()[4].split('e')[0]) * 10**int(line.split()[4].split('+')[1])
                     #if line.startswith('startTime:'):
                     #    start = self.timeToUnixPDT(line.lstrip('startTime:')[:-1])
                     #if line.startswith('endTime:'):
                     #    count += 1
                     #    end = self.timeToUnixPDT(line.lstrip('endTime:')[:-1])
                     #    et[count] = end - start
-        if app in ['lammps','hacc']:
-            if len(et) < 40:
-                for idx in range(len(et)+1, 41):
+        if app == 'hpcg':
+            et = {}
+            count = 0
+            files = getfiles('./hpcg/testrun')
+            files.sort()
+            for f in files:
+                if f.split('/')[-1].startswith('HPCG-Bench'):
+                    count += 1
+                    with open(f, 'r') as o:
+                        for line in o:
+                            if 'but execution' in line:
+                                et[count] = float(line.split('=')[1])
+        if app in ['lammps','hacc','milc']:
+            for idx in range(1, 41):
+                if idx not in et:
                     et[idx] = 0 # add missing cases.
         df = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
         df['run'] = list(range(run))
@@ -801,8 +832,9 @@ class analysis(ldms):
         df['yellowGPC'] = [et[x] for x in range(4, 4*run+1, 4)]
         if app == 'miniMD':
             df.to_csv('resultFixGPC5.csv', index=False)
-        elif app in ['nekbone','miniamr','lammps','graph500','hacc']:
+        else:
             df.to_csv('resultFix_%s.csv' % app, index=False)
+        print('Time processed.')
 
         if onlyTime:
             sys.exit(0)

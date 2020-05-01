@@ -6,7 +6,6 @@ import time
 import sys
 import random
 import multiprocessing
-import pandas as pd
 from shutil import copyfile
 
 def main():
@@ -15,8 +14,8 @@ def main():
     #w.testOSU()
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
-    #w.fixAllocation(appName='milc', iteration=10, instance=5)
-    w.CADD(appName='miniamr', iteration=10)
+    w.fixAllocation(appName='qmcpack', iteration=10, instance=5)
+    #w.CADD(appName='miniamr', iteration=10)
 
 class withOSU:
     def __init__(self):
@@ -113,7 +112,7 @@ class withOSU:
     def appOnNodes(self, app, N, nodes):
         '''
         Run app on some nodes.
-        app: nekbone, miniMD, lammps, miniamr, hacc.
+        app: nekbone, miniMD, lammps, miniamr, hacc, hpcg, qmcpack.
         '''
         ntasks = 32*N
         liststr = ','.join(['nid{0:05d}'.format(y) for y in nodes])
@@ -131,9 +130,11 @@ class withOSU:
             appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/LAMMPS/src/LAMMPS -in in.vacf.2d; ' % (N, liststr)
         elif app == 'miniamr':
             appcmd += 'cd $HOME/allocation/miniamr/testrun; '
+            appcmd += 'sbcast --compress=lz4 /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x /tmp/miniAMR.x; '
             appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1             --npx 16 --npy 16 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2             --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0             --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0             --num_tsteps 10 --stages_per_ts 125 --report_perf 4; ' % (N, liststr)
         elif app == 'hacc':
             appcmd += 'cd $HOME/allocation/hacc/testrun; '
+            appcmd += 'sbcast --compress=lz4 /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC /tmp/HACC; '
             appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC indat cmbM000.tf m000 INIT ALL_TO_ALL -w -R -N 64 -a final -f refresh -t 16x16x8; ' % (N, liststr)
         elif app == 'graph500':
             appcmd += 'cd $HOME/allocation/graph500/src; export SKIP_VALIDATION=1; '
@@ -141,6 +142,12 @@ class withOSU:
         elif app == 'milc':
             appcmd += 'cd $HOME/milc_qcd-7.8.1/ks_imp_dyn/test; '
             appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s ../su3_rmd myinput.in; ' % (N, liststr)
+        elif app == 'hpcg':
+            appcmd += 'cd $HOME/allocation/hpcg/testrun; '
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=60; ' % (N, liststr)
+        elif app == 'qmcpack':
+            appcmd += 'cd $HOME/allocation/qmcpack/testrun; '
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/qmcpack_ben/build_ben/bin/qmcpack simple-H2O.xml; ' % (N, liststr)
         print('startTime:' + subprocess.check_output(['date']).decode('utf-8'))
         apprun = subprocess.Popen(appcmd, stdout=subprocess.PIPE, shell=True)
         output = apprun.communicate()[0].strip()
@@ -202,7 +209,7 @@ class withOSU:
 
             # run with congestor.
             procs = self.startGPC(instance=instance, nodes=congestNodes)
-            #procs = self.startOSU(N=N, core=32, instance=instance, nodes=congestNodes)
+            #procs = self.startOSU(N=N, core=32, instance=instance, nodes=congestNodes) # OSU doesn't seem to create congestion.
             self.appOnNodes(app=appName, N=N, nodes=greenNodes)
             self.appOnNodes(app=appName, N=N, nodes=yellowNodes)
             print('is congestor running:')
@@ -231,8 +238,8 @@ class withOSU:
         N = len(self.GPCnodes)
         ntasks = 32*N
         gpclist = self.abbrev(self.GPCnodes)
-        command = 'srun -N %d --mem=64G --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out' % (N, ntasks, gpclist)
-        print(command)
+        command = 'sbcast --compress=lz4 /global/homes/z/zhangyj/GPCNET/network_load_test /tmp/network_load_test; '
+        command += 'srun -N %d --mem=64G --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out; ' % (N, ntasks, gpclist)
         GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
         print('continual GPC started.')
         while 1:
@@ -341,6 +348,7 @@ class withOSU:
         '''
         Experiment for the Congestion-Aware Data-Driven allocation policy.
         '''
+        import pandas as pd
         #self.runLDMS(foldername='%s_%d' % (os.environ['SLURM_JOB_ID'], 0), seconds=120)
         #sys.exit(0)
         print(subprocess.check_output(['date']).decode('utf-8'))
