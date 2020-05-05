@@ -14,8 +14,8 @@ def main():
     #w.testOSU()
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
-    w.fixAllocation(appName='qmcpack', iteration=10, instance=5)
-    #w.CADD(appName='miniamr', iteration=10)
+    #w.fixAllocation(appName='qmcpack', iteration=10, instance=5)
+    w.CADD(appName='milc', iteration=10)
 
 class withOSU:
     def __init__(self):
@@ -51,6 +51,9 @@ class withOSU:
         return [nodelist[2*x+1] for x in range(N)]
 
     def abbrev(self, nodelist):
+        '''
+        Format the nodelist for use in srun command.
+        '''
         nodestr = 'nid['
         nodestr += ','.join(['{0:05d}'.format(x) for x in nodelist])
         nodestr += ']'
@@ -109,7 +112,7 @@ class withOSU:
         print('endTime:%s:' % (alloc) + subprocess.check_output(['date']).decode('utf-8'))
         print()
 
-    def appOnNodes(self, app, N, nodes):
+    def appOnNodes(self, app, N, nodes, writeToFile=None):
         '''
         Run app on some nodes.
         app: nekbone, miniMD, lammps, miniamr, hacc, hpcg, qmcpack.
@@ -121,39 +124,50 @@ class withOSU:
         appcmd = 'module load openmpi; '
         if app == 'miniMD':
             appcmd += 'cd $HOME/miniMD/ref; '
-            appcmd += 'mpirun -np %d --host %s $HOME/miniMD/ref/miniMD_openmpi -n 160000; ' % (ntasks, liststr)
+            appcmd += 'mpirun -np %d --host %s $HOME/miniMD/ref/miniMD_openmpi -n 160000' % (ntasks, liststr) # may trigger LDMS daemon problem by mpirun.
         elif app == 'nekbone':
             appcmd += 'cd $HOME/allocation/nekbone/Nekbone/test/example1; '
-            appcmd += 'mpirun -np %d --host %s ./nekbone ex1; ' % (ntasks, liststr)
+            appcmd += 'mpirun -np %d --host %s ./nekbone ex1' % (ntasks, liststr)
         elif app == 'lammps':
             appcmd += 'cd $HOME/allocation/lammps/testrun; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/LAMMPS/src/LAMMPS -in in.vacf.2d; ' % (N, liststr)
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/LAMMPS/src/LAMMPS -in in.vacf.2d' % (N, liststr)
         elif app == 'miniamr':
             appcmd += 'cd $HOME/allocation/miniamr/testrun; '
-            appcmd += 'sbcast --compress=lz4 /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x /tmp/miniAMR.x; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1             --npx 16 --npy 16 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2             --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0             --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0             --num_tsteps 10 --stages_per_ts 125 --report_perf 4; ' % (N, liststr)
+            #appcmd += 'sbcast --compress=lz4 /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x /tmp/miniAMR.x; '
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1             --npx 16 --npy 16 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2             --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0             --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0             --num_tsteps 10 --stages_per_ts 125 --report_perf 4' % (N, liststr)
         elif app == 'hacc':
             appcmd += 'cd $HOME/allocation/hacc/testrun; '
-            appcmd += 'sbcast --compress=lz4 /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC /tmp/HACC; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC indat cmbM000.tf m000 INIT ALL_TO_ALL -w -R -N 64 -a final -f refresh -t 16x16x8; ' % (N, liststr)
+            #appcmd += 'sbcast --compress=lz4 /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC /tmp/HACC; '
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC indat cmbM000.tf m000 INIT ALL_TO_ALL -w -R -N 64 -a final -f refresh -t 16x16x8' % (N, liststr)
         elif app == 'graph500':
             appcmd += 'cd $HOME/allocation/graph500/src; export SKIP_VALIDATION=1; '
-            appcmd += 'mpirun -np %d --host %s ./graph500_reference_bfs_sssp 26; ' % (ntasks, liststr)
+            appcmd += 'mpirun -np %d --host %s ./graph500_reference_bfs_sssp 26' % (ntasks, liststr)
         elif app == 'milc':
             appcmd += 'cd $HOME/milc_qcd-7.8.1/ks_imp_dyn/test; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s ../su3_rmd myinput.in; ' % (N, liststr)
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s ../su3_rmd myinput.in' % (N, liststr)
         elif app == 'hpcg':
             appcmd += 'cd $HOME/allocation/hpcg/testrun; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=60; ' % (N, liststr)
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=60' % (N, liststr)
         elif app == 'qmcpack':
             appcmd += 'cd $HOME/allocation/qmcpack/testrun; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/qmcpack_ben/build_ben/bin/qmcpack simple-H2O.xml; ' % (N, liststr)
-        print('startTime:' + subprocess.check_output(['date']).decode('utf-8'))
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/qmcpack_ben/build_ben/bin/qmcpack simple-H2O.xml' % (N, liststr)
+        appcmd += ';'
+        #appcmd += ' > %s;' % writeToFile # not needed.
+        out = 'startTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n'
+        if writeToFile is None:
+            print(out)
+        else:
+            with open(writeToFile, 'a') as o:
+                o.write(out)
         apprun = subprocess.Popen(appcmd, stdout=subprocess.PIPE, shell=True)
         output = apprun.communicate()[0].strip()
-        print(output.decode('utf-8'))
-        print('endTime:' + subprocess.check_output(['date']).decode('utf-8'))
-        print()
+        out = output.decode('utf-8') + '\n'
+        out += 'endTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n\n'
+        if writeToFile is None:
+            print(out)
+        else:
+            with open(writeToFile, 'a') as o:
+                o.write(out)
 
     def congestion(self, withCongestor, core, instance):
         '''
@@ -221,7 +235,7 @@ class withOSU:
 
     def startContGPC(self, nodes):
         '''
-        Start the continualGPC() process. Use self.q for communication.
+        Start a separate continualGPC() process. Use self.q for communication between the main process and the subprocess.
         '''
         self.GPCnodes = nodes
         self.q = multiprocessing.Queue()
@@ -232,13 +246,14 @@ class withOSU:
     def continualGPC(self, q):
         '''
         The process for running GPCNET network congestor.
-        Only 1 instace.
+        Only run 1 instance of congestor.
         '''
         print(self.GPCnodes)
         N = len(self.GPCnodes)
         ntasks = 32*N
         gpclist = self.abbrev(self.GPCnodes)
-        command = 'sbcast --compress=lz4 /global/homes/z/zhangyj/GPCNET/network_load_test /tmp/network_load_test; '
+        command = ''
+        #command += 'sbcast --compress=lz4 /global/homes/z/zhangyj/GPCNET/network_load_test /tmp/network_load_test; '
         command += 'srun -N %d --mem=64G --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out; ' % (N, ntasks, gpclist)
         GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
         print('continual GPC started.')
@@ -246,19 +261,19 @@ class withOSU:
             time.sleep(0.5)
             if not q.empty():
                 message = q.get()
-                if message == 'stop':
+                if message == 'stop': # stop congestor message received.
                     if GPCproc.poll() == None: # if not finished.
                         os.killpg(os.getpgid(GPCproc.pid), signal.SIGTERM)
                         print('GPC killed in continualGPC().')
                     break
-            if GPCproc.poll() != None: # if finished.
+            if GPCproc.poll() != None: # if finished, restart the congestor.
                 print('restarting GPC..')
                 GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
 
     def stopGPC(self):
         '''
         Stop the GPCNET congestor.
-        may not run due to srun problem.
+        may not run successfully due to srun delay problem.
         '''
         self.q.put('stop')
         #self.GPCchecker.terminate()
@@ -271,12 +286,12 @@ class withOSU:
     def runLDMS(self, foldername, storeNode, seconds):
         '''
         Start LDMS.
-        Additional 30s to start sampler is not counted.
+        The additional 30s to start sampler in the bash script is not counted.
         '''
         print('starting LDMS..')
         #proc = subprocess.call('./runStartLDMS.sh %s %s %d' % (foldername, storeNode, seconds), shell=True)
-        proc = subprocess.call('./startLDMS.sh %s %s %d' % (foldername, storeNode, seconds), shell=True)
-        self.ldmsdir = '/project/projectdirs/m3231/yijia/csv/%s' % foldername
+        proc = subprocess.call('./startLDMS.sh %s %s %d' % (foldername, storeNode, seconds), shell=True) # storeNode parameter is currently not used in startLDMS.sh.
+        self.ldmsdir = '/project/projectdirs/m3231/yijia/csv/%s' % foldername # output folder.
         print('runLDMS() finish.')
 
     def deleteLastLine(self, f):
@@ -349,18 +364,18 @@ class withOSU:
         Experiment for the Congestion-Aware Data-Driven allocation policy.
         '''
         import pandas as pd
-        #self.runLDMS(foldername='%s_%d' % (os.environ['SLURM_JOB_ID'], 0), seconds=120)
-        #sys.exit(0)
         print(subprocess.check_output(['date']).decode('utf-8'))
         jobid = os.environ['SLURM_JOB_ID']
         print('jobid: ' + str(jobid))
+        appOut = 'CADDjob.out' # application output file.
+        #self.runLDMS(foldername='%s_%d' % (jobid, 0), storeNode='nid%05d' % self.nodelist[0], seconds=120) # for debug.
 
         for i in range(iteration):
             print('====================')
             print('iteration %d' % i)
-            # use 1st node for this python code; skip 2nd node; the rest for congestor and app.
-            storeNode = 'nid%05d' % self.nodelist[0]
-            congNodes = random.sample(self.nodelist[2:], 10) # skip the 1st node for LDMS.
+            # use 1st node for this python code; skip 2nd node (may be used for LDMS storage); the rest for congestor and app.
+            storeNode = 'nid%05d' % self.nodelist[0] # LDMS storage daemon node.
+            congNodes = random.sample(self.nodelist[2:], 64) # randomly selecting nodes for the congestor.
             print('Congestor nodes:')
             print(congNodes)
             self.idleNodes = [x for x in self.nodelist[2:] if x not in congNodes]
@@ -370,21 +385,34 @@ class withOSU:
             if i == 0:
                 self.runLDMS(foldername='%s_%d' % (jobid, i), storeNode=storeNode, seconds=120)
             else:
-                time.sleep(120)
+                time.sleep(120) # don't need to start LDMS again.
             self.monitorend = int(time.time())
 
             print('Starting sortCongestion()..')
-            nodeCongPair = self.sortCongestion() # sort idle nodes from low to high congestion.
-            greenNodes = [nodeCongPair[x][0] for x in range(4)]
-            yellowNodes = [nodeCongPair[x][0] for x in range(4, 8)]
+            nodeCongPair = self.sortCongestion() # sort idle nodes from low to high congestion according to their stall-per-second.
+            print('Node congestion pair:')
+            print(nodeCongPair)
+            greenNodes = [nodeCongPair[x][0] for x in range(64)]
+            yellowNodes = [nodeCongPair[x][0] for x in range(64, 128)]
+
+            #time.sleep(10)
+            #greenNodes = self.idleNodes[:64] # for debug.
+            #yellowNodes = self.idleNodes[:64]
+
             print('Run green job.')
-            with open('asdf.txt', 'w') as f:
-                f.write('Starting green job.\n')
-            self.appOnNodes(app=appName, N=4, nodes=greenNodes)
+            print('Green nodes:')
+            print(greenNodes)
+            with open(appOut, 'w' if i==0 else 'a') as f:
+                f.write('Starting green job..\n')
+            self.appOnNodes(app=appName, N=64, nodes=greenNodes, writeToFile=appOut)
+
             print('Run yellow job.')
-            with open('asdf.txt', 'a') as f:
-                f.write('Starting yellow job.\n')
-            self.appOnNodes(app=appName, N=4, nodes=yellowNodes)
+            print('Yellow nodes:')
+            print(yellowNodes)
+            with open(appOut, 'a') as f:
+                f.write('Starting yellow job..\n')
+            self.appOnNodes(app=appName, N=64, nodes=yellowNodes, writeToFile=appOut)
+
             self.stopGPC()
             time.sleep(5)
             print('Iteration end.')
