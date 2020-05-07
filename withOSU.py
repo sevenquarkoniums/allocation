@@ -15,7 +15,7 @@ def main():
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
     #w.fixAllocation(appName='qmcpack', iteration=10, instance=5)
-    w.CADD(appName='milc', iteration=10)
+    w.CADD(appName='hpcgDEBUG', iteration=0)
 
 class withOSU:
     def __init__(self):
@@ -115,7 +115,6 @@ class withOSU:
     def appOnNodes(self, app, N, nodes, writeToFile=None):
         '''
         Run app on some nodes.
-        app: nekbone, miniMD, lammps, miniamr, hacc, hpcg, qmcpack.
         '''
         ntasks = 32*N
         liststr = ','.join(['nid{0:05d}'.format(y) for y in nodes])
@@ -148,6 +147,9 @@ class withOSU:
         elif app == 'hpcg':
             appcmd += 'cd $HOME/allocation/hpcg/testrun; '
             appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=60' % (N, liststr)
+        elif app == 'hpcgDEBUG':
+            appcmd += 'cd $HOME/allocation/hpcg/testrun; '
+            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=5' % (N, liststr)
         elif app == 'qmcpack':
             appcmd += 'cd $HOME/allocation/qmcpack/testrun; '
             appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/qmcpack_ben/build_ben/bin/qmcpack simple-H2O.xml' % (N, liststr)
@@ -368,7 +370,8 @@ class withOSU:
         jobid = os.environ['SLURM_JOB_ID']
         print('jobid: ' + str(jobid))
         appOut = 'CADDjob.out' # application output file.
-        #self.runLDMS(foldername='%s_%d' % (jobid, 0), storeNode='nid%05d' % self.nodelist[0], seconds=120) # for debug.
+        self.runLDMS(foldername='%s_%d' % (jobid, 0), storeNode='nid%05d' % self.nodelist[0], seconds=120) # for debug.
+        self.appOnNodes(app=appName, N=4, nodes=self.nodelist[1:], writeToFile=appOut) # for debug.
 
         for i in range(iteration):
             print('====================')

@@ -38,6 +38,10 @@ ${LDMSSCRIPT} store &
 
 sleep $3
 
+mkdir configs
+cp /tmp/conf.ldms.store configs/
+cp /tmp/conf.ldms.sampler configs/
+
 date
 
 #echo "kill ldmsd"
