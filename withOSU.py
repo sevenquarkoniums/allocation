@@ -15,7 +15,7 @@ def main():
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
     #w.fixAllocation(appName='qmcpack', iteration=10, instance=5)
-    w.CADD(appName='hpcgDEBUG', iteration=0)
+    w.CADD(appName='milc', iteration=10)
 
 class withOSU:
     def __init__(self):
@@ -116,7 +116,8 @@ class withOSU:
         '''
         Run app on some nodes.
         '''
-        ntasks = 32*N
+        tasksPerNode = 32
+        ntasks = N * tasksPerNode
         liststr = ','.join(['nid{0:05d}'.format(y) for y in nodes])
         print('app-node list:')
         print(nodes)
@@ -149,7 +150,7 @@ class withOSU:
             appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=60' % (N, liststr)
         elif app == 'hpcgDEBUG':
             appcmd += 'cd $HOME/allocation/hpcg/testrun; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=5' % (N, liststr)
+            appcmd += 'srun -N %d --mem=100G -c 1 --ntasks-per-node=%d --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=5' % (N, tasksPerNode, liststr)
         elif app == 'qmcpack':
             appcmd += 'cd $HOME/allocation/qmcpack/testrun; '
             appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/qmcpack_ben/build_ben/bin/qmcpack simple-H2O.xml' % (N, liststr)
@@ -324,6 +325,7 @@ class withOSU:
         '''
         Sort idle nodes according to their network metrics.
         '''
+        import pandas as pd
         print('Copying file..')
         copyfile('%s/cray_aries_r' % self.ldmsdir, '%s/temp.csv' % self.ldmsdir)
         print('Removing last line..')
@@ -365,23 +367,22 @@ class withOSU:
         '''
         Experiment for the Congestion-Aware Data-Driven allocation policy.
         '''
-        import pandas as pd
         print(subprocess.check_output(['date']).decode('utf-8'))
         jobid = os.environ['SLURM_JOB_ID']
         print('jobid: ' + str(jobid))
         appOut = 'CADDjob.out' # application output file.
-        self.runLDMS(foldername='%s_%d' % (jobid, 0), storeNode='nid%05d' % self.nodelist[0], seconds=120) # for debug.
-        self.appOnNodes(app=appName, N=4, nodes=self.nodelist[1:], writeToFile=appOut) # for debug.
+        #self.runLDMS(foldername='%s_%d' % (jobid, 0), storeNode='nid%05d' % self.nodelist[0], seconds=120) # for debug.
+        #self.appOnNodes(app=appName, N=4, nodes=self.nodelist[1:5], writeToFile=appOut) # for debug.
 
         for i in range(iteration):
             print('====================')
             print('iteration %d' % i)
-            # use 1st node for this python code; skip 2nd node (may be used for LDMS storage); the rest for congestor and app.
+            # use 1st node for this python code and LDMS storage; the rest for congestor and app.
             storeNode = 'nid%05d' % self.nodelist[0] # LDMS storage daemon node.
-            congNodes = random.sample(self.nodelist[2:], 64) # randomly selecting nodes for the congestor.
+            congNodes = random.sample(self.nodelist[1:], 64) # randomly selecting nodes for the congestor.
             print('Congestor nodes:')
             print(congNodes)
-            self.idleNodes = [x for x in self.nodelist[2:] if x not in congNodes]
+            self.idleNodes = [x for x in self.nodelist[1:] if x not in congNodes]
             self.startContGPC(nodes=congNodes)
 
             self.monitorstart = int(time.time())
@@ -393,8 +394,6 @@ class withOSU:
 
             print('Starting sortCongestion()..')
             nodeCongPair = self.sortCongestion() # sort idle nodes from low to high congestion according to their stall-per-second.
-            print('Node congestion pair:')
-            print(nodeCongPair)
             greenNodes = [nodeCongPair[x][0] for x in range(64)]
             yellowNodes = [nodeCongPair[x][0] for x in range(64, 128)]
 

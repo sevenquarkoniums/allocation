@@ -809,12 +809,14 @@ class analysis(ldms):
                     #    end = self.timeToUnixPDT(line.lstrip('endTime:')[:-1])
                     #    et[count] = end - start
         if app == 'hpcg':
+            # hpcg output are in separate files, need to process specially.
             et = {}
             count = 0
             files = getfiles('./hpcg/testrun')
             files.sort()
             for f in files:
-                if f.split('/')[-1].startswith('HPCG-Bench'):
+                fname = f.split('/')[-1]
+                if fname.startswith('HPCG-Bench') and '2020-04-26' in fname:
                     count += 1
                     with open(f, 'r') as o:
                         for line in o:
