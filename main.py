@@ -21,8 +21,16 @@ def main():
     #al.runtime()
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
-    al.processFix(app='hpcg', onlyTime=1, getSpan=0)
+    al.processFix(app='lammps', onlyTime=1, getSpan=0, ptile=0)
+    #al.processCADD(app='milc')
     #al.calcNode()
+
+def isint(value):
+  try:
+    int(value)
+    return True
+  except ValueError:
+    return False
 
 def getfiles(path):
     # get all the files with full path.
@@ -356,6 +364,20 @@ class ldms:
             if len(thisRouter) > 0:
                 thisNodeRatio = thisRouter['AR_NL_PRF_REQ_PTILES_TO_NIC_%s_STALLED' % cname[-1]].mean()
                 nodevalue.append(thisNodeRatio)
+        if len(nodevalue) > 0:
+            avg = sum(nodevalue)/len(nodevalue)
+        else:
+            avg = -1
+        return avg
+
+    def calcNodeFlit(self, data, nodes):
+        nodevalue = []
+        for node in nodes:
+            cname = self.getCName(node)
+            thisRouter = data[data['aries_rtr_id'] == cname[:-1] + '0']
+            if len(thisRouter) > 0:
+                thisNodeValue = thisRouter['AR_NL_PRF_REQ_PTILES_TO_NIC_%s_FLITS' % cname[-1]].mean()
+                nodevalue.append(thisNodeValue)
         if len(nodevalue) > 0:
             avg = sum(nodevalue)/len(nodevalue)
         else:
@@ -720,12 +742,15 @@ class analysis(ldms):
             print('green:' + str(greenNodes))
             print('yellow:' + str(yellowNodes))
 
-    def processFix(self, app, onlyTime, getSpan):
+    def processFix(self, app, onlyTime, getSpan, ptile):
         '''
         '''
         run = 10
         task = 2048
-        f = 'results/fixAlloc_%s.out' % app
+        if app == 'lammps':
+            f = 'results/fixAlloc_%s3.out' % app # the 2nd run of lammps.
+        else:
+            f = 'results/fixAlloc_%s.out' % app
         print('Getting exec time..')
         with open(f, 'r') as o:
             et = {}
@@ -822,10 +847,9 @@ class analysis(ldms):
                         for line in o:
                             if 'but execution' in line:
                                 et[count] = float(line.split('=')[1])
-        if app in ['lammps','hacc','milc']:
-            for idx in range(1, 41):
-                if idx not in et:
-                    et[idx] = 0 # add missing cases.
+        for idx in range(1, 41):
+            if idx not in et:
+                et[idx] = 0 # add missing cases.
         df = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
         df['run'] = list(range(run))
         df['green'] = [et[x] for x in range(1, 4*run+1, 4)]
@@ -834,6 +858,8 @@ class analysis(ldms):
         df['yellowGPC'] = [et[x] for x in range(4, 4*run+1, 4)]
         if app == 'miniMD':
             df.to_csv('resultFixGPC5.csv', index=False)
+        elif app == 'lammps':
+            df.to_csv('resultFix_%s3.csv' % app, index=False)
         else:
             df.to_csv('resultFix_%s.csv' % app, index=False)
         print('Time processed.')
@@ -864,14 +890,16 @@ class analysis(ldms):
 
         print('Getting router data..')
         with open(f, 'r') as o:
-            stall, ratio = {}, {}
+            stall, ratio, flit = {}, {}, {}
             count = 0
             for line in o:
                 if line.startswith('app-node list'):
                     count += 1
+                    print(count)
                 if count >= 1 and line.startswith('['):
-                    appnodes = [int(x) for x in line[1:-2].split(', ')]
-                    routers = super().nodeToRouter(appnodes)
+                    if isint(line[1:-2].split(', ')[0]):
+                        appnodes = [int(x) for x in line[1:-2].split(', ')]
+                        routers = super().nodeToRouter(appnodes)
                 if line.startswith('startTime:'):
                     if app == 'miniMD':
                         startTime = pd.Timestamp(self.timeToUnixPST(line[10:-1]), unit='s', tz='US/Pacific')
@@ -889,27 +917,34 @@ class analysis(ldms):
                     queryEnd = endTime
                     qd = super().fetchData(queryStart, queryEnd, 'rtr')
                     if qd is None:
-                        stall[count] = -1
-                        ratio[count] = -1
+                        stall[count], ratio[count], flit[count] = -1, -1, -1
                         continue
                     sel = super().selectRouter(qd, routers)
                     rmDup, jump, numSelectedProducer, prodnum = super().removeDuplicate(sel)
                     if jump:
-                        stall[count] = -2
-                        ratio[count] = -2
+                        stall[count], ratio[count], flit[count] = -2, -2, -2
                         continue
                     diff = super().getDiff(rmDup)
                     regu = super().regularize(diff)
-                    stall[count] = super().calcRouterStall(regu)
-                    ratio[count] = super().calcRouterMetric(regu)
+                    #regu = regu.replace(0, np.NaN)
+                    if ptile:
+                        flit[count] = super().calcNodeFlit(regu, appnodes)
+                        stall[count] = super().calcNodeStall(regu, appnodes)
+                        ratio[count] = super().calcNodeMetric(regu, appnodes)
+                    else:
+                        stall[count] = super().calcRouterStall(regu)
+                        ratio[count] = super().calcRouterMetric(regu)
+                        # add flit later.
 
-        if app in ['lammps','hacc']:
-            if len(stall) < 40:
-                for idx in range(len(stall)+1, 41):
-                    stall[idx] = -3 # add missing cases.
-            if len(ratio) < 40:
-                for idx in range(len(ratio)+1, 41):
-                    ratio[idx] = -3 # add missing cases.
+        if len(stall) < 40:
+            for idx in range(len(stall)+1, 41):
+                stall[idx] = -3 # add missing cases.
+        if len(ratio) < 40:
+            for idx in range(len(ratio)+1, 41):
+                ratio[idx] = -3
+        if len(flit) < 40:
+            for idx in range(len(flit)+1, 41):
+                flit[idx] = -3
 
         dfStall = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
         dfStall['run'] = list(range(run))
@@ -917,7 +952,10 @@ class analysis(ldms):
         dfStall['yellow'] = [stall[x] for x in range(2, 4*run+1, 4)]
         dfStall['greenGPC'] = [stall[x] for x in range(3, 4*run+1, 4)]
         dfStall['yellowGPC'] = [stall[x] for x in range(4, 4*run+1, 4)]
-        dfStall.to_csv('fixGPC_autotime_%s_stall.csv' % app, index=False)
+        if ptile:
+            dfStall.to_csv('fixGPC_autotime_%s_nodestall.csv' % app, index=False)
+        else:
+            dfStall.to_csv('fixGPC_autotime_%s_stall.csv' % app, index=False)
 
         dfRatio = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
         dfRatio['run'] = list(range(run))
@@ -925,8 +963,49 @@ class analysis(ldms):
         dfRatio['yellow'] = [ratio[x] for x in range(2, 4*run+1, 4)]
         dfRatio['greenGPC'] = [ratio[x] for x in range(3, 4*run+1, 4)]
         dfRatio['yellowGPC'] = [ratio[x] for x in range(4, 4*run+1, 4)]
-        dfRatio.to_csv('fixGPC_autotime_%s_ratio.csv' % app, index=False)
+        if ptile:
+            dfRatio.to_csv('fixGPC_autotime_%s_noderatio.csv' % app, index=False)
+        else:
+            dfRatio.to_csv('fixGPC_autotime_%s_ratio.csv' % app, index=False)
+
+        dfFlit = pd.DataFrame(columns=['run','green','yellow','greenGPC','yellowGPC'])
+        dfFlit['run'] = list(range(run))
+        dfFlit['green'] = [flit[x] for x in range(1, 4*run+1, 4)]
+        dfFlit['yellow'] = [flit[x] for x in range(2, 4*run+1, 4)]
+        dfFlit['greenGPC'] = [flit[x] for x in range(3, 4*run+1, 4)]
+        dfFlit['yellowGPC'] = [flit[x] for x in range(4, 4*run+1, 4)]
+        if ptile:
+            dfFlit.to_csv('fixGPC_autotime_%s_nodeflit.csv' % app, index=False)
         print('finished.')
+
+    def processCADD(self, app):
+        run = 5
+        task = 2048
+        f = 'CADDjob.out'
+        print('Getting exec time..')
+        with open(f, 'r') as o:
+            et = {}
+            count = 0
+            for line in o:
+                if app == 'milc':
+                    if line.startswith('startTime:'):
+                        count += 1
+                        sumTime, countTimeLine = 0, 0
+                    if line.startswith('Time ='):
+                        countTimeLine += 1
+                        tsplit = line.split()[2].split('e')
+                        sumTime += float(tsplit[0]) * 10**int(tsplit[1][1:])
+                    if line.startswith('total_iters = 23190'):
+                        if countTimeLine == 2:
+                            et[count] = sumTime
+                        else:
+                            et[count] = -1
+        df = pd.DataFrame(columns=['run','green','yellow'])
+        df['run'] = list(range(run))
+        df['green'] = [et[x] for x in range(1, 2*run+1, 2)]
+        df['yellow'] = [et[x] for x in range(2, 2*run+1, 2)]
+        df.to_csv('CADDprocess_%s.csv' % app, index=False)
+        print('Time processed.')
 
     def process(self, mode, counterSaved, saveFolder):
         '''

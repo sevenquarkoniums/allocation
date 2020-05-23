@@ -1,0 +1,3375 @@
+CrayPat/X:  Version 7.1.1 Revision 7c0ddd79b  08/19/19 16:58:46
+
+Number of PEs (MPI ranks):   2,048
+                           
+Numbers of PEs per Node:        32  PEs on each of  64  Nodes
+                           
+Numbers of Threads per PE:       1
+                           
+Number of Cores per Socket:     16
+
+Execution start time:  Thu May 21 16:54:33 2020
+
+System name and speed:  nid00604  2.301 GHz (nominal)
+
+Intel Haswell    CPU  Family:  6  Model: 63  Stepping:  2
+
+DRAM: 128 GiB DDR4-2400 on 2.3 GHz nodes  for 160 PEs
+DRAM: 128 GiB DDR4-2133 on 2.3 GHz nodes  for 1888 PEs
+
+
+Current path to data file:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/miniAMR/miniAMR.x+pat+15005-604t   (RTS, 256 data files)
+
+
+Notes for table 1:
+
+  This table shows functions that have significant exclusive time,
+    averaged across ranks.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile ...
+
+Table 1:  Profile by Function Group and Function
+
+  Time% |      Time |     Imb. |   Imb. |     Calls | Group
+        |           |     Time |  Time% |           |  Function
+        |           |          |        |           |   PE=HIDE
+       
+ 100.0% | 25.335926 |       -- |     -- | 791,602.6 | Total
+|------------------------------------------------------------------------
+|  70.1% | 17.769201 |       -- |     -- |       2.0 | USER
+||-----------------------------------------------------------------------
+||  70.1% | 17.769159 | 3.273613 |  15.6% |       1.0 | main
+||   0.0% |  0.000042 | 0.000009 |  17.4% |       1.0 | exit
+||=======================================================================
+|  18.5% |  4.696079 |       -- |     -- | 781,263.3 | MPI
+||-----------------------------------------------------------------------
+||  12.4% |  3.148709 | 4.165580 |  57.0% |  33,225.7 | MPI_Waitany
+||   2.0% |  0.509983 | 0.011249 |   2.2% |  10,327.4 | MPI_Allreduce
+||   1.1% |  0.282512 | 0.302870 |  51.8% |     242.7 | MPI_Wait
+||   1.0% |  0.261366 | 0.022271 |   7.9% |      11.0 | MPI_Comm_split
+||   0.8% |  0.190657 | 0.297175 |  60.9% |     220.7 | MPI_Recv
+||   0.6% |  0.160553 | 0.031972 |  16.6% | 703,250.6 | MPI_Wtime
+||   0.3% |  0.069516 | 0.119328 |  63.2% |  16,603.8 | MPI_Isend
+||   0.2% |  0.054550 | 0.177103 |  76.5% |  16,864.7 | MPI_Irecv
+||   0.1% |  0.014158 | 0.092415 |  86.8% |     481.7 | MPI_Send
+||   0.0% |  0.003931 | 0.001712 |  30.4% |       6.0 | MPI_Alltoall
+||   0.0% |  0.000121 | 0.000071 |  36.9% |       2.0 | MPI_Bcast
+||   0.0% |  0.000010 | 0.000027 |  72.6% |      12.0 | MPI_Comm_rank
+||   0.0% |  0.000005 | 0.000003 |  40.4% |       1.0 | MPI_Finalize
+||   0.0% |  0.000003 | 0.000020 |  86.0% |      12.0 | MPI_Comm_size
+||   0.0% |  0.000002 | 0.000005 |  68.6% |       1.0 | MPI_Errhandler_set
+||   0.0% |  0.000001 | 0.000002 |  59.8% |       1.0 | MPI_Init
+||=======================================================================
+|  11.3% |  2.870647 |       -- |     -- |  10,337.4 | MPI_SYNC
+||-----------------------------------------------------------------------
+||   8.8% |  2.241686 | 0.998012 |  44.5% |  10,327.4 | MPI_Allreduce(sync)
+||   2.3% |  0.587199 | 0.587166 | 100.0% |       1.0 | MPI_Init(sync)
+||   0.2% |  0.041280 | 0.041231 |  99.9% |       1.0 | MPI_Finalize(sync)
+||   0.0% |  0.000260 | 0.000148 |  56.7% |       6.0 | MPI_Alltoall(sync)
+||   0.0% |  0.000222 | 0.000129 |  58.3% |       2.0 | MPI_Bcast(sync)
+|========================================================================
+
+Notes for table 2:
+
+  This table shows functions that have the most significant exclusive
+    time, taking the maximum time across ranks and threads.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile_max ...
+
+Table 2:  Profile of maximum function times
+
+  Time% |      Time |     Imb. |   Imb. | Function
+        |           |     Time |  Time% |  PE=[max,min]
+|------------------------------------------------------------
+| 100.0% | 21.042772 | 3.273613 |  15.6% | main
+||-----------------------------------------------------------
+|| 100.0% | 21.042772 |       -- |     -- | pe.1856
+||  65.2% | 13.730196 |       -- |     -- | pe.1974
+||===========================================================
+|  34.8% |  7.314289 | 4.165580 |  57.0% | MPI_Waitany
+||-----------------------------------------------------------
+||  34.8% |  7.314289 |       -- |     -- | pe.479
+||   3.1% |  0.649949 |       -- |     -- | pe.612
+||===========================================================
+|  18.9% |  3.973914 | 0.998012 |  44.5% | MPI_Allreduce(sync)
+||-----------------------------------------------------------
+||  18.9% |  3.973914 |       -- |     -- | pe.601
+||   5.9% |  1.243674 |       -- |     -- | pe.126
+||===========================================================
+|   2.8% |  0.598435 | 0.587166 | 100.0% | MPI_Init(sync)
+||-----------------------------------------------------------
+||   2.8% |  0.598435 |       -- |     -- | pe.1325
+||   0.0% |  0.000033 |       -- |     -- | pe.1278
+||===========================================================
+|   2.8% |  0.585382 | 0.302870 |  51.8% | MPI_Wait
+||-----------------------------------------------------------
+||   2.8% |  0.585382 |       -- |     -- | pe.1992
+||   0.2% |  0.036861 |       -- |     -- | pe.1901
+||===========================================================
+|   2.5% |  0.521232 | 0.011249 |   2.2% | MPI_Allreduce
+||-----------------------------------------------------------
+||   2.5% |  0.521232 |       -- |     -- | pe.1824
+||   2.4% |  0.496200 |       -- |     -- | pe.720
+||===========================================================
+|   2.3% |  0.487833 | 0.297175 |  60.9% | MPI_Recv
+||-----------------------------------------------------------
+||   2.3% |  0.487833 |       -- |     -- | pe.20
+||   0.1% |  0.012930 |       -- |     -- | pe.1605
+||===========================================================
+|   1.3% |  0.283638 | 0.022271 |   7.9% | MPI_Comm_split
+||-----------------------------------------------------------
+||   1.3% |  0.283638 |       -- |     -- | pe.1327
+||   0.1% |  0.013383 |       -- |     -- | pe.1856
+||===========================================================
+|   1.1% |  0.231652 | 0.177103 |  76.5% | MPI_Irecv
+||-----------------------------------------------------------
+||   1.1% |  0.231652 |       -- |     -- | pe.968
+||   0.0% |  0.009120 |       -- |     -- | pe.1316
+||===========================================================
+|   0.9% |  0.192524 | 0.031972 |  16.6% | MPI_Wtime
+||-----------------------------------------------------------
+||   0.9% |  0.192524 |       -- |     -- | pe.1376
+||   0.7% |  0.144364 |       -- |     -- | pe.471
+||===========================================================
+|   0.9% |  0.188844 | 0.119328 |  63.2% | MPI_Isend
+||-----------------------------------------------------------
+||   0.9% |  0.188844 |       -- |     -- | pe.370
+||   0.1% |  0.020272 |       -- |     -- | pe.1316
+||===========================================================
+|   0.5% |  0.106572 | 0.092415 |  86.8% | MPI_Send
+||-----------------------------------------------------------
+||   0.5% |  0.106572 |       -- |     -- | pe.1312
+||   0.0% |  0.003017 |       -- |     -- | pe.1101
+||===========================================================
+|   0.3% |  0.053750 | 0.041231 |  99.9% | MPI_Finalize(sync)
+||-----------------------------------------------------------
+||   0.3% |  0.053750 |       -- |     -- | pe.1518
+||   0.0% |  0.000048 |       -- |     -- | pe.1184
+||===========================================================
+|   0.0% |  0.005644 | 0.001712 |  30.4% | MPI_Alltoall
+||-----------------------------------------------------------
+||   0.0% |  0.005644 |       -- |     -- | pe.0
+||   0.0% |  0.003409 |       -- |     -- | pe.1277
+||===========================================================
+|   0.0% |  0.000314 | 0.000129 |  58.3% | MPI_Bcast(sync)
+||-----------------------------------------------------------
+||   0.0% |  0.000314 |       -- |     -- | pe.1552
+||   0.0% |  0.000092 |       -- |     -- | pe.923
+||===========================================================
+|   0.0% |  0.000287 | 0.000148 |  56.7% | MPI_Alltoall(sync)
+||-----------------------------------------------------------
+||   0.0% |  0.000287 |       -- |     -- | pe.22
+||   0.0% |  0.000113 |       -- |     -- | pe.1846
+||===========================================================
+|   0.0% |  0.000192 | 0.000071 |  36.9% | MPI_Bcast
+||-----------------------------------------------------------
+||   0.0% |  0.000192 |       -- |     -- | pe.55
+||   0.0% |  0.000084 |       -- |     -- | pe.628
+||===========================================================
+|   0.0% |  0.000051 | 0.000009 |  17.4% | exit
+||-----------------------------------------------------------
+||   0.0% |  0.000051 |       -- |     -- | pe.1061
+||   0.0% |  0.000036 |       -- |     -- | pe.1284
+||===========================================================
+|   0.0% |  0.000038 | 0.000027 |  72.6% | MPI_Comm_rank
+||-----------------------------------------------------------
+||   0.0% |  0.000038 |       -- |     -- | pe.363
+||   0.0% |  0.000006 |       -- |     -- | pe.896
+||===========================================================
+|   0.0% |  0.000024 | 0.000020 |  86.0% | MPI_Comm_size
+||-----------------------------------------------------------
+||   0.0% |  0.000024 |       -- |     -- | pe.535
+||   0.0% |  0.000003 |       -- |     -- | pe.869
+||===========================================================
+|   0.0% |  0.000008 | 0.000003 |  40.4% | MPI_Finalize
+||-----------------------------------------------------------
+||   0.0% |  0.000008 |       -- |     -- | pe.1142
+||   0.0% |  0.000003 |       -- |     -- | pe.443
+||===========================================================
+|   0.0% |  0.000008 | 0.000005 |  68.6% | MPI_Errhandler_set
+||-----------------------------------------------------------
+||   0.0% |  0.000008 |       -- |     -- | pe.684
+||   0.0% |  0.000002 |       -- |     -- | pe.982
+||===========================================================
+|   0.0% |  0.000003 | 0.000002 |  59.8% | MPI_Init
+||-----------------------------------------------------------
+||   0.0% |  0.000003 |       -- |     -- | pe.208
+||   0.0% |  0.000001 |       -- |     -- | pe.1967
+|============================================================
+
+Observation:  MPI Grid Detection
+
+    There appears to be point-to-point MPI communication in a 512 X 2 X
+    2 grid pattern. The 18.5% of the total execution time spent in MPI
+    functions might be reduced with a rank order that maximizes
+    communication between ranks on the same node. The effect of several
+    rank orders is estimated below.
+
+    No custom rank order was found that is better than the SMP order.
+
+    Rank Order    On-Node    On-Node  MPICH_RANK_REORDER_METHOD
+                 Bytes/PE  Bytes/PE%  
+                            of Total  
+                            Bytes/PE  
+
+           SMP  1.171e+12     67.48%  1
+          Fold  1.500e+10      0.86%  2
+    RoundRobin  2.523e+09      0.15%  0
+
+
+Observation:  Metric-Based Rank Order
+
+    When the use of a shared resource like memory bandwidth is unbalanced
+    across nodes, total execution time may be reduced with a rank order
+    that improves the balance.  The metric used here for resource usage
+    is: USER Time
+
+    For each node, the metric values for the ranks on that node are
+    summed.  The maximum and average value of those sums are shown below
+    for both the current rank order and a custom rank order that seeks
+    to reduce the maximum value.
+
+    A file named MPICH_RANK_ORDER.USER_Time was generated
+    along with this report and contains usage instructions and the
+    Custom rank order from the following table.
+
+       Rank    Node Reduction    Maximum  Average
+      Order  Metric    in Max      Value  Value
+               Imb.     Value             
+
+    Current   5.01%            5.986e+02  5.686e+02
+     Custom   0.20%    4.817%  5.697e+02  5.686e+02
+
+
+Observation:  MPI Hybrid Rank Order
+
+    A hybrid rank order has been calculated that attempts to take both
+    the MPI communication and USER Time resources into account.
+    The table below shows the metric-based calculations along with the
+    final on-node bytes/PE value.
+
+    A file named MPICH_RANK_ORDER.USER_Time_hybrid was generated
+    along with this report and contains usage instructions for this
+    custom rank order.
+
+       Rank    Node Reduction    Maximum    Average  On-Node
+      Order  Metric    in Max      Value      Value  Bytes/PE%
+               Imb.     Value                        of Total
+                                                     Bytes/PE
+
+    Current   5.01%            5.986e+02  5.686e+02  67.48%
+     Custom   0.33%     4.69%  5.705e+02  5.686e+02  56.48%
+
+
+Notes for table 3:
+
+  This table shows the ranks with maximum, mean, and minimum time for
+    functions with significant time, within the function groups. It
+    also shows MPI message statistics for functions in the MPI group.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O load_balance_m ...
+
+Table 3:  Load Balance with MPI Message Stats
+
+  Time% |      Time |  MPI Msg | MPI Msg Bytes |   Avg MPI | Group
+        |           |    Count |               |  Msg Size |  PE=[mmm]
+       
+ 100.0% | 25.335926 | 39,702.8 | 847,508,485.1 | 21,346.32 | Total
+|---------------------------------------------------------------------
+|  70.1% | 17.769201 |      0.0 |           0.0 |        -- | USER
+||--------------------------------------------------------------------
+||  83.1% | 21.042820 |      0.0 |           0.0 |        -- | pe.1856
+||  70.1% | 17.767723 |      0.0 |           0.0 |        -- | pe.896
+||  54.2% | 13.730238 |      0.0 |           0.0 |        -- | pe.1974
+||====================================================================
+|  18.5% |  4.696079 | 39,702.8 | 847,508,485.1 | 21,346.32 | MPI
+||--------------------------------------------------------------------
+||  34.9% |  8.831684 | 36,298.0 | 755,187,872.0 | 20,805.22 | pe.479
+||  18.2% |  4.622514 | 41,173.0 | 826,894,216.0 | 20,083.41 | pe.1047
+||   8.4% |  2.130478 | 40,068.0 | 952,423,628.0 | 23,770.18 | pe.1856
+||====================================================================
+|  11.3% |  2.870647 |      0.0 |           0.0 |        -- | MPI_SYNC
+||--------------------------------------------------------------------
+||  18.2% |  4.608975 |      0.0 |           0.0 |        -- | pe.601
+||  11.2% |  2.828949 |      0.0 |           0.0 |        -- | pe.1147
+||   7.3% |  1.849749 |      0.0 |           0.0 |        -- | pe.893
+|=====================================================================
+
+Notes for table 4:
+
+  This table shows the MPI library functions that are used to send a
+    significant number of bytes, taking the average across sender
+    ranks of the sum of bytes sent from the sender to all destination
+    ranks. It also shows how many bytes are attributable to each of
+    its call paths. It also shows a count of messages and the number
+    of messages that fall into each bin of message sizes. For each
+    path, it shows the ranks that send the minimum, mean, and maximum
+    number of bytes.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O mpi_callers ...
+
+Table 4:  MPI Message Stats by Caller
+
+Function / Caller / PE=[mmm]
+
+  
+=============================================================================
+  Total
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                       100.0% 
+  MPI Msg Bytes                 847,508,485.1 
+  MPI Msg Count                      39,702.8 msgs
+  MsgSz <16 Count                    23,354.4 msgs
+  16<= MsgSz <256 Count                 538.4 msgs
+  256<= MsgSz <4KiB Count               937.7 msgs
+  4KiB<= MsgSz <64KiB Count          10,784.4 msgs
+  64KiB<= MsgSz <1MiB Count           4,087.9 msgs
+=============================================================================
+  MPI_Isend
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                        98.1% 
+  MPI Msg Bytes                 831,706,052.5 
+  MPI Msg Count                      16,603.8 msgs
+  MsgSz <16 Count                       599.5 msgs
+  16<= MsgSz <256 Count                 510.7 msgs
+  256<= MsgSz <4KiB Count               868.9 msgs
+  4KiB<= MsgSz <64KiB Count          10,757.4 msgs
+  64KiB<= MsgSz <1MiB Count           3,867.2 msgs
+=============================================================================
+  MPI_Isend / comm
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                        98.1% 
+  MPI Msg Bytes                 831,672,070.3 
+  MPI Msg Count                      15,485.2 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count               860.6 msgs
+  4KiB<= MsgSz <64KiB Count          10,757.4 msgs
+  64KiB<= MsgSz <1MiB Count           3,867.2 msgs
+=============================================================================
+  MPI_Isend / comm / driver
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                        98.1% 
+  MPI Msg Bytes                 831,672,070.3 
+  MPI Msg Count                      15,485.2 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count               860.6 msgs
+  4KiB<= MsgSz <64KiB Count          10,757.4 msgs
+  64KiB<= MsgSz <1MiB Count           3,867.2 msgs
+==============================================================================
+  MPI_Isend / comm / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        98.1% 
+  MPI Msg Bytes                 831,672,070.3 
+  MPI Msg Count                      15,485.2 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count               860.6 msgs
+  4KiB<= MsgSz <64KiB Count          10,757.4 msgs
+  64KiB<= MsgSz <1MiB Count           3,867.2 msgs
+==============================================================================
+  MPI_Isend / comm / driver / main / pe.13
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         140.0% 
+  MPI Msg Bytes                 1,186,200,000.0 
+  MPI Msg Count                        18,750.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count               1,250.0 msgs
+  4KiB<= MsgSz <64KiB Count            11,875.0 msgs
+  64KiB<= MsgSz <1MiB Count             5,625.0 msgs
+==============================================================================
+  MPI_Isend / comm / driver / main / pe.1344
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                          97.3% 
+  MPI Msg Bytes                   824,400,000.0 
+  MPI Msg Count                        24,375.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count               4,375.0 msgs
+  4KiB<= MsgSz <64KiB Count            15,625.0 msgs
+  64KiB<= MsgSz <1MiB Count             4,375.0 msgs
+==============================================================================
+  MPI_Isend / comm / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                          41.6% 
+  MPI Msg Bytes                   352,800,000.0 
+  MPI Msg Count                         6,250.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count             4,375.0 msgs
+  64KiB<= MsgSz <1MiB Count             1,875.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        19,691.1 
+  MPI Msg Count                           728.7 msgs
+  MsgSz <16 Count                         421.1 msgs
+  16<= MsgSz <256 Count                   302.2 msgs
+  256<= MsgSz <4KiB Count                   5.4 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / split_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,444.3 
+  MPI Msg Count                           312.0 msgs
+  MsgSz <16 Count                         176.3 msgs
+  16<= MsgSz <256 Count                   133.4 msgs
+  256<= MsgSz <4KiB Count                   2.3 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / split_blocks / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,444.3 
+  MPI Msg Count                           312.0 msgs
+  MsgSz <16 Count                         176.3 msgs
+  16<= MsgSz <256 Count                   133.4 msgs
+  256<= MsgSz <4KiB Count                   2.3 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / split_blocks / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,444.3 
+  MPI Msg Count                           312.0 msgs
+  MsgSz <16 Count                         176.3 msgs
+  16<= MsgSz <256 Count                   133.4 msgs
+  256<= MsgSz <4KiB Count                   2.3 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / split_blocks / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,444.3 
+  MPI Msg Count                           312.0 msgs
+  MsgSz <16 Count                         176.3 msgs
+  16<= MsgSz <256 Count                   133.4 msgs
+  256<= MsgSz <4KiB Count                   2.3 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / split_blocks / refine / driver / main / pe.1975
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       106,224.0 
+  MPI Msg Count                         4,021.0 msgs
+  MsgSz <16 Count                       1,857.0 msgs
+  16<= MsgSz <256 Count                 2,111.0 msgs
+  256<= MsgSz <4KiB Count                  53.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / split_blocks / refine / driver / main / pe.1031
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         5,124.0 
+  MPI Msg Count                           246.0 msgs
+  MsgSz <16 Count                         148.0 msgs
+  16<= MsgSz <256 Count                    98.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / split_blocks / refine / driver / main / pe.2011
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         2,584.0 
+  MPI Msg Count                           136.0 msgs
+  MsgSz <16 Count                          90.0 msgs
+  16<= MsgSz <256 Count                    46.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_refine / refine_level
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         7,495.6 
+  MPI Msg Count                           242.5 msgs
+  MsgSz <16 Count                         129.1 msgs
+  16<= MsgSz <256 Count                   111.5 msgs
+  256<= MsgSz <4KiB Count                   1.9 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine_level / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         7,495.6 
+  MPI Msg Count                           242.5 msgs
+  MsgSz <16 Count                         129.1 msgs
+  16<= MsgSz <256 Count                   111.5 msgs
+  256<= MsgSz <4KiB Count                   1.9 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine_level / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         7,495.6 
+  MPI Msg Count                           242.5 msgs
+  MsgSz <16 Count                         129.1 msgs
+  16<= MsgSz <256 Count                   111.5 msgs
+  256<= MsgSz <4KiB Count                   1.9 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine_level / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         7,495.6 
+  MPI Msg Count                           242.5 msgs
+  MsgSz <16 Count                         129.1 msgs
+  16<= MsgSz <256 Count                   111.5 msgs
+  256<= MsgSz <4KiB Count                   1.9 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine_level / refine / driver / main / pe.1319
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        52,672.0 
+  MPI Msg Count                           616.0 msgs
+  MsgSz <16 Count                         236.0 msgs
+  16<= MsgSz <256 Count                   345.0 msgs
+  256<= MsgSz <4KiB Count                  35.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine_level / refine / driver / main / pe.556
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         4,436.0 
+  MPI Msg Count                           184.0 msgs
+  MsgSz <16 Count                         109.0 msgs
+  16<= MsgSz <256 Count                    75.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine_level / refine / driver / main / pe.75
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,944.0 
+  MPI Msg Count                            96.0 msgs
+  MsgSz <16 Count                          51.0 msgs
+  16<= MsgSz <256 Count                    45.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_refine / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         3,751.2 
+  MPI Msg Count                           174.2 msgs
+  MsgSz <16 Count                         115.7 msgs
+  16<= MsgSz <256 Count                    57.4 msgs
+  256<= MsgSz <4KiB Count                   1.1 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         3,751.2 
+  MPI Msg Count                           174.2 msgs
+  MsgSz <16 Count                         115.7 msgs
+  16<= MsgSz <256 Count                    57.4 msgs
+  256<= MsgSz <4KiB Count                   1.1 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         3,751.2 
+  MPI Msg Count                           174.2 msgs
+  MsgSz <16 Count                         115.7 msgs
+  16<= MsgSz <256 Count                    57.4 msgs
+  256<= MsgSz <4KiB Count                   1.1 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine / driver / main / pe.1975
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        38,160.0 
+  MPI Msg Count                           941.0 msgs
+  MsgSz <16 Count                          84.0 msgs
+  16<= MsgSz <256 Count                   835.0 msgs
+  256<= MsgSz <4KiB Count                  22.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine / driver / main / pe.1868
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         2,312.0 
+  MPI Msg Count                           145.0 msgs
+  MsgSz <16 Count                          96.0 msgs
+  16<= MsgSz <256 Count                    49.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_refine / refine / driver / main / pe.2043
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,184.0 
+  MPI Msg Count                            92.0 msgs
+  MsgSz <16 Count                          70.0 msgs
+  16<= MsgSz <256 Count                    22.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_reverse_refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         7,495.6 
+  MPI Msg Count                           242.5 msgs
+  MsgSz <16 Count                         129.1 msgs
+  16<= MsgSz <256 Count                   111.5 msgs
+  256<= MsgSz <4KiB Count                   1.9 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_reverse_refine / refine_level
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         7,495.6 
+  MPI Msg Count                           242.5 msgs
+  MsgSz <16 Count                         129.1 msgs
+  16<= MsgSz <256 Count                   111.5 msgs
+  256<= MsgSz <4KiB Count                   1.9 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_reverse_refine / refine_level / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         7,495.6 
+  MPI Msg Count                           242.5 msgs
+  MsgSz <16 Count                         129.1 msgs
+  16<= MsgSz <256 Count                   111.5 msgs
+  256<= MsgSz <4KiB Count                   1.9 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_reverse_refine / refine_level / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         7,495.6 
+  MPI Msg Count                           242.5 msgs
+  MsgSz <16 Count                         129.1 msgs
+  16<= MsgSz <256 Count                   111.5 msgs
+  256<= MsgSz <4KiB Count                   1.9 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_reverse_refine / refine_level / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         7,495.6 
+  MPI Msg Count                           242.5 msgs
+  MsgSz <16 Count                         129.1 msgs
+  16<= MsgSz <256 Count                   111.5 msgs
+  256<= MsgSz <4KiB Count                   1.9 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_reverse_refine / refine_level / refine / driver / main / pe.1319
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        52,672.0 
+  MPI Msg Count                           616.0 msgs
+  MsgSz <16 Count                         236.0 msgs
+  16<= MsgSz <256 Count                   345.0 msgs
+  256<= MsgSz <4KiB Count                  35.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_reverse_refine / refine_level / refine / driver / main / pe.556
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         4,436.0 
+  MPI Msg Count                           184.0 msgs
+  MsgSz <16 Count                         109.0 msgs
+  16<= MsgSz <256 Count                    75.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_reverse_refine / refine_level / refine / driver / main / pe.75
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,944.0 
+  MPI Msg Count                            96.0 msgs
+  MsgSz <16 Count                          51.0 msgs
+  16<= MsgSz <256 Count                    45.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_proc
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         2,204.6 
+  MPI Msg Count                            57.9 msgs
+  MsgSz <16 Count                          22.2 msgs
+  16<= MsgSz <256 Count                    34.7 msgs
+  256<= MsgSz <4KiB Count                   1.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         2,204.6 
+  MPI Msg Count                            57.9 msgs
+  MsgSz <16 Count                          22.2 msgs
+  16<= MsgSz <256 Count                    34.7 msgs
+  256<= MsgSz <4KiB Count                   1.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks..0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,266.2 
+  MPI Msg Count                            33.8 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                    18.5 msgs
+  256<= MsgSz <4KiB Count                   0.3 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks..0 / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,266.2 
+  MPI Msg Count                            33.8 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                    18.5 msgs
+  256<= MsgSz <4KiB Count                   0.3 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks..0 / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,266.2 
+  MPI Msg Count                            33.8 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                    18.5 msgs
+  256<= MsgSz <4KiB Count                   0.3 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks..0 / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,266.2 
+  MPI Msg Count                            33.8 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                    18.5 msgs
+  256<= MsgSz <4KiB Count                   0.3 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.1319
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,608.0 
+  MPI Msg Count                            85.0 msgs
+  MsgSz <16 Count                          26.0 msgs
+  16<= MsgSz <256 Count                    53.0 msgs
+  256<= MsgSz <4KiB Count                   6.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.1352
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           816.0 
+  MPI Msg Count                            33.0 msgs
+  MsgSz <16 Count                          13.0 msgs
+  16<= MsgSz <256 Count                    20.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.1755
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           360.0 
+  MPI Msg Count                             8.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     6.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / load_balance
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           684.3 
+  MPI Msg Count                            20.8 msgs
+  MsgSz <16 Count                           5.8 msgs
+  16<= MsgSz <256 Count                    14.5 msgs
+  256<= MsgSz <4KiB Count                   0.5 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / load_balance / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           684.3 
+  MPI Msg Count                            20.8 msgs
+  MsgSz <16 Count                           5.8 msgs
+  16<= MsgSz <256 Count                    14.5 msgs
+  256<= MsgSz <4KiB Count                   0.5 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / load_balance / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           684.3 
+  MPI Msg Count                            20.8 msgs
+  MsgSz <16 Count                           5.8 msgs
+  16<= MsgSz <256 Count                    14.5 msgs
+  256<= MsgSz <4KiB Count                   0.5 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / load_balance / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           684.3 
+  MPI Msg Count                            20.8 msgs
+  MsgSz <16 Count                           5.8 msgs
+  16<= MsgSz <256 Count                    14.5 msgs
+  256<= MsgSz <4KiB Count                   0.5 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / load_balance / refine / driver / main / pe.1975
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        23,684.0 
+  MPI Msg Count                           741.0 msgs
+  MsgSz <16 Count                           8.0 msgs
+  16<= MsgSz <256 Count                   727.0 msgs
+  256<= MsgSz <4KiB Count                   6.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / load_balance / refine / driver / main / pe.852
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           280.0 
+  MPI Msg Count                            19.0 msgs
+  MsgSz <16 Count                           6.0 msgs
+  16<= MsgSz <256 Count                    13.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / load_balance / refine / driver / main / pe.1783
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           148.0 
+  MPI Msg Count                            13.0 msgs
+  MsgSz <16 Count                           5.0 msgs
+  16<= MsgSz <256 Count                     8.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           254.1 
+  MPI Msg Count                             3.3 msgs
+  MsgSz <16 Count                           1.3 msgs
+  16<= MsgSz <256 Count                     1.8 msgs
+  256<= MsgSz <4KiB Count                   0.2 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           254.1 
+  MPI Msg Count                             3.3 msgs
+  MsgSz <16 Count                           1.3 msgs
+  16<= MsgSz <256 Count                     1.8 msgs
+  256<= MsgSz <4KiB Count                   0.2 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           254.1 
+  MPI Msg Count                             3.3 msgs
+  MsgSz <16 Count                           1.3 msgs
+  16<= MsgSz <256 Count                     1.8 msgs
+  256<= MsgSz <4KiB Count                   0.2 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           254.1 
+  MPI Msg Count                             3.3 msgs
+  MsgSz <16 Count                           1.3 msgs
+  16<= MsgSz <256 Count                     1.8 msgs
+  256<= MsgSz <4KiB Count                   0.2 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks / refine / driver / main / pe.1319
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         5,060.0 
+  MPI Msg Count                            21.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                    15.0 msgs
+  256<= MsgSz <4KiB Count                   4.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks / refine / driver / main / pe.579
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_proc / move_blocks / redistribute_blocks / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_parent
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         2,135.1 
+  MPI Msg Count                            41.1 msgs
+  MsgSz <16 Count                          12.2 msgs
+  16<= MsgSz <256 Count                    29.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine_level
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,523.6 
+  MPI Msg Count                            29.0 msgs
+  MsgSz <16 Count                           8.2 msgs
+  16<= MsgSz <256 Count                    20.9 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine_level / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,523.6 
+  MPI Msg Count                            29.0 msgs
+  MsgSz <16 Count                           8.2 msgs
+  16<= MsgSz <256 Count                    20.9 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine_level / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,523.6 
+  MPI Msg Count                            29.0 msgs
+  MsgSz <16 Count                           8.2 msgs
+  16<= MsgSz <256 Count                    20.9 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine_level / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,523.6 
+  MPI Msg Count                            29.0 msgs
+  MsgSz <16 Count                           8.2 msgs
+  16<= MsgSz <256 Count                    20.9 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine_level / refine / driver / main / pe.1970
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         4,920.0 
+  MPI Msg Count                           264.0 msgs
+  MsgSz <16 Count                         110.0 msgs
+  16<= MsgSz <256 Count                   154.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine_level / refine / driver / main / pe.1230
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,320.0 
+  MPI Msg Count                            15.0 msgs
+  MsgSz <16 Count                           5.0 msgs
+  16<= MsgSz <256 Count                    10.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine_level / refine / driver / main / pe.1974
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_parent / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           611.5 
+  MPI Msg Count                            12.1 msgs
+  MsgSz <16 Count                           4.0 msgs
+  16<= MsgSz <256 Count                     8.1 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           611.5 
+  MPI Msg Count                            12.1 msgs
+  MsgSz <16 Count                           4.0 msgs
+  16<= MsgSz <256 Count                     8.1 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           611.5 
+  MPI Msg Count                            12.1 msgs
+  MsgSz <16 Count                           4.0 msgs
+  16<= MsgSz <256 Count                     8.1 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine / driver / main / pe.1970
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,800.0 
+  MPI Msg Count                            97.0 msgs
+  MsgSz <16 Count                          41.0 msgs
+  16<= MsgSz <256 Count                    56.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine / driver / main / pe.1655
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           540.0 
+  MPI Msg Count                             9.0 msgs
+  MsgSz <16 Count                           3.0 msgs
+  16<= MsgSz <256 Count                     6.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_parent_reverse
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         2,135.1 
+  MPI Msg Count                            41.1 msgs
+  MsgSz <16 Count                          12.2 msgs
+  16<= MsgSz <256 Count                    29.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine_level
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,523.6 
+  MPI Msg Count                            29.0 msgs
+  MsgSz <16 Count                           8.2 msgs
+  16<= MsgSz <256 Count                    20.9 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine_level / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,523.6 
+  MPI Msg Count                            29.0 msgs
+  MsgSz <16 Count                           8.2 msgs
+  16<= MsgSz <256 Count                    20.9 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine_level / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,523.6 
+  MPI Msg Count                            29.0 msgs
+  MsgSz <16 Count                           8.2 msgs
+  16<= MsgSz <256 Count                    20.9 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine_level / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,523.6 
+  MPI Msg Count                            29.0 msgs
+  MsgSz <16 Count                           8.2 msgs
+  16<= MsgSz <256 Count                    20.9 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine_level / refine / driver / main / pe.457
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        24,640.0 
+  MPI Msg Count                           417.0 msgs
+  MsgSz <16 Count                         139.0 msgs
+  16<= MsgSz <256 Count                   278.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine_level / refine / driver / main / pe.810
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine_level / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           611.5 
+  MPI Msg Count                            12.1 msgs
+  MsgSz <16 Count                           4.0 msgs
+  16<= MsgSz <256 Count                     8.1 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           611.5 
+  MPI Msg Count                            12.1 msgs
+  MsgSz <16 Count                           4.0 msgs
+  16<= MsgSz <256 Count                     8.1 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           611.5 
+  MPI Msg Count                            12.1 msgs
+  MsgSz <16 Count                           4.0 msgs
+  16<= MsgSz <256 Count                     8.1 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine / driver / main / pe.457
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         9,792.0 
+  MPI Msg Count                           160.0 msgs
+  MsgSz <16 Count                          50.0 msgs
+  16<= MsgSz <256 Count                   110.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine / driver / main / pe.784
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_reverse / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_parent_proc
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           320.8 
+  MPI Msg Count                             7.1 msgs
+  MsgSz <16 Count                           2.8 msgs
+  16<= MsgSz <256 Count                     4.3 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           320.8 
+  MPI Msg Count                             7.1 msgs
+  MsgSz <16 Count                           2.8 msgs
+  16<= MsgSz <256 Count                     4.3 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks..0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           290.7 
+  MPI Msg Count                             5.0 msgs
+  MsgSz <16 Count                           1.3 msgs
+  16<= MsgSz <256 Count                     3.8 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks..0 / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           290.7 
+  MPI Msg Count                             5.0 msgs
+  MsgSz <16 Count                           1.3 msgs
+  16<= MsgSz <256 Count                     3.8 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks..0 / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           290.7 
+  MPI Msg Count                             5.0 msgs
+  MsgSz <16 Count                           1.3 msgs
+  16<= MsgSz <256 Count                     3.8 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks..0 / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           290.7 
+  MPI Msg Count                             5.0 msgs
+  MsgSz <16 Count                           1.3 msgs
+  16<= MsgSz <256 Count                     3.8 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.1970
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           676.0 
+  MPI Msg Count                            36.0 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                    21.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.1935
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           264.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     3.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.1974
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / load_balance
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            20.5 
+  MPI Msg Count                             1.5 msgs
+  MsgSz <16 Count                           1.2 msgs
+  16<= MsgSz <256 Count                     0.3 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / load_balance / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            20.5 
+  MPI Msg Count                             1.5 msgs
+  MsgSz <16 Count                           1.2 msgs
+  16<= MsgSz <256 Count                     0.3 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / load_balance / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            20.5 
+  MPI Msg Count                             1.5 msgs
+  MsgSz <16 Count                           1.2 msgs
+  16<= MsgSz <256 Count                     0.3 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / load_balance / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            20.5 
+  MPI Msg Count                             1.5 msgs
+  MsgSz <16 Count                           1.2 msgs
+  16<= MsgSz <256 Count                     0.3 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / load_balance / refine / driver / main / pe.1970
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           228.0 
+  MPI Msg Count                            13.0 msgs
+  MsgSz <16 Count                           6.0 msgs
+  16<= MsgSz <256 Count                     7.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / load_balance / refine / driver / main / pe.777
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            12.0 
+  MPI Msg Count                             1.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / load_balance / refine / driver / main / pe.1957
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             9.5 
+  MPI Msg Count                             0.5 msgs
+  MsgSz <16 Count                           0.2 msgs
+  16<= MsgSz <256 Count                     0.3 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             9.5 
+  MPI Msg Count                             0.5 msgs
+  MsgSz <16 Count                           0.2 msgs
+  16<= MsgSz <256 Count                     0.3 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             9.5 
+  MPI Msg Count                             0.5 msgs
+  MsgSz <16 Count                           0.2 msgs
+  16<= MsgSz <256 Count                     0.3 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             9.5 
+  MPI Msg Count                             0.5 msgs
+  MsgSz <16 Count                           0.2 msgs
+  16<= MsgSz <256 Count                     0.3 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks / refine / driver / main / pe.1970
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           220.0 
+  MPI Msg Count                            12.0 msgs
+  MsgSz <16 Count                           5.0 msgs
+  16<= MsgSz <256 Count                     7.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks / refine / driver / main / pe.763
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Isend / comm_parent_proc / move_blocks / redistribute_blocks / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Send
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           1.8% 
+  MPI Msg Bytes                    15,354,370.6 
+  MPI Msg Count                           481.7 msgs
+  MsgSz <16 Count                         243.9 msgs
+  16<= MsgSz <256 Count                     8.7 msgs
+  256<= MsgSz <4KiB Count                   7.4 msgs
+  4KiB<= MsgSz <64KiB Count                 0.9 msgs
+  64KiB<= MsgSz <1MiB Count               220.7 msgs
+==============================================================================
+  MPI_Send / move_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           1.8% 
+  MPI Msg Bytes                    15,337,100.2 
+  MPI Msg Count                           441.5 msgs
+  MsgSz <16 Count                         220.7 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               220.7 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           1.4% 
+  MPI Msg Bytes                    11,520,942.5 
+  MPI Msg Count                           331.6 msgs
+  MsgSz <16 Count                         165.8 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               165.8 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           1.4% 
+  MPI Msg Bytes                    11,520,942.5 
+  MPI Msg Count                           331.6 msgs
+  MsgSz <16 Count                         165.8 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               165.8 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           1.4% 
+  MPI Msg Bytes                    11,520,942.5 
+  MPI Msg Count                           331.6 msgs
+  MsgSz <16 Count                         165.8 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               165.8 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           1.4% 
+  MPI Msg Bytes                    11,520,942.5 
+  MPI Msg Count                           331.6 msgs
+  MsgSz <16 Count                         165.8 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               165.8 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine / driver / main / pe.128
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                          23.9% 
+  MPI Msg Bytes                   202,534,880.0 
+  MPI Msg Count                         3,085.0 msgs
+  MsgSz <16 Count                         170.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2,915.0 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine / driver / main / pe.246
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.2% 
+  MPI Msg Bytes                     1,737,676.0 
+  MPI Msg Count                           194.0 msgs
+  MsgSz <16 Count                         169.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                25.0 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine / driver / main / pe.1121
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.1% 
+  MPI Msg Bytes                       486,964.0 
+  MPI Msg Count                           158.0 msgs
+  MsgSz <16 Count                         151.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 7.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks..0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.4% 
+  MPI Msg Bytes                     3,623,651.7 
+  MPI Msg Count                           104.3 msgs
+  MsgSz <16 Count                          52.2 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                52.2 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks..0 / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.4% 
+  MPI Msg Bytes                     3,623,651.7 
+  MPI Msg Count                           104.3 msgs
+  MsgSz <16 Count                          52.2 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                52.2 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks..0 / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.4% 
+  MPI Msg Bytes                     3,623,651.7 
+  MPI Msg Count                           104.3 msgs
+  MsgSz <16 Count                          52.2 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                52.2 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks..0 / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.4% 
+  MPI Msg Bytes                     3,623,651.7 
+  MPI Msg Count                           104.3 msgs
+  MsgSz <16 Count                          52.2 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                52.2 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.457
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.5% 
+  MPI Msg Bytes                     3,964,028.0 
+  MPI Msg Count                           974.0 msgs
+  MsgSz <16 Count                         917.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                57.0 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.1917
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.5% 
+  MPI Msg Bytes                     3,960,360.0 
+  MPI Msg Count                            57.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                57.0 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.1975
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             0.0 
+  MPI Msg Count                             0.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       192,506.0 
+  MPI Msg Count                             5.5 msgs
+  MsgSz <16 Count                           2.8 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 2.8 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       192,506.0 
+  MPI Msg Count                             5.5 msgs
+  MsgSz <16 Count                           2.8 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 2.8 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       192,506.0 
+  MPI Msg Count                             5.5 msgs
+  MsgSz <16 Count                           2.8 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 2.8 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       192,506.0 
+  MPI Msg Count                             5.5 msgs
+  MsgSz <16 Count                           2.8 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 2.8 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks / refine / driver / main / pe.1975
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           6.0% 
+  MPI Msg Bytes                    50,511,960.0 
+  MPI Msg Count                           727.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               727.0 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks / refine / driver / main / pe.1003
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            12.0 
+  MPI Msg Count                             3.0 msgs
+  MsgSz <16 Count                           3.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / move_blocks / redistribute_blocks / refine / driver / main / pe.1828
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             4.0 
+  MPI Msg Count                             1.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Send / move_dots
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        15,943.9 
+  MPI Msg Count                            30.1 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     1.6 msgs
+  256<= MsgSz <4KiB Count                   5.6 msgs
+  4KiB<= MsgSz <64KiB Count                 0.9 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / move_dots / load_balance
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        15,943.9 
+  MPI Msg Count                            30.1 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     1.6 msgs
+  256<= MsgSz <4KiB Count                   5.6 msgs
+  4KiB<= MsgSz <64KiB Count                 0.9 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / move_dots / load_balance / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        15,943.9 
+  MPI Msg Count                            30.1 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     1.6 msgs
+  256<= MsgSz <4KiB Count                   5.6 msgs
+  4KiB<= MsgSz <64KiB Count                 0.9 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / move_dots / load_balance / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        15,943.9 
+  MPI Msg Count                            30.1 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     1.6 msgs
+  256<= MsgSz <4KiB Count                   5.6 msgs
+  4KiB<= MsgSz <64KiB Count                 0.9 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / move_dots / load_balance / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        15,943.9 
+  MPI Msg Count                            30.1 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     1.6 msgs
+  256<= MsgSz <4KiB Count                   5.6 msgs
+  4KiB<= MsgSz <64KiB Count                 0.9 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / move_dots / load_balance / refine / driver / main / pe.260
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       113,824.0 
+  MPI Msg Count                            32.0 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     1.0 msgs
+  256<= MsgSz <4KiB Count                   2.0 msgs
+  4KiB<= MsgSz <64KiB Count                 7.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / move_dots / load_balance / refine / driver / main / pe.810
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        11,152.0 
+  MPI Msg Count                            30.0 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     2.0 msgs
+  256<= MsgSz <4KiB Count                   6.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / move_dots / load_balance / refine / driver / main / pe.1543
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           856.0 
+  MPI Msg Count                            25.0 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     2.0 msgs
+  256<= MsgSz <4KiB Count                   1.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Send / load_balance
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,326.5 
+  MPI Msg Count                            10.1 msgs
+  MsgSz <16 Count                           1.2 msgs
+  16<= MsgSz <256 Count                     7.1 msgs
+  256<= MsgSz <4KiB Count                   1.8 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / load_balance / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,326.5 
+  MPI Msg Count                            10.1 msgs
+  MsgSz <16 Count                           1.2 msgs
+  16<= MsgSz <256 Count                     7.1 msgs
+  256<= MsgSz <4KiB Count                   1.8 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / load_balance / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,326.5 
+  MPI Msg Count                            10.1 msgs
+  MsgSz <16 Count                           1.2 msgs
+  16<= MsgSz <256 Count                     7.1 msgs
+  256<= MsgSz <4KiB Count                   1.8 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / load_balance / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,326.5 
+  MPI Msg Count                            10.1 msgs
+  MsgSz <16 Count                           1.2 msgs
+  16<= MsgSz <256 Count                     7.1 msgs
+  256<= MsgSz <4KiB Count                   1.8 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / load_balance / refine / driver / main / pe.2
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,360.0 
+  MPI Msg Count                            46.0 msgs
+  MsgSz <16 Count                          28.0 msgs
+  16<= MsgSz <256 Count                    18.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / load_balance / refine / driver / main / pe.1177
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         1,352.0 
+  MPI Msg Count                             9.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     6.0 msgs
+  256<= MsgSz <4KiB Count                   2.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Send / load_balance / refine / driver / main / pe.659
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           576.0 
+  MPI Msg Count                            56.0 msgs
+  MsgSz <16 Count                          50.0 msgs
+  16<= MsgSz <256 Count                     6.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       398,546.0 
+  MPI Msg Count                        10,327.4 msgs
+  MsgSz <16 Count                      10,223.0 msgs
+  16<= MsgSz <256 Count                    17.0 msgs
+  256<= MsgSz <4KiB Count                  61.4 msgs
+  4KiB<= MsgSz <64KiB Count                26.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks..0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       196,668.0 
+  MPI Msg Count                            39.0 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                24.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks..0 / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       196,668.0 
+  MPI Msg Count                            39.0 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                24.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks..0 / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       196,668.0 
+  MPI Msg Count                            39.0 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                24.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks..0 / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       196,668.0 
+  MPI Msg Count                            39.0 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                24.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks..0 / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       196,668.0 
+  MPI Msg Count                            39.0 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                24.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks..0 / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       196,668.0 
+  MPI Msg Count                            39.0 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                24.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks..0 / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       196,668.0 
+  MPI Msg Count                            39.0 msgs
+  MsgSz <16 Count                          15.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                24.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / sort
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       100,154.0 
+  MPI Msg Count                            79.4 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                  57.4 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / sort / load_balance
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       100,154.0 
+  MPI Msg Count                            79.4 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                  57.4 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / sort / load_balance / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       100,154.0 
+  MPI Msg Count                            79.4 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                  57.4 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / sort / load_balance / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       100,154.0 
+  MPI Msg Count                            79.4 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                  57.4 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / sort / load_balance / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       100,154.0 
+  MPI Msg Count                            79.4 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                  57.4 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / sort / load_balance / refine / driver / main / pe.104
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       106,584.0 
+  MPI Msg Count                            84.0 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                  62.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / sort / load_balance / refine / driver / main / pe.814
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                       100,440.0 
+  MPI Msg Count                            79.0 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                  57.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / sort / load_balance / refine / driver / main / pe.1459
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        87,128.0 
+  MPI Msg Count                            72.0 msgs
+  MsgSz <16 Count                          22.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                  50.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / check_sum
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        80,320.0 
+  MPI Msg Count                        10,040.0 msgs
+  MsgSz <16 Count                      10,040.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / check_sum / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        80,000.0 
+  MPI Msg Count                        10,000.0 msgs
+  MsgSz <16 Count                      10,000.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / check_sum / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        80,000.0 
+  MPI Msg Count                        10,000.0 msgs
+  MsgSz <16 Count                      10,000.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / check_sum / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        80,000.0 
+  MPI Msg Count                        10,000.0 msgs
+  MsgSz <16 Count                      10,000.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / check_sum / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        80,000.0 
+  MPI Msg Count                        10,000.0 msgs
+  MsgSz <16 Count                      10,000.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / check_sum / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        80,000.0 
+  MPI Msg Count                        10,000.0 msgs
+  MsgSz <16 Count                      10,000.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / check_sum / init
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           320.0 
+  MPI Msg Count                            40.0 msgs
+  MsgSz <16 Count                          40.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / check_sum / init / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           320.0 
+  MPI Msg Count                            40.0 msgs
+  MsgSz <16 Count                          40.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / check_sum / init / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           320.0 
+  MPI Msg Count                            40.0 msgs
+  MsgSz <16 Count                          40.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / check_sum / init / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           320.0 
+  MPI Msg Count                            40.0 msgs
+  MsgSz <16 Count                          40.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / check_sum / init / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           320.0 
+  MPI Msg Count                            40.0 msgs
+  MsgSz <16 Count                          40.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / check_sum / init / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           320.0 
+  MPI Msg Count                            40.0 msgs
+  MsgSz <16 Count                          40.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / redistribute_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,392.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 2.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,392.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 2.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,392.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 2.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,392.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 2.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,392.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 2.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,392.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 2.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / redistribute_blocks / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,392.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 2.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / calculate_results
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         4,096.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   4.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / calculate_results / profile
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         4,096.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   4.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / calculate_results / profile / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         4,096.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   4.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / calculate_results / profile / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         4,096.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   4.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / calculate_results / profile / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         4,096.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   4.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / calculate_results / profile / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         4,096.0 
+  MPI Msg Count                             4.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   4.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           496.0 
+  MPI Msg Count                            56.0 msgs
+  MsgSz <16 Count                          39.0 msgs
+  16<= MsgSz <256 Count                    17.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           496.0 
+  MPI Msg Count                            56.0 msgs
+  MsgSz <16 Count                          39.0 msgs
+  16<= MsgSz <256 Count                    17.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           496.0 
+  MPI Msg Count                            56.0 msgs
+  MsgSz <16 Count                          39.0 msgs
+  16<= MsgSz <256 Count                    17.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           496.0 
+  MPI Msg Count                            56.0 msgs
+  MsgSz <16 Count                          39.0 msgs
+  16<= MsgSz <256 Count                    17.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           496.0 
+  MPI Msg Count                            56.0 msgs
+  MsgSz <16 Count                          39.0 msgs
+  16<= MsgSz <256 Count                    17.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           496.0 
+  MPI Msg Count                            56.0 msgs
+  MsgSz <16 Count                          39.0 msgs
+  16<= MsgSz <256 Count                    17.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / refine_level
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           388.0 
+  MPI Msg Count                            97.0 msgs
+  MsgSz <16 Count                          97.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine_level / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           388.0 
+  MPI Msg Count                            97.0 msgs
+  MsgSz <16 Count                          97.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine_level / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           388.0 
+  MPI Msg Count                            97.0 msgs
+  MsgSz <16 Count                          97.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine_level / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           388.0 
+  MPI Msg Count                            97.0 msgs
+  MsgSz <16 Count                          97.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine_level / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           388.0 
+  MPI Msg Count                            97.0 msgs
+  MsgSz <16 Count                          97.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine_level / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           388.0 
+  MPI Msg Count                            97.0 msgs
+  MsgSz <16 Count                          97.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / refine_level / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           388.0 
+  MPI Msg Count                            97.0 msgs
+  MsgSz <16 Count                          97.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / move_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            24.0 
+  MPI Msg Count                             6.0 msgs
+  MsgSz <16 Count                           6.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks..0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            12.0 
+  MPI Msg Count                             3.0 msgs
+  MsgSz <16 Count                           3.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks..0 / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            12.0 
+  MPI Msg Count                             3.0 msgs
+  MsgSz <16 Count                           3.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks..0 / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            12.0 
+  MPI Msg Count                             3.0 msgs
+  MsgSz <16 Count                           3.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks..0 / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            12.0 
+  MPI Msg Count                             3.0 msgs
+  MsgSz <16 Count                           3.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            12.0 
+  MPI Msg Count                             3.0 msgs
+  MsgSz <16 Count                           3.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            12.0 
+  MPI Msg Count                             3.0 msgs
+  MsgSz <16 Count                           3.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks..0 / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                            12.0 
+  MPI Msg Count                             3.0 msgs
+  MsgSz <16 Count                           3.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / move_blocks / load_balance
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / load_balance / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / load_balance / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / load_balance / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / load_balance / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / load_balance / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / load_balance / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             4.0 
+  MPI Msg Count                             1.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             4.0 
+  MPI Msg Count                             1.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             4.0 
+  MPI Msg Count                             1.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             4.0 
+  MPI Msg Count                             1.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             4.0 
+  MPI Msg Count                             1.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             4.0 
+  MPI Msg Count                             1.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / move_blocks / redistribute_blocks / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             4.0 
+  MPI Msg Count                             1.0 msgs
+  MsgSz <16 Count                           1.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce / load_balance
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / load_balance / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / load_balance / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / load_balance / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / load_balance / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / load_balance / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Allreduce / load_balance / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                             8.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           2.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Alltoall
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        49,152.0 
+  MPI Msg Count                        12,288.0 msgs
+  MsgSz <16 Count                      12,288.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks..0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        24,576.0 
+  MPI Msg Count                         6,144.0 msgs
+  MsgSz <16 Count                       6,144.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks..0 / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        24,576.0 
+  MPI Msg Count                         6,144.0 msgs
+  MsgSz <16 Count                       6,144.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks..0 / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        24,576.0 
+  MPI Msg Count                         6,144.0 msgs
+  MsgSz <16 Count                       6,144.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks..0 / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        24,576.0 
+  MPI Msg Count                         6,144.0 msgs
+  MsgSz <16 Count                       6,144.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks..0 / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        24,576.0 
+  MPI Msg Count                         6,144.0 msgs
+  MsgSz <16 Count                       6,144.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks..0 / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        24,576.0 
+  MPI Msg Count                         6,144.0 msgs
+  MsgSz <16 Count                       6,144.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks..0 / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        24,576.0 
+  MPI Msg Count                         6,144.0 msgs
+  MsgSz <16 Count                       6,144.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Alltoall / load_balance
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,384.0 
+  MPI Msg Count                         4,096.0 msgs
+  MsgSz <16 Count                       4,096.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / load_balance / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,384.0 
+  MPI Msg Count                         4,096.0 msgs
+  MsgSz <16 Count                       4,096.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / load_balance / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,384.0 
+  MPI Msg Count                         4,096.0 msgs
+  MsgSz <16 Count                       4,096.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / load_balance / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,384.0 
+  MPI Msg Count                         4,096.0 msgs
+  MsgSz <16 Count                       4,096.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / load_balance / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,384.0 
+  MPI Msg Count                         4,096.0 msgs
+  MsgSz <16 Count                       4,096.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / load_balance / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,384.0 
+  MPI Msg Count                         4,096.0 msgs
+  MsgSz <16 Count                       4,096.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / load_balance / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                        16,384.0 
+  MPI Msg Count                         4,096.0 msgs
+  MsgSz <16 Count                       4,096.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Alltoall / redistribute_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,192.0 
+  MPI Msg Count                         2,048.0 msgs
+  MsgSz <16 Count                       2,048.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,192.0 
+  MPI Msg Count                         2,048.0 msgs
+  MsgSz <16 Count                       2,048.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,192.0 
+  MPI Msg Count                         2,048.0 msgs
+  MsgSz <16 Count                       2,048.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,192.0 
+  MPI Msg Count                         2,048.0 msgs
+  MsgSz <16 Count                       2,048.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks / refine / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,192.0 
+  MPI Msg Count                         2,048.0 msgs
+  MsgSz <16 Count                       2,048.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks / refine / driver / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,192.0 
+  MPI Msg Count                         2,048.0 msgs
+  MsgSz <16 Count                       2,048.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Alltoall / redistribute_blocks / refine / driver / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                         8,192.0 
+  MPI Msg Count                         2,048.0 msgs
+  MsgSz <16 Count                       2,048.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Bcast
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           364.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     2.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Bcast / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           364.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     2.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Bcast / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           364.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     2.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Bcast / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           364.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     2.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+  MPI_Bcast / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.0% 
+  MPI Msg Bytes                           364.0 
+  MPI Msg Count                             2.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     2.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                 0.0 msgs
+==============================================================================
+
+Notes for table 5:
+
+  This table shows energy and power usage for the nodes with the
+    maximum, mean, and minimum usage, as well as the sum of usage over
+    all nodes.
+    Energy and power for accelerators is also shown, if applicable.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_energy ...
+
+Table 5:  Program energy and power usage (from Cray PM)
+
+    Node | Node Power |   Process | Node Id=[mmm]
+  Energy |        (W) |      Time |  PE=HIDE
+     (J) |            |           | 
+        
+ 713,952 | 19,129.987 | 37.321074 | Total
+|------------------------------------------------
+|  12,834 |    343.818 | 37.327959 | nid.755
+|  10,789 |    289.086 | 37.322201 | nid.616
+|  10,187 |    272.915 | 37.327603 | nid.610
+|================================================
+
+Notes for table 6:
+
+  This table shows values shown for HiMem calculated from information
+    in the /proc/self/numa_maps files captured near the end of the
+    program. It is the total size of all pages, including huge pages,
+    that were actually mapped into physical memory from both private
+    and shared memory segments.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O himem ...
+
+Table 6:  Memory High Water Mark by Numa Node
+
+   Process |     HiMem |     HiMem | Numanode
+     HiMem | Numa Node | Numa Node |  PE=HIDE
+ (MiBytes) |         0 |         1 | 
+           | (MiBytes) | (MiBytes) | 
+|----------------------------------------------
+|   1,184.5 |   1,178.7 |       5.8 | numanode.0
+|   1,184.2 |      15.0 |   1,169.2 | numanode.1
+|==============================================
+
+Notes for table 7:
+
+  This table shows total wall clock time for the ranks with the
+    maximum, mean, and minimum time, as well as the average across
+    ranks.
+    It also shows maximum memory usage from /proc/self/numa_maps for
+    those ranks, and on average.  The usage is total size of all
+    pages, including huge pages, that were actually mapped into
+    physical memory from both private and shared memory segments.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_time ...
+
+Table 7:  Wall Clock Time, Memory High Water Mark
+
+   Process |   Process | PE=[mmm]
+      Time |     HiMem | 
+           | (MiBytes) | 
+          
+ 37.321074 |   1,184.3 | Total
+|--------------------------------
+| 37.757149 |   1,185.6 | pe.1364
+| 37.306600 |   1,185.4 | pe.1587
+| 37.302092 |   1,181.9 | pe.1840
+|================================
+
+========================  Additional details  ========================
+
+
+
+General table notes:
+
+    The default notes for a table are based on the default definition of
+    the table, and do not account for the effects of command-line options
+    that may modify the content of the table.
+    
+    Detailed notes, produced by the pat_report -v option, do account for
+    all command-line options, and also show how data is aggregated, and
+    if the table content is limited by thresholds, rank selections, etc.
+    
+    An imbalance metric in a line is based on values in main threads
+    across multiple ranks, or on values across all threads, as applicable.
+    
+    An imbalance percent in a line is relative to the maximum value
+    for that line across ranks or threads, as applicable.
+    
+Experiment:  trace
+
+Original path to data file:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/miniAMR/miniAMR.x+pat+15005-604t/xf-files   (RTS, 2048 data files)
+
+Original program:  /global/u1/c/cookbg/mpi/miniAMR/miniAMR_ref/miniAMR.x
+
+Instrumented with:  pat_build -g mpi miniAMR.x
+
+Instrumented program:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/miniAMR/./miniAMR_ref/miniAMR.x+pat
+
+Program invocation:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/miniAMR/./miniAMR_ref/miniAMR.x+pat --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1 --npx 16 --npy 16 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2 --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 ...
+
+Exit Status:  0 for 2,048 PEs
+
+Memory pagesize:  4 KiB
+
+Memory hugepagesize:  2 MiB
+
+Programming environment:  INTEL
+
+Runtime environment variables:
+  CRAYPAT_ALPS_COMPONENT=/opt/cray/pe/perftools/7.1.1/sbin/pat_alps
+  CRAYPAT_COMPILER_OPTIONS=1
+  CRAYPAT_LD_LIBRARY_PATH=/opt/cray/pe/gcc-libs:/opt/cray/gcc-libs:/opt/cray/pe/perftools/7.1.1/lib64
+  CRAYPAT_OPTS_EXECUTABLE=libexec64/opts
+  CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+  CRAYPE_VERSION=2.6.2
+  CRAY_LIBSCI_VERSION=19.06.1
+  DVS_VERSION=0.9.0
+  HUGETLB_DEFAULT_PAGE_SIZE=2M
+  HUGETLB_ELFMAP=W
+  HUGETLB_FORCE_ELFMAP=yes+
+  HUGETLB_MORECORE=yes
+  HUGETLB_MORECORE_HEAPBASE=10000000000
+  HUGETLB_VERBOSE=0
+  INTEL_MAJOR_VERSION=19
+  INTEL_MINOR_VERSION=19
+  INTEL_VERSION=19.0.3.199
+  LIBSCI_VERSION=19.06.1
+  MODULE_VERSION=3.2.11.4
+  MODULE_VERSION_STACK=3.2.11.4
+  MPICH_ABORT_ON_ERROR=1
+  MPICH_DIR=/opt/cray/pe/mpt/7.7.10/gni/mpich-intel/16.0
+  MPICH_MPIIO_DVS_MAXNODES=28
+  PAT_BUILD_PAPI_LIBDIR=/opt/cray/pe/papi/5.7.0.2/lib64
+  PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+  PERFTOOLS_VERSION=7.1.1
+  PMI_CONTROL_PORT=63040
+  PMI_CRAY_NO_SMP_ORDER=0
+  PMI_GNI_COOKIE=4230217728:454230016
+  PMI_GNI_DEV_ID=0
+  PMI_GNI_LOC_ADDR=732:732
+  PMI_GNI_PTAG=55:56
+  PMI_NO_FORK=1
+
+Report time environment variables:
+    CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+    PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+
+Number of MPI control variables collected:  108
+
+  (To see the list, specify: -s mpi_cvar=show)
+
+Report command line options:  -T
+
+Operating system:
+  Linux 4.12.14-150.17_5.0.90-cray_ari_c #1 SMP Tue Apr 28 21:17:03 UTC 2020 (3e6e478)
+
+Instrumentation overhead could not be estimated.
+
+Number of traced functions that were called:  18
+
+  (To see the list, specify:  -s traced_functions=show)
+

@@ -14,8 +14,8 @@ def main():
     #w.testOSU()
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
-    #w.fixAllocation(appName='qmcpack', iteration=10, instance=5)
-    w.CADD(appName='milc', iteration=10)
+    w.fixAllocation(appName='lammps', iteration=10, instance=5)
+    #w.CADD(appName='milc', iteration=10)
 
 class withOSU:
     def __init__(self):
