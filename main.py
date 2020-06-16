@@ -21,9 +21,11 @@ def main():
     #al.runtime()
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
-    al.processFix(app='lammps', onlyTime=1, getSpan=0, ptile=0)
-    #al.processCADD(app='milc')
+    #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
+    #al.processCADD(app='lammps')
     #al.calcNode()
+    #al.test()
+    al.getData()
 
 def isint(value):
   try:
@@ -167,7 +169,11 @@ class ldms:
         '''
         return pd.Timestamp(os.path.getmtime(filepath), unit='s', tz="US/Pacific")
 
-    def subsetLinesToDF(self, fname, start_t, end_t):
+    def subsetLinesToDF(self, fname, start_t, end_t, routers=[]):
+        '''
+        In a file, select the lines from start_t to end_t, and output a dataframe.
+        If routers specified, filter those routers.
+        '''
         #print("Extracting from {}".format(fname))
         #fdate = fname.split(".")[-1]
         #print(pd.datetime.fromtimestamp(int(fdate)))
@@ -191,8 +197,24 @@ class ldms:
                 print(tmpstr)
                 print("No data found in this file {}\n while reading bytes: {} to {}".format(fname, bstart, bend))
                 return pd.DataFrame()
+
             tmpstr = tmpstr.rsplit('\n', 1)[0]
-            dftest = pd.read_csv(StringIO(tmpstr), names=hline)
+            if len(routers) > 0:
+                outstr, rest = '', tmpstr
+                while 1:
+                    sp = rest.split('\n', 1)
+                    thisline = sp[0]
+                    thisRouter = thisline.split(',', 7)[6]
+                    if thisRouter in routers:
+                        outstr += thisline + '\n'
+                    if len(sp) == 1:
+                        break
+                    else:
+                        rest = sp[1]
+            else:
+                outstr = tmpstr
+
+            dftest = pd.read_csv(StringIO(outstr), names=hline)
         return dftest
 
     def bstFileNear(self, left, right, time_t, f, num_bytes=12000, field=0):
@@ -273,18 +295,39 @@ class ldms:
                     end_files += filematches
         return end_files
                 
-    def fetchData(self, datetimeStart, datetimeEnd, source):
+    def findRtrFiles(self, start_time, end_time, file_start_dict):
+        files = []
+        for agg in file_start_dict.keys():
+            valid = 1
+            for k in sorted(file_start_dict[agg].keys(), reverse=True):
+                if k < end_time and k >= start_time-pd.Timedelta("25H") and valid:
+                    filematches = file_start_dict[agg][k]
+                    files += filematches
+                    if k <= start_time:
+                        valid = 0 # so the following files omitted.
+        return files
+
+    def fetchData(self, datetimeStart, datetimeEnd, source, routers=[]):
         '''
         Get all the nic or rtr for certain time range.
+        For length longer than few hundred seconds, it will go out of memory.
+        start and end time are pandas.Timestamp.
+        If routers specified, filter those routers.
         '''
-        #print('Fetching data..')
-        startFiles = self.findRtrStartFilesV2(datetimeStart, self.rtr_log_starts if source=='rtr' else self.nic_log_starts)
-        endFiles = self.findRtrEndFilesV2(datetimeEnd, self.rtr_log_starts if source=='rtr' else self.nic_log_starts)
-        files = list( set().union(startFiles, endFiles) )
+        #startFiles = self.findRtrStartFilesV2(datetimeStart, self.rtr_log_starts if source=='rtr' else self.nic_log_starts)
+        #endFiles = self.findRtrEndFilesV2(datetimeEnd, self.rtr_log_starts if source=='rtr' else self.nic_log_starts) # maybe should be self.rtr_log_mods ?
+        #files = list( set().union(startFiles, endFiles) )
+        files = self.findRtrFiles(datetimeStart, datetimeEnd, self.rtr_log_starts if source=='rtr' else self.nic_log_starts)
+        print('Fetching data from files:')
+        for f in files:
+            print(f)
         unixTime = datetimeStart.value // 10**9
         unixEnd = datetimeEnd.value // 10**9
-        pargs = [(f, unixTime, unixEnd) for f in files]
-        fetched = self.pool.starmap(self.subsetLinesToDF, pargs)
+        if len(routers) > 0:
+            pargs = [(f, unixTime, unixEnd, routers) for f in files]
+        else:
+            pargs = [(f, unixTime, unixEnd) for f in files]
+        fetched = self.pool.starmap(self.subsetLinesToDF, pargs) # multiprocessing on files.
         if len(fetched) == 0:
             print('No data for this time %s.' % str(datetimeStart))
             return None
@@ -384,9 +427,9 @@ class ldms:
             avg = -1
         return avg
 
-    def calcRouterStall(self, data):
+    def calcRouterStall(self, data, fillna=1):
         '''
-        Calculate the avg stall of the 40 tiles in all the routers.
+        Calculate the avg stall of the 40 network tiles in all the routers.
         Averaged on 3 dimensions: time, routers, ports.
         Missing data are replaced by zero.
         '''
@@ -396,20 +439,22 @@ class ldms:
                 #data['VCsum_%d_%d' % (r,c)] = data[['AR_RTR_%d_%d_INQ_PRF_INCOMING_FLIT_VC%d' % (r,c,v) for v in range(8)]].sum(axis=1)
                 #Metrics.append('VCsum_%d_%d' % (r, c))
                 Metrics.append('AR_RTR_%d_%d_INQ_PRF_ROWBUS_STALL_CNT' % (r,c))
-        data.fillna(0, inplace=True)
+        if fillna:
+            data.fillna(0, inplace=True)
         data['PortAvgStall'] = data[Metrics].mean(axis=1) # average over ports.
         avgStall = data['PortAvgStall'].mean(axis=0) # average over router and time.
         return avgStall
 
-    def calcRouterFlit(self, data):
+    def calcRouterFlit(self, data, fillna=1):
         Metrics = []
         for r in range(5):
             for c in range(8):
                 data['VCsum_%d_%d' % (r,c)] = data[['AR_RTR_%d_%d_INQ_PRF_INCOMING_FLIT_VC%d' % (r,c,v) for v in range(8)]].sum(axis=1)
                 Metrics.append('VCsum_%d_%d' % (r, c))
-        data.fillna(0, inplace=True)
-        data['PortAvgStall'] = data[Metrics].mean(axis=1) # average over ports.
-        avg = data['PortAvgStall'].mean(axis=0) # average over router and time.
+        if fillna:
+            data.fillna(0, inplace=True)
+        data['PortAvgFlit'] = data[Metrics].mean(axis=1) # average over ports.
+        avg = data['PortAvgFlit'].mean(axis=0) # average over router and time.
         return avg
 
     def calcRouterAll(self, data):
@@ -979,9 +1024,9 @@ class analysis(ldms):
         print('finished.')
 
     def processCADD(self, app):
-        run = 5
-        task = 2048
-        f = 'CADDjob.out'
+        run = 10
+        task = 512
+        f = 'CADDjob_%s_16.out' % app
         print('Getting exec time..')
         with open(f, 'r') as o:
             et = {}
@@ -1000,12 +1045,33 @@ class analysis(ldms):
                             et[count] = sumTime
                         else:
                             et[count] = -1
+                elif app == 'lammps':
+                    if line.startswith('Total wall time'):
+                        count += 1
+                        if 'srun' in line:
+                            timestring = line.split()[3][:-5].split(':')
+                        else:
+                            timestring = line.split()[3].split(':')
+                        thisTime = int(timestring[1]) * 60 + int(timestring[2])
+                        et[count] = thisTime
         df = pd.DataFrame(columns=['run','green','yellow'])
         df['run'] = list(range(run))
         df['green'] = [et[x] for x in range(1, 2*run+1, 2)]
         df['yellow'] = [et[x] for x in range(2, 2*run+1, 2)]
-        df.to_csv('CADDprocess_%s.csv' % app, index=False)
+        df.to_csv('CADDprocess_%s_16.csv' % app, index=False)
         print('Time processed.')
+
+    def test(self):
+        f = 'results/fixAlloc_lammps3.out'
+        with open(f, 'r') as o:
+            for line in o:
+                if line.startswith('endTime:'):
+                    endTime = pd.Timestamp(self.timeToUnixPDT(line[8:-1]), unit='s', tz='US/Pacific')
+                    queryStart = endTime - pd.Timedelta(seconds=600)
+                    queryEnd = endTime
+                    break
+        qd = super().fetchData(queryStart, queryEnd, 'rtr')
+        qd.to_csv('temp.csv', index=0)
 
     def process(self, mode, counterSaved, saveFolder):
         '''
@@ -1051,6 +1117,36 @@ class analysis(ldms):
             with open(self.outputName, 'a') as o:
                 writeline = '%s,%d,%d,%f,%f,%d,%f,%f\n' % (jobmode, jobid, prodnum[1], execTime1, value[1], prodnum[2], execTime2, value[2])
                 o.write(writeline)
+
+    def getData(self):
+        start = 'Fri May 1 00:00:01 PDT 2020'
+        end = 'Fri May 1 00:00:10 PDT 2020'
+        queryStart = pd.Timestamp(self.timeToUnixPDT(start), unit='s', tz='US/Pacific')
+        queryEnd = pd.Timestamp(self.timeToUnixPDT(end), unit='s', tz='US/Pacific')
+        f = 'results/fixAlloc_lammps3.out'
+        with open(f, 'r') as o:
+            for line in o:
+                if line.startswith('['):
+                    nodes = [int(n) for n in line[1:-2].split(', ')]
+                    routers = super().nodeToRouter(nodes)
+                    break
+        routers = routers[:5]
+        print('Routers:'+str(routers))
+        #qd = super().fetchData(queryStart, queryEnd, 'rtr', routers)
+        #qd.to_csv('temp.csv', index=0)
+        qd = pd.read_csv('temp.csv')
+        rmDup, _, _, _ = super().removeDuplicate(qd)
+        diff = super().getDiff(rmDup)
+        regu = super().regularize(diff)
+        super().calcRouterStall(regu, fillna=0)
+        super().calcRouterFlit(regu, fillna=0)
+        metrics = ['HTime','aries_rtr_id','PortAvgFlit','PortAvgStall']
+        for r in range(5):
+            for c in range(8):
+                metrics.append('VCsum_%d_%d' % (r, c))
+                metrics.append('AR_RTR_%d_%d_INQ_PRF_ROWBUS_STALL_CNT' % (r,c))
+        regu[metrics].to_csv('temp2.csv', index=0)
+        print('finished.')
 
     def oldprocess(self, mode, counterSaved, saveFolder):
         '''

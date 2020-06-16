@@ -14,8 +14,9 @@ def main():
     #w.testOSU()
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
-    w.fixAllocation(appName='lammps', iteration=10, instance=5)
-    #w.CADD(appName='milc', iteration=10)
+    #w.appOnNodes(app='miniFE', N=64, nodes=w.nodelist)
+    #w.fixAllocation(appName='nekbone', iteration=10, instance=5)
+    w.CADD(appName='lammps', iteration=10, congSize=32, appSize=16, appOut='CADDjob_lammps_16.out')
 
 class withOSU:
     def __init__(self):
@@ -154,6 +155,9 @@ class withOSU:
         elif app == 'qmcpack':
             appcmd += 'cd $HOME/allocation/qmcpack/testrun; '
             appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/qmcpack_ben/build_ben/bin/qmcpack simple-H2O.xml' % (N, liststr)
+        elif app == 'miniFE':
+            appcmd += 'cd $HOME/allocation/miniFE/ref/src; '
+            appcmd += 'mpirun -np %d --host %s ./miniFE.x -nx 128 -ny 128 -nz 128' % (ntasks, liststr)
         appcmd += ';'
         #appcmd += ' > %s;' % writeToFile # not needed.
         out = 'startTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n'
@@ -363,14 +367,13 @@ class withOSU:
         print(nodeCongPair)
         return nodeCongPair
 
-    def CADD(self, appName, iteration):
+    def CADD(self, appName, iteration, congSize, appSize, appOut):
         '''
         Experiment for the Congestion-Aware Data-Driven allocation policy.
         '''
         print(subprocess.check_output(['date']).decode('utf-8'))
         jobid = os.environ['SLURM_JOB_ID']
         print('jobid: ' + str(jobid))
-        appOut = 'CADDjob.out' # application output file.
         #self.runLDMS(foldername='%s_%d' % (jobid, 0), storeNode='nid%05d' % self.nodelist[0], seconds=120) # for debug.
         #self.appOnNodes(app=appName, N=4, nodes=self.nodelist[1:5], writeToFile=appOut) # for debug.
 
@@ -379,7 +382,7 @@ class withOSU:
             print('iteration %d' % i)
             # use 1st node for this python code and LDMS storage; the rest for congestor and app.
             storeNode = 'nid%05d' % self.nodelist[0] # LDMS storage daemon node.
-            congNodes = random.sample(self.nodelist[1:], 64) # randomly selecting nodes for the congestor.
+            congNodes = random.sample(self.nodelist[1:], congSize) # randomly selecting nodes for the congestor.
             print('Congestor nodes:')
             print(congNodes)
             self.idleNodes = [x for x in self.nodelist[1:] if x not in congNodes]
@@ -387,15 +390,20 @@ class withOSU:
 
             self.monitorstart = int(time.time())
             if i == 0:
-                self.runLDMS(foldername='%s_%d' % (jobid, i), storeNode=storeNode, seconds=120)
+                self.runLDMS(foldername='%s_%d' % (jobid, i), storeNode=storeNode, seconds=60)
             else:
-                time.sleep(120) # don't need to start LDMS again.
+                time.sleep(60) # don't need to start LDMS again.
             self.monitorend = int(time.time())
 
             print('Starting sortCongestion()..')
             nodeCongPair = self.sortCongestion() # sort idle nodes from low to high congestion according to their stall-per-second.
-            greenNodes = [nodeCongPair[x][0] for x in range(64)]
-            yellowNodes = [nodeCongPair[x][0] for x in range(64, 128)]
+            greenNodes = [nodeCongPair[x][0] for x in range(appSize)]
+            greenStall = sum([nodeCongPair[x][1] for x in range(appSize)]) / appSize
+            yellowNodes = [nodeCongPair[x][0] for x in range(appSize, 2*appSize)]
+            yellowStall = sum([nodeCongPair[x][1] for x in range(appSize, 2*appSize)]) / appSize
+            print('Green stalls: %.f' % greenStall)
+            print('Yellow stalls: %.f' % yellowStall)
+            print('Ratio G/Y: %.3f' % (greenStall/yellowStall))
 
             #time.sleep(10)
             #greenNodes = self.idleNodes[:64] # for debug.
@@ -406,14 +414,14 @@ class withOSU:
             print(greenNodes)
             with open(appOut, 'w' if i==0 else 'a') as f:
                 f.write('Starting green job..\n')
-            self.appOnNodes(app=appName, N=64, nodes=greenNodes, writeToFile=appOut)
+            self.appOnNodes(app=appName, N=appSize, nodes=greenNodes, writeToFile=appOut)
 
             print('Run yellow job.')
             print('Yellow nodes:')
             print(yellowNodes)
             with open(appOut, 'a') as f:
                 f.write('Starting yellow job..\n')
-            self.appOnNodes(app=appName, N=64, nodes=yellowNodes, writeToFile=appOut)
+            self.appOnNodes(app=appName, N=appSize, nodes=yellowNodes, writeToFile=appOut)
 
             self.stopGPC()
             time.sleep(5)
