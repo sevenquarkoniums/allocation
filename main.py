@@ -10,13 +10,14 @@ import pytz
 pacific = pytz.timezone('US/Pacific')
 import re
 import sys
+import gc
 
 '''
 Warning: do not use .replace(tzinfo=pacific) to replace timezone, which has a fault!
 '''
 
 def main():
-    al = analysis(outputName='temp.csv', logExist=1)
+    al = analysis(outputName='temp.csv', logExist=1, initPool=0)
         # do change queryTime when adjusting range.
     #al.runtime()
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
@@ -25,7 +26,7 @@ def main():
     #al.processCADD(app='lammps')
     #al.calcNode()
     #al.test()
-    al.getData()
+    al.getData(int(sys.argv[1]))
 
 def isint(value):
   try:
@@ -49,10 +50,11 @@ def unix2string(unixTime):
     return timestr
 
 class ldms:
-    def __init__(self, logExist=False):
+    def __init__(self, logExist=0, initPool=1):
         self.allrtrmetrics = ['flit','stallvc','stallrowbus']
-        nprocs = multiprocessing.cpu_count()
-        self.pool = multiprocessing.Pool(nprocs)
+        if initPool:
+            nprocs = multiprocessing.cpu_count()
+            self.pool = multiprocessing.Pool(nprocs)
         if logExist:
             # needs to have rtr_log_starts.pkl file. Otherwise, use logExist=False.
             print('Reading aggs..')
@@ -200,17 +202,12 @@ class ldms:
 
             tmpstr = tmpstr.rsplit('\n', 1)[0]
             if len(routers) > 0:
-                outstr, rest = '', tmpstr
-                while 1:
-                    sp = rest.split('\n', 1)
-                    thisline = sp[0]
-                    thisRouter = thisline.split(',', 7)[6]
+                outstr, count = '', 0
+                lines = tmpstr.splitlines(keepends=1) # takes a few seconds.
+                for line in lines:
+                    thisRouter = line.split(',', 7)[6]
                     if thisRouter in routers:
-                        outstr += thisline + '\n'
-                    if len(sp) == 1:
-                        break
-                    else:
-                        rest = sp[1]
+                        outstr += line
             else:
                 outstr = tmpstr
 
@@ -307,7 +304,7 @@ class ldms:
                         valid = 0 # so the following files omitted.
         return files
 
-    def fetchData(self, datetimeStart, datetimeEnd, source, routers=[]):
+    def fetchData(self, datetimeStart, datetimeEnd, source, routers=[], parallel=1):
         '''
         Get all the nic or rtr for certain time range.
         For length longer than few hundred seconds, it will go out of memory.
@@ -327,7 +324,14 @@ class ldms:
             pargs = [(f, unixTime, unixEnd, routers) for f in files]
         else:
             pargs = [(f, unixTime, unixEnd) for f in files]
-        fetched = self.pool.starmap(self.subsetLinesToDF, pargs) # multiprocessing on files.
+        if parallel:
+            fetched = self.pool.starmap(self.subsetLinesToDF, pargs) # multiprocessing on files.
+        else:
+            fetched = []
+            for idx, parg in enumerate(pargs):
+                print('file %d..' % idx)
+                gc.collect()
+                fetched.append(self.subsetLinesToDF(*parg))
         if len(fetched) == 0:
             print('No data for this time %s.' % str(datetimeStart))
             return None
@@ -336,7 +340,7 @@ class ldms:
 
     def __getstate__(self):
         self_dict = self.__dict__.copy()
-        del self_dict['pool']
+        del self_dict['pool'] # for pickle dump.
         return self_dict
 
     def __setstate__(self, state):
@@ -553,8 +557,8 @@ class ldms:
         return thisRouters
 
 class analysis(ldms):
-    def __init__(self, outputName, logExist):
-        super().__init__(logExist)
+    def __init__(self, outputName, logExist, initPool):
+        super().__init__(logExist, initPool)
         self.outputName = outputName
 
     def timeToUnixPST(self, line):
@@ -1118,9 +1122,15 @@ class analysis(ldms):
                 writeline = '%s,%d,%d,%f,%f,%d,%f,%f\n' % (jobmode, jobid, prodnum[1], execTime1, value[1], prodnum[2], execTime2, value[2])
                 o.write(writeline)
 
-    def getData(self):
-        start = 'Fri May 1 00:00:01 PDT 2020'
-        end = 'Fri May 1 00:00:10 PDT 2020'
+    def getData(self, idx):
+        hour = idx//2
+        if idx % 2 == 0:
+            minStart, minEnd = 0, 29
+        else:
+            minStart, minEnd = 30, 59
+        start = 'Tue May 5 %02d:%02d:01 PDT 2020' % (hour, minStart)
+        end = 'Tue May 5 %02d:%02d:59 PDT 2020' % (hour, minEnd)
+        outname = 'data_30min_20r_May5_%d.csv' % (idx)
         queryStart = pd.Timestamp(self.timeToUnixPDT(start), unit='s', tz='US/Pacific')
         queryEnd = pd.Timestamp(self.timeToUnixPDT(end), unit='s', tz='US/Pacific')
         f = 'results/fixAlloc_lammps3.out'
@@ -1130,11 +1140,11 @@ class analysis(ldms):
                     nodes = [int(n) for n in line[1:-2].split(', ')]
                     routers = super().nodeToRouter(nodes)
                     break
-        routers = routers[:5]
+        routers = routers[:20]
         print('Routers:'+str(routers))
-        #qd = super().fetchData(queryStart, queryEnd, 'rtr', routers)
-        #qd.to_csv('temp.csv', index=0)
-        qd = pd.read_csv('temp.csv')
+        qd = super().fetchData(queryStart, queryEnd, 'rtr', routers, parallel=0) # the longest part.
+        print('Data fetched.')
+        gc.collect()
         rmDup, _, _, _ = super().removeDuplicate(qd)
         diff = super().getDiff(rmDup)
         regu = super().regularize(diff)
@@ -1145,7 +1155,7 @@ class analysis(ldms):
             for c in range(8):
                 metrics.append('VCsum_%d_%d' % (r, c))
                 metrics.append('AR_RTR_%d_%d_INQ_PRF_ROWBUS_STALL_CNT' % (r,c))
-        regu[metrics].to_csv('temp2.csv', index=0)
+        regu[metrics].to_csv(outname, index=0)
         print('finished.')
 
     def oldprocess(self, mode, counterSaved, saveFolder):
