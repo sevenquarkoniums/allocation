@@ -26,7 +26,8 @@ def main():
     #al.processCADD(app='lammps')
     #al.calcNode()
     #al.test()
-    al.getData(int(sys.argv[1]))
+    #al.getData(int(sys.argv[1]), int(sys.argv[2]))
+    al.shrinkData()
 
 def isint(value):
   try:
@@ -564,8 +565,11 @@ class analysis(ldms):
     def timeToUnixPST(self, line):
         return pacific.localize(datetime.datetime.strptime(line, '%a %b %d %H:%M:%S PST %Y')).timestamp()
 
-    def timeToUnixPDT(self, line):
-        return pacific.localize(datetime.datetime.strptime(line, '%a %b %d %H:%M:%S PDT %Y')).timestamp()
+    def timeToUnixPDT(self, line, withDay=True):
+        if withDay:
+            return pacific.localize(datetime.datetime.strptime(line, '%a %b %d %H:%M:%S PDT %Y')).timestamp()
+        else:
+            return pacific.localize(datetime.datetime.strptime(line, '%b %d %H:%M:%S PDT %Y')).timestamp()
 
     def parseJob(self):
         fs = getfiles('OSUresults')
@@ -1122,17 +1126,17 @@ class analysis(ldms):
                 writeline = '%s,%d,%d,%f,%f,%d,%f,%f\n' % (jobmode, jobid, prodnum[1], execTime1, value[1], prodnum[2], execTime2, value[2])
                 o.write(writeline)
 
-    def getData(self, idx):
+    def getData(self, day, idx):
         hour = idx//2
         if idx % 2 == 0:
             minStart, minEnd = 0, 29
         else:
             minStart, minEnd = 30, 59
-        start = 'Tue May 5 %02d:%02d:01 PDT 2020' % (hour, minStart)
-        end = 'Tue May 5 %02d:%02d:59 PDT 2020' % (hour, minEnd)
-        outname = 'data_30min_20r_May5_%d.csv' % (idx)
-        queryStart = pd.Timestamp(self.timeToUnixPDT(start), unit='s', tz='US/Pacific')
-        queryEnd = pd.Timestamp(self.timeToUnixPDT(end), unit='s', tz='US/Pacific')
+        start = 'May %d %02d:%02d:01 PDT 2020' % (day, hour, minStart)
+        end = 'May %d %02d:%02d:59 PDT 2020' % (day, hour, minEnd)
+        outname = '/project/projectdirs/m3231/yijia/CoriAries/data_30min_20r_May%d_%d.csv' % (day, idx)
+        queryStart = pd.Timestamp(self.timeToUnixPDT(start, withDay=0), unit='s', tz='US/Pacific')
+        queryEnd = pd.Timestamp(self.timeToUnixPDT(end, withDay=0), unit='s', tz='US/Pacific')
         f = 'results/fixAlloc_lammps3.out'
         with open(f, 'r') as o:
             for line in o:
@@ -1157,6 +1161,29 @@ class analysis(ldms):
                 metrics.append('AR_RTR_%d_%d_INQ_PRF_ROWBUS_STALL_CNT' % (r,c))
         regu[metrics].to_csv(outname, index=0)
         print('finished.')
+
+    def shrinkData(self):
+        folder = '/project/projectdirs/m3231/yijia/CoriAries'
+        files = getfiles(folder)
+        metrics = ['HTime','aries_rtr_id','PortAvgFlit','PortAvgStall']
+        for day in range(1, 25):
+            print('day %d' % day)
+            thisday = []
+            for f in files:
+                if f.split('/')[-1].startswith('data_30min_20r_May%d_' % day):
+                    idx = int(f.split('_')[-1].split('.')[0])
+                    thisday.append((idx, f))
+            thisday.sort(key=lambda x:x[0])
+            dfs = []
+            for pair in thisday:
+                print('idx %d' % pair[0])
+                df = pd.read_csv(pair[1])
+                dfs.append(df[metrics])
+            if len(dfs) > 0:
+                allData = pd.concat(dfs, ignore_index=True)
+                allData.to_csv('%s/reduced_30min_20r_May%d.csv' % (folder, day), index=0)
+            else:
+                print('No data for day %d' % day)
 
     def oldprocess(self, mode, counterSaved, saveFolder):
         '''

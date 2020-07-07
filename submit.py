@@ -8,7 +8,8 @@ def main():
     #s.allocation(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.fixAllocation(timelimit='01:40:00', isSingle=0, isMail=1)
     #s.CADD(N=65, timelimit='03:00:00', isMail=1)
-    s.getData(N=1, timelimit='23:00:00', isMail=1)
+    for day in range(9, 32):
+        s.getData(day=day, N=1, timelimit='23:00:00', isMail=0)
 
 class submit:
     def miniMD(self, timelimit, isSingle, isMail):
@@ -45,17 +46,17 @@ class submit:
         command = 'sbatch -N %d --account=m3231 -q regular -C haswell %s-t %s -J CADD --exclusive --gres=craynetwork:0 -o $HOME/allocation/CADD_lammps_16.out runwith.sh' % (N, mail, timelimit)
         call(command, shell=True)
 
-    def getData(self, N, timelimit, isMail):
+    def getData(self, day, N, timelimit, isMail):
         mail = '--mail-type=END ' if isMail else ''
-        sh = 'sh/run.sh'
+        sh = 'sh/run%d.sh' % day
         with open(sh, 'w') as f:
             cmd = '#!/bin/bash\nmodule load python/3.6-anaconda-5.2\n'
             for idx in range(48):
-                cmd += './main.py %d\n' % idx
+                cmd += './main.py %d %d\n' % (day, idx)
             f.write(cmd)
         call('chmod +x %s' % sh, shell=True)
-        out = 'out/run.out'
-        command = 'sbatch -N %d --account=m3231 -q premium -C haswell %s-t %s -J getData -o $HOME/allocation/%s %s' % (N, mail, timelimit, out, sh)
+        out = 'out/run%d.out' % day
+        command = 'sbatch -N %d --account=m3231 -q regular -C haswell %s-t %s -J getData%d -o $HOME/allocation/%s %s' % (N, mail, timelimit, day, out, sh)
         call(command, shell=True)
 
 if __name__ == '__main__':

@@ -15,8 +15,8 @@ def main():
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
     #w.appOnNodes(app='miniFE', N=64, nodes=w.nodelist)
-    #w.fixAllocation(appName='nekbone', iteration=10, instance=5)
-    w.CADD(appName='lammps', iteration=10, congSize=32, appSize=16, appOut='CADDjob_lammps_16.out')
+    w.fixAllocation(appName='lammps', iteration=10, instance=5)
+    #w.CADD(appName='lammps', iteration=10, congSize=32, appSize=16, appOut='CADDjob_lammps_16.out')
 
 class withOSU:
     def __init__(self):
@@ -76,7 +76,7 @@ class withOSU:
 
     def startGPC(self, instance, nodes):
         '''
-        obsolete
+        instance: number to instance of GPCNET to start. Seems 1 instance is enough.
         '''
         N = len(nodes)
         ntasks = 32*N
@@ -119,9 +119,10 @@ class withOSU:
         '''
         tasksPerNode = 32
         ntasks = N * tasksPerNode
-        liststr = ','.join(['nid{0:05d}'.format(y) for y in nodes])
+        liststr = ','.join(['nid{0:05d}'.format(y) for y in nodes]) # nodelist for srun or mpirun format.
         print('app-node list:')
         print(nodes)
+        # create bash command for cori.
         appcmd = 'module load openmpi; '
         if app == 'miniMD':
             appcmd += 'cd $HOME/miniMD/ref; '
@@ -166,8 +167,8 @@ class withOSU:
         else:
             with open(writeToFile, 'a') as o:
                 o.write(out)
-        apprun = subprocess.Popen(appcmd, stdout=subprocess.PIPE, shell=True)
-        output = apprun.communicate()[0].strip()
+        apprun = subprocess.Popen(appcmd, stdout=subprocess.PIPE, shell=True) # execute the command.
+        output = apprun.communicate()[0].strip() # get execution output.
         out = output.decode('utf-8') + '\n'
         out += 'endTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n\n'
         if writeToFile is None:
@@ -219,10 +220,10 @@ class withOSU:
         rotate = 3*N // iteration
         for i in range(iteration):
             print('iteration:%d' % i)
-            allNodes = self.nodelist[i*rotate:] + self.nodelist[:i*rotate]
-            congestNodes = [allNodes[2*x+1] for x in range(N)]
-            greenNodes = allNodes[-N:]
-            yellowNodes = [allNodes[2*x] for x in range(N)]
+            allNodes = self.nodelist[i*rotate:] + self.nodelist[:i*rotate] # the order of the nodes are rotated in every iteration.
+            congestNodes = [allNodes[2*x+1] for x in range(N)] # for running the congestor.
+            greenNodes = allNodes[-N:] # selecting a continuous set from allNodes.
+            yellowNodes = [allNodes[2*x] for x in range(N)] # selecting every other nodes.
 
             # run without congestor.
             self.appOnNodes(app=appName, N=N, nodes=greenNodes)
@@ -236,9 +237,9 @@ class withOSU:
             print('is congestor running:')
             for j in range(instance):
                 cong = procs.pop()
-                print(cong.poll() == None)
+                print(cong.poll() == None) # print out whether the congestor is still running at the current time.
                 if cong.poll() == None:
-                    os.killpg(os.getpgid(cong.pid), signal.SIGTERM)
+                    os.killpg(os.getpgid(cong.pid), signal.SIGTERM) # kill it.
 
     def startContGPC(self, nodes):
         '''
@@ -370,6 +371,7 @@ class withOSU:
     def CADD(self, appName, iteration, congSize, appSize, appOut):
         '''
         Experiment for the Congestion-Aware Data-Driven allocation policy.
+        iteration: number of iteration. In each iteration, the nodes to run congestor is re-selected randomly.
         '''
         print(subprocess.check_output(['date']).decode('utf-8'))
         jobid = os.environ['SLURM_JOB_ID']
