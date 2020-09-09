@@ -27,7 +27,8 @@ def main():
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
-    al.shrinkData()
+    #al.shrinkData()
+    al.analyze()
 
 def isint(value):
   try:
@@ -1032,9 +1033,9 @@ class analysis(ldms):
         print('finished.')
 
     def processCADD(self, app):
-        run = 10
-        task = 512
-        f = 'CADDjob_%s_16.out' % app
+        run = 9
+        task = 1024
+        f = 'CADDjob_%s_3policy.out' % app
         print('Getting exec time..')
         with open(f, 'r') as o:
             et = {}
@@ -1062,11 +1063,14 @@ class analysis(ldms):
                             timestring = line.split()[3].split(':')
                         thisTime = int(timestring[1]) * 60 + int(timestring[2])
                         et[count] = thisTime
-        df = pd.DataFrame(columns=['run','green','yellow'])
+        df = pd.DataFrame(columns=['run','CADD','CADD-reverse','Cori','Random','noCong'])
         df['run'] = list(range(run))
-        df['green'] = [et[x] for x in range(1, 2*run+1, 2)]
-        df['yellow'] = [et[x] for x in range(2, 2*run+1, 2)]
-        df.to_csv('CADDprocess_%s_16.csv' % app, index=False)
+        df['CADD'] = [et[x] for x in range(1, 5*run+1, 5)]
+        df['CADD-reverse'] = [et[x] for x in range(2, 5*run+1, 5)]
+        df['Cori'] = [et[x] for x in range(3, 5*run+1, 5)]
+        df['Random'] = [et[x] for x in range(4, 5*run+1, 5)]
+        df['noCong'] = [et[x] for x in range(5, 5*run+1, 5)]
+        df.to_csv('CADDprocess_%s_3policy.csv' % app, index=False)
         print('Time processed.')
 
     def test(self):
@@ -1254,6 +1258,22 @@ class analysis(ldms):
                         writeline = writeline + ',' + str(self.t[run][i])
                     writeline += '\n'
                     o.write(writeline)
+
+    def analyze(self):
+        end = 'Fri Jul 31 21:06:11 PDT 2020'
+        monitorend = self.timeToUnixPDT(end, withDay=1)
+        monitorstart = monitorend - 60
+        path = '/global/project/projectdirs/m3231/yijia/csv/32956922_0/temp.csv'
+        print('Reading cray csv..')
+        df = pd.read_csv(path)
+        print('%.1f seconds collected in total.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
+        print('Calculating stall sum..')
+        df['stalled_sum'] = df[['stalled_%03d (ns)' % x for x in range(48)]].sum(axis=1)
+        selectTime = df[ (df['#Time'] >= monitorstart) & (df['#Time'] <= monitorend) ]
+        selectNode = selectTime[ selectTime['ProducerName']=='nid00961' ]
+        diff = selectNode[['#Time','Time_usec','stalled_sum']].diff()
+        diff.to_csv('temp.csv', index=0)
+        print('finished.')
 
 if __name__ == '__main__':
     main()

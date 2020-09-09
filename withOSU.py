@@ -15,8 +15,8 @@ def main():
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
     #w.appOnNodes(app='miniFE', N=64, nodes=w.nodelist)
-    w.fixAllocation(appName='lammps', iteration=10, instance=5)
-    #w.CADD(appName='lammps', iteration=10, congSize=32, appSize=16, appOut='CADDjob_lammps_16.out')
+    #w.fixAllocation(appName='lammps', iteration=10, instance=5)
+    w.CADD(appName='lammps', iteration=10, congSize=64, appSize=32, appOut='CADDjob_lammps_3policy.out')
 
 class withOSU:
     def __init__(self):
@@ -117,7 +117,7 @@ class withOSU:
         '''
         Run app on some nodes.
         '''
-        tasksPerNode = 32
+        tasksPerNode = 32 # for Cori Haswell.
         ntasks = N * tasksPerNode
         liststr = ','.join(['nid{0:05d}'.format(y) for y in nodes]) # nodelist for srun or mpirun format.
         print('app-node list:')
@@ -384,49 +384,81 @@ class withOSU:
             print('iteration %d' % i)
             # use 1st node for this python code and LDMS storage; the rest for congestor and app.
             storeNode = 'nid%05d' % self.nodelist[0] # LDMS storage daemon node.
-            congNodes = random.sample(self.nodelist[1:], congSize) # randomly selecting nodes for the congestor.
+            availNodes = self.nodelist[1:]
+            congNodes = random.sample(availNodes, congSize) # randomly selecting nodes for the congestor.
+            self.idleNodes = [x for x in availNodes if x not in congNodes]
+            numIdle = len(self.idleNodes)
+
+            # get the nodes for cori policy.
+            # prioritize nodes without sharing router with congestor, and in that case also prioritize nodes with more neighbors.
+            noSharing, sharing = [], []
+            for n in self.idleNodes:
+                n4 = (n//4)*4
+                router = {n4, n4+1, n4+2, n4+3}
+                router.remove(n)
+                if not router.intersection(set(congNodes)): # intersection is empty.
+                    neighbor = len(router.intersection(set(self.idleNodes))) # 0-3.
+                    noSharing.append((n,neighbor))
+                else:
+                    sharing.append(n)
+            noSharing.sort(key=lambda x: x[1], reverse=True)
+            numGood = len(noSharing)
+            if numGood >= appSize:
+                coriAllocated = [noSharing[x][0] for x in range(appSize)]
+            else:
+                coriAllocated = [noSharing[x][0] for x in range(numGood)]
+                coriAllocated += [sharing[x] for x in range(appSize-numGood)]
+
             print('Congestor nodes:')
             print(congNodes)
-            self.idleNodes = [x for x in self.nodelist[1:] if x not in congNodes]
             self.startContGPC(nodes=congNodes)
 
             self.monitorstart = int(time.time())
             if i == 0:
                 self.runLDMS(foldername='%s_%d' % (jobid, i), storeNode=storeNode, seconds=60)
             else:
-                time.sleep(60) # don't need to start LDMS again.
+                time.sleep(60) # don't start LDMS again.
             self.monitorend = int(time.time())
 
             print('Starting sortCongestion()..')
             nodeCongPair = self.sortCongestion() # sort idle nodes from low to high congestion according to their stall-per-second.
-            greenNodes = [nodeCongPair[x][0] for x in range(appSize)]
-            greenStall = sum([nodeCongPair[x][1] for x in range(appSize)]) / appSize
-            yellowNodes = [nodeCongPair[x][0] for x in range(appSize, 2*appSize)]
-            yellowStall = sum([nodeCongPair[x][1] for x in range(appSize, 2*appSize)]) / appSize
-            print('Green stalls: %.f' % greenStall)
-            print('Yellow stalls: %.f' % yellowStall)
-            print('Ratio G/Y: %.3f' % (greenStall/yellowStall))
+            nodeCongDict = {}
+            for pair in nodeCongPair:
+                nodeCongDict[pair[0]] = pair[1]
 
-            #time.sleep(10)
-            #greenNodes = self.idleNodes[:64] # for debug.
-            #yellowNodes = self.idleNodes[:64]
+            for policy in ['cadd','anticadd','cori','random']:
+                if policy == 'cadd':
+                    nodes = [nodeCongPair[x][0] for x in range(appSize)]
+                    stall = sum([nodeCongPair[x][1] for x in range(appSize)]) / appSize
+                    caddstall = stall
+                elif policy == 'anticadd':
+                    nodes = [nodeCongPair[x][0] for x in range(numIdle-appSize, numIdle)]
+                    stall = sum([nodeCongPair[x][1] for x in range(numIdle-appSize, numIdle)]) / appSize
+                elif policy == 'cori':
+                    nodes = coriAllocated
+                    stall = sum([nodeCongDict[x] for x in nodes]) / appSize
+                elif policy == 'random':
+                    nodes = random.sample(self.idleNodes, appSize)
+                    stall = sum([nodeCongDict[x] for x in nodes]) / appSize
+                print('%s avg stalls: %.f' % (policy, stall))
+                print('Ratio current/cadd: %.3f' % (stall/(caddstall+0.00001)))
 
-            print('Run green job.')
-            print('Green nodes:')
-            print(greenNodes)
-            with open(appOut, 'w' if i==0 else 'a') as f:
-                f.write('Starting green job..\n')
-            self.appOnNodes(app=appName, N=appSize, nodes=greenNodes, writeToFile=appOut)
-
-            print('Run yellow job.')
-            print('Yellow nodes:')
-            print(yellowNodes)
-            with open(appOut, 'a') as f:
-                f.write('Starting yellow job..\n')
-            self.appOnNodes(app=appName, N=appSize, nodes=yellowNodes, writeToFile=appOut)
+                print('Run job in %s policy.' % policy)
+                with open(appOut, 'w' if i==0 else 'a') as f:
+                    f.write('Starting job in %s policy..\n' % policy)
+                self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
 
             self.stopGPC()
             time.sleep(5)
+
+            # run without congestor.
+            policy = 'noCong'
+            nodes = [nodeCongPair[x][0] for x in range(appSize)]
+            print('Run job in %s policy.' % policy)
+            with open(appOut, 'a') as f:
+                f.write('Starting job in %s policy..\n' % policy)
+            self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
+
             print('Iteration end.')
             print()
 
