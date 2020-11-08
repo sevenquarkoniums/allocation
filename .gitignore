@@ -1,0 +1,15 @@
+qe/
+hacc/
+hpcg/
+hpl/
+lammps/
+miniFE/
+miniGhost/
+miniamr/
+qmcpack/
+sh/
+benchfft/
+cp2k/
+graph500/
+nekbone/
+wrf/
