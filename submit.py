@@ -7,11 +7,18 @@ def main():
     #s.withOSU(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.allocation(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.fixAllocation(timelimit='01:40:00', isSingle=0, isMail=1)
-    s.CADD(N=201, timelimit='02:00:00', isMail=1)
+    s.CADD(N=201, timelimit='04:00:00', isMail=1)
     #for day in range(9, 32):
     #    s.getData(day=day, N=1, timelimit='23:00:00', isMail=0)
 
 class submit:
+    def CADD(self, N, timelimit, isMail):
+        # By default, a job step has access to every CPU allocated to the job.  To ensure that distinct CPUs are allocated to each job step, use the --exclusive option.
+        # Check this for multiple srun, https://docs.nersc.gov/jobs/examples/#multiple-parallel-jobs-while-sharing-nodes
+        mail = '--mail-type=END ' if isMail else ''
+        command = 'sbatch -N %d --account=m3231 -q regular -C knl %s-t %s -J CADD --exclusive --gres=craynetwork:0 -o $HOME/allocation/CADD_lammps_knl20.out runwith.sh' % (N, mail, timelimit)
+        call(command, shell=True)
+
     def miniMD(self, timelimit, isSingle, isMail):
         singleton = '-d singleton ' if isSingle else ''
         mail = '--mail-type=END ' if isMail else ''
@@ -37,13 +44,6 @@ class submit:
         singleton = '-d singleton ' if isSingle else ''
         mail = '--mail-type=END ' if isMail else ''
         command = 'sbatch -N 192 --account=m3231 -q premium -C haswell %s-t %s -J nekbone %s-o $HOME/allocation/results/fixAlloc_nekbone.out withOSU.py' % (mail, timelimit, singleton)
-        call(command, shell=True)
-
-    def CADD(self, N, timelimit, isMail):
-        # By default, a job step has access to every CPU allocated to the job.  To ensure that distinct CPUs are allocated to each job step, use the --exclusive option.
-        # Check this for multiple srun, https://docs.nersc.gov/jobs/examples/#multiple-parallel-jobs-while-sharing-nodes
-        mail = '--mail-type=END ' if isMail else ''
-        command = 'sbatch -N %d --account=m3231 -q regular -C haswell %s-t %s -J CADD --exclusive --gres=craynetwork:0 -o $HOME/allocation/CADD_lammps_3policy.out runwith.sh' % (N, mail, timelimit)
         call(command, shell=True)
 
     def getData(self, day, N, timelimit, isMail):

@@ -11,6 +11,7 @@ pacific = pytz.timezone('US/Pacific')
 import re
 import sys
 import gc
+import math
 
 '''
 Warning: do not use .replace(tzinfo=pacific) to replace timezone, which has a fault!
@@ -23,12 +24,12 @@ def main():
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
     #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
-    #al.processCADD(app='lammps')
+    al.processCADD(app='lammps')
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
     #al.shrinkData()
-    al.analyze()
+    #al.analyze()
 
 def isint(value):
   try:
@@ -798,6 +799,7 @@ class analysis(ldms):
 
     def processFix(self, app, onlyTime, getSpan, ptile):
         '''
+        Read results for the Cluster paper.
         '''
         run = 10
         task = 2048
@@ -1033,9 +1035,10 @@ class analysis(ldms):
         print('finished.')
 
     def processCADD(self, app):
-        run = 9
-        task = 1024
-        f = 'CADDjob_%s_3policy.out' % app
+        cols = ['run','CADD','CADD-reverse','Cori','Omniscient','Random','noCong']
+        task = 32*68
+        suffix = '%s_knl20' % app
+        f = 'CADDjob_%s.out' % suffix 
         print('Getting exec time..')
         with open(f, 'r') as o:
             et = {}
@@ -1063,15 +1066,17 @@ class analysis(ldms):
                             timestring = line.split()[3].split(':')
                         thisTime = int(timestring[1]) * 60 + int(timestring[2])
                         et[count] = thisTime
-        df = pd.DataFrame(columns=['run','CADD','CADD-reverse','Cori','Random','noCong'])
-        df['run'] = list(range(run))
-        df['CADD'] = [et[x] for x in range(1, 5*run+1, 5)]
-        df['CADD-reverse'] = [et[x] for x in range(2, 5*run+1, 5)]
-        df['Cori'] = [et[x] for x in range(3, 5*run+1, 5)]
-        df['Random'] = [et[x] for x in range(4, 5*run+1, 5)]
-        df['noCong'] = [et[x] for x in range(5, 5*run+1, 5)]
-        df.to_csv('CADDprocess_%s_3policy.csv' % app, index=False)
-        print('Time processed.')
+        df = pd.DataFrame(columns=cols)
+        width = len(cols)-1
+        rowCount = math.ceil(count / width)
+        res = count % width
+        if res != 0:
+            for i in range(count+1, rowCount*width+1):
+                et[i] = -1
+        for row in range(rowCount):
+            df.loc[row] = [row] + [et[row*width+i+1] for i in range(width)]
+        df.to_csv('CADDprocess_%s.csv' % suffix, index=False)
+        print('CADDprocess_%s.csv generated.' % suffix)
 
     def test(self):
         f = 'results/fixAlloc_lammps3.out'
@@ -1260,6 +1265,9 @@ class analysis(ldms):
                     o.write(writeline)
 
     def analyze(self):
+        '''
+        Read LDMS data and do some analysis.
+        '''
         end = 'Fri Jul 31 21:06:11 PDT 2020'
         monitorend = self.timeToUnixPDT(end, withDay=1)
         monitorstart = monitorend - 60

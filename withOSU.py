@@ -10,17 +10,22 @@ from shutil import copyfile
 
 def main():
     time.sleep(10)
-    w = withOSU()
+    w = withOSU(knl=1)
     #w.testOSU()
     #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
     #w.allocation(instance=int(sys.argv[1]))
-    #w.appOnNodes(app='miniFE', N=64, nodes=w.nodelist)
+    #w.appOnNodes(app='lammps', N=4, nodes=w.nodelist) # used to test application run.
     #w.fixAllocation(appName='lammps', iteration=10, instance=5)
-    w.CADD(appName='lammps', iteration=10, congSize=64, appSize=32, appOut='CADDjob_lammps_3policy.out')
+    w.CADD(appName='lammps', iteration=20, congSize=64, appSize=32, appOut='CADDjob_lammps_knl20.out')
 
 class withOSU:
-    def __init__(self):
+    def __init__(self, knl):
+        self.knl = knl
         self.getNodelist()
+        if knl:
+            print('Using knl nodes.')
+        else:
+            print('Using haswell nodes.')
 
     def parseNodeList(self, nodestr):
         nodelist = []
@@ -117,7 +122,7 @@ class withOSU:
         '''
         Run app on some nodes.
         '''
-        tasksPerNode = 32 # for Cori Haswell.
+        tasksPerNode = 68 if self.knl else 32
         ntasks = N * tasksPerNode
         liststr = ','.join(['nid{0:05d}'.format(y) for y in nodes]) # nodelist for srun or mpirun format.
         print('app-node list:')
@@ -132,7 +137,7 @@ class withOSU:
             appcmd += 'mpirun -np %d --host %s ./nekbone ex1' % (ntasks, liststr)
         elif app == 'lammps':
             appcmd += 'cd $HOME/allocation/lammps/testrun; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/LAMMPS/src/LAMMPS -in in.vacf.2d' % (N, liststr)
+            appcmd += 'srun -N %d --mem=50G --ntasks-per-node=%d --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/LAMMPS/src/LAMMPS -in in.vacf.2d' % (N, tasksPerNode, liststr)
         elif app == 'miniamr':
             appcmd += 'cd $HOME/allocation/miniamr/testrun; '
             #appcmd += 'sbcast --compress=lz4 /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x /tmp/miniAMR.x; '
@@ -258,11 +263,13 @@ class withOSU:
         '''
         print(self.GPCnodes)
         N = len(self.GPCnodes)
-        ntasks = 32*N
+        tpn = 68 if self.knl else 32
+        ntasks = tpn*N
+        cpu = 'knl' if self.knl else 'haswell'
         gpclist = self.abbrev(self.GPCnodes)
         command = ''
         #command += 'sbcast --compress=lz4 /global/homes/z/zhangyj/GPCNET/network_load_test /tmp/network_load_test; '
-        command += 'srun -N %d --mem=64G --ntasks %d --nodelist=%s --ntasks-per-node=32 -C haswell /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out; ' % (N, ntasks, gpclist)
+        command += 'srun -N %d --mem=30G --ntasks %d --nodelist=%s --ntasks-per-node=%d -C %s /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out; ' % (N, ntasks, gpclist, tpn, cpu)
         GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
         print('continual GPC started.')
         while 1:
@@ -378,10 +385,15 @@ class withOSU:
         print('jobid: ' + str(jobid))
         #self.runLDMS(foldername='%s_%d' % (jobid, 0), storeNode='nid%05d' % self.nodelist[0], seconds=120) # for debug.
         #self.appOnNodes(app=appName, N=4, nodes=self.nodelist[1:5], writeToFile=appOut) # for debug.
+        with open(appOut, 'w') as f:
+            f.write('Starting..\n')
 
         for i in range(iteration):
             print('====================')
             print('iteration %d' % i)
+            with open(appOut, 'a') as f:
+                f.write('====================\n')
+                f.write('iteration %d\n' % i)
             # use 1st node for this python code and LDMS storage; the rest for congestor and app.
             storeNode = 'nid%05d' % self.nodelist[0] # LDMS storage daemon node.
             availNodes = self.nodelist[1:]
@@ -389,25 +401,29 @@ class withOSU:
             self.idleNodes = [x for x in availNodes if x not in congNodes]
             numIdle = len(self.idleNodes)
 
-            # get the nodes for cori policy.
-            # prioritize nodes without sharing router with congestor, and in that case also prioritize nodes with more neighbors.
-            noSharing, sharing = [], []
+            # get idle nodes that noShare/share with congestor.
+            noSharing, sharing, idleNeighbor = [], [], []
             for n in self.idleNodes:
                 n4 = (n//4)*4
                 router = {n4, n4+1, n4+2, n4+3}
                 router.remove(n)
+                neighbor = len(router.intersection(set(self.idleNodes))) # 0-3.
+                idleNeighbor.append((n,neighbor))
                 if not router.intersection(set(congNodes)): # intersection is empty.
-                    neighbor = len(router.intersection(set(self.idleNodes))) # 0-3.
                     noSharing.append((n,neighbor))
                 else:
                     sharing.append(n)
             noSharing.sort(key=lambda x: x[1], reverse=True)
+            idleNeighbor.sort(key=lambda x: x[1], reverse=True)
+            # omniscient policy: prioritize nodes without sharing router with congestor, and in that case also prioritize nodes with more neighbors.
             numGood = len(noSharing)
             if numGood >= appSize:
-                coriAllocated = [noSharing[x][0] for x in range(appSize)]
+                omniAllocated = [noSharing[x][0] for x in range(appSize)]
             else:
-                coriAllocated = [noSharing[x][0] for x in range(numGood)]
-                coriAllocated += [sharing[x] for x in range(appSize-numGood)]
+                omniAllocated = [noSharing[x][0] for x in range(numGood)]
+                omniAllocated += [sharing[x] for x in range(appSize-numGood)]
+            # cori policy: prioritize nodes with more idle neighbors.
+            coriAllocated = [idleNeighbor[x][0] for x in range(appSize)]
 
             print('Congestor nodes:')
             print(congNodes)
@@ -419,6 +435,7 @@ class withOSU:
             else:
                 time.sleep(60) # don't start LDMS again.
             self.monitorend = int(time.time())
+            print('Monitor end timestamp: %d' % self.monitorend)
 
             print('Starting sortCongestion()..')
             nodeCongPair = self.sortCongestion() # sort idle nodes from low to high congestion according to their stall-per-second.
@@ -426,7 +443,7 @@ class withOSU:
             for pair in nodeCongPair:
                 nodeCongDict[pair[0]] = pair[1]
 
-            for policy in ['cadd','anticadd','cori','random']:
+            for policy in ['cadd','anticadd','cori','omni','random']:
                 if policy == 'cadd':
                     nodes = [nodeCongPair[x][0] for x in range(appSize)]
                     stall = sum([nodeCongPair[x][1] for x in range(appSize)]) / appSize
@@ -437,6 +454,9 @@ class withOSU:
                 elif policy == 'cori':
                     nodes = coriAllocated
                     stall = sum([nodeCongDict[x] for x in nodes]) / appSize
+                elif policy == 'omni':
+                    nodes = omniAllocated
+                    stall = sum([nodeCongDict[x] for x in nodes]) / appSize
                 elif policy == 'random':
                     nodes = random.sample(self.idleNodes, appSize)
                     stall = sum([nodeCongDict[x] for x in nodes]) / appSize
@@ -444,7 +464,7 @@ class withOSU:
                 print('Ratio current/cadd: %.3f' % (stall/(caddstall+0.00001)))
 
                 print('Run job in %s policy.' % policy)
-                with open(appOut, 'w' if i==0 else 'a') as f:
+                with open(appOut, 'a') as f:
                     f.write('Starting job in %s policy..\n' % policy)
                 self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
 
