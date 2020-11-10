@@ -16,7 +16,7 @@ def main():
     #w.allocation(instance=int(sys.argv[1]))
     #w.appOnNodes(app='lammps', N=4, nodes=w.nodelist) # used to test application run.
     #w.fixAllocation(appName='lammps', iteration=10, instance=5)
-    w.CADD(appName='lammps', iteration=20, congSize=64, appSize=32, appOut='CADDjob_lammps_knl20.out')
+    w.CADD(appName='lammps', iteration=20, congSize=64, appSize=32, appOut='CADDjob_lammps_knlTile.out')
 
 class withOSU:
     def __init__(self, knl):
@@ -338,6 +338,7 @@ class withOSU:
         Sort idle nodes according to their network metrics.
         '''
         import pandas as pd
+        import numpy as np
         print('Copying file..')
         copyfile('%s/cray_aries_r' % self.ldmsdir, '%s/temp.csv' % self.ldmsdir)
         print('Removing last line..')
@@ -346,7 +347,8 @@ class withOSU:
         df = pd.read_csv('%s/temp.csv' % self.ldmsdir)
         print('%.1f seconds collected in total.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
         print('Calculating stall sum..')
-        df['stalled_sum'] = df[['stalled_%03d (ns)' % x for x in range(48)]].sum(axis=1)
+        tiles = ['stalled_%03d (ns)' % x for x in range(48)]
+        df['stalled_sum'] = df[tiles].sum(axis=1)
         print('Calculating node stall..')
         nodeCong = []
         selectTime = df[ (df['#Time'] >= self.monitorstart) & (df['#Time'] <= self.monitorend) ]
@@ -354,13 +356,19 @@ class withOSU:
             select = selectTime[selectTime['component_id']==node]
             if len(select) == 0:
                 print('No data for node %d' % node)
-                stall = -1
+                stallPerTile = -1
             elif len(select) == 1:
                 print('Only one timestamp.')
-                stall = -1
+                stallPerTile = -1
             else:
-                stall = ( select.iloc[-1]['stalled_sum'] - select.iloc[0]['stalled_sum'] ) / ( select.iloc[-1]['#Time'] - select.iloc[0]['#Time'] )
-            nodeCong.append((node, stall))
+                stall = ( select.iloc[-1]['stalled_sum'] - select.iloc[0]['stalled_sum'] ) / ( select.iloc[-1]['#Time'] - select.iloc[0]['#Time'] )# average over time.
+                nonzero = np.count_nonzero( (select.iloc[-1][tiles] - select.iloc[0][tiles]).values )
+                if nonzero == 0:
+                    print('All tiles have zero stall.')
+                    stallPerTile = -1
+                else:
+                    stallPerTile = stall / nonzero
+            nodeCong.append((node, stallPerTile))
         print('Replacing no-value data..')
         positive = [x[1] for x in nodeCong]
         mean = sum(positive) / len(positive)

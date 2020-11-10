@@ -24,12 +24,12 @@ def main():
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
     #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
-    al.processCADD(app='lammps')
+    #al.processCADD(app='lammps')
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
     #al.shrinkData()
-    #al.analyze()
+    al.analyze()
 
 def isint(value):
   try:
@@ -1136,6 +1136,9 @@ class analysis(ldms):
                 o.write(writeline)
 
     def getData(self, day, idx):
+        '''
+        Fetch LDMS data from a specific period of time.
+        '''
         hour = idx//2
         if idx % 2 == 0:
             minStart, minEnd = 0, 29
@@ -1268,20 +1271,47 @@ class analysis(ldms):
         '''
         Read LDMS data and do some analysis.
         '''
-        end = 'Fri Jul 31 21:06:11 PDT 2020'
-        monitorend = self.timeToUnixPDT(end, withDay=1)
+        #end = 'Fri Jul 31 21:06:11 PDT 2020'
+        #monitorend = self.timeToUnixPDT(end, withDay=1)
+        monitorend = 1604887273
         monitorstart = monitorend - 60
-        path = '/global/project/projectdirs/m3231/yijia/csv/32956922_0/temp.csv'
-        print('Reading cray csv..')
-        df = pd.read_csv(path)
-        print('%.1f seconds collected in total.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
-        print('Calculating stall sum..')
-        df['stalled_sum'] = df[['stalled_%03d (ns)' % x for x in range(48)]].sum(axis=1)
-        selectTime = df[ (df['#Time'] >= monitorstart) & (df['#Time'] <= monitorend) ]
-        selectNode = selectTime[ selectTime['ProducerName']=='nid00961' ]
-        diff = selectNode[['#Time','Time_usec','stalled_sum']].diff()
-        diff.to_csv('temp.csv', index=0)
-        print('finished.')
+        node = 11796
+        our, cori = 1, 1
+
+        if our:
+            # Data from our LDMS version.
+            path = '/global/project/projectdirs/m3231/yijia/csv/36015849_0/temp.csv'
+            print('Reading cray csv..')
+            df = pd.read_csv(path, error_bad_lines=False)
+            print('%.1f seconds collected in total.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
+            print('Calculating stall sum..')
+            df['stalled_sum'] = df[['stalled_%03d (ns)' % x for x in range(48)]].sum(axis=1)
+            selectTime = df[ (df['#Time'] >= monitorstart) & (df['#Time'] <= monitorend) ]
+            selectNode = selectTime[ selectTime['ProducerName']=='nid%05d' % node]
+            #diff = selectNode[['#Time','Time_usec','stalled_sum']].diff()
+            #diff.to_csv('temp.csv', index=0)
+            removeCol = ['Time_usec','ProducerName','component_id','job_id','app_id'] + ['sendlinkstatus_%03d (1)' % x for x in range(48)] + ['recvlinkstatus_%03d (1)' % x for x in range(48)]
+            cols = [x for x in selectNode.columns if x not in removeCol]
+            fname = 'ldms_%d_nid%05d.csv' % (monitorend, node)
+            selectNode[cols].to_csv(fname, index=0)
+            print('finished, %s generated.' % fname)
+
+        if cori:
+            # Data from Cori LDMS version.
+            print('Fetching LDMS..')
+            queryStart = pd.Timestamp(monitorstart, unit='s', tz='US/Pacific')
+            queryEnd = pd.Timestamp(monitorend, unit='s', tz='US/Pacific')
+            routers = super().nodeToRouter([node])
+            qd = super().fetchData(queryStart, queryEnd, 'rtr', routers, parallel=0) # the longest part.
+            print('Data fetched.')
+            rmDup, _, _, _ = super().removeDuplicate(qd)
+            cols = ['#Time']
+            for r in range(5):
+                for c in range(8):
+                    cols.append('AR_RTR_%d_%d_INQ_PRF_ROWBUS_STALL_CNT' % (r,c))
+            fname = 'corildms_%d_nid%05d.csv' % (monitorend, node)
+            rmDup[cols].to_csv(fname, index=0)
+            print('finished, %s generated.' % fname)
 
 if __name__ == '__main__':
     main()

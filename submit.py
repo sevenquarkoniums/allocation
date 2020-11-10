@@ -16,7 +16,7 @@ class submit:
         # By default, a job step has access to every CPU allocated to the job.  To ensure that distinct CPUs are allocated to each job step, use the --exclusive option.
         # Check this for multiple srun, https://docs.nersc.gov/jobs/examples/#multiple-parallel-jobs-while-sharing-nodes
         mail = '--mail-type=END ' if isMail else ''
-        command = 'sbatch -N %d --account=m3231 -q regular -C knl %s-t %s -J CADD --exclusive --gres=craynetwork:0 -o $HOME/allocation/CADD_lammps_knl20.out runwith.sh' % (N, mail, timelimit)
+        command = 'sbatch -N %d --account=m3231 -q regular -C knl %s-t %s -J CADD --exclusive --gres=craynetwork:0 -o $HOME/allocation/CADD_lammps_knlTile.out runwith.sh' % (N, mail, timelimit)
         call(command, shell=True)
 
     def miniMD(self, timelimit, isSingle, isMail):
