@@ -24,12 +24,12 @@ def main():
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
     #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
-    #al.processCADD(app='lammps')
+    al.processCADD(app='lammps')
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
     #al.shrinkData()
-    al.analyze()
+    #al.analyze()
 
 def isint(value):
   try:
@@ -1035,9 +1035,9 @@ class analysis(ldms):
         print('finished.')
 
     def processCADD(self, app):
-        cols = ['run','CADD','CADD-reverse','Cori','Omniscient','Random','noCong']
+        cols = ['run','CADD','CADD-reverse','Cori','Random','noCong','noCongMin']
         task = 32*68
-        suffix = '%s_knl20' % app
+        suffix = '%s_knl129' % app
         f = 'CADDjob_%s.out' % suffix 
         print('Getting exec time..')
         with open(f, 'r') as o:

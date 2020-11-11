@@ -7,16 +7,22 @@ def main():
     #s.withOSU(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.allocation(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.fixAllocation(timelimit='01:40:00', isSingle=0, isMail=1)
-    s.CADD(N=201, timelimit='04:00:00', isMail=1)
+    s.CADD(N=129, queue='regular', fname='CADD_lammps_CADDmin.out', timelimit='04:00:00', isMail=1)
+    #s.GPC(N=64, timelimit='01:00:00', isMail=1)
     #for day in range(9, 32):
     #    s.getData(day=day, N=1, timelimit='23:00:00', isMail=0)
 
 class submit:
-    def CADD(self, N, timelimit, isMail):
+    def CADD(self, N, queue, fname, timelimit, isMail):
         # By default, a job step has access to every CPU allocated to the job.  To ensure that distinct CPUs are allocated to each job step, use the --exclusive option.
         # Check this for multiple srun, https://docs.nersc.gov/jobs/examples/#multiple-parallel-jobs-while-sharing-nodes
         mail = '--mail-type=END ' if isMail else ''
-        command = 'sbatch -N %d --account=m3231 -q regular -C knl %s-t %s -J CADD --exclusive --gres=craynetwork:0 -o $HOME/allocation/CADD_lammps_knlTile.out runwith.sh' % (N, mail, timelimit)
+        command = 'sbatch -N %d --account=m3231 -q %s -C knl %s-t %s -J CADD --exclusive --gres=craynetwork:0 -o $HOME/allocation/%s runwith.sh' % (N, queue, mail, timelimit, fname)
+        call(command, shell=True)
+
+    def GPC(self, N, timelimit, isMail):
+        mail = '--mail-type=END ' if isMail else ''
+        command = 'sbatch -N %d --account=m3231 -q premium -C knl %s-t %s -J GPC --exclusive --gres=craynetwork:0 -o $HOME/allocation/GPC.out runwith.sh' % (N, mail, timelimit)
         call(command, shell=True)
 
     def miniMD(self, timelimit, isSingle, isMail):

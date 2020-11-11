@@ -12,11 +12,11 @@ def main():
     time.sleep(10)
     w = withOSU(knl=1)
     #w.testOSU()
-    #w.congestion(withCongestor=0, core=32, instance=int(sys.argv[1]))
+    #w.congestor() # My GPCNET takes 5 min on 64 knl nodes.
     #w.allocation(instance=int(sys.argv[1]))
     #w.appOnNodes(app='lammps', N=4, nodes=w.nodelist) # used to test application run.
     #w.fixAllocation(appName='lammps', iteration=10, instance=5)
-    w.CADD(appName='lammps', iteration=20, congSize=64, appSize=32, appOut='CADDjob_lammps_knlTile.out')
+    w.CADD(appName='lammps', iteration=20, congSize=64, appSize=32, appOut='CADDjob_lammps_CADDmin.out')
 
 class withOSU:
     def __init__(self, knl):
@@ -182,25 +182,28 @@ class withOSU:
             with open(writeToFile, 'a') as o:
                 o.write(out)
 
-    def congestion(self, withCongestor, core, instance):
+    def congestor(self):
         '''
-        obsolete
+        Start GPCNET congestor.
         '''
-        N = 32
-        self.usedNodes = self.jumpOne(self.nodelist, N)
-        if withCongestor:
-            procs = self.startOSU(N=N, core=core, instance=instance, nodes=self.usedNodes)
-        else:
-            print('osu not started due to setting.')
-
-        self.startApp(N=N, alloc='bad')
-
-        if withCongestor:
-            print('is osu running:')
-            for i in range(instance):
-                osu = procs.pop()
-                print(osu.poll() == None)
-                os.killpg(os.getpgid(osu.pid), signal.SIGTERM)
+        GPCnodes = self.nodelist
+        print(GPCnodes)
+        N = len(GPCnodes)
+        tpn = 68 if self.knl else 32
+        ntasks = tpn*N
+        cpu = 'knl' if self.knl else 'haswell'
+        gpclist = self.abbrev(GPCnodes)
+        command = ''
+        command += 'srun -N %d --mem=30G --ntasks %d --nodelist=%s --ntasks-per-node=%d -C %s /global/homes/z/zhangyj/GPCNET/network_load_test > results/testGPC.out; ' % (N, ntasks, gpclist, tpn, cpu)
+        GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
+        print('GPC started.')
+        print(subprocess.check_output(['date']).decode('utf-8'))
+        while 1:
+            time.sleep(0.5)
+            if GPCproc.poll() != None: # if finished, restart the congestor.
+                print('GPC finished.')
+                print(subprocess.check_output(['date']).decode('utf-8'))
+                break
 
     def allocation(self, instance, core=32):
         '''
@@ -450,12 +453,30 @@ class withOSU:
             nodeCongDict = {}
             for pair in nodeCongPair:
                 nodeCongDict[pair[0]] = pair[1]
+            node3NeighborRank,node2NeighborRank,node1NeighborRank,node0NeighborRank = [],[],[],[]
+            for pair in idleNeighbor:
+                if pair[1] == 3:# with 3 idle neighbors.
+                    node3NeighborRank.append((pair[0], nodeCongDict[pair[0]])) # (node id, congestion).
+                if pair[1] == 2:
+                    node2NeighborRank.append((pair[0], nodeCongDict[pair[0]])) # (node id, congestion).
+                if pair[1] == 1:
+                    node1NeighborRank.append((pair[0], nodeCongDict[pair[0]])) # (node id, congestion).
+                if pair[1] == 0:
+                    node0NeighborRank.append((pair[0], nodeCongDict[pair[0]])) # (node id, congestion).
+            node3NeighborRank.sort(key=lambda x: x[1])
+            node2NeighborRank.sort(key=lambda x: x[1])
+            node1NeighborRank.sort(key=lambda x: x[1])
+            node0NeighborRank.sort(key=lambda x: x[1])
+            sortIdle = node3NeighborRank + node2NeighborRank + node1NeighborRank + node0NeighborRank
 
-            for policy in ['cadd','anticadd','cori','omni','random']:
+            for policy in ['caddMin','cadd','cori','random']:
                 if policy == 'cadd':
                     nodes = [nodeCongPair[x][0] for x in range(appSize)]
                     stall = sum([nodeCongPair[x][1] for x in range(appSize)]) / appSize
-                    caddstall = stall
+                elif policy == 'caddMin':
+                    nodes = [sortIdle[x][0] for x in range(appSize)]
+                    stall = sum([sortIdle[x][1] for x in range(appSize)]) / appSize
+                    caddstall = stall # comparison point.
                 elif policy == 'anticadd':
                     nodes = [nodeCongPair[x][0] for x in range(numIdle-appSize, numIdle)]
                     stall = sum([nodeCongPair[x][1] for x in range(numIdle-appSize, numIdle)]) / appSize
@@ -469,7 +490,7 @@ class withOSU:
                     nodes = random.sample(self.idleNodes, appSize)
                     stall = sum([nodeCongDict[x] for x in nodes]) / appSize
                 print('%s avg stalls: %.f' % (policy, stall))
-                print('Ratio current/cadd: %.3f' % (stall/(caddstall+0.00001)))
+                print('Ratio current/caddMin: %.3f' % (stall/(caddstall+0.00001)))
 
                 print('Run job in %s policy.' % policy)
                 with open(appOut, 'a') as f:
@@ -480,12 +501,19 @@ class withOSU:
             time.sleep(5)
 
             # run without congestor.
-            policy = 'noCong'
-            nodes = [nodeCongPair[x][0] for x in range(appSize)]
+            policy = 'caddMinNo'
+            nodes = [sortIdle[x][0] for x in range(appSize)]
             print('Run job in %s policy.' % policy)
             with open(appOut, 'a') as f:
                 f.write('Starting job in %s policy..\n' % policy)
             self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
+
+            #policy = 'noCongMin'
+            #nodes = coriAllocated
+            #print('Run job in %s policy.' % policy)
+            #with open(appOut, 'a') as f:
+            #    f.write('Starting job in %s policy..\n' % policy)
+            #self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
 
             print('Iteration end.')
             print()
