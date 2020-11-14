@@ -16,7 +16,8 @@ def main():
     #w.allocation(instance=int(sys.argv[1]))
     #w.appOnNodes(app='lammps', N=4, nodes=w.nodelist) # used to test application run.
     #w.fixAllocation(appName='lammps', iteration=10, instance=5)
-    w.CADD(appName='lammps', iteration=20, congSize=64, appSize=32, appOut='CADDjob_lammps_CADDmin.out')
+    #w.CADD(appName='lammps', iteration=30, congSize=64, appSize=32, appOut='CADDjob_lammps_CADDmin151_run60k.out')
+    w.congestorLDMS()
 
 class withOSU:
     def __init__(self, knl):
@@ -203,6 +204,37 @@ class withOSU:
             if GPCproc.poll() != None: # if finished, restart the congestor.
                 print('GPC finished.')
                 print(subprocess.check_output(['date']).decode('utf-8'))
+                break
+
+    def congestorLDMS(self):
+        '''
+        Start congestor with LDMS.
+        '''
+        print(subprocess.check_output(['date']).decode('utf-8'))
+        jobid = os.environ['SLURM_JOB_ID']
+        print('jobid: ' + str(jobid))
+        print(self.nodelist)
+        storeNode = 'nid%05d' % self.nodelist[0] # LDMS storage daemon node.
+        self.runLDMS(foldername='%s' % (jobid), storeNode=storeNode, seconds=60)
+
+        GPCnodes = self.nodelist[1:]
+        N = len(GPCnodes)
+        tpn = 68 if self.knl else 32
+        ntasks = tpn*N
+        cpu = 'knl' if self.knl else 'haswell'
+        gpclist = self.abbrev(GPCnodes)
+        GPCproc = []
+        for i in range(1):
+            command = 'srun -N %d --mem=10G --ntasks %d --nodelist=%s --ntasks-per-node=%d -C %s /global/homes/z/zhangyj/GPCNET/network_load_test > results/testGPC%d.out; ' % (N, ntasks, gpclist, tpn, cpu, i)
+            GPCproc.append( subprocess.Popen(command, shell=True, preexec_fn=os.setsid) )
+            print('GPC %d started.' % i)
+        print(subprocess.check_output(['date']).decode('utf-8'))
+        while 1:
+            time.sleep(0.5)
+            if GPCproc[-1].poll() != None: # if finished, restart the congestor.
+                print('GPC -1 finished.')
+                print(subprocess.check_output(['date']).decode('utf-8'))
+                time.sleep(120)
                 break
 
     def allocation(self, instance, core=32):

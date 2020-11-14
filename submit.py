@@ -7,8 +7,8 @@ def main():
     #s.withOSU(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.allocation(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.fixAllocation(timelimit='01:40:00', isSingle=0, isMail=1)
-    s.CADD(N=129, queue='regular', fname='CADD_lammps_CADDmin.out', timelimit='04:00:00', isMail=1)
-    #s.GPC(N=64, timelimit='01:00:00', isMail=1)
+    #s.CADD(N=151, queue='regular', fname='CADD_lammps_CADDmin151_run60k.out', timelimit='03:00:00', isMail=1)
+    s.GPC(N=65, timelimit='00:30:00', isMail=1)
     #for day in range(9, 32):
     #    s.getData(day=day, N=1, timelimit='23:00:00', isMail=0)
 

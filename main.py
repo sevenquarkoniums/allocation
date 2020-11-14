@@ -24,12 +24,12 @@ def main():
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
     #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
-    al.processCADD(app='lammps')
+    #al.processCADD(app='lammps')
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
     #al.shrinkData()
-    #al.analyze()
+    al.analyze()
 
 def isint(value):
   try:
@@ -1035,9 +1035,9 @@ class analysis(ldms):
         print('finished.')
 
     def processCADD(self, app):
-        cols = ['run','CADD','CADD-reverse','Cori','Random','noCong','noCongMin']
+        cols = ['run','caddMin','cadd','Cori','Random','caddMinNo']
         task = 32*68
-        suffix = '%s_knl129' % app
+        suffix = '%s_CADDmin151_run60k' % app
         f = 'CADDjob_%s.out' % suffix 
         print('Getting exec time..')
         with open(f, 'r') as o:
@@ -1273,27 +1273,40 @@ class analysis(ldms):
         '''
         #end = 'Fri Jul 31 21:06:11 PDT 2020'
         #monitorend = self.timeToUnixPDT(end, withDay=1)
-        monitorend = 1604887273
-        monitorstart = monitorend - 60
-        node = 11796
-        our, cori = 1, 1
+        monitorend = 1605313811
+        monitorstart = 1605313192 # iteration 20.
+        nodes = [3388, 3389, 3390, 3391, 3392, 3562, 3563, 3564, 3565, 3566, 3567, 7331, 7332, 7333, 7334, 7335, 7336, 7337, 8773, 8774, 8775, 8776, 8777, 8778, 8779, 8784, 9585, 9586, 9587, 9588, 9589, 9590, 9591, 9592, 9593, 10972, 10973, 10974, 10975, 10976, 10977, 10978, 10979, 10980, 12331, 12332, 12333, 12334, 12335, 12336, 12337, 12536, 12537, 12538, 12539, 12540, 12541, 12542, 12658, 12659, 12660, 12661, 12662, 12663, 12664]
+        nodeNames = ['nid%05d' % i for i in nodes]
+
+        our, cori = 1, 0
 
         if our:
             # Data from our LDMS version.
-            path = '/global/project/projectdirs/m3231/yijia/csv/36015849_0/temp.csv'
+            #path = '/global/project/projectdirs/m3231/yijia/csv/36234409/temp.csv'
+            path = '/global/project/projectdirs/m3231/yijia/csv/36234409/cray_aries_r'
             print('Reading cray csv..')
             df = pd.read_csv(path, error_bad_lines=False)
-            print('%.1f seconds collected in total.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
-            print('Calculating stall sum..')
-            df['stalled_sum'] = df[['stalled_%03d (ns)' % x for x in range(48)]].sum(axis=1)
-            selectTime = df[ (df['#Time'] >= monitorstart) & (df['#Time'] <= monitorend) ]
-            selectNode = selectTime[ selectTime['ProducerName']=='nid%05d' % node]
-            #diff = selectNode[['#Time','Time_usec','stalled_sum']].diff()
-            #diff.to_csv('temp.csv', index=0)
-            removeCol = ['Time_usec','ProducerName','component_id','job_id','app_id'] + ['sendlinkstatus_%03d (1)' % x for x in range(48)] + ['recvlinkstatus_%03d (1)' % x for x in range(48)]
-            cols = [x for x in selectNode.columns if x not in removeCol]
-            fname = 'ldms_%d_nid%05d.csv' % (monitorend, node)
-            selectNode[cols].to_csv(fname, index=0)
+            #df = df[ (df['#Time'] >= monitorstart) & (df['#Time'] <= monitorend) ].copy()
+            #print('%.1f seconds fetched.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
+            selectNode = df[ df['ProducerName'].isin(nodeNames) ].copy()
+
+            print('Calculating sum..')
+            #Cols = ['stalled_%03d (ns)' % x for x in range(48)]
+            #selectNode['stalled_sum'] = selectNode[Cols].sum(axis=1)
+            Cols = ['traffic_%03d (B)' % x for x in range(48)]
+            selectNode['traffic_sum'] = selectNode[Cols].sum(axis=1)
+
+            print('Calculating diff for multiple nodes..')
+            nonAccumCol = ['#Time','Time_usec','ProducerName','component_id']
+            nonAccum = selectNode[nonAccumCol]
+            tobeDiff = selectNode[['component_id','traffic_sum']]
+            diffed = tobeDiff.groupby('component_id').diff()
+            combine = pd.concat([nonAccum, diffed], axis=1)
+            diff = combine.dropna(axis=0, how='any', inplace=False)
+            #removeCol = ['Time_usec','ProducerName','component_id','job_id','app_id'] + ['sendlinkstatus_%03d (1)' % x for x in range(48)] + ['recvlinkstatus_%03d (1)' % x for x in range(48)]
+            #cols = [x for x in selectNode.columns if x not in removeCol]
+            fname = 'traffic_%d.csv' % (1)
+            diff.to_csv(fname, index=0)
             print('finished, %s generated.' % fname)
 
         if cori:
