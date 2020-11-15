@@ -29,7 +29,7 @@ def main():
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
     #al.shrinkData()
-    al.analyze()
+    al.ourLDMSsingle()
 
 def isint(value):
   try:
@@ -1267,64 +1267,87 @@ class analysis(ldms):
                     writeline += '\n'
                     o.write(writeline)
 
-    def analyze(self):
+    def ourLDMSsingle(self):
+        node = 3435
+        jobid = 36244741
+        path = '/global/project/projectdirs/m3231/yijia/csv/%d/cray_aries_r' % jobid
+        print('Reading cray csv..')
+        df = pd.read_csv(path, error_bad_lines=False)
+        #df = df[ (df['#Time'] >= monitorstart) & (df['#Time'] <= monitorend) ].copy()
+        #print('%.1f seconds fetched.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
+        selectNode = df[ df['ProducerName']=='nid%05d' % node ].copy()
+
+        print('Calculating diff for multiple nodes..')
+        nonAccumCol = ['#Time','Time_usec','ProducerName','component_id']
+        nonAccum = selectNode[nonAccumCol]
+        cols = [x for x in selectNode.columns if x not in nonAccumCol]
+        tobeDiff = selectNode[cols]
+        diffed = tobeDiff.diff()
+        combine = pd.concat([nonAccum, diffed], axis=1)
+        diff = combine.dropna(axis=0, how='any', inplace=False)
+        removeCol = ['Time_usec','ProducerName','job_id','app_id'] + ['sendlinkstatus_%03d (1)' % x for x in range(48)] + ['recvlinkstatus_%03d (1)' % x for x in range(48)]
+        remainCol = [x for x in diff.columns if x not in removeCol]
+        fname = 'ldms_node%d.csv' % (node)
+        diff[remainCol].to_csv(fname, index=0)
+        print('finished, %s generated.' % fname)
+
+    def ourLDMSmulti(self):
         '''
-        Read LDMS data and do some analysis.
+        Read our LDMS data multi node diff.
         '''
         #end = 'Fri Jul 31 21:06:11 PDT 2020'
         #monitorend = self.timeToUnixPDT(end, withDay=1)
-        monitorend = 1605313811
-        monitorstart = 1605313192 # iteration 20.
-        nodes = [3388, 3389, 3390, 3391, 3392, 3562, 3563, 3564, 3565, 3566, 3567, 7331, 7332, 7333, 7334, 7335, 7336, 7337, 8773, 8774, 8775, 8776, 8777, 8778, 8779, 8784, 9585, 9586, 9587, 9588, 9589, 9590, 9591, 9592, 9593, 10972, 10973, 10974, 10975, 10976, 10977, 10978, 10979, 10980, 12331, 12332, 12333, 12334, 12335, 12336, 12337, 12536, 12537, 12538, 12539, 12540, 12541, 12542, 12658, 12659, 12660, 12661, 12662, 12663, 12664]
+        #monitorend = 1605313811
+        #monitorstart = 1605313192 # iteration 20.
+        nodes = [2540, 2541, 2542, 2543, 2605, 2623, 2624, 2625, 3101, 3435, 3436, 3437, 3438, 3655, 3726, 3727, 3732, 3733, 4006, 4007, 4008, 4009, 4010, 4011, 4017, 4055, 4060, 4062, 4099, 4100, 4101, 4102, 4147, 4218, 4220, 4329, 4340, 4341, 4342, 4343, 4346, 4347, 4348, 4349, 4519, 4520, 4521, 4522, 4718, 4719, 4720, 4721, 4945, 5194, 5473, 6171, 6364, 6771, 7269, 7270, 7271, 7272, 7273, 7517, 7518, 7805, 7809, 7979, 8249, 8250, 8308, 8427, 8734, 8792, 8817, 9043, 9626, 9890, 9897, 9908, 10036, 10729, 10730, 10731, 10732, 10733, 10734, 10735, 10736, 10737, 10738, 10739, 10740, 10934, 10935, 10936, 10937, 10938, 10939, 10945, 10946, 10947, 10948, 10949, 10950, 10951, 10952, 10953, 11502, 11503, 11504, 11627, 11628, 11629, 11630, 11631, 11912, 11913, 12147, 12148, 12223, 12224, 12225, 12226, 12227, 12228, 12229, 12442, 12443]
         nodeNames = ['nid%05d' % i for i in nodes]
 
-        our, cori = 1, 0
+        jobid = 36244741
+        #path = '/global/project/projectdirs/m3231/yijia/csv/36234409/temp.csv'
+        path = '/global/project/projectdirs/m3231/yijia/csv/%d/cray_aries_r' % jobid
+        print('Reading cray csv..')
+        df = pd.read_csv(path, error_bad_lines=False)
+        #df = df[ (df['#Time'] >= monitorstart) & (df['#Time'] <= monitorend) ].copy()
+        #print('%.1f seconds fetched.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
+        selectNode = df[ df['ProducerName'].isin(nodeNames) ].copy()
 
-        if our:
-            # Data from our LDMS version.
-            #path = '/global/project/projectdirs/m3231/yijia/csv/36234409/temp.csv'
-            path = '/global/project/projectdirs/m3231/yijia/csv/36234409/cray_aries_r'
-            print('Reading cray csv..')
-            df = pd.read_csv(path, error_bad_lines=False)
-            #df = df[ (df['#Time'] >= monitorstart) & (df['#Time'] <= monitorend) ].copy()
-            #print('%.1f seconds fetched.' % (df.iloc[-1]['#Time'] - df.iloc[0]['#Time']))
-            selectNode = df[ df['ProducerName'].isin(nodeNames) ].copy()
+        print('Calculating sum..')
+        Cols = ['stalled_%03d (ns)' % x for x in range(48)]
+        selectNode['stalled_sum'] = selectNode[Cols].sum(axis=1)
+        Cols = ['traffic_%03d (B)' % x for x in range(48)]
+        selectNode['traffic_sum'] = selectNode[Cols].sum(axis=1)
 
-            print('Calculating sum..')
-            #Cols = ['stalled_%03d (ns)' % x for x in range(48)]
-            #selectNode['stalled_sum'] = selectNode[Cols].sum(axis=1)
-            Cols = ['traffic_%03d (B)' % x for x in range(48)]
-            selectNode['traffic_sum'] = selectNode[Cols].sum(axis=1)
+        print('Calculating diff for multiple nodes..')
+        nonAccumCol = ['#Time','Time_usec','ProducerName','component_id']
+        nonAccum = selectNode[nonAccumCol]
+        tobeDiff = selectNode[['component_id','traffic_sum','stalled_sum']]
+        diffed = tobeDiff.groupby('component_id').diff()
+        combine = pd.concat([nonAccum, diffed], axis=1)
+        diff = combine.dropna(axis=0, how='any', inplace=False)
+        #removeCol = ['Time_usec','ProducerName','component_id','job_id','app_id'] + ['sendlinkstatus_%03d (1)' % x for x in range(48)] + ['recvlinkstatus_%03d (1)' % x for x in range(48)]
+        #cols = [x for x in selectNode.columns if x not in removeCol]
+        fname = 'ldms_%d.csv' % (1)
+        diff.to_csv(fname, index=0)
+        print('finished, %s generated.' % fname)
 
-            print('Calculating diff for multiple nodes..')
-            nonAccumCol = ['#Time','Time_usec','ProducerName','component_id']
-            nonAccum = selectNode[nonAccumCol]
-            tobeDiff = selectNode[['component_id','traffic_sum']]
-            diffed = tobeDiff.groupby('component_id').diff()
-            combine = pd.concat([nonAccum, diffed], axis=1)
-            diff = combine.dropna(axis=0, how='any', inplace=False)
-            #removeCol = ['Time_usec','ProducerName','component_id','job_id','app_id'] + ['sendlinkstatus_%03d (1)' % x for x in range(48)] + ['recvlinkstatus_%03d (1)' % x for x in range(48)]
-            #cols = [x for x in selectNode.columns if x not in removeCol]
-            fname = 'traffic_%d.csv' % (1)
-            diff.to_csv(fname, index=0)
-            print('finished, %s generated.' % fname)
-
-        if cori:
-            # Data from Cori LDMS version.
-            print('Fetching LDMS..')
-            queryStart = pd.Timestamp(monitorstart, unit='s', tz='US/Pacific')
-            queryEnd = pd.Timestamp(monitorend, unit='s', tz='US/Pacific')
-            routers = super().nodeToRouter([node])
-            qd = super().fetchData(queryStart, queryEnd, 'rtr', routers, parallel=0) # the longest part.
-            print('Data fetched.')
-            rmDup, _, _, _ = super().removeDuplicate(qd)
-            cols = ['#Time']
-            for r in range(5):
-                for c in range(8):
-                    cols.append('AR_RTR_%d_%d_INQ_PRF_ROWBUS_STALL_CNT' % (r,c))
-            fname = 'corildms_%d_nid%05d.csv' % (monitorend, node)
-            rmDup[cols].to_csv(fname, index=0)
-            print('finished, %s generated.' % fname)
+    def readLDMSsingle(self):
+        # Read data from Cori LDMS version.
+        monitorend = 1605313811
+        monitorstart = 1605313192 # iteration 20.
+        print('Fetching LDMS..')
+        queryStart = pd.Timestamp(monitorstart, unit='s', tz='US/Pacific')
+        queryEnd = pd.Timestamp(monitorend, unit='s', tz='US/Pacific')
+        routers = super().nodeToRouter([node])
+        qd = super().fetchData(queryStart, queryEnd, 'rtr', routers, parallel=0) # the longest part.
+        print('Data fetched.')
+        rmDup, _, _, _ = super().removeDuplicate(qd)
+        cols = ['#Time']
+        for r in range(5):
+            for c in range(8):
+                cols.append('AR_RTR_%d_%d_INQ_PRF_ROWBUS_STALL_CNT' % (r,c))
+        fname = 'corildms_%d_nid%05d.csv' % (monitorend, node)
+        rmDup[cols].to_csv(fname, index=0)
+        print('finished, %s generated.' % fname)
 
 if __name__ == '__main__':
     main()

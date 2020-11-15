@@ -8,7 +8,7 @@ def main():
     #s.allocation(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.fixAllocation(timelimit='01:40:00', isSingle=0, isMail=1)
     #s.CADD(N=151, queue='regular', fname='CADD_lammps_CADDmin151_run60k.out', timelimit='03:00:00', isMail=1)
-    s.GPC(N=65, timelimit='00:30:00', isMail=1)
+    s.GPC(N=5, timelimit='00:30:00', isMail=1)
     #for day in range(9, 32):
     #    s.getData(day=day, N=1, timelimit='23:00:00', isMail=0)
 
@@ -22,7 +22,7 @@ class submit:
 
     def GPC(self, N, timelimit, isMail):
         mail = '--mail-type=END ' if isMail else ''
-        command = 'sbatch -N %d --account=m3231 -q premium -C knl %s-t %s -J GPC --exclusive --gres=craynetwork:0 -o $HOME/allocation/GPC.out runwith.sh' % (N, mail, timelimit)
+        command = 'sbatch -N %d --account=m3231 -q premium -C knl %s-t %s -J GPC --exclusive --gres=craynetwork:0 -o $HOME/allocation/testLDMS.out runwith.sh' % (N, mail, timelimit)
         call(command, shell=True)
 
     def miniMD(self, timelimit, isSingle, isMail):

@@ -46,6 +46,5 @@ date
 
 #echo "kill ldmsd"
 #srun -n ${SLURM_NNODES} -m cyclic --mem=1G pkill ldmsd # may be delayed by srun problem.
-
-date
+#date
 

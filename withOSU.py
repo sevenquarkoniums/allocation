@@ -16,8 +16,9 @@ def main():
     #w.allocation(instance=int(sys.argv[1]))
     #w.appOnNodes(app='lammps', N=4, nodes=w.nodelist) # used to test application run.
     #w.fixAllocation(appName='lammps', iteration=10, instance=5)
-    #w.CADD(appName='lammps', iteration=30, congSize=64, appSize=32, appOut='CADDjob_lammps_CADDmin151_run60k.out')
-    w.congestorLDMS()
+    w.NeDD(appName='lammps', iteration=30, congSize=64, appSize=32, appOut='NeDDjob_lammps_151.out')
+    #w.congestorLDMS()
+    #w.testLDMS()
 
 class withOSU:
     def __init__(self, knl):
@@ -225,7 +226,8 @@ class withOSU:
         gpclist = self.abbrev(GPCnodes)
         GPCproc = []
         for i in range(1):
-            command = 'srun -N %d --mem=10G --ntasks %d --nodelist=%s --ntasks-per-node=%d -C %s /global/homes/z/zhangyj/GPCNET/network_load_test > results/testGPC%d.out; ' % (N, ntasks, gpclist, tpn, cpu, i)
+            command = 'export MPICH_GNI_FMA_SHARING=ENABLED;'
+            command += 'srun -N %d --mem=20G --ntasks %d --nodelist=%s --ntasks-per-node=%d -C %s /global/homes/z/zhangyj/GPCNET/network_load_test > results/testGPC%d.out;' % (N, ntasks, gpclist, tpn, cpu, i)
             GPCproc.append( subprocess.Popen(command, shell=True, preexec_fn=os.setsid) )
             print('GPC %d started.' % i)
         print(subprocess.check_output(['date']).decode('utf-8'))
@@ -233,9 +235,20 @@ class withOSU:
             time.sleep(0.5)
             if GPCproc[-1].poll() != None: # if finished, restart the congestor.
                 print('GPC -1 finished.')
-                print(subprocess.check_output(['date']).decode('utf-8'))
+                end = int(time.time())
+                print('end timestamp: %d' % end)
                 time.sleep(120)
                 break
+
+    def testLDMS(self):
+        print(subprocess.check_output(['date']).decode('utf-8'))
+        jobid = os.environ['SLURM_JOB_ID']
+        print('jobid: ' + str(jobid))
+        print(self.nodelist)
+        storeNode = 'nid%05d' % self.nodelist[0] # LDMS storage daemon node.
+        self.runLDMS(foldername='%s' % (jobid), storeNode=storeNode, seconds=60)
+        time.sleep(60)
+        print(subprocess.check_output(['date']).decode('utf-8'))
 
     def allocation(self, instance, core=32):
         '''
@@ -295,6 +308,7 @@ class withOSU:
         '''
         The process for running GPCNET network congestor.
         Only run 1 instance of congestor.
+        Each GPC instance needs 10~20G memory.
         '''
         print(self.GPCnodes)
         N = len(self.GPCnodes)
@@ -304,7 +318,7 @@ class withOSU:
         gpclist = self.abbrev(self.GPCnodes)
         command = ''
         #command += 'sbcast --compress=lz4 /global/homes/z/zhangyj/GPCNET/network_load_test /tmp/network_load_test; '
-        command += 'srun -N %d --mem=30G --ntasks %d --nodelist=%s --ntasks-per-node=%d -C %s /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out; ' % (N, ntasks, gpclist, tpn, cpu)
+        command += 'srun -N %d --mem=20G --ntasks %d --nodelist=%s --ntasks-per-node=%d -C %s /global/homes/z/zhangyj/GPCNET/network_load_test > results/continualGPC_.out; ' % (N, ntasks, gpclist, tpn, cpu)
         GPCproc = subprocess.Popen(command, shell=True, preexec_fn=os.setsid)
         print('continual GPC started.')
         while 1:
@@ -418,16 +432,15 @@ class withOSU:
         print(nodeCongPair)
         return nodeCongPair
 
-    def CADD(self, appName, iteration, congSize, appSize, appOut):
+    def NeDD(self, appName, iteration, congSize, appSize, appOut):
         '''
-        Experiment for the Congestion-Aware Data-Driven allocation policy.
+        Experiment for the Network-Data-Driven allocation policy.
         iteration: number of iteration. In each iteration, the nodes to run congestor is re-selected randomly.
         '''
+        monitorTime = 120 # 60 may not be enough to pass the network test period.
         print(subprocess.check_output(['date']).decode('utf-8'))
         jobid = os.environ['SLURM_JOB_ID']
         print('jobid: ' + str(jobid))
-        #self.runLDMS(foldername='%s_%d' % (jobid, 0), storeNode='nid%05d' % self.nodelist[0], seconds=120) # for debug.
-        #self.appOnNodes(app=appName, N=4, nodes=self.nodelist[1:5], writeToFile=appOut) # for debug.
         with open(appOut, 'w') as f:
             f.write('Starting..\n')
 
@@ -450,7 +463,7 @@ class withOSU:
                 n4 = (n//4)*4
                 router = {n4, n4+1, n4+2, n4+3}
                 router.remove(n)
-                neighbor = len(router.intersection(set(self.idleNodes))) # 0-3.
+                neighbor = len(router.intersection(set(self.idleNodes))) # idle neighbor number: 0-3.
                 idleNeighbor.append((n,neighbor))
                 if not router.intersection(set(congNodes)): # intersection is empty.
                     noSharing.append((n,neighbor))
@@ -458,7 +471,9 @@ class withOSU:
                     sharing.append(n)
             noSharing.sort(key=lambda x: x[1], reverse=True)
             idleNeighbor.sort(key=lambda x: x[1], reverse=True)
-            # omniscient policy: prioritize nodes without sharing router with congestor, and in that case also prioritize nodes with more neighbors.
+
+            # NeDD policy: prioritize routers with less NIC traffic.
+            # so it will first avoid congestor, then prioritize more idle neighbors.
             numGood = len(noSharing)
             if numGood >= appSize:
                 omniAllocated = [noSharing[x][0] for x in range(appSize)]
@@ -474,9 +489,9 @@ class withOSU:
 
             self.monitorstart = int(time.time())
             if i == 0:
-                self.runLDMS(foldername='%s_%d' % (jobid, i), storeNode=storeNode, seconds=60)
+                self.runLDMS(foldername='%s_%d' % (jobid, i), storeNode=storeNode, seconds=monitorTime)
             else:
-                time.sleep(60) # don't start LDMS again.
+                time.sleep(monitorTime) # don't start LDMS again.
             self.monitorend = int(time.time())
             print('Monitor end timestamp: %d' % self.monitorend)
 
