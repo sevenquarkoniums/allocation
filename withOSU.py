@@ -457,41 +457,16 @@ class withOSU:
             self.idleNodes = [x for x in availNodes if x not in congNodes]
             numIdle = len(self.idleNodes)
 
-            # get idle nodes that noShare/share with congestor.
-            noSharing, sharing, idleNeighbor = [], [], []
-            for n in self.idleNodes:
-                n4 = (n//4)*4
-                router = {n4, n4+1, n4+2, n4+3}
-                router.remove(n)
-                neighbor = len(router.intersection(set(self.idleNodes))) # idle neighbor number: 0-3.
-                idleNeighbor.append((n,neighbor))
-                if not router.intersection(set(congNodes)): # intersection is empty.
-                    noSharing.append((n,neighbor))
-                else:
-                    sharing.append(n)
-            noSharing.sort(key=lambda x: x[1], reverse=True)
-            idleNeighbor.sort(key=lambda x: x[1], reverse=True)
-
-            # NeDD policy: prioritize routers with less NIC traffic.
-            # so it will first avoid congestor, then prioritize more idle neighbors.
-            numGood = len(noSharing)
-            if numGood >= appSize:
-                omniAllocated = [noSharing[x][0] for x in range(appSize)]
-            else:
-                omniAllocated = [noSharing[x][0] for x in range(numGood)]
-                omniAllocated += [sharing[x] for x in range(appSize-numGood)]
-            # cori policy: prioritize nodes with more idle neighbors.
-            coriAllocated = [idleNeighbor[x][0] for x in range(appSize)]
-
+            # start GPCNET.
             print('Congestor nodes:')
             print(congNodes)
             self.startContGPC(nodes=congNodes)
 
+            # monitor LDMS data.
             self.monitorstart = int(time.time())
-            if i == 0:
-                self.runLDMS(foldername='%s_%d' % (jobid, i), storeNode=storeNode, seconds=monitorTime)
-            else:
-                time.sleep(monitorTime) # don't start LDMS again.
+            if i == 0: # don't start LDMS again.
+                self.runLDMS(foldername='%s_%d' % (jobid, i), storeNode=storeNode, seconds=10)
+            time.sleep(monitorTime)
             self.monitorend = int(time.time())
             print('Monitor end timestamp: %d' % self.monitorend)
 
@@ -500,67 +475,72 @@ class withOSU:
             nodeCongDict = {}
             for pair in nodeCongPair:
                 nodeCongDict[pair[0]] = pair[1]
-            node3NeighborRank,node2NeighborRank,node1NeighborRank,node0NeighborRank = [],[],[],[]
-            for pair in idleNeighbor:
-                if pair[1] == 3:# with 3 idle neighbors.
-                    node3NeighborRank.append((pair[0], nodeCongDict[pair[0]])) # (node id, congestion).
-                if pair[1] == 2:
-                    node2NeighborRank.append((pair[0], nodeCongDict[pair[0]])) # (node id, congestion).
-                if pair[1] == 1:
-                    node1NeighborRank.append((pair[0], nodeCongDict[pair[0]])) # (node id, congestion).
-                if pair[1] == 0:
-                    node0NeighborRank.append((pair[0], nodeCongDict[pair[0]])) # (node id, congestion).
-            node3NeighborRank.sort(key=lambda x: x[1])
-            node2NeighborRank.sort(key=lambda x: x[1])
-            node1NeighborRank.sort(key=lambda x: x[1])
-            node0NeighborRank.sort(key=lambda x: x[1])
-            sortIdle = node3NeighborRank + node2NeighborRank + node1NeighborRank + node0NeighborRank
+                
+            # get idle nodes that noShare/share with congestor.
+            nodeInfo = []
+            for n in self.idleNodes:
+                n4 = (n//4)*4
+                router = {n4, n4+1, n4+2, n4+3}
+                router.remove(n)
+                neighbor = len(router.intersection(set(self.idleNodes))) # idle neighbor number: 0-3.
+                congNeighbor = len(router.intersection(set(congNodes)))
+                nodeInfo.append( (n,neighbor,congNeighbor,nodeCongDict[n]) )
+            nodeInfo2 = nodeInfo.copy()
+            nodeInfo3 = nodeInfo.copy()
+            
+            # NeDD policy: prioritize routers with less NIC traffic.
+            # so it will first avoid congestor, then prioritize more idle neighbors.
+            nodeInfo.sort(key=lambda x: x[2], reverse=False) # low to high.
+            nodeInfo.sort(key=lambda x: x[1], reverse=True) # high to low.
+            print('nedd nodeInfo:')
+            print(nodeInfo)
+            neddAlloc = [nodeInfo[x][0] for x in range(appSize)]
+            
+            # Anti-NeDD.
+            antiAlloc = [nodeInfo[x][0] for x in range(numIdle-appSize, numIdle)]
+            
+            # Fewer switches. Close to Cori's allocation.
+            nodeInfo2.sort(key=lambda x: x[1], reverse=True) # high to low.
+            fewerAlloc = [nodeInfo2[x][0] for x in range(appSize)]
+            
+            # Lower router stall count.
+            nodeInfo3.sort(key=lambda x: x[3], reverse=False) # low to high.
+            lowerAlloc = [nodeInfo3[x][0] for x in range(appSize)]
 
-            for policy in ['caddMin','cadd','cori','random']:
-                if policy == 'cadd':
-                    nodes = [nodeCongPair[x][0] for x in range(appSize)]
-                    stall = sum([nodeCongPair[x][1] for x in range(appSize)]) / appSize
-                elif policy == 'caddMin':
-                    nodes = [sortIdle[x][0] for x in range(appSize)]
-                    stall = sum([sortIdle[x][1] for x in range(appSize)]) / appSize
-                    caddstall = stall # comparison point.
-                elif policy == 'anticadd':
-                    nodes = [nodeCongPair[x][0] for x in range(numIdle-appSize, numIdle)]
-                    stall = sum([nodeCongPair[x][1] for x in range(numIdle-appSize, numIdle)]) / appSize
-                elif policy == 'cori':
-                    nodes = coriAllocated
-                    stall = sum([nodeCongDict[x] for x in nodes]) / appSize
-                elif policy == 'omni':
-                    nodes = omniAllocated
-                    stall = sum([nodeCongDict[x] for x in nodes]) / appSize
+            for policy in ['nedd','lowerRouterStall','fewerSwitch','random','antinedd']:
+                if policy == 'nedd':
+                    nodes = neddAlloc
+                elif policy == 'antinedd':
+                    nodes = antiAlloc
+                elif policy == 'fewerSwitch':
+                    nodes = fewerAlloc
+                elif policy == 'lowerRouterStall':
+                    nodes = lowerAlloc
                 elif policy == 'random':
                     nodes = random.sample(self.idleNodes, appSize)
-                    stall = sum([nodeCongDict[x] for x in nodes]) / appSize
-                print('%s avg stalls: %.f' % (policy, stall))
-                print('Ratio current/caddMin: %.3f' % (stall/(caddstall+0.00001)))
-
-                print('Run job in %s policy.' % policy)
+                print('Run job in %s policy..' % policy)
                 with open(appOut, 'a') as f:
                     f.write('Starting job in %s policy..\n' % policy)
                 self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
+                print()
 
             self.stopGPC()
             time.sleep(5)
 
             # run without congestor.
-            policy = 'caddMinNo'
-            nodes = [sortIdle[x][0] for x in range(appSize)]
-            print('Run job in %s policy.' % policy)
+            policy = 'neddNoCong'
+            nodes = neddAlloc
+            print('Run job in %s policy..' % policy)
             with open(appOut, 'a') as f:
                 f.write('Starting job in %s policy..\n' % policy)
             self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
 
-            #policy = 'noCongMin'
-            #nodes = coriAllocated
-            #print('Run job in %s policy.' % policy)
-            #with open(appOut, 'a') as f:
-            #    f.write('Starting job in %s policy..\n' % policy)
-            #self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
+            policy = 'fewerNoCong'
+            nodes = fewerAlloc
+            print('Run job in %s policy.' % policy)
+            with open(appOut, 'a') as f:
+                f.write('Starting job in %s policy..\n' % policy)
+            self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
 
             print('Iteration end.')
             print()
