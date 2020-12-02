@@ -14,9 +14,9 @@ def main():
     #w.testOSU()
     #w.congestor() # My GPCNET takes 5 min on 64 knl nodes.
     #w.allocation(instance=int(sys.argv[1]))
-    #w.appOnNodes(app='lammps', N=4, nodes=w.nodelist) # used to test application run.
+    #w.appOnNodes(app='hacc', N=32, nodes=w.nodelist) # used to test application run.
     #w.fixAllocation(appName='lammps', iteration=10, instance=5)
-    w.NeDD(appName='lammps', iteration=30, congSize=64, appSize=32, appOut='NeDDjob_lammps_151.out')
+    w.NeDD(appName='hacc', iteration=10, congSize=64, appSize=32, appOut='NeDDjob_hacc_201.out')
     #w.congestorLDMS()
     #w.testLDMS()
 
@@ -125,6 +125,8 @@ class withOSU:
         Run app on some nodes.
         '''
         tasksPerNode = 68 if self.knl else 32
+        if app in ['milc','hacc']:
+            tasksPerNode = 64
         ntasks = N * tasksPerNode
         liststr = ','.join(['nid{0:05d}'.format(y) for y in nodes]) # nodelist for srun or mpirun format.
         print('app-node list:')
@@ -133,7 +135,8 @@ class withOSU:
         appcmd = 'module load openmpi; '
         if app == 'miniMD':
             appcmd += 'cd $HOME/miniMD/ref; '
-            appcmd += 'mpirun -np %d --host %s $HOME/miniMD/ref/miniMD_openmpi -n 160000' % (ntasks, liststr) # may trigger LDMS daemon problem by mpirun.
+            #appcmd += 'mpirun -np %d --host %s $HOME/miniMD/ref/miniMD_openmpi -n 160000' % (ntasks, liststr) # may trigger LDMS daemon problem by mpirun.
+            appcmd += 'srun -N %d --mem=50G --ntasks-per-node=%d --nodelist=%s $HOME/miniMD/ref/miniMD_openmpi -n 80000' % (N, tasksPerNode, liststr)
         elif app == 'nekbone':
             appcmd += 'cd $HOME/allocation/nekbone/Nekbone/test/example1; '
             appcmd += 'mpirun -np %d --host %s ./nekbone ex1' % (ntasks, liststr)
@@ -143,26 +146,31 @@ class withOSU:
         elif app == 'miniamr':
             appcmd += 'cd $HOME/allocation/miniamr/testrun; '
             #appcmd += 'sbcast --compress=lz4 /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x /tmp/miniAMR.x; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1             --npx 16 --npy 16 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2             --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0             --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0             --num_tsteps 10 --stages_per_ts 125 --report_perf 4' % (N, liststr)
+            appcmd += 'srun -N %d --mem=80G --ntasks-per-node=%d --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/miniAMR_1.0_all/miniAMR_ref/miniAMR.x --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1             --npx 17 --npy 16 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2             --object 2 0 -1.10 -1.10 -1.10 0.030 0.030 0.030 1.5 1.5 1.5 0.0 0.0 0.0             --object 2 0 0.5 0.5 1.76 0.0 0.0 -0.025 0.75 0.75 0.75 0.0 0.0 0.0             --num_tsteps 10 --stages_per_ts 125 --report_perf 4' % (N, tasksPerNode, liststr)# npx * npy * npz better be the same as cores. # memory should be larger.
         elif app == 'hacc':
             appcmd += 'cd $HOME/allocation/hacc/testrun; '
             #appcmd += 'sbcast --compress=lz4 /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC /tmp/HACC; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC indat cmbM000.tf m000 INIT ALL_TO_ALL -w -R -N 64 -a final -f refresh -t 16x16x8' % (N, liststr)
+            appcmd += 'srun -N %d --mem=80G --ntasks-per-node=%d --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/HACC_1_7/HACC indat cmbM000.tf m000 INIT ALL_TO_ALL -w -R -N %d -a final -f refresh -t 16x16x8' % (N, tasksPerNode, liststr, N)
         elif app == 'graph500':
             appcmd += 'cd $HOME/allocation/graph500/src; export SKIP_VALIDATION=1; '
-            appcmd += 'mpirun -np %d --host %s ./graph500_reference_bfs_sssp 26' % (ntasks, liststr)
+            #appcmd += 'mpirun -np %d --host %s ./graph500_reference_bfs_sssp 26' % (ntasks, liststr)
+            appcmd += 'srun -N %d --mem=50G --ntasks-per-node=%d --nodelist=%s ./graph500_reference_bfs_sssp 26' % (N, tasksPerNode, liststr) # task need to be power of 2.
         elif app == 'milc':
             appcmd += 'cd $HOME/milc_qcd-7.8.1/ks_imp_dyn/test; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s ../su3_rmd myinput.in' % (N, liststr)
+            if self.knl:
+                myinput = 'myinput_knl.in'
+            else:
+                myinput = 'myinput.in'
+            appcmd += 'srun -N %d --mem=50G --ntasks-per-node=%s --nodelist=%s ../su3_rmd %s' % (N, tasksPerNode, liststr, myinput)
         elif app == 'hpcg':
             appcmd += 'cd $HOME/allocation/hpcg/testrun; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=60' % (N, liststr)
+            appcmd += 'srun -N %d --mem=50G --ntasks-per-node=%d --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=50' % (N, tasksPerNode, liststr)
         elif app == 'hpcgDEBUG':
             appcmd += 'cd $HOME/allocation/hpcg/testrun; '
             appcmd += 'srun -N %d --mem=100G -c 1 --ntasks-per-node=%d --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/hpcg/build/bin/HPCG --nx=64 --rt=5' % (N, tasksPerNode, liststr)
         elif app == 'qmcpack':
             appcmd += 'cd $HOME/allocation/qmcpack/testrun; '
-            appcmd += 'srun -N %d --mem=100G --ntasks-per-node=32 --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/qmcpack_ben/build_ben/bin/qmcpack simple-H2O.xml' % (N, liststr)
+            appcmd += 'srun -N %d --mem=50G --ntasks-per-node=%d --nodelist=%s /project/projectdirs/m3410/applications/withoutIns/qmcpack_ben/build_ben/bin/qmcpack simple-H2O.xml' % (N, tasksPerNode, liststr)
         elif app == 'miniFE':
             appcmd += 'cd $HOME/allocation/miniFE/ref/src; '
             appcmd += 'mpirun -np %d --host %s ./miniFE.x -nx 128 -ny 128 -nz 128' % (ntasks, liststr)
@@ -489,9 +497,9 @@ class withOSU:
             nodeInfo3 = nodeInfo.copy()
             
             # NeDD policy: prioritize routers with less NIC traffic.
-            # so it will first avoid congestor, then prioritize more idle neighbors.
-            nodeInfo.sort(key=lambda x: x[2], reverse=False) # low to high.
+            # so it will first avoid congestor, then choose nodes with more idle neighbors.
             nodeInfo.sort(key=lambda x: x[1], reverse=True) # high to low.
+            nodeInfo.sort(key=lambda x: x[2], reverse=False) # low to high. This is prioritized, so sorted later.
             print('nedd nodeInfo:')
             print(nodeInfo)
             neddAlloc = [nodeInfo[x][0] for x in range(appSize)]
@@ -528,12 +536,12 @@ class withOSU:
             time.sleep(5)
 
             # run without congestor.
-            policy = 'neddNoCong'
-            nodes = neddAlloc
-            print('Run job in %s policy..' % policy)
-            with open(appOut, 'a') as f:
-                f.write('Starting job in %s policy..\n' % policy)
-            self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
+            #policy = 'neddNoCong'
+            #nodes = neddAlloc
+            #print('Run job in %s policy..' % policy)
+            #with open(appOut, 'a') as f:
+            #    f.write('Starting job in %s policy..\n' % policy)
+            #self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
 
             policy = 'fewerNoCong'
             nodes = fewerAlloc

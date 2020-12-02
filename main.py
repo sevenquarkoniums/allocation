@@ -24,12 +24,12 @@ def main():
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
     #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
-    #al.processCADD(app='lammps')
+    al.processNeDD(app='hacc')
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
     #al.shrinkData()
-    al.ourLDMSsingle()
+    #al.ourLDMSsingle()
 
 def isint(value):
   try:
@@ -1034,11 +1034,11 @@ class analysis(ldms):
             dfFlit.to_csv('fixGPC_autotime_%s_nodeflit.csv' % app, index=False)
         print('finished.')
 
-    def processCADD(self, app):
-        cols = ['run','caddMin','cadd','Cori','Random','caddMinNo']
-        task = 32*68
-        suffix = '%s_CADDmin151_run60k' % app
-        f = 'CADDjob_%s.out' % suffix 
+    def processNeDD(self, app):
+        cols = ['run','nedd','lowerRouterStall','fewerSwitch','random','antinedd','fewerNoCong']
+        suffix = '%s_201' % app
+        miniMD_task = 32*68
+        f = 'NeDDjob_%s.out' % suffix 
         print('Getting exec time..')
         with open(f, 'r') as o:
             et = {}
@@ -1052,11 +1052,17 @@ class analysis(ldms):
                         countTimeLine += 1
                         tsplit = line.split()[2].split('e')
                         sumTime += float(tsplit[0]) * 10**int(tsplit[1][1:])
-                    if line.startswith('total_iters = 23190'):
+                    if line.startswith('total_iters = 23188'):
                         if countTimeLine == 2:
                             et[count] = sumTime
                         else:
                             et[count] = -1
+                elif app == 'miniMD':
+                    if line.startswith('%d 1' % miniMD_task):
+                        count += 1
+                        spl = line.split()
+                        decompose = [spl[x] for x in [4,5,6,7,8,-1]]
+                        et[count] = float(decompose[0])
                 elif app == 'lammps':
                     if line.startswith('Total wall time'):
                         count += 1
@@ -1066,6 +1072,42 @@ class analysis(ldms):
                             timestring = line.split()[3].split(':')
                         thisTime = int(timestring[1]) * 60 + int(timestring[2])
                         et[count] = thisTime
+                elif app == 'miniamr':
+                    if line.startswith('startTime:'):
+                        count += 1
+                        sumTime = 0
+                    if 'Time: ave' in line:
+                        sumTime += float(line.split()[6])
+                    if line.startswith('endTime:'):
+                        et[count] = sumTime
+                elif app == 'qmcpack':
+                    if line.startswith('  Total Execution time'):
+                        count += 1
+                        et[count] = float(line.split()[4].split('e')[0]) * 10**int(line.split()[4].split('+')[1])
+                elif app == 'hacc':
+                    if line.startswith('startTime:'):
+                        count += 1
+                    if line.startswith('step   max'):
+                        timestring = line.split()[5].split('e+')
+                        thisTime = float(timestring[0]) * 10**int(timestring[1])
+                    if line.startswith('endTime:'):
+                        et[count] = thisTime
+        if app == 'hpcg':
+            # hpcg output are in separate files, need to process specially.
+            et = {}
+            count = 0
+            files = getfiles('./hpcg/testrun')
+            files.sort()
+            for f in files:
+                fname = f.split('/')[-1]
+                if fname.startswith('HPCG-Bench') and '2020-11-29' in fname:
+                    count += 1
+                    with open(f, 'r') as o:
+                        for line in o:
+                            if 'but execution' in line:
+                                et[count] = float(line.split('=')[1])
+        if count not in et:
+            count -= 1
         df = pd.DataFrame(columns=cols)
         width = len(cols)-1
         rowCount = math.ceil(count / width)
@@ -1075,8 +1117,9 @@ class analysis(ldms):
                 et[i] = -1
         for row in range(rowCount):
             df.loc[row] = [row] + [et[row*width+i+1] for i in range(width)]
-        df.to_csv('CADDprocess_%s.csv' % suffix, index=False)
-        print('CADDprocess_%s.csv generated.' % suffix)
+        df.to_csv('NeDDprocess_%s.csv' % suffix, index=False)
+        print(df)
+        print('NeDDprocess_%s.csv generated.' % suffix)
 
     def test(self):
         f = 'results/fixAlloc_lammps3.out'
@@ -1268,7 +1311,7 @@ class analysis(ldms):
                     o.write(writeline)
 
     def ourLDMSsingle(self):
-        node = 3435
+        node = 4060
         jobid = 36244741
         path = '/global/project/projectdirs/m3231/yijia/csv/%d/cray_aries_r' % jobid
         print('Reading cray csv..')
