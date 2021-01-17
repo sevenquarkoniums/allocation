@@ -16,7 +16,8 @@ def main():
     #w.allocation(instance=int(sys.argv[1]))
     #w.appOnNodes(app='graph500', N=32, nodes=w.nodelist) # used to test application run.
     #w.fixAllocation(appName='lammps', iteration=10, instance=5)
-    w.NeDD(appName='graph500', iteration=10, congSize=64, appSize=32, appOut='NeDDjob_graph500_201.out')
+    #w.NeDD(appName='graph500', iteration=10, congSize=64, appSize=32, appOut='NeDDjob_graph500_201.out')
+    w.NeDDTwo(app1='miniMD', app2='lammps', iteration=10, congSize=64, appSize=32, out1='NeDDTwojob_miniMD.out', out2='NeDDTwojob_lammps.out')
     #w.congestorLDMS()
     #w.testLDMS()
 
@@ -496,7 +497,125 @@ class withOSU:
             nodeInfo2 = nodeInfo.copy()
             nodeInfo3 = nodeInfo.copy()
             
-            # NeDD policy: prioritize routers with less NIC traffic.
+            # NeDD policy: select routers by NIC traffic.
+            # so it will first avoid congestor, then choose nodes with more idle neighbors.
+            nodeInfo.sort(key=lambda x: x[1], reverse=True) # high to low.
+            nodeInfo.sort(key=lambda x: x[2], reverse=False) # low to high. This is prioritized, so sorted later.
+            print('nedd nodeInfo:')
+            print(nodeInfo)
+            neddAlloc = [nodeInfo[x][0] for x in range(appSize)]
+            
+            # Anti-NeDD.
+            antiAlloc = [nodeInfo[x][0] for x in range(numIdle-appSize, numIdle)]
+            
+            # Fewer switches. Close to Cori's allocation.
+            nodeInfo2.sort(key=lambda x: x[1], reverse=True) # high to low.
+            fewerAlloc = [nodeInfo2[x][0] for x in range(appSize)]
+            
+            # Lower router stall count.
+            nodeInfo3.sort(key=lambda x: x[3], reverse=False) # low to high.
+            lowerAlloc = [nodeInfo3[x][0] for x in range(appSize)]
+
+            for policy in ['nedd','lowerRouterStall','fewerSwitch','random','antinedd']:
+                if policy == 'nedd':
+                    nodes = neddAlloc
+                elif policy == 'antinedd':
+                    nodes = antiAlloc
+                elif policy == 'fewerSwitch':
+                    nodes = fewerAlloc
+                elif policy == 'lowerRouterStall':
+                    nodes = lowerAlloc
+                elif policy == 'random':
+                    nodes = random.sample(self.idleNodes, appSize)
+                print('Run job in %s policy..' % policy)
+                with open(appOut, 'a') as f:
+                    f.write('Starting job in %s policy..\n' % policy)
+                self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
+                print()
+
+            self.stopGPC()
+            time.sleep(5)
+
+            # run without congestor.
+            #policy = 'neddNoCong'
+            #nodes = neddAlloc
+            #print('Run job in %s policy..' % policy)
+            #with open(appOut, 'a') as f:
+            #    f.write('Starting job in %s policy..\n' % policy)
+            #self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
+
+            policy = 'fewerNoCong'
+            nodes = fewerAlloc
+            print('Run job in %s policy.' % policy)
+            with open(appOut, 'a') as f:
+                f.write('Starting job in %s policy..\n' % policy)
+            self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
+
+            print('Iteration end.')
+            print()
+
+    def NeDDTwo(self, app1, app2, iteration, congSize, appSize, out1, out2):
+        '''
+        Two-job Experiment for the Network-Data-Driven allocation policy.
+        iteration: number of iteration. In each iteration, the nodes to run congestor is re-selected randomly.
+        '''
+        monitorTime = 120 # 60 may not be enough to pass the network test period.
+        print(subprocess.check_output(['date']).decode('utf-8'))
+        jobid = os.environ['SLURM_JOB_ID']
+        print('jobid: ' + str(jobid))
+        with open(out1, 'w') as f:
+            f.write('Starting..\n')
+        with open(out2, 'w') as f:
+            f.write('Starting..\n')
+            
+        for i in range(iteration):
+            print('====================')
+            print('iteration %d' % i)
+            with open(out1, 'a') as f:
+                f.write('====================\n')
+                f.write('iteration %d\n' % i)
+            with open(out2, 'a') as f:
+                f.write('====================\n')
+                f.write('iteration %d\n' % i)
+            # use 1st node for this python code and LDMS storage; the rest for congestor and app.
+            storeNode = 'nid%05d' % self.nodelist[0] # LDMS storage daemon node.
+            availNodes = self.nodelist[1:]
+            congNodes = random.sample(availNodes, congSize) # randomly selecting nodes for the congestor.
+            self.idleNodes = [x for x in availNodes if x not in congNodes]
+            numIdle = len(self.idleNodes)
+
+            # start GPCNET.
+            print('Congestor nodes:')
+            print(congNodes)
+            self.startContGPC(nodes=congNodes)
+
+            # monitor LDMS data.
+            self.monitorstart = int(time.time())
+            if i == 0: # don't start LDMS again.
+                self.runLDMS(foldername='%s_%d' % (jobid, i), storeNode=storeNode, seconds=10)
+            time.sleep(monitorTime)
+            self.monitorend = int(time.time())
+            print('Monitor end timestamp: %d' % self.monitorend)
+
+            print('Starting sortCongestion()..')
+            nodeCongPair = self.sortCongestion() # sort idle nodes from low to high congestion according to their stall-per-second.
+            nodeCongDict = {}
+            for pair in nodeCongPair:
+                nodeCongDict[pair[0]] = pair[1]
+                
+            # get idle nodes that noShare/share with congestor.
+            nodeInfo = []
+            for n in self.idleNodes:
+                n4 = (n//4)*4
+                router = {n4, n4+1, n4+2, n4+3}
+                router.remove(n)
+                neighbor = len(router.intersection(set(self.idleNodes))) # idle neighbor number: 0-3.
+                congNeighbor = len(router.intersection(set(congNodes)))
+                nodeInfo.append( (n,neighbor,congNeighbor,nodeCongDict[n]) )
+            nodeInfo2 = nodeInfo.copy()
+            nodeInfo3 = nodeInfo.copy()
+            
+            # NeDD.
             # so it will first avoid congestor, then choose nodes with more idle neighbors.
             nodeInfo.sort(key=lambda x: x[1], reverse=True) # high to low.
             nodeInfo.sort(key=lambda x: x[2], reverse=False) # low to high. This is prioritized, so sorted later.
