@@ -121,7 +121,7 @@ class withOSU:
         print('endTime:%s:' % (alloc) + subprocess.check_output(['date']).decode('utf-8'))
         print()
 
-    def appOnNodes(self, app, N, nodes, writeToFile=None):
+    def appOnNodes(self, app, N, nodes, writeToFile=None, waitToEnd=True):
         '''
         Run app on some nodes.
         '''
@@ -183,15 +183,19 @@ class withOSU:
         else:
             with open(writeToFile, 'a') as o:
                 o.write(out)
-        apprun = subprocess.Popen(appcmd, stdout=subprocess.PIPE, shell=True) # execute the command.
-        output = apprun.communicate()[0].strip() # get execution output.
-        out = output.decode('utf-8') + '\n'
-        out += 'endTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n\n'
-        if writeToFile is None:
-            print(out)
+        if waitToEnd:
+            apprun = subprocess.Popen(appcmd, stdout=subprocess.PIPE, shell=True) # execute the command.
+            output = apprun.communicate()[0].strip() # get execution output.
+            out = output.decode('utf-8') + '\n'
+            out += 'endTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n\n'
+            if writeToFile is None:
+                print(out)
+            else:
+                with open(writeToFile, 'a') as o:
+                    o.write(out)
         else:
-            with open(writeToFile, 'a') as o:
-                o.write(out)
+            apprun = subprocess.Popen(appcmd, stdout=writeToFile, shell=True) # execute the command.
+        return apprun
 
     def congestor(self):
         '''
@@ -616,59 +620,100 @@ class withOSU:
             nodeInfo3 = nodeInfo.copy()
             
             # NeDD.
-            # so it will first avoid congestor, then choose nodes with more idle neighbors.
             nodeInfo.sort(key=lambda x: x[1], reverse=True) # high to low.
             nodeInfo.sort(key=lambda x: x[2], reverse=False) # low to high. This is prioritized, so sorted later.
             print('nedd nodeInfo:')
             print(nodeInfo)
-            neddAlloc = [nodeInfo[x][0] for x in range(appSize)]
+            neddAlloc1 = [nodeInfo[x][0] for x in range(appSize)]
             
             # Anti-NeDD.
-            antiAlloc = [nodeInfo[x][0] for x in range(numIdle-appSize, numIdle)]
+            antiAlloc1 = [nodeInfo[x][0] for x in range(numIdle-appSize, numIdle)]
             
             # Fewer switches. Close to Cori's allocation.
             nodeInfo2.sort(key=lambda x: x[1], reverse=True) # high to low.
-            fewerAlloc = [nodeInfo2[x][0] for x in range(appSize)]
+            fewerAlloc1 = [nodeInfo2[x][0] for x in range(appSize)]
             
             # Lower router stall count.
             nodeInfo3.sort(key=lambda x: x[3], reverse=False) # low to high.
-            lowerAlloc = [nodeInfo3[x][0] for x in range(appSize)]
+            lowerAlloc1 = [nodeInfo3[x][0] for x in range(appSize)]
+            
+            randomAlloc1 = random.sample(self.idleNodes, appSize)
 
             for policy in ['nedd','lowerRouterStall','fewerSwitch','random','antinedd']:
                 if policy == 'nedd':
-                    nodes = neddAlloc
+                    nodes1 = neddAlloc1
                 elif policy == 'antinedd':
-                    nodes = antiAlloc
+                    nodes1 = antiAlloc1
                 elif policy == 'fewerSwitch':
-                    nodes = fewerAlloc
+                    nodes1 = fewerAlloc1
                 elif policy == 'lowerRouterStall':
-                    nodes = lowerAlloc
+                    nodes1 = lowerAlloc1
                 elif policy == 'random':
-                    nodes = random.sample(self.idleNodes, appSize)
-                print('Run job in %s policy..' % policy)
-                with open(appOut, 'a') as f:
+                    nodes1 = randomAlloc1
+                
+                # get idle node information after the 1st job is allocated.
+                self.idleNodes = [n for n in self.idleNodes if n not in nodes1]
+                numIdle = numIdle - appSize
+                nodeInfo = []
+                for n in self.idleNodes:
+                    n4 = (n//4)*4
+                    router = {n4, n4+1, n4+2, n4+3}
+                    router.remove(n)
+                    neighbor = len(router.intersection(set(self.idleNodes))) # idle neighbor number: 0-3.
+                    congNeighbor = len(router.intersection(set(congNodes)))
+                    nodeInfo.append( (n,neighbor,congNeighbor,nodeCongDict[n]) )
+                nodeInfo2 = nodeInfo.copy()
+                nodeInfo3 = nodeInfo.copy()
+
+                # NeDD.
+                nodeInfo.sort(key=lambda x: x[1], reverse=True) # high to low.
+                nodeInfo.sort(key=lambda x: x[2], reverse=False) # low to high. This is prioritized, so sorted later.
+                neddAlloc2 = [nodeInfo[x][0] for x in range(appSize)]
+
+                # Anti-NeDD.
+                antiAlloc2 = [nodeInfo[x][0] for x in range(numIdle-appSize, numIdle)]
+
+                # Fewer switches. Close to Cori's allocation.
+                nodeInfo2.sort(key=lambda x: x[1], reverse=True) # high to low.
+                fewerAlloc2 = [nodeInfo2[x][0] for x in range(appSize)]
+
+                # Lower router stall count.
+                nodeInfo3.sort(key=lambda x: x[3], reverse=False) # low to high.
+                lowerAlloc2 = [nodeInfo3[x][0] for x in range(appSize)]
+
+                randomAlloc2 = random.sample(self.idleNodes, appSize)
+                
+                if policy == 'nedd':
+                    nodes2 = neddAlloc2
+                elif policy == 'antinedd':
+                    nodes2 = antiAlloc2
+                elif policy == 'fewerSwitch':
+                    nodes2 = fewerAlloc2
+                elif policy == 'lowerRouterStall':
+                    nodes2 = lowerAlloc2
+                elif policy == 'random':
+                    nodes2 = randomAlloc2
+                    
+                print('Run job %s in %s policy..' % (app1, policy))
+                outfile1 = open(out1, 'a')
+                outfile1.write('Starting job in %s policy..\n' % policy)
+                runObj = self.appOnNodes(app=app1, N=appSize, nodes=nodes1, writeToFile=outfile1, waitToEnd=0)
+
+                print('Run job %s in %s policy..' % (app2, policy))
+                with open(out2, 'a') as f:
                     f.write('Starting job in %s policy..\n' % policy)
-                self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
+                self.appOnNodes(app=app2, N=appSize, nodes=nodes2, writeToFile=out2, waitToEnd=1)
                 print()
+                
+                while runObj.poll() == None: # if not finished.
+                    time.sleep(5)
+                outfile1.flush()
+                outdate1 = 'endTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n\n'
+                outfile1.write(outdate1)
+                outfile1.close()
 
             self.stopGPC()
             time.sleep(5)
-
-            # run without congestor.
-            #policy = 'neddNoCong'
-            #nodes = neddAlloc
-            #print('Run job in %s policy..' % policy)
-            #with open(appOut, 'a') as f:
-            #    f.write('Starting job in %s policy..\n' % policy)
-            #self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
-
-            policy = 'fewerNoCong'
-            nodes = fewerAlloc
-            print('Run job in %s policy.' % policy)
-            with open(appOut, 'a') as f:
-                f.write('Starting job in %s policy..\n' % policy)
-            self.appOnNodes(app=appName, N=appSize, nodes=nodes, writeToFile=appOut)
-
             print('Iteration end.')
             print()
 
