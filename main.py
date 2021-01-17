@@ -24,7 +24,7 @@ def main():
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
     #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
-    al.processNeDD(app='graph500')
+    al.processNeDD(app='qmcpack', getdiff=1)
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
@@ -1034,14 +1034,14 @@ class analysis(ldms):
             dfFlit.to_csv('fixGPC_autotime_%s_nodeflit.csv' % app, index=False)
         print('finished.')
 
-    def processNeDD(self, app):
+    def processNeDD(self, app, getdiff):
         cols = ['run','nedd','lowerRouterStall','fewerSwitch','random','antinedd','fewerNoCong']
         suffix = '%s_201' % app
         miniMD_task = 32*68
         f = 'NeDDjob_%s.out' % suffix 
         print('Getting exec time..')
         with open(f, 'r') as o:
-            et = {}
+            et, timediff = {}, []
             count = 0
             for line in o:
                 if app == 'milc':
@@ -1091,6 +1091,12 @@ class analysis(ldms):
                         thisTime = (bfs + sssp) * 64
                         et[count] = thisTime
                 elif app == 'qmcpack':
+                    if getdiff:
+                        if line.startswith('startTime:'):
+                            startUnix = self.timeToUnixPST(line[10:-1])
+                        if line.startswith('endTime:'):
+                            endUnix = self.timeToUnixPST(line[8:-1])
+                            timediff.append(endUnix-startUnix-et[count])
                     if line.startswith('  Total Execution time'):
                         count += 1
                         et[count] = float(line.split()[4].split('e')[0]) * 10**int(line.split()[4].split('+')[1])
@@ -1130,6 +1136,9 @@ class analysis(ldms):
         df.to_csv('NeDDprocess_%s.csv' % suffix, index=False)
         print(df)
         print('NeDDprocess_%s.csv generated.' % suffix)
+        if getdiff:
+            avgdiff = sum(timediff) / len(timediff)
+            print('Difference between two time count: %.f' % avgdiff)
 
     def test(self):
         f = 'results/fixAlloc_lammps3.out'
