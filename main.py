@@ -24,7 +24,7 @@ def main():
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
     #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
-    al.processNeDD(app='hacc')
+    al.processNeDD(app='graph500')
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
@@ -1080,6 +1080,16 @@ class analysis(ldms):
                         sumTime += float(line.split()[6])
                     if line.startswith('endTime:'):
                         et[count] = sumTime
+                elif app == 'graph500':
+                    if line.startswith('startTime:'):
+                        count += 1
+                    if line.startswith('bfs  mean_time'):
+                        bfs = float(line.split()[2])
+                    if line.startswith('sssp mean_time'):
+                        sssp = float(line.split()[2])
+                    if line.startswith('endTime:'):
+                        thisTime = (bfs + sssp) * 64
+                        et[count] = thisTime
                 elif app == 'qmcpack':
                     if line.startswith('  Total Execution time'):
                         count += 1

@@ -14,9 +14,9 @@ def main():
     #w.testOSU()
     #w.congestor() # My GPCNET takes 5 min on 64 knl nodes.
     #w.allocation(instance=int(sys.argv[1]))
-    #w.appOnNodes(app='hacc', N=32, nodes=w.nodelist) # used to test application run.
+    #w.appOnNodes(app='graph500', N=32, nodes=w.nodelist) # used to test application run.
     #w.fixAllocation(appName='lammps', iteration=10, instance=5)
-    w.NeDD(appName='hacc', iteration=10, congSize=64, appSize=32, appOut='NeDDjob_hacc_201.out')
+    w.NeDD(appName='graph500', iteration=10, congSize=64, appSize=32, appOut='NeDDjob_graph500_201.out')
     #w.congestorLDMS()
     #w.testLDMS()
 
@@ -125,7 +125,7 @@ class withOSU:
         Run app on some nodes.
         '''
         tasksPerNode = 68 if self.knl else 32
-        if app in ['milc','hacc']:
+        if app in ['milc','hacc','graph500']:
             tasksPerNode = 64
         ntasks = N * tasksPerNode
         liststr = ','.join(['nid{0:05d}'.format(y) for y in nodes]) # nodelist for srun or mpirun format.

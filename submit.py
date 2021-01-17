@@ -6,8 +6,8 @@ def main():
     #s.withOSU(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.allocation(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.fixAllocation(timelimit='01:40:00', isSingle=0, isMail=1)
-    s.NeDD(N=201, queue='regular', fname='NeDD_hacc_201.out', timelimit='06:00:00', isMail=1)
-    #s.app(N=32, queue='premium', fname='test_hacc.out', timelimit='00:20:00', isMail=1)
+    s.NeDD(N=201, queue='regular', fname='NeDD_graph500_201.out', timelimit='06:00:00', isMail=1)
+    #s.app(N=32, queue='premium', fname='test_graph500.out', timelimit='00:50:00', isMail=1)
     #s.GPC(N=5, timelimit='00:20:00', isMail=1)
     #for day in range(9, 32):
     #    s.getData(day=day, N=1, timelimit='23:00:00', isMail=0)
