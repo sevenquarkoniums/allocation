@@ -24,7 +24,7 @@ def main():
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
     #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
-    al.processNeDD(app='qmcpack', getdiff=1)
+    al.processNeDD(app='lammps', getdiff=1)
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
@@ -1036,7 +1036,7 @@ class analysis(ldms):
 
     def processNeDD(self, app, getdiff):
         cols = ['run','nedd','lowerRouterStall','fewerSwitch','random','antinedd','fewerNoCong']
-        suffix = '%s_201' % app
+        suffix = '%s_201_new' % app
         miniMD_task = 32*68
         f = 'NeDDjob_%s.out' % suffix 
         print('Getting exec time..')
@@ -1058,12 +1058,24 @@ class analysis(ldms):
                         else:
                             et[count] = -1
                 elif app == 'miniMD':
+                    if getdiff:
+                        if line.startswith('startTime:'):
+                            startUnix = self.timeToUnixPST(line[10:-1])
+                        if line.startswith('endTime:'):
+                            endUnix = self.timeToUnixPST(line[8:-1])
+                            timediff.append(endUnix-startUnix-et[count])
                     if line.startswith('%d 1' % miniMD_task):
                         count += 1
                         spl = line.split()
                         decompose = [spl[x] for x in [4,5,6,7,8,-1]]
                         et[count] = float(decompose[0])
                 elif app == 'lammps':
+                    if getdiff:
+                        if line.startswith('startTime:'):
+                            startUnix = self.timeToUnixPST(line[10:-1])
+                        if line.startswith('endTime:'):
+                            endUnix = self.timeToUnixPST(line[8:-1])
+                            timediff.append(endUnix-startUnix-et[count])
                     if line.startswith('Total wall time'):
                         count += 1
                         if 'srun' in line:
