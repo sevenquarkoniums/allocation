@@ -177,13 +177,13 @@ class withOSU:
             appcmd += 'mpirun -np %d --host %s ./miniFE.x -nx 128 -ny 128 -nz 128' % (ntasks, liststr)
         appcmd += ';'
         #appcmd += ' > %s;' % writeToFile # not needed.
-        out = 'startTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n'
-        if writeToFile is None:
-            print(out)
-        else:
-            with open(writeToFile, 'a') as o:
-                o.write(out)
         if waitToEnd:
+            out = 'startTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n'
+            if writeToFile is None:
+                print(out)
+            else:
+                with open(writeToFile, 'a') as o:
+                    o.write(out)
             apprun = subprocess.Popen(appcmd, stdout=subprocess.PIPE, shell=True) # execute the command.
             output = apprun.communicate()[0].strip() # get execution output.
             out = output.decode('utf-8') + '\n'
@@ -586,7 +586,7 @@ class withOSU:
             availNodes = self.nodelist[1:]
             congNodes = random.sample(availNodes, congSize) # randomly selecting nodes for the congestor.
             self.idleNodes = [x for x in availNodes if x not in congNodes]
-            numIdle = len(self.idleNodes)
+            self.numIdle = len(self.idleNodes)
 
             # start GPCNET.
             print('Congestor nodes:')
@@ -627,7 +627,7 @@ class withOSU:
             neddAlloc1 = [nodeInfo[x][0] for x in range(appSize)]
             
             # Anti-NeDD.
-            antiAlloc1 = [nodeInfo[x][0] for x in range(numIdle-appSize, numIdle)]
+            antiAlloc1 = [nodeInfo[x][0] for x in range(self.numIdle-appSize, self.numIdle)]
             
             # Fewer switches. Close to Cori's allocation.
             nodeInfo2.sort(key=lambda x: x[1], reverse=True) # high to low.
@@ -652,14 +652,14 @@ class withOSU:
                     nodes1 = randomAlloc1
                 
                 # get idle node information after the 1st job is allocated.
-                self.idleNodes = [n for n in self.idleNodes if n not in nodes1]
-                numIdle = numIdle - appSize
+                idleNodes = [n for n in self.idleNodes if n not in nodes1]
+                numIdle = self.numIdle - appSize
                 nodeInfo = []
-                for n in self.idleNodes:
+                for n in idleNodes:
                     n4 = (n//4)*4
                     router = {n4, n4+1, n4+2, n4+3}
                     router.remove(n)
-                    neighbor = len(router.intersection(set(self.idleNodes))) # idle neighbor number: 0-3.
+                    neighbor = len(router.intersection(set(idleNodes))) # idle neighbor number: 0-3.
                     congNeighbor = len(router.intersection(set(congNodes)))
                     nodeInfo.append( (n,neighbor,congNeighbor,nodeCongDict[n]) )
                 nodeInfo2 = nodeInfo.copy()
@@ -681,7 +681,7 @@ class withOSU:
                 nodeInfo3.sort(key=lambda x: x[3], reverse=False) # low to high.
                 lowerAlloc2 = [nodeInfo3[x][0] for x in range(appSize)]
 
-                randomAlloc2 = random.sample(self.idleNodes, appSize)
+                randomAlloc2 = random.sample(idleNodes, appSize)
                 
                 if policy == 'nedd':
                     nodes2 = neddAlloc2
@@ -697,6 +697,9 @@ class withOSU:
                 print('Run job %s in %s policy..' % (app1, policy))
                 outfile1 = open(out1, 'a')
                 outfile1.write('Starting job in %s policy..\n' % policy)
+                date1 = 'startTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n'
+                outfile1.write(date1)
+                outfile1.flush()
                 runObj = self.appOnNodes(app=app1, N=appSize, nodes=nodes1, writeToFile=outfile1, waitToEnd=0)
 
                 print('Run job %s in %s policy..' % (app2, policy))
@@ -708,8 +711,8 @@ class withOSU:
                 while runObj.poll() == None: # if not finished.
                     time.sleep(5)
                 outfile1.flush()
-                outdate1 = 'endTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n\n'
-                outfile1.write(outdate1)
+                date1 = 'endTime:' + subprocess.check_output(['date']).decode('utf-8') + '\n\n'
+                outfile1.write(date1)
                 outfile1.close()
 
             self.stopGPC()
