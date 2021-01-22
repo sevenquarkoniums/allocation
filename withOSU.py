@@ -17,7 +17,7 @@ def main():
     #w.appOnNodes(app='graph500', N=32, nodes=w.nodelist) # used to test application run.
     #w.fixAllocation(appName='lammps', iteration=10, instance=5)
     #w.NeDD(appName='graph500', iteration=10, congSize=64, appSize=32, appOut='NeDDjob_graph500_201.out')
-    w.NeDDTwo(app1='miniMD', app2='lammps', iteration=10, congSize=64, appSize=32, out1='NeDDTwojob_miniMD.out', out2='NeDDTwojob_lammps.out')
+    w.NeDDTwo(app1='miniMD', app2='hpcg', iteration=10, congSize=64, appSize=32, out1='NeDDTwojob_miniMD_hpcg_1.out', out2='NeDDTwojob_miniMD_hpcg_2.out')
     #w.congestorLDMS()
     #w.testLDMS()
 

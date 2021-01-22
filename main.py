@@ -24,7 +24,7 @@ def main():
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
     #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
-    al.processNeDD(app='lammps', getdiff=1)
+    al.processNeDD(app='milc', getdiff=0, two=1)
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
@@ -1034,11 +1034,17 @@ class analysis(ldms):
             dfFlit.to_csv('fixGPC_autotime_%s_nodeflit.csv' % app, index=False)
         print('finished.')
 
-    def processNeDD(self, app, getdiff):
-        cols = ['run','nedd','lowerRouterStall','fewerSwitch','random','antinedd','fewerNoCong']
-        suffix = '%s_201_new' % app
+    def processNeDD(self, app, getdiff, two):
+        if two:
+            cols = ['run','nedd','lowerRouterStall','fewerSwitch','random','antinedd']
+            suffix = '%s' % app
+            f = 'NeDDTwojob_%s.out' % suffix 
+            outname = 'NeDDTwoproc_miniMD_milc_2.csv'
+        else:
+            cols += ['fewerNoCong']
+            suffix = '%s_201_new' % app
+            f = 'NeDDjob_%s.out' % suffix 
         miniMD_task = 32*68
-        f = 'NeDDjob_%s.out' % suffix 
         print('Getting exec time..')
         with open(f, 'r') as o:
             et, timediff = {}, []
@@ -1145,9 +1151,14 @@ class analysis(ldms):
                 et[i] = -1
         for row in range(rowCount):
             df.loc[row] = [row] + [et[row*width+i+1] for i in range(width)]
-        df.to_csv('NeDDprocess_%s.csv' % suffix, index=False)
-        print(df)
-        print('NeDDprocess_%s.csv generated.' % suffix)
+        if two:
+            df.to_csv(outname, index=False)
+            print(df)
+            print('%s generated.' % outname)
+        else:
+            df.to_csv('NeDDprocess_%s.csv' % suffix, index=False)
+            print(df)
+            print('NeDDprocess_%s.csv generated.' % suffix)
         if getdiff:
             avgdiff = sum(timediff) / len(timediff)
             print('Difference between two time count: %.f' % avgdiff)

@@ -6,7 +6,7 @@ def main():
     #s.withOSU(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.allocation(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.fixAllocation(timelimit='01:40:00', isSingle=0, isMail=1)
-    s.NeDD(N=201, queue='regular', fname='NeDDTwo_miniMD_lammps.out', timelimit='05:00:00', isMail=1)
+    s.NeDD(N=201, queue='regular', fname='NeDDTwo_miniMD_hpcg.out', timelimit='07:00:00', isMail=1)
     #s.app(N=32, queue='premium', fname='test_graph500.out', timelimit='00:50:00', isMail=1)
     #s.GPC(N=5, timelimit='00:20:00', isMail=1)
     #for day in range(9, 32):
