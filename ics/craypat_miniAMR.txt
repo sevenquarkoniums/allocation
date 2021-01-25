@@ -1,0 +1,584 @@
+CrayPat/X:  Version 7.1.1 Revision 7c0ddd79b  08/19/19 16:58:46
+
+Number of PEs (MPI ranks):   1,024
+                           
+Numbers of PEs per Node:        32  PEs on each of  32  Nodes
+                           
+Numbers of Threads per PE:       1
+                           
+Number of Cores per Socket:     16
+
+Execution start time:  Fri Jan 22 23:03:40 2021
+
+System name and speed:  nid01545  2.301 GHz (nominal)
+
+Intel Haswell    CPU  Family:  6  Model: 63  Stepping:  2
+
+DRAM: 128 GiB DDR4-2400 on 2.3 GHz nodes  for 288 PEs
+DRAM: 128 GiB DDR4-2133 on 2.3 GHz nodes  for 736 PEs
+
+
+Current path to data file:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/miniAMR/miniAMR.x+pat+8361-1545t   (RTS, 256 data files)
+
+
+Notes for table 1:
+
+  This table shows functions that have significant exclusive time,
+    averaged across ranks.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile ...
+
+Table 1:  Profile by Function Group and Function
+
+  Time% |      Time |     Imb. |  Imb. |     Calls | Group
+        |           |     Time | Time% |           |  Function
+        |           |          |       |           |   PE=HIDE
+       
+ 100.0% | 24.823789 |       -- |    -- | 819,375.8 | Total
+|-----------------------------------------------------------------------
+|  78.7% | 19.528644 |       -- |    -- |       2.0 | USER
+||----------------------------------------------------------------------
+||  78.7% | 19.528601 | 3.076045 | 13.6% |       1.0 | main
+||======================================================================
+|  15.0% |  3.717712 |       -- |    -- | 809,045.6 | MPI
+||----------------------------------------------------------------------
+||  11.1% |  2.747904 | 4.238309 | 60.7% |  34,654.8 | MPI_Waitany
+||======================================================================
+|   6.4% |  1.577432 |       -- |    -- |  10,328.2 | MPI_SYNC
+||----------------------------------------------------------------------
+||   6.2% |  1.528770 | 0.905789 | 59.2% |  10,319.2 | MPI_Allreduce(sync)
+|=======================================================================
+
+Notes for table 2:
+
+  This table shows functions that have the most significant exclusive
+    time, taking the maximum time across ranks and threads.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile_max ...
+
+Table 2:  Profile of maximum function times
+
+  Time% |      Time |     Imb. |  Imb. | Function
+        |           |     Time | Time% |  PE=[max,min]
+|-----------------------------------------------------------
+| 100.0% | 22.604647 | 3.076045 | 13.6% | main
+||----------------------------------------------------------
+|| 100.0% | 22.604647 |       -- |    -- | pe.224
+||  67.6% | 15.283128 |       -- |    -- | pe.950
+||==========================================================
+|  30.9% |  6.986213 | 4.238309 | 60.7% | MPI_Waitany
+||----------------------------------------------------------
+||  30.9% |  6.986213 |       -- |    -- | pe.591
+||   2.7% |  0.616974 |       -- |    -- | pe.224
+||==========================================================
+|  13.8% |  3.108821 | 0.905789 | 59.2% | MPI_Allreduce(sync)
+||----------------------------------------------------------
+||  13.8% |  3.108821 |       -- |    -- | pe.361
+||   2.8% |  0.622981 |       -- |    -- | pe.224
+||==========================================================
+|   1.2% |  0.275834 | 0.150541 | 54.6% | MPI_Recv
+||----------------------------------------------------------
+||   1.2% |  0.275834 |       -- |    -- | pe.974
+||   0.1% |  0.019866 |       -- |    -- | pe.73
+||==========================================================
+|   1.1% |  0.259893 | 0.111814 | 43.1% | MPI_Wait
+||----------------------------------------------------------
+||   1.1% |  0.259893 |       -- |    -- | pe.46
+||   0.1% |  0.018597 |       -- |    -- | pe.361
+||==========================================================
+|   1.0% |  0.220603 | 0.168505 | 76.5% | MPI_Irecv
+||----------------------------------------------------------
+||   1.0% |  0.220603 |       -- |    -- | pe.336
+||   0.0% |  0.010014 |       -- |    -- | pe.1005
+||==========================================================
+|   1.0% |  0.220431 | 0.019568 |  8.9% | MPI_Comm_split
+||----------------------------------------------------------
+||   1.0% |  0.220431 |       -- |    -- | pe.786
+||   0.0% |  0.010600 |       -- |    -- | pe.192
+|===========================================================
+
+Observation:  MPI Grid Detection
+
+    There appears to be point-to-point MPI communication in a 256 X 2 X
+    2 grid pattern. The 15% of the total execution time spent in MPI
+    functions might be reduced with a rank order that maximizes
+    communication between ranks on the same node. The effect of several
+    rank orders is estimated below.
+
+    A file named MPICH_RANK_ORDER.Grid was generated along with this
+    report and contains usage instructions and the Custom rank order
+    from the following table.
+
+    Rank Order    On-Node    On-Node  MPICH_RANK_REORDER_METHOD
+                 Bytes/PE  Bytes/PE%  
+                            of Total  
+                            Bytes/PE  
+
+        Custom  6.466e+11     71.38%  3
+           SMP  6.466e+11     71.38%  1
+          Fold  1.822e+10      2.01%  2
+    RoundRobin  5.389e+09      0.59%  0
+
+
+Observation:  Metric-Based Rank Order
+
+    When the use of a shared resource like memory bandwidth is unbalanced
+    across nodes, total execution time may be reduced with a rank order
+    that improves the balance.  The metric used here for resource usage
+    is: USER Time
+
+    For each node, the metric values for the ranks on that node are
+    summed.  The maximum and average value of those sums are shown below
+    for both the current rank order and a custom rank order that seeks
+    to reduce the maximum value.
+
+    A file named MPICH_RANK_ORDER.USER_Time was generated
+    along with this report and contains usage instructions and the
+    Custom rank order from the following table.
+
+       Rank    Node Reduction    Maximum  Average
+      Order  Metric    in Max      Value  Value
+               Imb.     Value             
+
+    Current   3.70%            6.489e+02  6.249e+02
+     Custom   0.16%    3.542%  6.259e+02  6.249e+02
+
+
+Observation:  MPI Hybrid Rank Order
+
+    A hybrid rank order has been calculated that attempts to take both
+    the MPI communication and USER Time resources into account.
+    The table below shows the metric-based calculations along with the
+    final on-node bytes/PE value.
+
+    A file named MPICH_RANK_ORDER.USER_Time_hybrid was generated
+    along with this report and contains usage instructions for this
+    custom rank order.
+
+       Rank    Node Reduction    Maximum    Average  On-Node
+      Order  Metric    in Max      Value      Value  Bytes/PE%
+               Imb.     Value                        of Total
+                                                     Bytes/PE
+
+    Current   3.70%            6.489e+02  6.249e+02  71.38%
+     Custom   0.58%     3.13%  6.286e+02  6.249e+02  61.25%
+
+
+Notes for table 3:
+
+  This table shows the ranks with maximum, mean, and minimum time for
+    functions with significant time, within the function groups. It
+    also shows MPI message statistics for functions in the MPI group.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O load_balance_m ...
+
+Table 3:  Load Balance with MPI Message Stats
+
+  Time% |      Time |  MPI Msg |   MPI Msg Bytes |   Avg MPI | Group
+        |           |    Count |                 |  Msg Size |  PE=[mmm]
+       
+ 100.0% | 24.823789 | 33,300.9 |   884,999,860.3 | 26,575.88 | Total
+|-----------------------------------------------------------------------
+|  78.7% | 19.528644 |      0.0 |             0.0 |        -- | USER
+||----------------------------------------------------------------------
+||  91.1% | 22.604692 |      0.0 |             0.0 |        -- | pe.224
+||  79.1% | 19.647963 |      0.0 |             0.0 |        -- | pe.520
+||  61.6% | 15.283169 |      0.0 |             0.0 |        -- | pe.950
+||======================================================================
+|  15.0% |  3.717712 | 33,300.9 |   884,999,860.3 | 26,575.88 | MPI
+||----------------------------------------------------------------------
+||  32.0% |  7.938414 | 34,592.0 |   699,668,884.0 | 20,226.32 | pe.591
+||  14.5% |  3.607733 | 29,794.0 |   882,604,916.0 | 29,623.58 | pe.268
+||   6.3% |  1.565973 | 34,026.0 | 1,000,836,568.0 | 29,413.88 | pe.704
+||======================================================================
+|   6.4% |  1.577432 |      0.0 |             0.0 |        -- | MPI_SYNC
+||----------------------------------------------------------------------
+||  12.7% |  3.158659 |      0.0 |             0.0 |        -- | pe.361
+||   6.2% |  1.540583 |      0.0 |             0.0 |        -- | pe.447
+||   2.6% |  0.640552 |      0.0 |             0.0 |        -- | pe.224
+|=======================================================================
+
+Notes for table 4:
+
+  This table shows the MPI library functions that are used to send a
+    significant number of bytes, taking the average across sender
+    ranks of the sum of bytes sent from the sender to all destination
+    ranks. It also shows how many bytes are attributable to each of
+    its call paths. It also shows a count of messages and the number
+    of messages that fall into each bin of message sizes. For each
+    path, it shows the ranks that send the minimum, mean, and maximum
+    number of bytes.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O mpi_callers ...
+
+Table 4:  MPI Message Stats by Caller
+
+Function / Caller / PE=[mmm]
+
+  
+=============================================================================
+  Total
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                       100.0% 
+  MPI Msg Bytes                 884,999,860.3 
+  MPI Msg Count                      33,300.9 msgs
+  MsgSz <16 Count                    16,251.8 msgs
+  16<= MsgSz <256 Count                 965.0 msgs
+  256<= MsgSz <4KiB Count             1,108.3 msgs
+  4KiB<= MsgSz <64KiB Count          10,932.4 msgs
+  64KiB<= MsgSz <1MiB Count           4,043.4 msgs
+=============================================================================
+  MPI_Isend
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                        98.0% 
+  MPI Msg Bytes                 867,276,202.2 
+  MPI Msg Count                      17,316.5 msgs
+  MsgSz <16 Count                       640.8 msgs
+  16<= MsgSz <256 Count                 935.4 msgs
+  256<= MsgSz <4KiB Count             1,041.9 msgs
+  4KiB<= MsgSz <64KiB Count          10,905.8 msgs
+  64KiB<= MsgSz <1MiB Count           3,792.7 msgs
+=============================================================================
+  MPI_Isend / comm
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                        98.0% 
+  MPI Msg Bytes                 867,220,312.5 
+  MPI Msg Count                      15,731.2 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             1,032.7 msgs
+  4KiB<= MsgSz <64KiB Count          10,905.8 msgs
+  64KiB<= MsgSz <1MiB Count           3,792.7 msgs
+=============================================================================
+  MPI_Isend / comm / driver
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                        98.0% 
+  MPI Msg Bytes                 867,220,312.5 
+  MPI Msg Count                      15,731.2 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             1,032.7 msgs
+  4KiB<= MsgSz <64KiB Count          10,905.8 msgs
+  64KiB<= MsgSz <1MiB Count           3,792.7 msgs
+==============================================================================
+  MPI_Isend / comm / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        98.0% 
+  MPI Msg Bytes                 867,220,312.5 
+  MPI Msg Count                      15,731.2 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             1,032.7 msgs
+  4KiB<= MsgSz <64KiB Count          10,905.8 msgs
+  64KiB<= MsgSz <1MiB Count           3,792.7 msgs
+==============================================================================
+  MPI_Isend / comm / driver / main / pe.117
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         136.5% 
+  MPI Msg Bytes                 1,207,800,000.0 
+  MPI Msg Count                        20,625.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                 625.0 msgs
+  4KiB<= MsgSz <64KiB Count            14,375.0 msgs
+  64KiB<= MsgSz <1MiB Count             5,625.0 msgs
+==============================================================================
+  MPI_Isend / comm / driver / main / pe.545
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                          98.0% 
+  MPI Msg Bytes                   867,600,000.0 
+  MPI Msg Count                        18,750.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count               1,875.0 msgs
+  4KiB<= MsgSz <64KiB Count            13,125.0 msgs
+  64KiB<= MsgSz <1MiB Count             3,750.0 msgs
+==============================================================================
+  MPI_Isend / comm / driver / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                          43.1% 
+  MPI Msg Bytes                   381,600,000.0 
+  MPI Msg Count                         5,625.0 msgs
+  MsgSz <16 Count                           0.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count             3,750.0 msgs
+  64KiB<= MsgSz <1MiB Count             1,875.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Send
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           2.0% 
+  MPI Msg Bytes                    17,436,580.1 
+  MPI Msg Count                           543.1 msgs
+  MsgSz <16 Count                         272.0 msgs
+  16<= MsgSz <256 Count                    10.6 msgs
+  256<= MsgSz <4KiB Count                   9.2 msgs
+  4KiB<= MsgSz <64KiB Count                 0.7 msgs
+  64KiB<= MsgSz <1MiB Count               250.7 msgs
+==============================================================================
+  MPI_Send / move_blocks
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           2.0% 
+  MPI Msg Bytes                    17,418,295.3 
+  MPI Msg Count                           501.4 msgs
+  MsgSz <16 Count                         250.7 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               250.7 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           1.4% 
+  MPI Msg Bytes                    12,776,913.3 
+  MPI Msg Count                           367.8 msgs
+  MsgSz <16 Count                         183.9 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               183.9 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           1.4% 
+  MPI Msg Bytes                    12,776,913.3 
+  MPI Msg Count                           367.8 msgs
+  MsgSz <16 Count                         183.9 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               183.9 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine / driver
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           1.4% 
+  MPI Msg Bytes                    12,776,913.3 
+  MPI Msg Count                           367.8 msgs
+  MsgSz <16 Count                         183.9 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               183.9 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine / driver / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           1.4% 
+  MPI Msg Bytes                    12,776,913.3 
+  MPI Msg Count                           367.8 msgs
+  MsgSz <16 Count                         183.9 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count               183.9 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine / driver / main / pe.233
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           9.9% 
+  MPI Msg Bytes                    87,267,628.0 
+  MPI Msg Count                         1,443.0 msgs
+  MsgSz <16 Count                         187.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count             1,256.0 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine / driver / main / pe.77
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.8% 
+  MPI Msg Bytes                     6,740,308.0 
+  MPI Msg Count                           284.0 msgs
+  MsgSz <16 Count                         187.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                97.0 msgs
+==============================================================================
+  MPI_Send / move_blocks / load_balance / refine / driver / main / pe.1016
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                           0.4% 
+  MPI Msg Bytes                     3,127,176.0 
+  MPI Msg Count                           189.0 msgs
+  MsgSz <16 Count                         144.0 msgs
+  16<= MsgSz <256 Count                     0.0 msgs
+  256<= MsgSz <4KiB Count                   0.0 msgs
+  4KiB<= MsgSz <64KiB Count                 0.0 msgs
+  64KiB<= MsgSz <1MiB Count                45.0 msgs
+==============================================================================
+
+Notes for table 5:
+
+  This table shows energy and power usage for the nodes with the
+    maximum, mean, and minimum usage, as well as the sum of usage over
+    all nodes.
+    Energy and power for accelerators is also shown, if applicable.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_energy ...
+
+Table 5:  Program energy and power usage (from Cray PM)
+
+    Node |      Node |   Process | Node Id=[mmm]
+  Energy | Power (W) |      Time |  PE=HIDE
+     (J) |           |           | 
+        
+ 348,409 | 8,325.469 | 41.848600 | Total
+|-----------------------------------------------
+|  16,295 |   282.081 | 57.767999 | nid.1810
+|   9,567 |   257.606 | 37.139738 | nid.1776
+|   8,972 |   243.228 | 36.886462 | nid.1546
+|===============================================
+
+Notes for table 6:
+
+  This table shows values shown for HiMem calculated from information
+    in the /proc/self/numa_maps files captured near the end of the
+    program. It is the total size of all pages, including huge pages,
+    that were actually mapped into physical memory from both private
+    and shared memory segments.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O himem ...
+
+Table 6:  Memory High Water Mark by Numa Node
+
+   Process |     HiMem |     HiMem | Numanode
+     HiMem | Numa Node | Numa Node |  PE=HIDE
+ (MiBytes) |         0 |         1 | 
+           | (MiBytes) | (MiBytes) | 
+|----------------------------------------------
+|   1,188.6 |   1,179.6 |       9.1 | numanode.0
+|   1,188.1 |      11.0 |   1,177.1 | numanode.1
+|==============================================
+
+Notes for table 7:
+
+  This table shows total wall clock time for the ranks with the
+    maximum, mean, and minimum time, as well as the average across
+    ranks.
+    It also shows maximum memory usage from /proc/self/numa_maps for
+    those ranks, and on average.  The usage is total size of all
+    pages, including huge pages, that were actually mapped into
+    physical memory from both private and shared memory segments.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_time ...
+
+Table 7:  Wall Clock Time, Memory High Water Mark
+
+    Process |   Process | PE=[mmm]
+       Time |     HiMem | 
+            | (MiBytes) | 
+           
+  41.848600 |   1,188.4 | Total
+|---------------------------------
+| 304.169521 |   1,187.1 | pe.766
+|  36.885357 |   1,189.2 | pe.957
+|  36.687273 |   1,189.4 | pe.809
+|=================================
+
+========================  Additional details  ========================
+
+
+
+General table notes:
+
+    The default notes for a table are based on the default definition of
+    the table, and do not account for the effects of command-line options
+    that may modify the content of the table.
+    
+    Detailed notes, produced by the pat_report -v option, do account for
+    all command-line options, and also show how data is aggregated, and
+    if the table content is limited by thresholds, rank selections, etc.
+    
+    An imbalance metric in a line is based on values in main threads
+    across multiple ranks, or on values across all threads, as applicable.
+    
+    An imbalance percent in a line is relative to the maximum value
+    for that line across ranks or threads, as applicable.
+    
+Experiment:  trace
+
+Original path to data file:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/miniAMR/miniAMR.x+pat+8361-1545t/xf-files   (RTS, 1024 data files)
+
+Original program:  /global/u1/c/cookbg/mpi/miniAMR/miniAMR_ref/miniAMR.x
+
+Instrumented with:  pat_build -g mpi miniAMR.x
+
+Instrumented program:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/miniAMR/./miniAMR_ref/miniAMR.x+pat
+
+Program invocation:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/miniAMR/./miniAMR_ref/miniAMR.x+pat --num_refine 4 --max_blocks 5000 --init_x 1 --init_y 1 --init_z 1 --npx 16 --npy 8 --npz 8 --nx 6 --ny 6 --nz 6 --num_objects 2 --object 2 0 -1.10 -1.10 -1.10 0.030 ...
+
+Exit Status:  0 for 1,024 PEs
+
+Memory pagesize:  4 KiB
+
+Memory hugepagesize:  2 MiB
+
+Programming environment:  INTEL
+
+Runtime environment variables:
+  CRAYPAT_ALPS_COMPONENT=/opt/cray/pe/perftools/7.1.1/sbin/pat_alps
+  CRAYPAT_COMPILER_OPTIONS=1
+  CRAYPAT_LD_LIBRARY_PATH=/opt/cray/pe/gcc-libs:/opt/cray/gcc-libs:/opt/cray/pe/perftools/7.1.1/lib64
+  CRAYPAT_LITE=lite-samples
+  CRAYPAT_OPTS_EXECUTABLE=libexec64/opts
+  CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+  CRAYPE_VERSION=2.6.2
+  CRAY_LIBSCI_VERSION=19.06.1
+  DVS_VERSION=0.9.0
+  HUGETLB_DEFAULT_PAGE_SIZE=2M
+  HUGETLB_ELFMAP=W
+  HUGETLB_FORCE_ELFMAP=yes+
+  HUGETLB_MORECORE=yes
+  HUGETLB_MORECORE_HEAPBASE=10000000000
+  HUGETLB_VERBOSE=0
+  INTEL_MAJOR_VERSION=19
+  INTEL_MINOR_VERSION=19
+  INTEL_VERSION=19.0.3.199
+  LIBSCI_VERSION=19.06.1
+  MODULE_VERSION=3.2.11.4
+  MODULE_VERSION_STACK=3.2.11.4
+  MPICH_ABORT_ON_ERROR=1
+  MPICH_DIR=/opt/cray/pe/mpt/7.7.10/gni/mpich-intel/16.0
+  MPICH_GNI_ROUTING_MODE=ADAPTIVE_3
+  MPICH_MPIIO_DVS_MAXNODES=28
+  PAT_BUILD_PAPI_LIBDIR=/opt/cray/pe/papi/5.7.0.2/lib64
+  PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+  PERFTOOLS_VERSION=7.1.1
+  PMI_CONTROL_PORT=63994
+  PMI_CRAY_NO_SMP_ORDER=0
+  PMI_GNI_COOKIE=2991456256:226754560
+  PMI_GNI_DEV_ID=0
+  PMI_GNI_LOC_ADDR=2057:2057
+  PMI_GNI_PTAG=51:52
+  PMI_NO_FORK=1
+
+Report time environment variables:
+    CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+    PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+
+Number of MPI control variables collected:  108
+
+  (To see the list, specify: -s mpi_cvar=show)
+
+Report command line options:  -o craypat_miniAMR.txt
+
+Operating system:
+  Linux 4.12.14-150.17_5.0.92-cray_ari_c #1 SMP Wed Dec 2 16:40:47 UTC 2020 (0d561ce)
+
+Instrumentation overhead could not be estimated.
+
+Number of traced functions that were called:  18
+
+  (To see the list, specify:  -s traced_functions=show)
+

@@ -1,0 +1,408 @@
+CrayPat/X:  Version 7.1.1 Revision 7c0ddd79b  08/19/19 16:58:46
+
+Number of PEs (MPI ranks):   2,176
+                           
+Numbers of PEs per Node:        68  PEs on each of  32  Nodes
+                           
+Numbers of Threads per PE:       1
+                           
+Number of Cores per Socket:     68
+
+Execution start time:  Fri Jan 22 14:28:54 2021
+
+System name and speed:  nid02732  1.401 GHz (nominal)
+
+Intel Knights Landing CPU  Family:  6  Model: 87  Stepping:  1
+
+DRAM:  96 GiB DDR4-2400 on 1.4 GHz nodes
+
+MCDRAM: 7.2 GHz, 16 GiB available as quad, cache (100% cache)
+
+Current path to data file:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/miniMD/miniMD/craypat/miniMD_cray_intel+pat+170680-2732t   (RTS, 242 data files)
+
+
+Notes for table 1:
+
+  This table shows functions that have significant exclusive time,
+    averaged across ranks.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile ...
+
+Table 1:  Profile by Function Group and Function
+
+  Time% |      Time |     Imb. |  Imb. |       Calls | Group
+        |           |     Time | Time% |             |  Function
+        |           |          |       |             |   PE=HIDE
+       
+ 100.0% | 70.588237 |       -- |    -- | 1,371,295.0 | Total
+|-------------------------------------------------------------------------
+|  68.9% | 48.634059 |       -- |    -- | 1,368,074.0 | MPI
+||------------------------------------------------------------------------
+||  65.8% | 46.446342 | 1.203376 |  2.5% | 1,032,036.0 | MPI_Sendrecv
+||   1.5% |  1.057545 | 0.343373 | 24.5% |         1.0 | MPI_Cart_create
+||   1.0% |  0.725024 | 0.295912 | 29.0% |   332,803.0 | MPI_Wtime
+||========================================================================
+|  29.8% | 21.039971 | 5.069185 | 19.4% |         1.0 | USER
+||------------------------------------------------------------------------
+||  29.8% | 21.039971 | 5.069185 | 19.4% |         1.0 | main
+||========================================================================
+|   1.2% |  0.870395 |       -- |    -- |     3,217.0 | MPI_SYNC
+||------------------------------------------------------------------------
+||   1.1% |  0.749904 | 0.297055 | 39.6% |     2,410.0 | MPI_Allreduce(sync)
+|=========================================================================
+
+Notes for table 2:
+
+  This table shows functions that have the most significant exclusive
+    time, taking the maximum time across ranks and threads.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile_max ...
+
+Table 2:  Profile of maximum function times
+
+  Time% |      Time |     Imb. |  Imb. | Function
+        |           |     Time | Time% |  PE=[max,min]
+|-----------------------------------------------------------
+| 100.0% | 47.649718 | 1.203376 |  2.5% | MPI_Sendrecv
+||----------------------------------------------------------
+|| 100.0% | 47.649718 |       -- |    -- | pe.238
+||  88.5% | 42.173532 |       -- |    -- | pe.1972
+||==========================================================
+|  54.8% | 26.109156 | 5.069185 | 19.4% | main
+||----------------------------------------------------------
+||  54.8% | 26.109156 |       -- |    -- | pe.748
+||  41.1% | 19.585960 |       -- |    -- | pe.1462
+||==========================================================
+|   2.9% |  1.400918 | 0.343373 | 24.5% | MPI_Cart_create
+||----------------------------------------------------------
+||   2.9% |  1.400918 |       -- |    -- | pe.843
+||   0.0% |  0.000820 |       -- |    -- | pe.1790
+||==========================================================
+|   2.1% |  1.020935 | 0.295912 | 29.0% | MPI_Wtime
+||----------------------------------------------------------
+||   2.1% |  1.020935 |       -- |    -- | pe.1224
+||   1.4% |  0.675799 |       -- |    -- | pe.185
+||==========================================================
+|   2.0% |  0.960993 | 0.297055 | 39.6% | MPI_Allreduce(sync)
+||----------------------------------------------------------
+||   2.0% |  0.960993 |       -- |    -- | pe.366
+||   1.0% |  0.452850 |       -- |    -- | pe.1020
+|===========================================================
+
+Observation:  MPI Grid Detection
+
+    There appears to be point-to-point MPI communication in a 8 X 16 X
+    17 grid pattern. The 68.9% of the total execution time spent in MPI
+    functions might be reduced with a rank order that maximizes
+    communication between ranks on the same node. The effect of several
+    rank orders is estimated below.
+
+    No custom rank order was found that is better than the SMP order.
+
+    Rank Order    On-Node    On-Node  MPICH_RANK_REORDER_METHOD
+                 Bytes/PE  Bytes/PE%  
+                            of Total  
+                            Bytes/PE  
+
+           SMP  5.382e+12     84.40%  1
+          Fold  1.758e+11      2.76%  2
+    RoundRobin  0.000e+00      0.00%  0
+
+
+Observation:  Metric-Based Rank Order
+
+    When the use of a shared resource like memory bandwidth is unbalanced
+    across nodes, total execution time may be reduced with a rank order
+    that improves the balance.  The metric used here for resource usage
+    is: USER Time
+
+    For each node, the metric values for the ranks on that node are
+    summed.  The maximum and average value of those sums are shown below
+    for both the current rank order and a custom rank order that seeks
+    to reduce the maximum value.
+
+    A file named MPICH_RANK_ORDER.USER_Time was generated
+    along with this report and contains usage instructions and the
+    Custom rank order from the following table.
+
+       Rank    Node Reduction    Maximum  Average
+      Order  Metric    in Max      Value  Value
+               Imb.     Value             
+
+    Current   5.22%            1.510e+03  1.431e+03
+     Custom   0.09%    5.141%  1.432e+03  1.431e+03
+
+
+Observation:  MPI Hybrid Rank Order
+
+    A hybrid rank order has been calculated that attempts to take both
+    the MPI communication and USER Time resources into account.
+    The table below shows the metric-based calculations along with the
+    final on-node bytes/PE value.
+
+    A file named MPICH_RANK_ORDER.USER_Time_hybrid was generated
+    along with this report and contains usage instructions for this
+    custom rank order.
+
+       Rank    Node Reduction    Maximum    Average  On-Node
+      Order  Metric    in Max      Value      Value  Bytes/PE%
+               Imb.     Value                        of Total
+                                                     Bytes/PE
+
+    Current   5.22%            1.510e+03  1.431e+03  84.40%
+     Custom   1.49%     3.79%  1.452e+03  1.431e+03  76.96%
+
+
+Observation:  MPI utilization
+
+    The time spent on overall MPI communications is relatively high. 
+    Functions and callsites responsible for consuming the most time can
+    be found in the table generated by pat_report -O callers+src (within
+    the MPI group).
+
+
+Notes for table 3:
+
+  This table shows the ranks with maximum, mean, and minimum time for
+    functions with significant time, within the function groups. It
+    also shows MPI message statistics for functions in the MPI group.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O load_balance_m ...
+
+Table 3:  Load Balance with MPI Message Stats
+
+  Time% |      Time |     MPI Msg |   MPI Msg Bytes |  Avg MPI | Group
+        |           |       Count |                 | Msg Size |  PE=[mmm]
+       
+ 100.0% | 70.588237 | 1,034,446.0 | 2,930,501,058.0 | 2,832.92 | Total
+|-------------------------------------------------------------------------
+|  68.9% | 48.634059 | 1,034,446.0 | 2,930,501,058.0 | 2,832.92 | MPI
+||------------------------------------------------------------------------
+||  71.0% | 50.084877 | 1,034,446.0 | 2,931,962,364.0 | 2,834.33 | pe.1445
+||  69.1% | 48.778666 | 1,034,446.0 | 2,929,703,660.0 | 2,832.15 | pe.2048
+||  62.1% | 43.844018 | 1,034,446.0 | 2,934,290,172.0 | 2,836.58 | pe.748
+||========================================================================
+|  29.8% | 21.039971 |         0.0 |             0.0 |       -- | USER
+||------------------------------------------------------------------------
+||  37.0% | 26.109156 |         0.0 |             0.0 |       -- | pe.748
+||  29.6% | 20.886074 |         0.0 |             0.0 |       -- | pe.1244
+||  27.7% | 19.585960 |         0.0 |             0.0 |       -- | pe.1462
+||========================================================================
+|   1.2% |  0.870395 |         0.0 |             0.0 |       -- | MPI_SYNC
+||------------------------------------------------------------------------
+||   1.6% |  1.142710 |         0.0 |             0.0 |       -- | pe.655
+||   1.2% |  0.870643 |         0.0 |             0.0 |       -- | pe.591
+||   0.8% |  0.555460 |         0.0 |             0.0 |       -- | pe.1292
+|=========================================================================
+
+Notes for table 4:
+
+  This table shows the MPI library functions that are used to send a
+    significant number of bytes, taking the average across sender
+    ranks of the sum of bytes sent from the sender to all destination
+    ranks. It also shows how many bytes are attributable to each of
+    its call paths. It also shows a count of messages and the number
+    of messages that fall into each bin of message sizes. For each
+    path, it shows the ranks that send the minimum, mean, and maximum
+    number of bytes.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O mpi_callers ...
+
+Table 4:  MPI Message Stats by Caller
+
+    MPI |   MPI Msg Bytes |     MPI Msg |    MsgSz |     16<= |     256<= |    4KiB<= | Function
+    Msg |                 |       Count |      <16 |    MsgSz |     MsgSz |     MsgSz |  Caller
+ Bytes% |                 |             |    Count |     <256 |     <4KiB |    <64KiB |   PE=[mmm]
+        |                 |             |          |    Count |     Count |     Count | 
+       
+ 100.0% | 2,930,501,058.0 | 1,034,446.0 | 60,128.9 | 14,210.7 | 640,100.3 | 320,006.0 | Total
+|-----------------------------------------------------------------------------
+| 100.0% | 2,930,481,790.0 | 1,032,036.0 | 57,718.9 | 14,210.7 | 640,100.3 | 320,006.0 | MPI_Sendrecv
+||----------------------------------------------------------------------------
+||  49.6% | 1,452,421,039.8 |   480,012.0 |      0.0 |      0.0 | 320,008.0 | 160,004.0 | Comm::reverse_communicate
+3|  49.6% | 1,452,383,729.3 |   480,000.0 |      0.0 |      0.0 | 320,000.0 | 160,000.0 |  Integrate::run
+4|        |                 |             |          |          |           |           |   __kmpc_fork_call
+5|        |                 |             |          |          |           |           |    Integrate::run
+6|        |                 |             |          |          |           |           |     main
+|||||||-----------------------------------------------------------------------
+7||||||  49.7% | 1,457,769,960.0 |   480,000.0 |      0.0 |      0.0 | 320,000.0 | 160,000.0 | pe.782
+7||||||  49.6% | 1,452,382,584.0 |   480,000.0 |      0.0 |      0.0 | 320,000.0 | 160,000.0 | pe.738
+7||||||  49.4% | 1,447,860,696.0 |   480,000.0 |      0.0 |      0.0 | 320,000.0 | 160,000.0 | pe.682
+|||||||=======================================================================
+||  47.1% | 1,379,765,521.5 |   456,000.0 |      0.0 |      0.0 | 304,000.0 | 152,000.0 | Comm::communicate
+3|        |                 |             |          |          |           |           |  Integrate::run
+4|        |                 |             |          |          |           |           |   __kmpc_fork_call
+5|        |                 |             |          |          |           |           |    Integrate::run
+6|        |                 |             |          |          |           |           |     main
+|||||||-----------------------------------------------------------------------
+7||||||  47.3% | 1,386,643,104.0 |   456,000.0 |      0.0 |      0.0 | 304,000.0 | 152,000.0 | pe.766
+7||||||  47.1% | 1,379,744,280.0 |   456,000.0 |      0.0 |      0.0 | 304,000.0 | 152,000.0 | pe.1099
+7||||||  46.9% | 1,373,035,608.0 |   456,000.0 |      0.0 |      0.0 | 304,000.0 | 152,000.0 | pe.841
+|||||||=======================================================================
+||   3.3% |    96,945,861.5 |    48,012.0 | 24,006.0 |      0.0 |  16,004.0 |   8,002.0 | Comm::borders
+3|   3.3% |    96,920,277.0 |    48,000.0 | 24,000.0 |      0.0 |  16,000.0 |   8,000.0 |  Integrate::run
+4|        |                 |             |          |          |           |           |   __kmpc_fork_call
+5|        |                 |             |          |          |           |           |    Integrate::run
+6|        |                 |             |          |          |           |           |     main
+|||||||-----------------------------------------------------------------------
+7||||||   3.3% |    97,402,240.0 |    48,000.0 | 24,000.0 |      0.0 |  16,000.0 |   8,000.0 | pe.766
+7||||||   3.3% |    96,918,720.0 |    48,000.0 | 24,000.0 |      0.0 |  16,000.0 |   8,000.0 | pe.1506
+7||||||   3.3% |    96,451,424.0 |    48,000.0 | 24,000.0 |      0.0 |  16,000.0 |   8,000.0 | pe.841
+|=============================================================================
+
+Notes for table 5:
+
+  This table shows energy and power usage for the nodes with the
+    maximum, mean, and minimum usage, as well as the sum of usage over
+    all nodes.
+    Energy and power for accelerators is also shown, if applicable.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_energy ...
+
+Table 5:  Program energy and power usage (from Cray PM)
+
+    Node |      Node |   Process | Node Id=[mmm]
+  Energy | Power (W) |      Time |  PE=HIDE
+     (J) |           |           | 
+        
+ 464,092 | 6,523.796 | 71.138409 | Total
+|-----------------------------------------------
+|  15,589 |   219.018 | 71.178053 | nid.10158
+|  14,483 |   203.390 | 71.206013 | nid.2758
+|  13,307 |   186.970 | 71.173644 | nid.7114
+|===============================================
+
+Notes for table 6:
+
+  This table shows total wall clock time for the ranks with the
+    maximum, mean, and minimum time, as well as the average across
+    ranks.
+    It also shows maximum memory usage from /proc/self/numa_maps for
+    those ranks, and on average.  The usage is total size of all
+    pages, including huge pages, that were actually mapped into
+    physical memory from both private and shared memory segments.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_time ...
+
+Table 6:  Wall Clock Time, Memory High Water Mark
+
+   Process |   Process | PE=[mmm]
+      Time |     HiMem | 
+           | (MiBytes) | 
+          
+ 71.138409 |      63.6 | Total
+|--------------------------------
+| 73.031854 |      64.0 | pe.1190
+| 71.093963 |      62.6 | pe.579
+| 70.801555 |      63.1 | pe.860
+|================================
+
+========================  Additional details  ========================
+
+
+
+General table notes:
+
+    The default notes for a table are based on the default definition of
+    the table, and do not account for the effects of command-line options
+    that may modify the content of the table.
+    
+    Detailed notes, produced by the pat_report -v option, do account for
+    all command-line options, and also show how data is aggregated, and
+    if the table content is limited by thresholds, rank selections, etc.
+    
+    An imbalance metric in a line is based on values in main threads
+    across multiple ranks, or on values across all threads, as applicable.
+    
+    An imbalance percent in a line is relative to the maximum value
+    for that line across ranks or threads, as applicable.
+    
+Experiment:  trace
+
+Original path to data file:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/miniMD/miniMD/craypat/miniMD_cray_intel+pat+170680-2732t/xf-files   (RTS, 2176 data files)
+
+Original program:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/miniMD/miniMD/craypat/miniMD_cray_intel
+
+Instrumented with:  pat_build -g mpi miniMD_cray_intel
+
+Instrumented program:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/miniMD/miniMD/craypat/./miniMD_cray_intel+pat
+
+Program invocation:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/miniMD/miniMD/craypat/./miniMD_cray_intel+pat -n 80000
+
+Exit Status:  0 for 2,176 PEs
+
+Memory pagesize:  4 KiB
+
+Memory hugepagesize:  2 MiB
+
+Programming environment:  INTEL
+
+Runtime environment variables:
+  CRAYPAT_ALPS_COMPONENT=/opt/cray/pe/perftools/7.1.1/sbin/pat_alps
+  CRAYPAT_COMPILER_OPTIONS=1
+  CRAYPAT_LD_LIBRARY_PATH=/opt/cray/pe/gcc-libs:/opt/cray/gcc-libs:/opt/cray/pe/perftools/7.1.1/lib64
+  CRAYPAT_LITE=lite-samples
+  CRAYPAT_OPTS_EXECUTABLE=libexec64/opts
+  CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+  CRAYPE_VERSION=2.6.2
+  CRAY_LIBSCI_VERSION=19.06.1
+  DVS_VERSION=0.9.0
+  HUGETLB_DEFAULT_PAGE_SIZE=2M
+  HUGETLB_ELFMAP=W
+  HUGETLB_FORCE_ELFMAP=yes+
+  HUGETLB_MORECORE=yes
+  HUGETLB_MORECORE_HEAPBASE=10000000000
+  HUGETLB_VERBOSE=0
+  INTEL_MAJOR_VERSION=19
+  INTEL_MINOR_VERSION=19
+  INTEL_VERSION=19.0.3.199
+  LIBSCI_VERSION=19.06.1
+  MODULE_VERSION=3.2.11.4
+  MODULE_VERSION_STACK=3.2.11.4
+  MPICH_ABORT_ON_ERROR=1
+  MPICH_DIR=/opt/cray/pe/mpt/7.7.10/gni/mpich-intel/16.0
+  MPICH_GNI_ROUTING_MODE=ADAPTIVE_3
+  MPICH_MPIIO_DVS_MAXNODES=28
+  PAT_BUILD_PAPI_LIBDIR=/opt/cray/pe/papi/5.7.0.2/lib64
+  PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+  PERFTOOLS_VERSION=7.1.1
+  PMI_CONTROL_PORT=63268
+  PMI_CRAY_NO_SMP_ORDER=0
+  PMI_GNI_COOKIE=2793472000:2389704704
+  PMI_GNI_DEV_ID=0
+  PMI_GNI_LOC_ADDR=3628:3628
+  PMI_GNI_PTAG=115:116
+  PMI_NO_FORK=1
+
+Report time environment variables:
+    CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+    PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+
+Number of MPI control variables collected:  108
+
+  (To see the list, specify: -s mpi_cvar=show)
+
+Report command line options:  -o craypatout.txt
+
+Operating system:
+  Linux 4.12.14-150.17_5.0.92-cray_ari_c #1 SMP Wed Dec 2 16:40:47 UTC 2020 (0d561ce)
+
+Instrumentation overhead could not be estimated.
+
+Number of traced functions that were called:  14
+
+  (To see the list, specify:  -s traced_functions=show)
+

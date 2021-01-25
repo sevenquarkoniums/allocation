@@ -1,0 +1,6 @@
+load name=aries_nic_mmr
+config name=aries_nic_mmr instance=2746/aries_nic_mmr producer=nid02746 job_set=2746/jobinfo component_id=2746 file=/project/projectdirs/m3231/yijia/ldms/ovis/build/etc/ldms/aries_mmr_set_configs/metric_set_nic
+start name=aries_nic_mmr interval=1000000 offset=0
+load name=cray_aries_r_sampler
+config name=cray_aries_r_sampler instance=2746/cray_aries_r producer=nid02746 job_set=2746/jobinfo component_id=2746 schema=cray_aries_r off_hsn=0
+start name=cray_aries_r_sampler interval=1000000 offset=50

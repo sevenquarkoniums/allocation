@@ -1,0 +1,341 @@
+current nodes:
+[1405, 1406, 1407, 1413, 1414, 1415, 1762, 1763, 1764, 1765, 1789, 12868, 12869, 12870, 12871, 12888, 12889, 12890, 12891, 12893]
+Sat May  2 19:09:21 PDT 2020
+
+jobid: 30291076
+====================
+iteration 0
+Congestor nodes:
+[12890, 12889, 1763, 12869, 12893, 1413, 12868, 1414, 1415, 1765]
+srun: forcing job termination
+[12890, 12889, 1763, 12869, 12893, 1413, 12868, 1414, 1415, 1765]
+continual GPC started.
+GPC killed in continualGPC().
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 30291076.0 ON nid01413 CANCELLED AT 2020-05-02T19:09:54 ***
+srun: error: nid12868: tasks 160-191: Killed
+srun: Terminating job step 30291076.0
+GPC checker started.
+continualGPC() finished.
+GPC killed.
+Iteration end.
+
+====================
+iteration 1
+Congestor nodes:
+[1415, 12889, 1414, 12891, 1764, 1762, 1413, 1765, 12869, 12888]
+sbcast: error: REQUEST_FILE_BCAST(nid01789): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12871): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01764): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01407): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01762): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01406): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12870): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12891): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12888): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01405): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12868): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12869): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01413): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12889): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01414): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12893): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01765): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01763): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12890): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01415): Unspecified error
+srun: error: nid01415: tasks 64-95: Killed
+srun: error: nid01413: tasks 0-31: Killed
+srun: error: nid01763: tasks 96-127: Killed
+srun: error: nid12890: tasks 256-287: Killed
+srun: error: nid01414: tasks 32-63: Killed
+srun: error: nid12869: tasks 192-223: Killed
+srun: error: nid01765: tasks 128-159: Killed
+srun: error: nid12889: tasks 224-255: Killed
+srun: error: nid12893: tasks 288-319: Killed
+srun: Job 30291076 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for job 30291076
+srun: forcing job termination
+[1415, 12889, 1414, 12891, 1764, 1762, 1413, 1765, 12869, 12888]
+continual GPC started.
+GPC killed in continualGPC().
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 30291076.1 ON nid01413 CANCELLED AT 2020-05-02T19:10:28 ***
+srun: error: nid01762: tasks 96-127: Killed
+srun: Terminating job step 30291076.1
+srun: error: nid01415: tasks 64-95: Killed
+srun: error: nid01765: tasks 160-191: Killed
+srun: error: nid01764: tasks 128-159: Killed
+srun: error: nid01414: tasks 32-63: Killed
+srun: error: nid01413: tasks 0-31: Killed
+srun: error: nid12891: tasks 288-319: Killed
+srun: error: nid12889: tasks 256-287: Killed
+srun: error: nid12888: tasks 224-255: Killed
+srun: error: nid12869: tasks 192-223: Killed
+GPC checker started.
+continualGPC() finished.
+GPC killed.
+Iteration end.
+
+====================
+iteration 2
+Congestor nodes:
+[12891, 12888, 12868, 12893, 1407, 1765, 12869, 1762, 12889, 1789]
+sbcast: error: REQUEST_FILE_BCAST(nid01789): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01407): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12871): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01406): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12870): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12868): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01763): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12890): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01405): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12893): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12869): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01762): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01764): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01413): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01765): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12888): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12891): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01415): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01414): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12889): Unspecified error
+srun: Job 30291076 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for job 30291076
+srun: forcing job termination
+[12891, 12888, 12868, 12893, 1407, 1765, 12869, 1762, 12889, 1789]
+continual GPC started.
+GPC killed in continualGPC().
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 30291076.2 ON nid01407 CANCELLED AT 2020-05-02T19:11:01 ***
+srun: error: nid12868: tasks 128-159: Killed
+srun: Terminating job step 30291076.2
+srun: error: nid01789: tasks 96-127: Killed
+srun: error: nid01407: tasks 0-31: Killed
+srun: error: nid12891: tasks 256-287: Killed
+srun: error: nid01765: tasks 64-95: Killed
+srun: error: nid12889: tasks 224-255: Killed
+srun: error: nid12869: tasks 160-191: Killed
+srun: error: nid12888: tasks 192-223: Killed
+srun: error: nid12893: tasks 288-319: Killed
+srun: error: nid01762: tasks 32-63: Killed
+GPC checker started.
+continualGPC() finished.
+GPC killed.
+Iteration end.
+
+====================
+iteration 3
+Congestor nodes:
+[12888, 1407, 12871, 12868, 1765, 12890, 1415, 1764, 12870, 12869]
+sbcast: error: REQUEST_FILE_BCAST(nid01406): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12871): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01413): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12870): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01764): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01763): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12890): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01405): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01415): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01789): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01414): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12868): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12869): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01765): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12888): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01762): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01407): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12889): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12893): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12891): Unspecified error
+srun: forcing job termination
+[12888, 1407, 12871, 12868, 1765, 12890, 1415, 1764, 12870, 12869]
+continual GPC started.
+GPC killed in continualGPC().
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 30291076.3 ON nid01407 CANCELLED AT 2020-05-02T19:11:36 ***
+srun: error: nid12868: tasks 128-159: Killed
+srun: Terminating job step 30291076.3
+srun: error: nid12871: tasks 224-255: Killed
+srun: error: nid01407: tasks 0-31: Killed
+srun: error: nid01415: tasks 32-63: Killed
+srun: error: nid01764: tasks 64-95: Killed
+srun: error: nid01765: tasks 96-127: Killed
+srun: error: nid12869: tasks 160-191: Killed
+srun: error: nid12890: tasks 288-319: Killed
+srun: error: nid12888: tasks 256-287: Killed
+GPC checker started.
+continualGPC() finished.
+GPC killed.
+Iteration end.
+
+====================
+iteration 4
+Congestor nodes:
+[1765, 1413, 12890, 1763, 12870, 12888, 12889, 12871, 1407, 1789]
+sbcast: error: REQUEST_FILE_BCAST(nid01789): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01413): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01406): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01762): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12891): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12868): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01764): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01765): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12871): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01414): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01763): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12869): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12888): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12870): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12889): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12893): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01405): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12890): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01407): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01415): Unspecified error
+srun: error: Timed out waiting for job step to complete
+srun: Cancelled pending job step with signal 15
+[1765, 1413, 12890, 1763, 12870, 12888, 12889, 12871, 1407, 1789]
+continual GPC started.
+GPC killed in continualGPC().
+srun: error: Unable to create step for job 30291076: Job/step already completing or completed
+GPC checker started.
+continualGPC() finished.
+GPC killed.
+Iteration end.
+
+====================
+iteration 5
+Congestor nodes:
+[1789, 12891, 12871, 12869, 12893, 12889, 1763, 12890, 12868, 1764]
+sbcast: error: REQUEST_FILE_BCAST(nid01789): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01765): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01406): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01763): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01413): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12871): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12868): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12891): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01762): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01764): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01407): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12888): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12870): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01415): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12869): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12890): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12889): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01414): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12893): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01405): Unspecified error
+srun: Cancelled pending job step with signal 15
+[1789, 12891, 12871, 12869, 12893, 12889, 1763, 12890, 12868, 1764]
+continual GPC started.
+GPC killed in continualGPC().
+srun: error: Unable to create step for job 30291076: Job/step already completing or completed
+GPC checker started.
+continualGPC() finished.
+GPC killed.
+Iteration end.
+
+====================
+iteration 6
+Congestor nodes:
+[1764, 12871, 1413, 1762, 1407, 12889, 12893, 12888, 12890, 1763]
+sbcast: error: REQUEST_FILE_BCAST(nid01789): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01407): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01413): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01765): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01406): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12871): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01764): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12868): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01762): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12869): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12890): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12870): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01763): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01414): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12888): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01415): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12889): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12891): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12893): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01405): Unspecified error
+srun: Job 30291076 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Cancelled pending job step with signal 15
+[1764, 12871, 1413, 1762, 1407, 12889, 12893, 12888, 12890, 1763]
+continual GPC started.
+GPC killed in continualGPC().
+srun: error: Unable to create step for job 30291076: Job/step already completing or completed
+GPC checker started.
+continualGPC() finished.
+GPC killed.
+Iteration end.
+
+====================
+iteration 7
+Congestor nodes:
+[1413, 1789, 12889, 1764, 12888, 1762, 1415, 12891, 1414, 12869]
+sbcast: error: REQUEST_FILE_BCAST(nid01789): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01765): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01764): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12868): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01762): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01413): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01407): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12871): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01414): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12869): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01406): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01763): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12870): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12888): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12890): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12891): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01415): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12893): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12889): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01405): Unspecified error
+srun: Job 30291076 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Cancelled pending job step with signal 15
+[1413, 1789, 12889, 1764, 12888, 1762, 1415, 12891, 1414, 12869]
+continual GPC started.
+GPC killed in continualGPC().
+srun: error: Unable to create step for job 30291076: Job/step already completing or completed
+GPC checker started.
+continualGPC() finished.
+GPC killed.
+Iteration end.
+
+====================
+iteration 8
+Congestor nodes:
+[1789, 1763, 1415, 12891, 12889, 12890, 12870, 1765, 1407, 1762]
+sbcast: error: REQUEST_FILE_BCAST(nid01789): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01406): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01413): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12868): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01765): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01407): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01764): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12871): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01762): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01415): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12888): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12869): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01414): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01763): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12890): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12891): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12870): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12889): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid12893): Unspecified error
+sbcast: error: REQUEST_FILE_BCAST(nid01405): Unspecified error
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 30291076.4 ON nid01407 CANCELLED AT 2020-05-02T19:14:12 DUE TO TIME LIMIT ***
+Sat May  2 19:14:12 2020: [PE_224]:inet_recv:inet_recv: recv error (fd=5) Connection reset by peer
+Sat May  2 19:14:12 2020: [PE_224]:_pmi_network_barrier:_pmi_inet_recv from target 0 failed pmi errno -1
+srun: got SIGCONT
+srun: forcing job termination

@@ -6,8 +6,9 @@ def main():
     #s.withOSU(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.allocation(timelimit='00:30:00', isSingle=1, isMail=1)
     #s.fixAllocation(timelimit='01:40:00', isSingle=0, isMail=1)
-    s.NeDD(N=201, queue='regular', fname='NeDDTwo_miniMD_hpcg.out', timelimit='07:00:00', isMail=1)
+    #s.NeDD(N=201, queue='regular', fname='NeDDTwo_qmcpack_miniMD.out', timelimit='08:00:00', isMail=1)
     #s.app(N=32, queue='premium', fname='test_graph500.out', timelimit='00:50:00', isMail=1)
+    s.craypatApp(queue='regular', app='miniAMR', timelimit='00:50:00', isMail=1)
     #s.GPC(N=5, timelimit='00:20:00', isMail=1)
     #for day in range(9, 32):
     #    s.getData(day=day, N=1, timelimit='23:00:00', isMail=0)
@@ -23,6 +24,17 @@ class submit:
     def app(self, N, queue, fname, timelimit, isMail):
         mail = '--mail-type=END ' if isMail else ''
         command = 'sbatch -N %d --account=m3231 -q %s -C knl %s-t %s -J app --exclusive --gres=craynetwork:0 -o $HOME/allocation/%s runwith.sh' % (N, queue, mail, timelimit, fname)
+        call(command, shell=True)
+
+    def craypatApp(self, queue, app, timelimit, isMail):
+        if app in ['miniAMR']:
+            arch = 'haswell'
+        else:
+            arch = 'knl'
+        N = 32
+        fname = 'craypat_%s.out' % app
+        mail = '--mail-type=END ' if isMail else ''
+        command = 'sbatch -N %d --account=m3231 -q %s -C %s %s-t %s -J craypat --exclusive --gres=craynetwork:0 -o $HOME/allocation/%s craypat.sh %s' % (N, queue, arch, mail, timelimit, fname, app)
         call(command, shell=True)
 
     def GPC(self, N, timelimit, isMail):

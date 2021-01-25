@@ -1,0 +1,1317 @@
+current nodes:
+[5115, 5116, 5117, 5118, 5119, 5120, 5121, 5122, 5123, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5140, 5141, 5142, 5143, 5144, 5145, 5146, 5147, 5148, 5149, 5150, 5151, 5152, 5153, 5154, 5155, 6271, 6272, 6273, 6274, 6275, 6276, 6277, 6278, 6279, 6280, 6281, 6282, 6283, 6292, 6293, 6294, 6295, 6296, 6297, 6298, 6299, 6300, 6301, 6302, 6303, 6304, 6305, 6306, 6307, 6308, 6309, 6310, 6311, 6312, 6313, 6314, 6315, 6316, 6317, 6318, 6319, 6320, 6321, 6322, 6323, 6324, 6325, 6326, 6327, 6328, 6329, 6330, 6331, 6332, 6333, 6334, 6335, 6336, 6337, 6338, 6339, 6340, 6341, 6342, 6343, 6344, 6345, 6346, 6347, 6352, 6353, 6354, 6355, 6356, 6357, 6358, 6359, 6360, 6361, 6362, 6363, 6364, 6365, 6366, 6367, 6368, 6369, 6370, 6371, 6372, 6373, 6374, 6375, 6376, 6377, 6378, 6379, 6380, 6381, 6382, 6383, 6384, 6385, 6386, 6387, 6388, 6389, 6390, 6391, 6392, 6393, 6394, 6395, 6396, 6397, 6398, 6399, 6400, 6401, 6402, 6403, 6404, 6405, 6406, 6407, 6408, 6409, 6410, 6411, 6412, 6413, 6414, 6415, 6420, 6421, 6422, 6423, 6424, 6425, 6426, 6427, 6428, 6429, 6430, 6431, 6432, 6433, 6434, 6435, 6436, 6437, 6438, 6439, 6440, 6441, 6442, 6443, 6444, 6445, 6446, 6447, 6448, 6449, 6450, 6451, 6452, 6453, 6454]
+Using knl nodes.
+Mon Jan 11 13:11:57 PST 2021
+
+jobid: 37847067
+====================
+iteration 0
+Congestor nodes:
+[6345, 6385, 6420, 6352, 6356, 5141, 6332, 6387, 6283, 5123, 6374, 6373, 6344, 6439, 6343, 6363, 6336, 6411, 6398, 6316, 5120, 5148, 6407, 5119, 6362, 6296, 6376, 6443, 6311, 6331, 6279, 6396, 6372, 6442, 6437, 6330, 6405, 5151, 6271, 6389, 6380, 6391, 6321, 6403, 6276, 6338, 5150, 6300, 6384, 6409, 6307, 6367, 6413, 6432, 6361, 6322, 5117, 5144, 6315, 6335, 6324, 6435, 6395, 6429]
+Mon Jan 11 13:11:57 PST 2021
+Mon Jan 11 13:12:27 PST 2021
+starting store daemon
+LR-localhost: OVIS_HOME is /project/projectdirs/m3231/yijia/ldms/ovis/build
+Env var is passed store mode is: store_csv
+LR-localhost: Storage container is /project/projectdirs/m3231/yijia/csv/37847067_0
+LR-localhost: Hostname is nid05115
+LR-localhost: /bin/hostName says ('nid05115\n', '')
+LR-nid05115: Component ID is 5115
+LR-nid05115: Input to store:
+prdcr_add name=LHP5115 host=nid05115 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5115
+prdcr_add name=LHP5116 host=nid05116 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5116
+prdcr_add name=LHP5117 host=nid05117 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5117
+prdcr_add name=LHP5118 host=nid05118 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5118
+prdcr_add name=LHP5119 host=nid05119 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5119
+prdcr_add name=LHP5120 host=nid05120 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5120
+prdcr_add name=LHP5121 host=nid05121 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5121
+prdcr_add name=LHP5122 host=nid05122 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5122
+prdcr_add name=LHP5123 host=nid05123 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5123
+prdcr_add name=LHP5124 host=nid05124 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5124
+prdcr_add name=LHP5125 host=nid05125 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5125
+prdcr_add name=LHP5126 host=nid05126 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5126
+prdcr_add name=LHP5127 host=nid05127 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5127
+prdcr_add name=LHP5128 host=nid05128 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5128
+prdcr_add name=LHP5129 host=nid05129 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5129
+prdcr_add name=LHP5130 host=nid05130 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5130
+prdcr_add name=LHP5131 host=nid05131 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5131
+prdcr_add name=LHP5140 host=nid05140 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5140
+prdcr_add name=LHP5141 host=nid05141 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5141
+prdcr_add name=LHP5142 host=nid05142 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5142
+prdcr_add name=LHP5143 host=nid05143 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5143
+prdcr_add name=LHP5144 host=nid05144 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5144
+prdcr_add name=LHP5145 host=nid05145 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5145
+prdcr_add name=LHP5146 host=nid05146 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5146
+prdcr_add name=LHP5147 host=nid05147 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5147
+prdcr_add name=LHP5148 host=nid05148 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5148
+prdcr_add name=LHP5149 host=nid05149 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5149
+prdcr_add name=LHP5150 host=nid05150 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5150
+prdcr_add name=LHP5151 host=nid05151 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5151
+prdcr_add name=LHP5152 host=nid05152 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5152
+prdcr_add name=LHP5153 host=nid05153 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5153
+prdcr_add name=LHP5154 host=nid05154 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5154
+prdcr_add name=LHP5155 host=nid05155 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP5155
+prdcr_add name=LHP6271 host=nid06271 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6271
+prdcr_add name=LHP6272 host=nid06272 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6272
+prdcr_add name=LHP6273 host=nid06273 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6273
+prdcr_add name=LHP6274 host=nid06274 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6274
+prdcr_add name=LHP6275 host=nid06275 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6275
+prdcr_add name=LHP6276 host=nid06276 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6276
+prdcr_add name=LHP6277 host=nid06277 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6277
+prdcr_add name=LHP6278 host=nid06278 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6278
+prdcr_add name=LHP6279 host=nid06279 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6279
+prdcr_add name=LHP6280 host=nid06280 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6280
+prdcr_add name=LHP6281 host=nid06281 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6281
+prdcr_add name=LHP6282 host=nid06282 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6282
+prdcr_add name=LHP6283 host=nid06283 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6283
+prdcr_add name=LHP6292 host=nid06292 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6292
+prdcr_add name=LHP6293 host=nid06293 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6293
+prdcr_add name=LHP6294 host=nid06294 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6294
+prdcr_add name=LHP6295 host=nid06295 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6295
+prdcr_add name=LHP6296 host=nid06296 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6296
+prdcr_add name=LHP6297 host=nid06297 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6297
+prdcr_add name=LHP6298 host=nid06298 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6298
+prdcr_add name=LHP6299 host=nid06299 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6299
+prdcr_add name=LHP6300 host=nid06300 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6300
+prdcr_add name=LHP6301 host=nid06301 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6301
+prdcr_add name=LHP6302 host=nid06302 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6302
+prdcr_add name=LHP6303 host=nid06303 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6303
+prdcr_add name=LHP6304 host=nid06304 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6304
+prdcr_add name=LHP6305 host=nid06305 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6305
+prdcr_add name=LHP6306 host=nid06306 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6306
+prdcr_add name=LHP6307 host=nid06307 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6307
+prdcr_add name=LHP6308 host=nid06308 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6308
+prdcr_add name=LHP6309 host=nid06309 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6309
+prdcr_add name=LHP6310 host=nid06310 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6310
+prdcr_add name=LHP6311 host=nid06311 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6311
+prdcr_add name=LHP6312 host=nid06312 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6312
+prdcr_add name=LHP6313 host=nid06313 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6313
+prdcr_add name=LHP6314 host=nid06314 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6314
+prdcr_add name=LHP6315 host=nid06315 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6315
+prdcr_add name=LHP6316 host=nid06316 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6316
+prdcr_add name=LHP6317 host=nid06317 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6317
+prdcr_add name=LHP6318 host=nid06318 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6318
+prdcr_add name=LHP6319 host=nid06319 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6319
+prdcr_add name=LHP6320 host=nid06320 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6320
+prdcr_add name=LHP6321 host=nid06321 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6321
+prdcr_add name=LHP6322 host=nid06322 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6322
+prdcr_add name=LHP6323 host=nid06323 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6323
+prdcr_add name=LHP6324 host=nid06324 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6324
+prdcr_add name=LHP6325 host=nid06325 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6325
+prdcr_add name=LHP6326 host=nid06326 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6326
+prdcr_add name=LHP6327 host=nid06327 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6327
+prdcr_add name=LHP6328 host=nid06328 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6328
+prdcr_add name=LHP6329 host=nid06329 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6329
+prdcr_add name=LHP6330 host=nid06330 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6330
+prdcr_add name=LHP6331 host=nid06331 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6331
+prdcr_add name=LHP6332 host=nid06332 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6332
+prdcr_add name=LHP6333 host=nid06333 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6333
+prdcr_add name=LHP6334 host=nid06334 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6334
+prdcr_add name=LHP6335 host=nid06335 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6335
+prdcr_add name=LHP6336 host=nid06336 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6336
+prdcr_add name=LHP6337 host=nid06337 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6337
+prdcr_add name=LHP6338 host=nid06338 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6338
+prdcr_add name=LHP6339 host=nid06339 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6339
+prdcr_add name=LHP6340 host=nid06340 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6340
+prdcr_add name=LHP6341 host=nid06341 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6341
+prdcr_add name=LHP6342 host=nid06342 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6342
+prdcr_add name=LHP6343 host=nid06343 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6343
+prdcr_add name=LHP6344 host=nid06344 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6344
+prdcr_add name=LHP6345 host=nid06345 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6345
+prdcr_add name=LHP6346 host=nid06346 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6346
+prdcr_add name=LHP6347 host=nid06347 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6347
+prdcr_add name=LHP6352 host=nid06352 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6352
+prdcr_add name=LHP6353 host=nid06353 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6353
+prdcr_add name=LHP6354 host=nid06354 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6354
+prdcr_add name=LHP6355 host=nid06355 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6355
+prdcr_add name=LHP6356 host=nid06356 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6356
+prdcr_add name=LHP6357 host=nid06357 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6357
+prdcr_add name=LHP6358 host=nid06358 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6358
+prdcr_add name=LHP6359 host=nid06359 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6359
+prdcr_add name=LHP6360 host=nid06360 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6360
+prdcr_add name=LHP6361 host=nid06361 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6361
+prdcr_add name=LHP6362 host=nid06362 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6362
+prdcr_add name=LHP6363 host=nid06363 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6363
+prdcr_add name=LHP6364 host=nid06364 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6364
+prdcr_add name=LHP6365 host=nid06365 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6365
+prdcr_add name=LHP6366 host=nid06366 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6366
+prdcr_add name=LHP6367 host=nid06367 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6367
+prdcr_add name=LHP6368 host=nid06368 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6368
+prdcr_add name=LHP6369 host=nid06369 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6369
+prdcr_add name=LHP6370 host=nid06370 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6370
+prdcr_add name=LHP6371 host=nid06371 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6371
+prdcr_add name=LHP6372 host=nid06372 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6372
+prdcr_add name=LHP6373 host=nid06373 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6373
+prdcr_add name=LHP6374 host=nid06374 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6374
+prdcr_add name=LHP6375 host=nid06375 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6375
+prdcr_add name=LHP6376 host=nid06376 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6376
+prdcr_add name=LHP6377 host=nid06377 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6377
+prdcr_add name=LHP6378 host=nid06378 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6378
+prdcr_add name=LHP6379 host=nid06379 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6379
+prdcr_add name=LHP6380 host=nid06380 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6380
+prdcr_add name=LHP6381 host=nid06381 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6381
+prdcr_add name=LHP6382 host=nid06382 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6382
+prdcr_add name=LHP6383 host=nid06383 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6383
+prdcr_add name=LHP6384 host=nid06384 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6384
+prdcr_add name=LHP6385 host=nid06385 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6385
+prdcr_add name=LHP6386 host=nid06386 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6386
+prdcr_add name=LHP6387 host=nid06387 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6387
+prdcr_add name=LHP6388 host=nid06388 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6388
+prdcr_add name=LHP6389 host=nid06389 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6389
+prdcr_add name=LHP6390 host=nid06390 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6390
+prdcr_add name=LHP6391 host=nid06391 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6391
+prdcr_add name=LHP6392 host=nid06392 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6392
+prdcr_add name=LHP6393 host=nid06393 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6393
+prdcr_add name=LHP6394 host=nid06394 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6394
+prdcr_add name=LHP6395 host=nid06395 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6395
+prdcr_add name=LHP6396 host=nid06396 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6396
+prdcr_add name=LHP6397 host=nid06397 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6397
+prdcr_add name=LHP6398 host=nid06398 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6398
+prdcr_add name=LHP6399 host=nid06399 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6399
+prdcr_add name=LHP6400 host=nid06400 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6400
+prdcr_add name=LHP6401 host=nid06401 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6401
+prdcr_add name=LHP6402 host=nid06402 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6402
+prdcr_add name=LHP6403 host=nid06403 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6403
+prdcr_add name=LHP6404 host=nid06404 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6404
+prdcr_add name=LHP6405 host=nid06405 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6405
+prdcr_add name=LHP6406 host=nid06406 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6406
+prdcr_add name=LHP6407 host=nid06407 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6407
+prdcr_add name=LHP6408 host=nid06408 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6408
+prdcr_add name=LHP6409 host=nid06409 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6409
+prdcr_add name=LHP6410 host=nid06410 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6410
+prdcr_add name=LHP6411 host=nid06411 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6411
+prdcr_add name=LHP6412 host=nid06412 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6412
+prdcr_add name=LHP6413 host=nid06413 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6413
+prdcr_add name=LHP6414 host=nid06414 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6414
+prdcr_add name=LHP6415 host=nid06415 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6415
+prdcr_add name=LHP6420 host=nid06420 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6420
+prdcr_add name=LHP6421 host=nid06421 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6421
+prdcr_add name=LHP6422 host=nid06422 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6422
+prdcr_add name=LHP6423 host=nid06423 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6423
+prdcr_add name=LHP6424 host=nid06424 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6424
+prdcr_add name=LHP6425 host=nid06425 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6425
+prdcr_add name=LHP6426 host=nid06426 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6426
+prdcr_add name=LHP6427 host=nid06427 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6427
+prdcr_add name=LHP6428 host=nid06428 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6428
+prdcr_add name=LHP6429 host=nid06429 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6429
+prdcr_add name=LHP6430 host=nid06430 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6430
+prdcr_add name=LHP6431 host=nid06431 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6431
+prdcr_add name=LHP6432 host=nid06432 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6432
+prdcr_add name=LHP6433 host=nid06433 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6433
+prdcr_add name=LHP6434 host=nid06434 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6434
+prdcr_add name=LHP6435 host=nid06435 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6435
+prdcr_add name=LHP6436 host=nid06436 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6436
+prdcr_add name=LHP6437 host=nid06437 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6437
+prdcr_add name=LHP6438 host=nid06438 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6438
+prdcr_add name=LHP6439 host=nid06439 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6439
+prdcr_add name=LHP6440 host=nid06440 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6440
+prdcr_add name=LHP6441 host=nid06441 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6441
+prdcr_add name=LHP6442 host=nid06442 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6442
+prdcr_add name=LHP6443 host=nid06443 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6443
+prdcr_add name=LHP6444 host=nid06444 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6444
+prdcr_add name=LHP6445 host=nid06445 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6445
+prdcr_add name=LHP6446 host=nid06446 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6446
+prdcr_add name=LHP6447 host=nid06447 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6447
+prdcr_add name=LHP6448 host=nid06448 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6448
+prdcr_add name=LHP6449 host=nid06449 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6449
+prdcr_add name=LHP6450 host=nid06450 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6450
+prdcr_add name=LHP6451 host=nid06451 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6451
+prdcr_add name=LHP6452 host=nid06452 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6452
+prdcr_add name=LHP6453 host=nid06453 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6453
+prdcr_add name=LHP6454 host=nid06454 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP6454
+updtr_add name=LHU interval=1000000 offset=400
+updtr_prdcr_add name=LHU regex=LHP*
+updtr_start name=LHU
+load name=store_csv
+config name=store_csv path=/project/projectdirs/m3231/yijia/csv
+strgp_add name=LHSGN plugin=store_csv schema=aries_nic_mmr container=37847067_0
+strgp_start name=LHSGN
+strgp_add name=LHSGC plugin=store_csv schema=cray_aries_r container=37847067_0
+strgp_start name=LHSGC
+
+component 5115 storage pid: 109438
+mkdir: cannot create directory 'configs': File exists
+Mon Jan 11 13:12:37 PST 2021
+srun: Job 37847067 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for job 37847067
+[6345, 6385, 6420, 6352, 6356, 5141, 6332, 6387, 6283, 5123, 6374, 6373, 6344, 6439, 6343, 6363, 6336, 6411, 6398, 6316, 5120, 5148, 6407, 5119, 6362, 6296, 6376, 6443, 6311, 6331, 6279, 6396, 6372, 6442, 6437, 6330, 6405, 5151, 6271, 6389, 6380, 6391, 6321, 6403, 6276, 6338, 5150, 6300, 6384, 6409, 6307, 6367, 6413, 6432, 6361, 6322, 5117, 5144, 6315, 6335, 6324, 6435, 6395, 6429]
+continual GPC started.
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+GPC killed in continualGPC().
+srun: forcing job termination
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 37847067.10 ON nid05117 CANCELLED AT 2021-01-11T13:34:27 ***
+srun: error: nid06439: tasks 4148-4215: Killed
+srun: Terminating job step 37847067.10
+srun: error: nid06432: tasks 3944-4011: Killed
+srun: error: nid06307: tasks 1020-1087: Killed
+srun: error: nid06442: tasks 4216-4283: Killed
+srun: error: nid06338: tasks 1836-1903: Killed
+srun: error: nid06376: tasks 2720-2787: Killed
+srun: error: nid06435: tasks 4012-4079: Killed
+srun: error: nid06396: tasks 3264-3331: Killed
+srun: error: nid06443: tasks 4284-4351: Killed
+srun: error: nid06300: tasks 952-1019: Killed
+srun: error: nid05119: tasks 68-135: Killed
+srun: error: nid05151: tasks 544-611: Killed
+srun: error: nid06296: tasks 884-951: Killed
+srun: error: nid06362: tasks 2312-2379: Killed
+srun: error: nid06335: tasks 1700-1767: Killed
+srun: error: nid06343: tasks 1904-1971: Killed
+srun: error: nid05144: tasks 340-407: Killed
+srun: error: nid06345: tasks 2040-2107: Killed
+srun: error: nid06398: tasks 3332-3399: Killed
+srun: error: nid06311: tasks 1088-1155: Killed
+srun: error: nid05123: tasks 204-271: Killed
+srun: error: nid06332: tasks 1632-1699: Killed
+srun: error: nid06279: tasks 748-815: Killed
+srun: error: nid06373: tasks 2584-2651: Killed
+srun: error: nid06271: tasks 612-679: Killed
+srun: error: nid05120: tasks 136-203: Killed
+srun: error: nid06344: tasks 1972-2039: Killed
+srun: error: nid06322: tasks 1360-1427: Killed
+srun: error: nid06363: tasks 2380-2447: Killed
+srun: error: nid06330: tasks 1496-1563: Killed
+srun: error: nid06429: tasks 3876-3943: Killed
+srun: error: nid05141: tasks 272-339: Killed
+srun: error: nid06413: tasks 3740-3807: Killed
+srun: error: nid06407: tasks 3536-3603: Killed
+srun: error: nid06372: tasks 2516-2583: Killed
+srun: error: nid06384: tasks 2856-2923: Killed
+srun: error: nid06331: tasks 1564-1631: Killed
+srun: error: nid06420: tasks 3808-3875: Killed
+srun: error: nid06361: tasks 2244-2311: Killed
+srun: error: nid06356: tasks 2176-2243: Killed
+srun: error: nid06324: tasks 1428-1495: Killed
+srun: error: nid06276: tasks 680-747: Killed
+srun: error: nid06395: tasks 3196-3263: Killed
+srun: error: nid06367: tasks 2448-2515: Killed
+srun: error: nid06321: tasks 1292-1359: Killed
+srun: error: nid05148: tasks 408-475: Killed
+srun: error: nid06352: tasks 2108-2175: Killed
+srun: error: nid06283: tasks 816-883: Killed
+srun: error: nid06374: tasks 2652-2719: Killed
+srun: error: nid06336: tasks 1768-1835: Killed
+srun: error: nid06389: tasks 3060-3127: Killed
+srun: error: nid06403: tasks 3400-3467: Killed
+srun: error: nid06315: tasks 1156-1223: Killed
+srun: error: nid05117: tasks 0-67: Killed
+srun: error: nid06405: tasks 3468-3535: Killed
+srun: error: nid06391: tasks 3128-3195: Killed
+srun: error: nid05150: tasks 476-543: Killed
+srun: error: nid06437: tasks 4080-4147: Killed
+srun: error: nid06385: tasks 2924-2991: Killed
+srun: error: nid06387: tasks 2992-3059: Killed
+srun: error: nid06380: tasks 2788-2855: Killed
+srun: error: nid06316: tasks 1224-1291: Killed
+srun: error: nid06409: tasks 3604-3671: Killed
+srun: error: nid06411: tasks 3672-3739: Killed
+GPC checker started.
+starting LDMS..
+runLDMS() finish.
+Monitor end timestamp: 1610399677
+Starting sortCongestion()..
+Copying file..
+Removing last line..
+deleteLastLine() finished.
+Reading cray csv..
+130.0 seconds collected in total.
+Calculating stall sum..
+Calculating node stall..
+Replacing no-value data..
+Sorting nodes..
+[(6299, 50707.92211755272), (6297, 50708.667054609978), (6298, 50832.615633081965), (5116, 93387.435534261604), (6365, 96566.760418025966), (6364, 96566.787711620884), (6366, 97278.475740728754), (5118, 101595.25119161798), (5129, 112411.66177420336), (5130, 115952.52841555848), (5128, 115953.05463719174), (5131, 115953.11485208949), (5146, 212283.56248290546), (5145, 218831.38322344259), (5147, 218831.71508719781), (6302, 425906.42451206536), (6301, 425910.945954778), (6303, 429363.40967568959), (6329, 447731.16981979529), (6328, 453553.34435284912), (5154, 480165.193592984), (6334, 492848.18065320922), (6333, 492848.41116673895), (5153, 494562.58367917727), (5155, 494563.57277679694), (5152, 494563.57429085992), (6309, 604207.02953145769), (6310, 604209.59577730612), (6308, 604211.38869432721), (5149, 645878.63643717847), (6282, 748266.215389224), (6281, 748270.2886060155), (6280, 748273.13938392792), (6340, 787770.38571949361), (6341, 820623.01817205257), (6342, 820627.70839580358), (6278, 832801.66136428551), (6277, 832802.04844910931), (6323, 847419.88119814661), (6320, 847442.09903852816), (6274, 932182.09300745546), (6273, 932206.03227491467), (6275, 935675.09386370995), (6272, 935676.36104693182), (6377, 1026283.9279687969), (6379, 1080245.8090540185), (6378, 1080259.1474303103), (6371, 1433244.2158463823), (6369, 1433250.6902884354), (6370, 1433258.3646050123), (6368, 1433259.55509922), (6312, 1525704.2189355672), (6313, 1525910.2874015186), (6314, 1525995.0440680827), (6406, 1643263.1511857151), (6404, 1643267.25656264), (6304, 1655317.1931455403), (6305, 1655383.6340128733), (6306, 1655391.4009610037), (6347, 1841223.1280257418), (6346, 1841226.907740185), (6400, 1949851.8482475798), (6401, 1949854.8336129603), (6402, 1949855.0368494971), (5125, 2238265.8182516093), (5127, 2238266.3344848328), (5124, 2238274.0882209083), (5126, 2238275.4177142996), (5142, 2337544.3431725889), (5143, 2337545.6807857966), (5140, 2337550.5533281453), (6388, 2918399.0345111536), (6390, 2918429.2929827608), (6383, 3197510.6696032388), (6381, 3226931.6142587401), (6382, 3226933.1940860199), (6375, 4213218.6108038686), (6408, 4544055.1009138897), (6339, 4627376.2537698494), (6399, 4630732.5503466027), (6397, 4630799.1186277792), (6318, 4634946.3383507468), (6410, 4778004.6133452179), (6317, 4848005.6328056678), (6319, 4848142.9173779748), (6337, 4856416.6151882336), (6353, 5073478.8835494434), (6354, 5248207.2255120808), (6355, 5248611.1897505987), (6394, 5369233.5129430275), (6393, 5369262.6141288746), (6392, 5369307.2357250918), (6386, 8684144.2539031468), (6327, 8867957.0705474168), (6326, 8868042.9143572748), (6325, 8868480.5540526155), (5121, 9320677.0410973206), (5122, 9711896.1228935868), (6357, 17456360.700021174), (6358, 17456502.914845452), (6359, 17456596.002537325), (6295, 24086426.375515115), (6294, 24086502.368846457), (6292, 24086828.491765946), (6293, 24281750.348858811), (6441, 41821867.412194416), (6440, 41916064.493599705), (6431, 51275723.179781944), (6430, 51275857.047149666), (6428, 51277802.603754796), (6453, 65448413.523971826), (6454, 65449505.542681105), (6452, 65451577.629444644), (6438, 66258094.101360127), (6436, 66259532.216718987), (6444, 68395464.613047779), (6447, 68395729.842284843), (6445, 68395920.320464149), (6446, 68917229.178166986), (6433, 69239376.935771868), (6434, 69241006.25230521), (6448, 71532004.490860447), (6450, 71532469.927342534), (6451, 71532618.193652734), (6449, 72050027.423312306), (6414, 144404469.63052762), (6415, 144405858.9937444), (6412, 144406054.89212921), (6421, 151006710.45673648), (6422, 151007055.5630894), (6423, 151007389.52312997), (6424, 277158519.52028877), (6425, 277160022.31929821), (6427, 277160390.09810525), (6426, 279412769.02763021), (6360, 331484369.61633343)]
+nedd nodeInfo:
+[(5124, 3, 0, 2238274.0882209083), (5125, 3, 0, 2238265.8182516093), (5126, 3, 0, 2238275.4177142996), (5127, 3, 0, 2238266.3344848328), (5128, 3, 0, 115953.05463719174), (5129, 3, 0, 112411.66177420336), (5130, 3, 0, 115952.52841555848), (5131, 3, 0, 115953.11485208949), (5152, 3, 0, 494563.57429085992), (5153, 3, 0, 494562.58367917727), (5154, 3, 0, 480165.193592984), (5155, 3, 0, 494563.57277679694), (6272, 3, 0, 935676.36104693182), (6273, 3, 0, 932206.03227491467), (6274, 3, 0, 932182.09300745546), (6275, 3, 0, 935675.09386370995), (6292, 3, 0, 24086828.491765946), (6293, 3, 0, 24281750.348858811), (6294, 3, 0, 24086502.368846457), (6295, 3, 0, 24086426.375515115), (6368, 3, 0, 1433259.55509922), (6369, 3, 0, 1433250.6902884354), (6370, 3, 0, 1433258.3646050123), (6371, 3, 0, 1433244.2158463823), (6424, 3, 0, 277158519.52028877), (6425, 3, 0, 277160022.31929821), (6426, 3, 0, 279412769.02763021), (6427, 3, 0, 277160390.09810525), (6444, 3, 0, 68395464.613047779), (6445, 3, 0, 68395920.320464149), (6446, 3, 0, 68917229.178166986), (6447, 3, 0, 68395729.842284843), (6448, 3, 0, 71532004.490860447), (6449, 3, 0, 72050027.423312306), (6450, 3, 0, 71532469.927342534), (6451, 3, 0, 71532618.193652734), (6452, 2, 0, 65451577.629444644), (6453, 2, 0, 65448413.523971826), (6454, 2, 0, 65449505.542681105), (5140, 2, 1, 2337550.5533281453), (5142, 2, 1, 2337544.3431725889), (5143, 2, 1, 2337545.6807857966), (5145, 2, 1, 218831.38322344259), (5146, 2, 1, 212283.56248290546), (5147, 2, 1, 218831.71508719781), (6280, 2, 1, 748273.13938392792), (6281, 2, 1, 748270.2886060155), (6282, 2, 1, 748266.215389224), (6297, 2, 1, 50708.667054609978), (6298, 2, 1, 50832.615633081965), (6299, 2, 1, 50707.92211755272), (6301, 2, 1, 425910.945954778), (6302, 2, 1, 425906.42451206536), (6303, 2, 1, 429363.40967568959), (6304, 2, 1, 1655317.1931455403), (6305, 2, 1, 1655383.6340128733), (6306, 2, 1, 1655391.4009610037), (6308, 2, 1, 604211.38869432721), (6309, 2, 1, 604207.02953145769), (6310, 2, 1, 604209.59577730612), (6312, 2, 1, 1525704.2189355672), (6313, 2, 1, 1525910.2874015186), (6314, 2, 1, 1525995.0440680827), (6317, 2, 1, 4848005.6328056678), (6318, 2, 1, 4634946.3383507468), (6319, 2, 1, 4848142.9173779748), (6325, 2, 1, 8868480.5540526155), (6326, 2, 1, 8868042.9143572748), (6327, 2, 1, 8867957.0705474168), (6340, 2, 1, 787770.38571949361), (6341, 2, 1, 820623.01817205257), (6342, 2, 1, 820627.70839580358), (6353, 2, 1, 5073478.8835494434), (6354, 2, 1, 5248207.2255120808), (6355, 2, 1, 5248611.1897505987), (6357, 2, 1, 17456360.700021174), (6358, 2, 1, 17456502.914845452), (6359, 2, 1, 17456596.002537325), (6364, 2, 1, 96566.787711620884), (6365, 2, 1, 96566.760418025966), (6366, 2, 1, 97278.475740728754), (6377, 2, 1, 1026283.9279687969), (6378, 2, 1, 1080259.1474303103), (6379, 2, 1, 1080245.8090540185), (6381, 2, 1, 3226931.6142587401), (6382, 2, 1, 3226933.1940860199), (6383, 2, 1, 3197510.6696032388), (6392, 2, 1, 5369307.2357250918), (6393, 2, 1, 5369262.6141288746), (6394, 2, 1, 5369233.5129430275), (6400, 2, 1, 1949851.8482475798), (6401, 2, 1, 1949854.8336129603), (6402, 2, 1, 1949855.0368494971), (6412, 2, 1, 144406054.89212921), (6414, 2, 1, 144404469.63052762), (6415, 2, 1, 144405858.9937444), (6421, 2, 1, 151006710.45673648), (6422, 2, 1, 151007055.5630894), (6423, 2, 1, 151007389.52312997), (6428, 2, 1, 51277802.603754796), (6430, 2, 1, 51275857.047149666), (6431, 2, 1, 51275723.179781944), (5116, 1, 2, 93387.435534261604), (5118, 1, 2, 101595.25119161798), (5121, 1, 2, 9320677.0410973206), (5122, 1, 2, 9711896.1228935868), (6277, 1, 2, 832802.04844910931), (6278, 1, 2, 832801.66136428551), (6320, 1, 2, 847442.09903852816), (6323, 1, 2, 847419.88119814661), (6328, 1, 2, 453553.34435284912), (6329, 1, 2, 447731.16981979529), (6333, 1, 2, 492848.41116673895), (6334, 1, 2, 492848.18065320922), (6337, 1, 2, 4856416.6151882336), (6339, 1, 2, 4627376.2537698494), (6346, 1, 2, 1841226.907740185), (6347, 1, 2, 1841223.1280257418), (6388, 1, 2, 2918399.0345111536), (6390, 1, 2, 2918429.2929827608), (6397, 1, 2, 4630799.1186277792), (6399, 1, 2, 4630732.5503466027), (6404, 1, 2, 1643267.25656264), (6406, 1, 2, 1643263.1511857151), (6408, 1, 2, 4544055.1009138897), (6410, 1, 2, 4778004.6133452179), (6433, 1, 2, 69239376.935771868), (6434, 1, 2, 69241006.25230521), (6436, 1, 2, 66259532.216718987), (6438, 1, 2, 66258094.101360127), (6440, 1, 2, 41916064.493599705), (6441, 1, 2, 41821867.412194416), (5149, 0, 3, 645878.63643717847), (6360, 0, 3, 331484369.61633343), (6375, 0, 3, 4213218.6108038686), (6386, 0, 3, 8684144.2539031468)]
+Run job in nedd policy..
+app-node list:
+[5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5152, 5153, 5154, 5155, 6272, 6273, 6274, 6275, 6292, 6293, 6294, 6295, 6368, 6369, 6370, 6371, 6424, 6425, 6426, 6427, 6444, 6445, 6446, 6447]
+
+Run job in lowerRouterStall policy..
+app-node list:
+[6299, 6297, 6298, 5116, 6365, 6364, 6366, 5118, 5129, 5130, 5128, 5131, 5146, 5145, 5147, 6302, 6301, 6303, 6329, 6328, 5154, 6334, 6333, 5153, 5155, 5152, 6309, 6310, 6308, 5149, 6282, 6281]
+
+Run job in fewerSwitch policy..
+app-node list:
+[5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5152, 5153, 5154, 5155, 6272, 6273, 6274, 6275, 6292, 6293, 6294, 6295, 6368, 6369, 6370, 6371, 6424, 6425, 6426, 6427, 6444, 6445, 6446, 6447]
+
+Run job in random policy..
+app-node list:
+[6415, 6301, 6273, 5152, 6280, 6302, 6320, 6445, 6339, 6371, 6303, 6278, 5126, 6357, 6438, 6454, 5142, 6340, 6412, 5146, 5153, 6319, 5129, 6392, 6355, 6424, 6314, 6354, 6313, 5155, 6334, 5122]
+
+Run job in antinedd policy..
+app-node list:
+[5121, 5122, 6277, 6278, 6320, 6323, 6328, 6329, 6333, 6334, 6337, 6339, 6346, 6347, 6388, 6390, 6397, 6399, 6404, 6406, 6408, 6410, 6433, 6434, 6436, 6438, 6440, 6441, 5149, 6360, 6375, 6386]
+
+continualGPC() finished.
+GPC killed.
+Run job in fewerNoCong policy.
+app-node list:
+[5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5152, 5153, 5154, 5155, 6272, 6273, 6274, 6275, 6292, 6293, 6294, 6295, 6368, 6369, 6370, 6371, 6424, 6425, 6426, 6427, 6444, 6445, 6446, 6447]
+Iteration end.
+
+====================
+iteration 1
+Congestor nodes:
+[6278, 6337, 6424, 6283, 6299, 6448, 6325, 5143, 6370, 6352, 6355, 6276, 6334, 6376, 6394, 6273, 5123, 6425, 5120, 5119, 6443, 6372, 6319, 6378, 5128, 6344, 6413, 5126, 6387, 5125, 6410, 6275, 6421, 5145, 6392, 6297, 6389, 5116, 6358, 5117, 6282, 6427, 6296, 6359, 6314, 6309, 6292, 6384, 6328, 6342, 6386, 6437, 6379, 6388, 6393, 6453, 5146, 5149, 6409, 6312, 6390, 6374, 6454, 6402]
+srun: Job 37847067 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for job 37847067
+srun: Job 37847067 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for job 37847067
+[6278, 6337, 6424, 6283, 6299, 6448, 6325, 5143, 6370, 6352, 6355, 6276, 6334, 6376, 6394, 6273, 5123, 6425, 5120, 5119, 6443, 6372, 6319, 6378, 5128, 6344, 6413, 5126, 6387, 5125, 6410, 6275, 6421, 5145, 6392, 6297, 6389, 5116, 6358, 5117, 6282, 6427, 6296, 6359, 6314, 6309, 6292, 6384, 6328, 6342, 6386, 6437, 6379, 6388, 6393, 6453, 5146, 5149, 6409, 6312, 6390, 6374, 6454, 6402]
+continual GPC started.
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+GPC killed in continualGPC().
+srun: forcing job termination
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 37847067.20 ON nid05116 CANCELLED AT 2021-01-11T14:03:31 ***
+srun: error: nid06296: tasks 1292-1359: Killed
+srun: Terminating job step 37847067.20
+srun: error: nid06453: tasks 4216-4283: Killed
+srun: error: nid06454: tasks 4284-4351: Killed
+srun: error: nid05146: tasks 680-747: Killed
+srun: error: nid05125: tasks 340-407: Killed
+srun: error: nid06443: tasks 4080-4147: Killed
+srun: error: nid05117: tasks 68-135: Killed
+srun: error: nid06273: tasks 816-883: Killed
+srun: error: nid06410: tasks 3604-3671: Killed
+srun: error: nid06392: tasks 3264-3331: Killed
+srun: error: nid06390: tasks 3196-3263: Killed
+srun: error: nid06297: tasks 1360-1427: Killed
+srun: error: nid06402: tasks 3468-3535: Killed
+srun: error: nid06424: tasks 3808-3875: Killed
+srun: error: nid05149: tasks 748-815: Killed
+srun: error: nid06282: tasks 1088-1155: Killed
+srun: error: nid06437: tasks 4012-4079: Killed
+srun: error: nid06309: tasks 1496-1563: Killed
+srun: error: nid06421: tasks 3740-3807: Killed
+srun: error: nid05116: tasks 0-67: Killed
+srun: error: nid06275: tasks 884-951: Killed
+srun: error: nid06394: tasks 3400-3467: Killed
+srun: error: nid05145: tasks 612-679: Killed
+srun: error: nid06292: tasks 1224-1291: Killed
+srun: error: nid06328: tasks 1836-1903: Killed
+srun: error: nid06427: tasks 3944-4011: Killed
+srun: error: nid06299: tasks 1428-1495: Killed
+srun: error: nid06325: tasks 1768-1835: Killed
+srun: error: nid06448: tasks 4148-4215: Killed
+srun: error: nid06352: tasks 2176-2243: Killed
+srun: error: nid06278: tasks 1020-1087: Killed
+srun: error: nid06370: tasks 2448-2515: Killed
+srun: error: nid06355: tasks 2244-2311: Killed
+srun: error: nid05143: tasks 544-611: Killed
+srun: error: nid05128: tasks 476-543: Killed
+srun: error: nid05119: tasks 136-203: Killed
+srun: error: nid06337: tasks 1972-2039: Killed
+srun: error: nid06389: tasks 3128-3195: Killed
+srun: error: nid06359: tasks 2380-2447: Killed
+srun: error: nid06314: tasks 1632-1699: Killed
+srun: error: nid06319: tasks 1700-1767: Killed
+srun: error: nid06358: tasks 2312-2379: Killed
+srun: error: nid06344: tasks 2108-2175: Killed
+srun: error: nid06387: tasks 2992-3059: Killed
+srun: error: nid06388: tasks 3060-3127: Killed
+srun: error: nid06342: tasks 2040-2107: Killed
+srun: error: nid06312: tasks 1564-1631: Killed
+srun: error: nid06374: tasks 2584-2651: Killed
+srun: error: nid05120: tasks 204-271: Killed
+srun: error: nid06413: tasks 3672-3739: Killed
+srun: error: nid06393: tasks 3332-3399: Killed
+srun: error: nid05123: tasks 272-339: Killed
+srun: error: nid06376: tasks 2652-2719: Killed
+srun: error: nid05126: tasks 408-475: Killed
+srun: error: nid06379: tasks 2788-2855: Killed
+srun: error: nid06409: tasks 3536-3603: Killed
+srun: error: nid06283: tasks 1156-1223: Killed
+srun: error: nid06378: tasks 2720-2787: Killed
+srun: error: nid06372: tasks 2516-2583: Killed
+srun: error: nid06334: tasks 1904-1971: Killed
+srun: error: nid06386: tasks 2924-2991: Killed
+srun: error: nid06384: tasks 2856-2923: Killed
+srun: error: nid06425: tasks 3876-3943: Killed
+srun: error: nid06276: tasks 952-1019: Killed
+GPC checker started.
+Monitor end timestamp: 1610401210
+Starting sortCongestion()..
+Copying file..
+Removing last line..
+deleteLastLine() finished.
+Reading cray csv..
+1660.0 seconds collected in total.
+Calculating stall sum..
+Calculating node stall..
+Replacing no-value data..
+Sorting nodes..
+[(6451, 18660.178132037188), (6449, 18660.307191084539), (6450, 18660.332076192379), (6302, 36280.765307414506), (6300, 36280.800429531249), (6301, 36280.84663126454), (6303, 36280.883557525965), (6367, 39174.433853250543), (6365, 39174.470582856535), (6364, 39174.567210124944), (6366, 39174.637691462638), (6434, 44755.156369598262), (6435, 44755.389466283552), (6432, 44755.560620454344), (6433, 44785.775327143267), (6377, 49816.091443461242), (6431, 57554.419353369332), (6430, 57554.803577734841), (6428, 57554.842179396663), (6429, 57554.93809720529), (6385, 95215.620885693774), (6445, 96386.208768289012), (6444, 96386.693586741065), (6447, 96386.71994911501), (6446, 96387.071662519375), (6313, 163596.75679535209), (6315, 163598.31628694493), (6316, 174539.39133475689), (6317, 174539.95282004311), (6318, 174541.07724012225), (6399, 191183.62012057516), (6397, 191183.73670372646), (6396, 191185.14948626485), (6398, 191185.84224782584), (6371, 193917.6327349795), (6369, 193918.48897096462), (6368, 193919.83402084108), (6271, 205444.52272587628), (6335, 209571.16543964544), (6332, 209571.97109438063), (6333, 209572.94437081492), (6426, 217469.2378872112), (6354, 258262.40919915793), (6353, 258263.4911799939), (6440, 295767.52597018378), (6441, 295767.58509622101), (6442, 295769.692152465), (6360, 300757.71654967079), (6362, 300760.81199403072), (6363, 300761.25015534379), (6361, 300761.62569814088), (6381, 310223.03032811458), (6382, 310223.93754813407), (6380, 310225.64993219526), (6383, 310225.67068431556), (6304, 330107.48001259135), (6305, 330108.0039843946), (6307, 330109.07232898241), (6306, 330109.49834901118), (6347, 366271.73332574748), (6346, 366274.18863278284), (6345, 366275.4319253054), (6408, 384109.31851835811), (6411, 384109.94256129669), (6321, 402038.31533844257), (6320, 402038.47099502257), (6322, 402039.11383353412), (6323, 402040.27146010887), (6336, 408531.38446642226), (6339, 408535.23062037322), (6338, 408539.12990066205), (6293, 431357.94826171047), (6294, 431359.62685158965), (6295, 431360.32037709298), (6329, 537696.94872259139), (6330, 537697.13547889877), (6331, 537700.1074977247), (6281, 577496.12474710471), (6280, 577496.62687675341), (6400, 582871.07970080245), (6403, 582876.44387140416), (6401, 582878.42309013545), (6407, 635679.40565454448), (6404, 635683.84399128612), (6405, 635683.99690177722), (6406, 635688.02127809741), (6274, 731581.74064791156), (6272, 731590.50113570923), (6279, 779578.67743201589), (6277, 779579.69071036531), (6298, 2730026.5944345514), (6414, 2739070.6511835172), (6415, 2739099.6151106418), (6412, 2739101.5299009699), (6375, 3052990.1349565326), (6373, 3052996.1387697011), (6343, 3073602.9905879241), (6341, 3073619.2089617779), (6340, 3073624.4197110222), (6326, 3153023.7724523749), (6324, 3153033.5317232581), (6327, 3153037.2172816209), (6308, 3228955.9927558023), (6310, 3228960.6255642357), (6311, 3228965.6130637224), (6422, 3271934.6154779997), (6423, 3271944.6960752965), (6420, 3271956.1630314374), (6357, 3369109.2035787837), (6356, 3369147.9185306518), (6436, 3420751.9100637282), (6439, 3420765.1852621646), (6438, 3420775.535620166), (6391, 4433355.1176670594), (5129, 6839663.0392687907), (5130, 6839727.5053387173), (5131, 6839773.7348719109), (6452, 6933998.0389410723), (5141, 9330498.067958029), (5140, 9454066.010348076), (5142, 9454145.9751765151), (5122, 10683929.510604123), (5121, 10683999.211331613), (5124, 10730741.009761415), (5127, 10731381.019834004), (6395, 10841286.983725064), (5154, 12828638.561806962), (5152, 12828760.012846652), (5153, 12828868.208063031), (5155, 12828868.276749816), (5150, 25270939.015452802), (5148, 25270949.626995791), (5151, 25271059.872299064), (5118, 71356608.968326405), (5147, 341856547.89246774), (5144, 341863616.62601542)]
+nedd nodeInfo:
+[(5152, 3, 0, 12828760.012846652), (5153, 3, 0, 12828868.208063031), (5154, 3, 0, 12828638.561806962), (5155, 3, 0, 12828868.276749816), (6300, 3, 0, 36280.800429531249), (6301, 3, 0, 36280.84663126454), (6302, 3, 0, 36280.765307414506), (6303, 3, 0, 36280.883557525965), (6304, 3, 0, 330107.48001259135), (6305, 3, 0, 330108.0039843946), (6306, 3, 0, 330109.49834901118), (6307, 3, 0, 330109.07232898241), (6320, 3, 0, 402038.47099502257), (6321, 3, 0, 402038.31533844257), (6322, 3, 0, 402039.11383353412), (6323, 3, 0, 402040.27146010887), (6360, 3, 0, 300757.71654967079), (6361, 3, 0, 300761.62569814088), (6362, 3, 0, 300760.81199403072), (6363, 3, 0, 300761.25015534379), (6364, 3, 0, 39174.567210124944), (6365, 3, 0, 39174.470582856535), (6366, 3, 0, 39174.637691462638), (6367, 3, 0, 39174.433853250543), (6380, 3, 0, 310225.64993219526), (6381, 3, 0, 310223.03032811458), (6382, 3, 0, 310223.93754813407), (6383, 3, 0, 310225.67068431556), (6396, 3, 0, 191185.14948626485), (6397, 3, 0, 191183.73670372646), (6398, 3, 0, 191185.84224782584), (6399, 3, 0, 191183.62012057516), (6404, 3, 0, 635683.84399128612), (6405, 3, 0, 635683.99690177722), (6406, 3, 0, 635688.02127809741), (6407, 3, 0, 635679.40565454448), (6428, 3, 0, 57554.842179396663), (6429, 3, 0, 57554.93809720529), (6430, 3, 0, 57554.803577734841), (6431, 3, 0, 57554.419353369332), (6432, 3, 0, 44755.560620454344), (6433, 3, 0, 44785.775327143267), (6434, 3, 0, 44755.156369598262), (6435, 3, 0, 44755.389466283552), (6444, 3, 0, 96386.693586741065), (6445, 3, 0, 96386.208768289012), (6446, 3, 0, 96387.071662519375), (6447, 3, 0, 96386.71994911501), (6271, 0, 0, 205444.52272587628), (5129, 2, 1, 6839663.0392687907), (5130, 2, 1, 6839727.5053387173), (5131, 2, 1, 6839773.7348719109), (5140, 2, 1, 9454066.010348076), (5141, 2, 1, 9330498.067958029), (5142, 2, 1, 9454145.9751765151), (5148, 2, 1, 25270949.626995791), (5150, 2, 1, 25270939.015452802), (5151, 2, 1, 25271059.872299064), (6293, 2, 1, 431357.94826171047), (6294, 2, 1, 431359.62685158965), (6295, 2, 1, 431360.32037709298), (6308, 2, 1, 3228955.9927558023), (6310, 2, 1, 3228960.6255642357), (6311, 2, 1, 3228965.6130637224), (6316, 2, 1, 174539.39133475689), (6317, 2, 1, 174539.95282004311), (6318, 2, 1, 174541.07724012225), (6324, 2, 1, 3153033.5317232581), (6326, 2, 1, 3153023.7724523749), (6327, 2, 1, 3153037.2172816209), (6329, 2, 1, 537696.94872259139), (6330, 2, 1, 537697.13547889877), (6331, 2, 1, 537700.1074977247), (6332, 2, 1, 209571.97109438063), (6333, 2, 1, 209572.94437081492), (6335, 2, 1, 209571.16543964544), (6336, 2, 1, 408531.38446642226), (6338, 2, 1, 408539.12990066205), (6339, 2, 1, 408535.23062037322), (6340, 2, 1, 3073624.4197110222), (6341, 2, 1, 3073619.2089617779), (6343, 2, 1, 3073602.9905879241), (6345, 2, 1, 366275.4319253054), (6346, 2, 1, 366274.18863278284), (6347, 2, 1, 366271.73332574748), (6368, 2, 1, 193919.83402084108), (6369, 2, 1, 193918.48897096462), (6371, 2, 1, 193917.6327349795), (6400, 2, 1, 582871.07970080245), (6401, 2, 1, 582878.42309013545), (6403, 2, 1, 582876.44387140416), (6412, 2, 1, 2739101.5299009699), (6414, 2, 1, 2739070.6511835172), (6415, 2, 1, 2739099.6151106418), (6420, 2, 1, 3271956.1630314374), (6422, 2, 1, 3271934.6154779997), (6423, 2, 1, 3271944.6960752965), (6436, 2, 1, 3420751.9100637282), (6438, 2, 1, 3420775.535620166), (6439, 2, 1, 3420765.1852621646), (6440, 2, 1, 295767.52597018378), (6441, 2, 1, 295767.58509622101), (6442, 2, 1, 295769.692152465), (6449, 2, 1, 18660.307191084539), (6450, 2, 1, 18660.332076192379), (6451, 2, 1, 18660.178132037188), (5121, 1, 2, 10683999.211331613), (5122, 1, 2, 10683929.510604123), (5124, 1, 2, 10730741.009761415), (5127, 1, 2, 10731381.019834004), (5144, 1, 2, 341863616.62601542), (5147, 1, 2, 341856547.89246774), (6272, 1, 2, 731590.50113570923), (6274, 1, 2, 731581.74064791156), (6277, 1, 2, 779579.69071036531), (6279, 1, 2, 779578.67743201589), (6280, 1, 2, 577496.62687675341), (6281, 1, 2, 577496.12474710471), (6313, 1, 2, 163596.75679535209), (6315, 1, 2, 163598.31628694493), (6353, 1, 2, 258263.4911799939), (6354, 1, 2, 258262.40919915793), (6356, 1, 2, 3369147.9185306518), (6357, 1, 2, 3369109.2035787837), (6373, 1, 2, 3052996.1387697011), (6375, 1, 2, 3052990.1349565326), (6408, 1, 2, 384109.31851835811), (6411, 1, 2, 384109.94256129669), (6452, 0, 2, 6933998.0389410723), (5118, 0, 3, 71356608.968326405), (6298, 0, 3, 2730026.5944345514), (6377, 0, 3, 49816.091443461242), (6385, 0, 3, 95215.620885693774), (6391, 0, 3, 4433355.1176670594), (6395, 0, 3, 10841286.983725064), (6426, 0, 3, 217469.2378872112)]
+Run job in nedd policy..
+app-node list:
+[5152, 5153, 5154, 5155, 6300, 6301, 6302, 6303, 6304, 6305, 6306, 6307, 6320, 6321, 6322, 6323, 6360, 6361, 6362, 6363, 6364, 6365, 6366, 6367, 6380, 6381, 6382, 6383, 6396, 6397, 6398, 6399]
+
+Run job in lowerRouterStall policy..
+app-node list:
+[6451, 6449, 6450, 6302, 6300, 6301, 6303, 6367, 6365, 6364, 6366, 6434, 6435, 6432, 6433, 6377, 6431, 6430, 6428, 6429, 6385, 6445, 6444, 6447, 6446, 6313, 6315, 6316, 6317, 6318, 6399, 6397]
+
+Run job in fewerSwitch policy..
+app-node list:
+[5152, 5153, 5154, 5155, 6300, 6301, 6302, 6303, 6304, 6305, 6306, 6307, 6320, 6321, 6322, 6323, 6360, 6361, 6362, 6363, 6364, 6365, 6366, 6367, 6380, 6381, 6382, 6383, 6396, 6397, 6398, 6399]
+
+Run job in random policy..
+app-node list:
+[6333, 6316, 5131, 6434, 6380, 6366, 6450, 6428, 5141, 5118, 6341, 6407, 5151, 6431, 6302, 6343, 6420, 6271, 6304, 6360, 6422, 6399, 6385, 6363, 6377, 6435, 6444, 6364, 6381, 6411, 6305, 6330]
+
+Run job in antinedd policy..
+app-node list:
+[6450, 6451, 5121, 5122, 5124, 5127, 5144, 5147, 6272, 6274, 6277, 6279, 6280, 6281, 6313, 6315, 6353, 6354, 6356, 6357, 6373, 6375, 6408, 6411, 6452, 5118, 6298, 6377, 6385, 6391, 6395, 6426]
+
+continualGPC() finished.
+GPC killed.
+Run job in fewerNoCong policy.
+app-node list:
+[5152, 5153, 5154, 5155, 6300, 6301, 6302, 6303, 6304, 6305, 6306, 6307, 6320, 6321, 6322, 6323, 6360, 6361, 6362, 6363, 6364, 6365, 6366, 6367, 6380, 6381, 6382, 6383, 6396, 6397, 6398, 6399]
+Iteration end.
+
+====================
+iteration 2
+Congestor nodes:
+[6365, 5126, 5123, 6327, 6338, 6312, 5128, 6377, 6299, 6355, 6358, 6438, 6276, 6426, 6446, 6372, 6343, 6304, 6281, 6440, 6425, 6278, 5154, 6313, 6415, 6294, 6439, 6335, 6333, 6359, 6277, 6441, 6330, 6362, 5121, 6328, 6399, 6297, 6405, 6339, 6452, 6310, 6400, 6283, 6410, 6273, 6404, 6282, 6369, 6444, 6398, 6344, 5151, 6280, 6309, 6378, 6407, 6391, 6381, 5141, 6321, 6293, 6317, 5120]
+srun: Job 37847067 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for job 37847067
+srun: forcing job termination
+[6365, 5126, 5123, 6327, 6338, 6312, 5128, 6377, 6299, 6355, 6358, 6438, 6276, 6426, 6446, 6372, 6343, 6304, 6281, 6440, 6425, 6278, 5154, 6313, 6415, 6294, 6439, 6335, 6333, 6359, 6277, 6441, 6330, 6362, 5121, 6328, 6399, 6297, 6405, 6339, 6452, 6310, 6400, 6283, 6410, 6273, 6404, 6282, 6369, 6444, 6398, 6344, 5151, 6280, 6309, 6378, 6407, 6391, 6381, 5141, 6321, 6293, 6317, 5120]
+continual GPC started.
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+GPC killed in continualGPC().
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 37847067.32 ON nid05120 CANCELLED AT 2021-01-11T14:31:45 ***
+srun: error: nid06440: tasks 4012-4079: Killed
+srun: Terminating job step 37847067.32
+srun: error: nid06280: tasks 816-883: Killed
+srun: error: nid05141: tasks 340-407: Killed
+srun: error: nid06282: tasks 952-1019: Killed
+srun: error: nid06405: tasks 3468-3535: Killed
+srun: error: nid06297: tasks 1224-1291: Killed
+srun: error: nid05154: tasks 476-543: Killed
+srun: error: nid06426: tasks 3808-3875: Killed
+srun: error: nid06309: tasks 1428-1495: Killed
+srun: error: nid06439: tasks 3944-4011: Killed
+srun: error: nid06377: tasks 2924-2991: Killed
+srun: error: nid05151: tasks 408-475: Killed
+srun: error: nid06327: tasks 1836-1903: Killed
+srun: error: nid06338: tasks 2176-2243: Killed
+srun: error: nid06444: tasks 4148-4215: Killed
+srun: error: nid06446: tasks 4216-4283: Killed
+srun: error: nid06299: tasks 1292-1359: Killed
+srun: error: nid06321: tasks 1768-1835: Killed
+srun: error: nid06362: tasks 2652-2719: Killed
+srun: error: nid06304: tasks 1360-1427: Killed
+srun: error: nid05121: tasks 68-135: Killed
+srun: error: nid06378: tasks 2992-3059: Killed
+srun: error: nid06410: tasks 3604-3671: Killed
+srun: error: nid06343: tasks 2312-2379: Killed
+srun: error: nid06339: tasks 2244-2311: Killed
+srun: error: nid06310: tasks 1496-1563: Killed
+srun: error: nid06425: tasks 3740-3807: Killed
+srun: error: nid05128: tasks 272-339: Killed
+srun: error: nid06278: tasks 748-815: Killed
+srun: error: nid06365: tasks 2720-2787: Killed
+srun: error: nid06330: tasks 1972-2039: Killed
+srun: error: nid06359: tasks 2584-2651: Killed
+srun: error: nid06317: tasks 1700-1767: Killed
+srun: error: nid06355: tasks 2448-2515: Killed
+srun: error: nid06344: tasks 2380-2447: Killed
+srun: error: nid06441: tasks 4080-4147: Killed
+srun: error: nid06438: tasks 3876-3943: Killed
+srun: error: nid06399: tasks 3264-3331: Killed
+srun: error: nid06400: tasks 3332-3399: Killed
+srun: error: nid06273: tasks 544-611: Killed
+srun: error: nid06335: tasks 2108-2175: Killed
+srun: error: nid05120: tasks 0-67: Killed
+srun: error: nid06381: tasks 3060-3127: Killed
+srun: error: nid06293: tasks 1088-1155: Killed
+srun: error: nid06294: tasks 1156-1223: Killed
+srun: error: nid06415: tasks 3672-3739: Killed
+srun: error: nid05126: tasks 204-271: Killed
+srun: error: nid06328: tasks 1904-1971: Killed
+srun: error: nid06452: tasks 4284-4351: Killed
+srun: error: nid05123: tasks 136-203: Killed
+srun: error: nid06398: tasks 3196-3263: Killed
+srun: error: nid06333: tasks 2040-2107: Killed
+srun: error: nid06281: tasks 884-951: Killed
+srun: error: nid06313: tasks 1632-1699: Killed
+srun: error: nid06283: tasks 1020-1087: Killed
+srun: error: nid06404: tasks 3400-3467: Killed
+srun: error: nid06358: tasks 2516-2583: Killed
+srun: error: nid06407: tasks 3536-3603: Killed
+srun: error: nid06276: tasks 612-679: Killed
+srun: error: nid06372: tasks 2856-2923: Killed
+srun: error: nid06369: tasks 2788-2855: Killed
+srun: error: nid06277: tasks 680-747: Killed
+srun: error: nid06312: tasks 1564-1631: Killed
+srun: error: nid06391: tasks 3128-3195: Killed
+GPC checker started.
+Monitor end timestamp: 1610402960
+Starting sortCongestion()..
+Copying file..
+Removing last line..
+deleteLastLine() finished.
+Reading cray csv..
+3411.0 seconds collected in total.
+Calculating stall sum..
+Calculating node stall..
+Replacing no-value data..
+Sorting nodes..
+[(6430, 547918.9373471248), (6428, 547919.45439251058), (6431, 547921.1021381371), (6429, 547923.13850635104), (6451, 623379.78706146532), (6450, 623383.96082502033), (6448, 623384.00129924167), (6449, 623386.90865890228), (6432, 651681.80001941905), (6433, 651682.35846186464), (6435, 651685.01188375696), (6434, 651685.26795787062), (6436, 658171.30268877593), (6437, 658174.18504462752), (6422, 1079602.4902929782), (6423, 1079605.6655640302), (6421, 1079606.9254881116), (6420, 1079613.0806651814), (6413, 1143631.6669739499), (6414, 1143636.0955167646), (6412, 1143641.238135583), (6443, 1918382.8789882276), (6442, 1918389.0506100121), (6411, 2229390.1969415303), (6408, 2229414.2362904539), (6409, 2229426.9684304046), (6375, 2531929.3431294924), (6374, 2531936.8155998695), (6373, 2531950.4680007473), (6393, 2628966.7373986896), (6392, 2628976.8117313441), (6394, 2628981.1202856679), (6395, 2628994.0809268025), (5146, 3660330.3225487075), (5145, 3660330.4472179455), (5147, 3660369.2193936133), (5144, 3660370.6421203716), (5148, 3863093.1932336017), (5150, 3863141.6186974403), (5149, 3863142.0573391966), (6402, 4112530.2879438382), (6403, 4112568.9492646959), (6401, 4112579.4901660201), (6325, 4322569.7990095625), (6324, 4322595.2419106811), (6326, 4322615.9076887341), (5152, 5227747.6951259663), (5153, 5227781.6385764694), (5155, 5227837.5585198356), (5130, 6053911.1137430947), (5129, 6053930.2170555275), (5131, 6053950.5931213014), (6424, 6741694.5816170555), (6427, 6741704.3493869789), (6453, 6987626.9600345753), (6454, 6987648.6877437113), (6308, 7100410.9013748942), (6311, 7100416.8031709166), (6329, 7776553.8935319511), (6331, 7776586.7061808938), (5117, 8381725.9774733894), (5119, 8381731.4168218467), (5118, 8381791.9712184863), (5116, 8400259.1972283088), (6389, 9749954.7827945594), (6390, 9749969.7714336719), (6388, 9749997.8030893411), (5124, 10676626.040159801), (5125, 10676631.533249035), (5127, 10676687.051780574), (5122, 16637515.385646082), (6406, 17167979.625780605), (5142, 17411653.903810672), (5143, 17411678.49864085), (5140, 17411941.143505462), (6396, 48969904.386900537), (6397, 48969944.96816244), (6334, 52573952.625268176), (6332, 52574199.939501099), (6302, 52947158.025435083), (6300, 52947447.504938498), (6303, 52947474.667843223), (6301, 52947514.990266688), (6384, 55037286.484979041), (6385, 55037439.535883069), (6386, 55037575.05217737), (6387, 55037632.392251872), (6360, 55037703.496204078), (6363, 55037728.021425985), (6361, 55037796.182904169), (6314, 55595608.31878686), (6315, 55596426.483899094), (6292, 55672137.304014109), (6295, 55672354.964265019), (6376, 56225769.145579651), (6379, 56226196.406503111), (6296, 56520814.039163888), (6298, 56520901.368749633), (6371, 58917255.356903307), (6368, 58917294.507169418), (6370, 58917387.489356928), (6356, 59025176.461364135), (6357, 59025373.602732688), (6364, 59365171.305240817), (6367, 59365580.044840753), (6366, 59365663.63347543), (6337, 60192012.589401901), (6336, 60192339.868800931), (6272, 61210968.113548189), (6275, 61211231.813878059), (6274, 61211303.142499737), (6347, 63141223.759197555), (6345, 63141253.598311812), (6346, 63141255.579043642), (6340, 68121683.027326033), (6342, 68121796.38510412), (6341, 68122061.926557168), (6279, 68629279.812825873), (6305, 69089762.949663237), (6306, 69089981.888614044), (6307, 69090397.026797265), (6323, 70452223.576206237), (6322, 70452348.567811683), (6320, 70452487.375792578), (6354, 71042282.745497316), (6353, 71042401.528035551), (6352, 71042632.370321929), (6271, 85496631.202526912), (6319, 135256124.73077384), (6318, 135259422.68969491), (6316, 135260249.97323719), (6380, 151952168.44797882), (6382, 151953097.57322493), (6383, 151953962.77622133), (6445, 152585317.64379656), (6447, 152589842.00489321)]
+nedd nodeInfo:
+[(5116, 3, 0, 8400259.1972283088), (5117, 3, 0, 8381725.9774733894), (5118, 3, 0, 8381791.9712184863), (5119, 3, 0, 8381731.4168218467), (5144, 3, 0, 3660370.6421203716), (5145, 3, 0, 3660330.4472179455), (5146, 3, 0, 3660330.3225487075), (5147, 3, 0, 3660369.2193936133), (6300, 3, 0, 52947447.504938498), (6301, 3, 0, 52947514.990266688), (6302, 3, 0, 52947158.025435083), (6303, 3, 0, 52947474.667843223), (6384, 3, 0, 55037286.484979041), (6385, 3, 0, 55037439.535883069), (6386, 3, 0, 55037575.05217737), (6387, 3, 0, 55037632.392251872), (6392, 3, 0, 2628976.8117313441), (6393, 3, 0, 2628966.7373986896), (6394, 3, 0, 2628981.1202856679), (6395, 3, 0, 2628994.0809268025), (6420, 3, 0, 1079613.0806651814), (6421, 3, 0, 1079606.9254881116), (6422, 3, 0, 1079602.4902929782), (6423, 3, 0, 1079605.6655640302), (6428, 3, 0, 547919.45439251058), (6429, 3, 0, 547923.13850635104), (6430, 3, 0, 547918.9373471248), (6431, 3, 0, 547921.1021381371), (6432, 3, 0, 651681.80001941905), (6433, 3, 0, 651682.35846186464), (6434, 3, 0, 651685.26795787062), (6435, 3, 0, 651685.01188375696), (6448, 3, 0, 623384.00129924167), (6449, 3, 0, 623386.90865890228), (6450, 3, 0, 623383.96082502033), (6451, 3, 0, 623379.78706146532), (6271, 0, 0, 85496631.202526912), (5124, 2, 1, 10676626.040159801), (5125, 2, 1, 10676631.533249035), (5127, 2, 1, 10676687.051780574), (5129, 2, 1, 6053930.2170555275), (5130, 2, 1, 6053911.1137430947), (5131, 2, 1, 6053950.5931213014), (5140, 2, 1, 17411941.143505462), (5142, 2, 1, 17411653.903810672), (5143, 2, 1, 17411678.49864085), (5148, 2, 1, 3863093.1932336017), (5149, 2, 1, 3863142.0573391966), (5150, 2, 1, 3863141.6186974403), (5152, 2, 1, 5227747.6951259663), (5153, 2, 1, 5227781.6385764694), (5155, 2, 1, 5227837.5585198356), (6272, 2, 1, 61210968.113548189), (6274, 2, 1, 61211303.142499737), (6275, 2, 1, 61211231.813878059), (6305, 2, 1, 69089762.949663237), (6306, 2, 1, 69089981.888614044), (6307, 2, 1, 69090397.026797265), (6316, 2, 1, 135260249.97323719), (6318, 2, 1, 135259422.68969491), (6319, 2, 1, 135256124.73077384), (6320, 2, 1, 70452487.375792578), (6322, 2, 1, 70452348.567811683), (6323, 2, 1, 70452223.576206237), (6324, 2, 1, 4322595.2419106811), (6325, 2, 1, 4322569.7990095625), (6326, 2, 1, 4322615.9076887341), (6340, 2, 1, 68121683.027326033), (6341, 2, 1, 68122061.926557168), (6342, 2, 1, 68121796.38510412), (6345, 2, 1, 63141253.598311812), (6346, 2, 1, 63141255.579043642), (6347, 2, 1, 63141223.759197555), (6352, 2, 1, 71042632.370321929), (6353, 2, 1, 71042401.528035551), (6354, 2, 1, 71042282.745497316), (6360, 2, 1, 55037703.496204078), (6361, 2, 1, 55037796.182904169), (6363, 2, 1, 55037728.021425985), (6364, 2, 1, 59365171.305240817), (6366, 2, 1, 59365663.63347543), (6367, 2, 1, 59365580.044840753), (6368, 2, 1, 58917294.507169418), (6370, 2, 1, 58917387.489356928), (6371, 2, 1, 58917255.356903307), (6373, 2, 1, 2531950.4680007473), (6374, 2, 1, 2531936.8155998695), (6375, 2, 1, 2531929.3431294924), (6380, 2, 1, 151952168.44797882), (6382, 2, 1, 151953097.57322493), (6383, 2, 1, 151953962.77622133), (6388, 2, 1, 9749997.8030893411), (6389, 2, 1, 9749954.7827945594), (6390, 2, 1, 9749969.7714336719), (6401, 2, 1, 4112579.4901660201), (6402, 2, 1, 4112530.2879438382), (6403, 2, 1, 4112568.9492646959), (6408, 2, 1, 2229414.2362904539), (6409, 2, 1, 2229426.9684304046), (6411, 2, 1, 2229390.1969415303), (6412, 2, 1, 1143641.238135583), (6413, 2, 1, 1143631.6669739499), (6414, 2, 1, 1143636.0955167646), (6453, 1, 1, 6987626.9600345753), (6454, 1, 1, 6987648.6877437113), (6292, 1, 2, 55672137.304014109), (6295, 1, 2, 55672354.964265019), (6296, 1, 2, 56520814.039163888), (6298, 1, 2, 56520901.368749633), (6308, 1, 2, 7100410.9013748942), (6311, 1, 2, 7100416.8031709166), (6314, 1, 2, 55595608.31878686), (6315, 1, 2, 55596426.483899094), (6329, 1, 2, 7776553.8935319511), (6331, 1, 2, 7776586.7061808938), (6332, 1, 2, 52574199.939501099), (6334, 1, 2, 52573952.625268176), (6336, 1, 2, 60192339.868800931), (6337, 1, 2, 60192012.589401901), (6356, 1, 2, 59025176.461364135), (6357, 1, 2, 59025373.602732688), (6376, 1, 2, 56225769.145579651), (6379, 1, 2, 56226196.406503111), (6396, 1, 2, 48969904.386900537), (6397, 1, 2, 48969944.96816244), (6424, 1, 2, 6741694.5816170555), (6427, 1, 2, 6741704.3493869789), (6436, 1, 2, 658171.30268877593), (6437, 1, 2, 658174.18504462752), (6442, 1, 2, 1918389.0506100121), (6443, 1, 2, 1918382.8789882276), (6445, 1, 2, 152585317.64379656), (6447, 1, 2, 152589842.00489321), (5122, 0, 3, 16637515.385646082), (6279, 0, 3, 68629279.812825873), (6406, 0, 3, 17167979.625780605)]
+Run job in nedd policy..
+app-node list:
+[5116, 5117, 5118, 5119, 5144, 5145, 5146, 5147, 6300, 6301, 6302, 6303, 6384, 6385, 6386, 6387, 6392, 6393, 6394, 6395, 6420, 6421, 6422, 6423, 6428, 6429, 6430, 6431, 6432, 6433, 6434, 6435]
+
+Run job in lowerRouterStall policy..
+app-node list:
+[6430, 6428, 6431, 6429, 6451, 6450, 6448, 6449, 6432, 6433, 6435, 6434, 6436, 6437, 6422, 6423, 6421, 6420, 6413, 6414, 6412, 6443, 6442, 6411, 6408, 6409, 6375, 6374, 6373, 6393, 6392, 6394]
+
+Run job in fewerSwitch policy..
+app-node list:
+[5116, 5117, 5118, 5119, 5144, 5145, 5146, 5147, 6300, 6301, 6302, 6303, 6384, 6385, 6386, 6387, 6392, 6393, 6394, 6395, 6420, 6421, 6422, 6423, 6428, 6429, 6430, 6431, 6432, 6433, 6434, 6435]
+
+Run job in random policy..
+app-node list:
+[6340, 5124, 6332, 6371, 5145, 6422, 6271, 6449, 6451, 6397, 6413, 6406, 6412, 6421, 6356, 6298, 6279, 5130, 6357, 6430, 6411, 5150, 6427, 6374, 5117, 6275, 6302, 6347, 6320, 6346, 6364, 6431]
+
+Run job in antinedd policy..
+app-node list:
+[6454, 6292, 6295, 6296, 6298, 6308, 6311, 6314, 6315, 6329, 6331, 6332, 6334, 6336, 6337, 6356, 6357, 6376, 6379, 6396, 6397, 6424, 6427, 6436, 6437, 6442, 6443, 6445, 6447, 5122, 6279, 6406]
+
+continualGPC() finished.
+GPC killed.
+Run job in fewerNoCong policy.
+app-node list:
+[5116, 5117, 5118, 5119, 5144, 5145, 5146, 5147, 6300, 6301, 6302, 6303, 6384, 6385, 6386, 6387, 6392, 6393, 6394, 6395, 6420, 6421, 6422, 6423, 6428, 6429, 6430, 6431, 6432, 6433, 6434, 6435]
+Iteration end.
+
+====================
+iteration 3
+Congestor nodes:
+[6317, 6296, 6425, 6399, 5121, 6335, 5150, 5145, 5147, 6345, 6356, 6276, 6384, 6429, 6434, 6403, 6302, 6435, 6421, 5143, 6342, 6437, 6364, 6440, 6321, 6380, 6292, 6299, 6394, 6386, 6443, 6454, 6322, 6372, 6377, 6414, 6393, 6381, 6308, 6408, 6347, 6297, 6432, 6311, 6304, 6389, 6352, 6274, 6341, 6428, 5123, 6339, 6422, 6295, 6438, 6294, 6388, 5148, 6314, 6447, 6273, 6307, 6390, 6426]
+srun: forcing job termination
+[6317, 6296, 6425, 6399, 5121, 6335, 5150, 5145, 5147, 6345, 6356, 6276, 6384, 6429, 6434, 6403, 6302, 6435, 6421, 5143, 6342, 6437, 6364, 6440, 6321, 6380, 6292, 6299, 6394, 6386, 6443, 6454, 6322, 6372, 6377, 6414, 6393, 6381, 6308, 6408, 6347, 6297, 6432, 6311, 6304, 6389, 6352, 6274, 6341, 6428, 5123, 6339, 6422, 6295, 6438, 6294, 6388, 5148, 6314, 6447, 6273, 6307, 6390, 6426]
+continual GPC started.
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+GPC killed in continualGPC().
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 37847067.45 ON nid05121 CANCELLED AT 2021-01-11T15:08:33 ***
+srun: error: nid06454: tasks 4284-4351: Killed
+srun: Terminating job step 37847067.45
+srun: error: nid06440: tasks 4080-4147: Killed
+srun: error: nid06377: tasks 2380-2447: Killed
+srun: error: nid06295: tasks 816-883: Killed
+srun: error: nid06443: tasks 4148-4215: Killed
+srun: error: nid05121: tasks 0-67: Killed
+srun: error: nid06299: tasks 1020-1087: Killed
+srun: error: nid06297: tasks 952-1019: Killed
+srun: error: nid06432: tasks 3740-3807: Killed
+srun: error: nid06447: tasks 4216-4283: Killed
+srun: error: nid06438: tasks 4012-4079: Killed
+srun: error: nid06422: tasks 3400-3467: Killed
+srun: error: nid06425: tasks 3468-3535: Killed
+srun: error: nid06311: tasks 1360-1427: Killed
+srun: error: nid06296: tasks 884-951: Killed
+srun: error: nid06342: tasks 1904-1971: Killed
+srun: error: nid06352: tasks 2108-2175: Killed
+srun: error: nid05147: tasks 272-339: Killed
+srun: error: nid05123: tasks 68-135: Killed
+srun: error: nid06380: tasks 2448-2515: Killed
+srun: error: nid06408: tasks 3196-3263: Killed
+srun: error: nid06426: tasks 3536-3603: Killed
+srun: error: nid06389: tasks 2788-2855: Killed
+srun: error: nid05143: tasks 136-203: Killed
+srun: error: nid06304: tasks 1156-1223: Killed
+srun: error: nid06302: tasks 1088-1155: Killed
+srun: error: nid06341: tasks 1836-1903: Killed
+srun: error: nid06317: tasks 1496-1563: Killed
+srun: error: nid06364: tasks 2244-2311: Killed
+srun: error: nid06356: tasks 2176-2243: Killed
+srun: error: nid06294: tasks 748-815: Killed
+srun: error: nid06292: tasks 680-747: Killed
+srun: error: nid05145: tasks 204-271: Killed
+srun: error: nid06414: tasks 3264-3331: Killed
+srun: error: nid06314: tasks 1428-1495: Killed
+srun: error: nid06322: tasks 1632-1699: Killed
+srun: error: nid06345: tasks 1972-2039: Killed
+srun: error: nid06384: tasks 2584-2651: Killed
+srun: error: nid06428: tasks 3604-3671: Killed
+srun: error: nid06339: tasks 1768-1835: Killed
+srun: error: nid06273: tasks 476-543: Killed
+srun: error: nid06274: tasks 544-611: Killed
+srun: error: nid06276: tasks 612-679: Killed
+srun: error: nid05150: tasks 408-475: Killed
+srun: error: nid06421: tasks 3332-3399: Killed
+srun: error: nid06434: tasks 3808-3875: Killed
+srun: error: nid06381: tasks 2516-2583: Killed
+srun: error: nid06437: tasks 3944-4011: Killed
+srun: error: nid06335: tasks 1700-1767: Killed
+srun: error: nid06403: tasks 3128-3195: Killed
+srun: error: nid05148: tasks 340-407: Killed
+srun: error: nid06394: tasks 2992-3059: Killed
+srun: error: nid06399: tasks 3060-3127: Killed
+srun: error: nid06390: tasks 2856-2923: Killed
+srun: error: nid06321: tasks 1564-1631: Killed
+srun: error: nid06372: tasks 2312-2379: Killed
+srun: error: nid06386: tasks 2652-2719: Killed
+srun: error: nid06347: tasks 2040-2107: Killed
+srun: error: nid06308: tasks 1292-1359: Killed
+srun: error: nid06429: tasks 3672-3739: Killed
+srun: error: nid06435: tasks 3876-3943: Killed
+srun: error: nid06388: tasks 2720-2787: Killed
+srun: error: nid06393: tasks 2924-2991: Killed
+srun: error: nid06307: tasks 1224-1291: Killed
+GPC checker started.
+Monitor end timestamp: 1610404653
+Starting sortCongestion()..
+Copying file..
+Removing last line..
+deleteLastLine() finished.
+Reading cray csv..
+5105.0 seconds collected in total.
+Calculating stall sum..
+Calculating node stall..
+Replacing no-value data..
+Sorting nodes..
+[(6451, 88685.520591021166), (6449, 88685.807633475051), (6448, 88685.988692744912), (6450, 88686.370011502004), (6387, 115281.55111524799), (6385, 115284.36227825926), (6392, 184428.4491261665), (6395, 184428.610599351), (6310, 190310.86664030654), (6309, 190312.14387602758), (6328, 196816.65309705329), (6329, 196816.96855656756), (6330, 196817.23157171061), (6331, 196818.36422428093), (6375, 229367.64230936416), (6374, 229369.58267517199), (6373, 229370.31980095559), (6320, 320652.27757876535), (6323, 320653.91677175357), (6305, 352009.38749576284), (6306, 352012.26592437411), (6369, 461863.01642087899), (6371, 461874.45774107089), (6368, 461879.31236153137), (6370, 461879.31840565812), (5116, 600953.71540005703), (5117, 604396.72954766266), (5118, 604400.0549570258), (5119, 604403.37341782486), (5153, 606703.14111536636), (5152, 606705.32908026455), (5154, 606706.64495837758), (5155, 606710.60658432718), (5128, 675139.80025389465), (5131, 675140.04700009793), (5129, 675140.57126887178), (5130, 675144.35873643635), (6378, 848903.77587617119), (6376, 848908.27784714918), (6379, 848913.57457220869), (5151, 924991.45750321052), (5149, 924993.70203337399), (6366, 1003960.645945061), (6365, 1003965.2700533366), (6367, 1003968.8969595355), (5144, 1103530.1819504658), (5146, 1103537.7634031398), (6303, 1108881.397760954), (6301, 1108881.528845846), (6300, 1108883.6638138075), (6360, 1445536.9637052759), (6362, 1445539.3182761914), (6361, 1445540.8185298417), (6363, 1445545.2443973715), (6343, 1594153.6446862256), (6340, 1594156.9192343606), (6346, 2397928.5440199287), (6344, 2397936.5383567279), (5127, 3205629.4978968194), (5126, 3205631.5752902082), (5124, 3205640.8108990099), (5125, 3205660.4420916419), (6271, 3835782.412512552), (6272, 4383723.3384759361), (6275, 4383774.19317054), (5142, 4814378.3662343873), (5141, 4814415.9768417161), (5140, 4830123.0296677109), (6280, 5252095.5374077242), (6282, 5252160.2378495447), (6281, 5252179.6923179012), (6283, 5252340.1468209438), (6298, 6506175.7866810355), (6324, 6535939.4804430977), (6326, 6535950.3065948682), (6327, 6535950.4647208499), (6325, 6535984.743327966), (6353, 6861836.6336538959), (6355, 6861839.2423718162), (6354, 6861843.0385444686), (6396, 7141867.1232736409), (6398, 7141916.0272316411), (6397, 7141964.7058789777), (6319, 7404214.2705213167), (6318, 7404226.217831173), (6316, 7404258.0048070597), (6334, 7484636.8521841746), (6332, 7484683.9083218519), (6333, 7484690.4454539791), (6357, 7715941.7562901359), (6359, 7715941.771749137), (6358, 7715949.5012569986), (6293, 8276585.4604152525), (6391, 8361501.9219574714), (6337, 8470342.4914567452), (6338, 8470435.1669421438), (6336, 8470498.2978334557), (6383, 9012832.6001687404), (6382, 9012929.0446133427), (6420, 10283406.009221694), (6423, 10283489.460499652), (6279, 11195736.68197711), (6277, 11195767.433753604), (6278, 11195776.733023655), (5120, 12371998.649570324), (5122, 12372003.737047724), (6439, 28863022.57604634), (6436, 28864056.439128641), (6433, 29162914.913287859), (6404, 31220451.378916793), (6407, 31220511.362392571), (6405, 31220547.892625019), (6406, 31220802.912975159), (6401, 44264471.561847754), (6402, 44265307.30232615), (6400, 44265404.325955197), (6431, 46716448.398871258), (6430, 46717379.555122957), (6453, 63063974.819793455), (6452, 63064502.713900208), (6445, 66523896.160468616), (6446, 66523952.907494001), (6444, 66524179.595743231), (6424, 74501243.060443342), (6427, 74501249.340138972), (6412, 101110032.01308483), (6413, 101111197.28837562), (6415, 101111441.15867686), (6410, 128799992.21809763), (6411, 128800276.67993024), (6409, 128801012.86888231), (6442, 225700977.84646618), (6441, 225702290.71274248), (6312, 263937649.21727031), (6315, 263940490.750963), (6313, 263941489.31449619)]
+nedd nodeInfo:
+[(5116, 3, 0, 600953.71540005703), (5117, 3, 0, 604396.72954766266), (5118, 3, 0, 604400.0549570258), (5119, 3, 0, 604403.37341782486), (5124, 3, 0, 3205640.8108990099), (5125, 3, 0, 3205660.4420916419), (5126, 3, 0, 3205631.5752902082), (5127, 3, 0, 3205629.4978968194), (5128, 3, 0, 675139.80025389465), (5129, 3, 0, 675140.57126887178), (5130, 3, 0, 675144.35873643635), (5131, 3, 0, 675140.04700009793), (5152, 3, 0, 606705.32908026455), (5153, 3, 0, 606703.14111536636), (5154, 3, 0, 606706.64495837758), (5155, 3, 0, 606710.60658432718), (6280, 3, 0, 5252095.5374077242), (6281, 3, 0, 5252179.6923179012), (6282, 3, 0, 5252160.2378495447), (6283, 3, 0, 5252340.1468209438), (6324, 3, 0, 6535939.4804430977), (6325, 3, 0, 6535984.743327966), (6326, 3, 0, 6535950.3065948682), (6327, 3, 0, 6535950.4647208499), (6328, 3, 0, 196816.65309705329), (6329, 3, 0, 196816.96855656756), (6330, 3, 0, 196817.23157171061), (6331, 3, 0, 196818.36422428093), (6360, 3, 0, 1445536.9637052759), (6361, 3, 0, 1445540.8185298417), (6362, 3, 0, 1445539.3182761914), (6363, 3, 0, 1445545.2443973715), (6368, 3, 0, 461879.31236153137), (6369, 3, 0, 461863.01642087899), (6370, 3, 0, 461879.31840565812), (6371, 3, 0, 461874.45774107089), (6404, 3, 0, 31220451.378916793), (6405, 3, 0, 31220547.892625019), (6406, 3, 0, 31220802.912975159), (6407, 3, 0, 31220511.362392571), (6448, 3, 0, 88685.988692744912), (6449, 3, 0, 88685.807633475051), (6450, 3, 0, 88686.370011502004), (6451, 3, 0, 88685.520591021166), (6271, 0, 0, 3835782.412512552), (5140, 2, 1, 4830123.0296677109), (5141, 2, 1, 4814415.9768417161), (5142, 2, 1, 4814378.3662343873), (6277, 2, 1, 11195767.433753604), (6278, 2, 1, 11195776.733023655), (6279, 2, 1, 11195736.68197711), (6300, 2, 1, 1108883.6638138075), (6301, 2, 1, 1108881.528845846), (6303, 2, 1, 1108881.397760954), (6312, 2, 1, 263937649.21727031), (6313, 2, 1, 263941489.31449619), (6315, 2, 1, 263940490.750963), (6316, 2, 1, 7404258.0048070597), (6318, 2, 1, 7404226.217831173), (6319, 2, 1, 7404214.2705213167), (6332, 2, 1, 7484683.9083218519), (6333, 2, 1, 7484690.4454539791), (6334, 2, 1, 7484636.8521841746), (6336, 2, 1, 8470498.2978334557), (6337, 2, 1, 8470342.4914567452), (6338, 2, 1, 8470435.1669421438), (6353, 2, 1, 6861836.6336538959), (6354, 2, 1, 6861843.0385444686), (6355, 2, 1, 6861839.2423718162), (6357, 2, 1, 7715941.7562901359), (6358, 2, 1, 7715949.5012569986), (6359, 2, 1, 7715941.771749137), (6365, 2, 1, 1003965.2700533366), (6366, 2, 1, 1003960.645945061), (6367, 2, 1, 1003968.8969595355), (6373, 2, 1, 229370.31980095559), (6374, 2, 1, 229369.58267517199), (6375, 2, 1, 229367.64230936416), (6376, 2, 1, 848908.27784714918), (6378, 2, 1, 848903.77587617119), (6379, 2, 1, 848913.57457220869), (6396, 2, 1, 7141867.1232736409), (6397, 2, 1, 7141964.7058789777), (6398, 2, 1, 7141916.0272316411), (6400, 2, 1, 44265404.325955197), (6401, 2, 1, 44264471.561847754), (6402, 2, 1, 44265307.30232615), (6409, 2, 1, 128801012.86888231), (6410, 2, 1, 128799992.21809763), (6411, 2, 1, 128800276.67993024), (6412, 2, 1, 101110032.01308483), (6413, 2, 1, 101111197.28837562), (6415, 2, 1, 101111441.15867686), (6444, 2, 1, 66524179.595743231), (6445, 2, 1, 66523896.160468616), (6446, 2, 1, 66523952.907494001), (6452, 1, 1, 63064502.713900208), (6453, 1, 1, 63063974.819793455), (5120, 1, 2, 12371998.649570324), (5122, 1, 2, 12372003.737047724), (5144, 1, 2, 1103530.1819504658), (5146, 1, 2, 1103537.7634031398), (5149, 1, 2, 924993.70203337399), (5151, 1, 2, 924991.45750321052), (6272, 1, 2, 4383723.3384759361), (6275, 1, 2, 4383774.19317054), (6305, 1, 2, 352009.38749576284), (6306, 1, 2, 352012.26592437411), (6309, 1, 2, 190312.14387602758), (6310, 1, 2, 190310.86664030654), (6320, 1, 2, 320652.27757876535), (6323, 1, 2, 320653.91677175357), (6340, 1, 2, 1594156.9192343606), (6343, 1, 2, 1594153.6446862256), (6344, 1, 2, 2397936.5383567279), (6346, 1, 2, 2397928.5440199287), (6382, 1, 2, 9012929.0446133427), (6383, 1, 2, 9012832.6001687404), (6385, 1, 2, 115284.36227825926), (6387, 1, 2, 115281.55111524799), (6392, 1, 2, 184428.4491261665), (6395, 1, 2, 184428.610599351), (6420, 1, 2, 10283406.009221694), (6423, 1, 2, 10283489.460499652), (6424, 1, 2, 74501243.060443342), (6427, 1, 2, 74501249.340138972), (6430, 1, 2, 46717379.555122957), (6431, 1, 2, 46716448.398871258), (6436, 1, 2, 28864056.439128641), (6439, 1, 2, 28863022.57604634), (6441, 1, 2, 225702290.71274248), (6442, 1, 2, 225700977.84646618), (6293, 0, 3, 8276585.4604152525), (6298, 0, 3, 6506175.7866810355), (6391, 0, 3, 8361501.9219574714), (6433, 0, 3, 29162914.913287859)]
+Run job in nedd policy..
+app-node list:
+[5116, 5117, 5118, 5119, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5152, 5153, 5154, 5155, 6280, 6281, 6282, 6283, 6324, 6325, 6326, 6327, 6328, 6329, 6330, 6331, 6360, 6361, 6362, 6363]
+
+Run job in lowerRouterStall policy..
+app-node list:
+[6451, 6449, 6448, 6450, 6387, 6385, 6392, 6395, 6310, 6309, 6328, 6329, 6330, 6331, 6375, 6374, 6373, 6320, 6323, 6305, 6306, 6369, 6371, 6368, 6370, 5116, 5117, 5118, 5119, 5153, 5152, 5154]
+
+Run job in fewerSwitch policy..
+app-node list:
+[5116, 5117, 5118, 5119, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5152, 5153, 5154, 5155, 6280, 6281, 6282, 6283, 6324, 6325, 6326, 6327, 6328, 6329, 6330, 6331, 6360, 6361, 6362, 6363]
+
+Run job in random policy..
+app-node list:
+[5129, 5141, 6427, 6275, 6374, 6300, 6382, 5142, 6338, 6301, 6329, 6353, 6326, 6357, 6363, 6378, 6366, 6411, 6424, 6313, 6397, 6310, 5131, 6396, 6439, 6305, 5120, 6281, 6282, 5125, 6332, 6358]
+
+Run job in antinedd policy..
+app-node list:
+[6272, 6275, 6305, 6306, 6309, 6310, 6320, 6323, 6340, 6343, 6344, 6346, 6382, 6383, 6385, 6387, 6392, 6395, 6420, 6423, 6424, 6427, 6430, 6431, 6436, 6439, 6441, 6442, 6293, 6298, 6391, 6433]
+
+continualGPC() finished.
+GPC killed.
+Run job in fewerNoCong policy.
+app-node list:
+[5116, 5117, 5118, 5119, 5124, 5125, 5126, 5127, 5128, 5129, 5130, 5131, 5152, 5153, 5154, 5155, 6280, 6281, 6282, 6283, 6324, 6325, 6326, 6327, 6328, 6329, 6330, 6331, 6360, 6361, 6362, 6363]
+Iteration end.
+
+====================
+iteration 4
+Congestor nodes:
+[6376, 6337, 6299, 5149, 6278, 6295, 6329, 6395, 5129, 6358, 6445, 6415, 6271, 6352, 6452, 6391, 6447, 6426, 6307, 6353, 6421, 6365, 6438, 6343, 6442, 6302, 6366, 6432, 6392, 6370, 6282, 6335, 6422, 6389, 5143, 6338, 6272, 6336, 6334, 6383, 6306, 6372, 6384, 6405, 6322, 5124, 5150, 6379, 6399, 6328, 6327, 6424, 5154, 6451, 5117, 6332, 6360, 6344, 6300, 6431, 6356, 6273, 6408, 6377]
+srun: forcing job termination
+[6376, 6337, 6299, 5149, 6278, 6295, 6329, 6395, 5129, 6358, 6445, 6415, 6271, 6352, 6452, 6391, 6447, 6426, 6307, 6353, 6421, 6365, 6438, 6343, 6442, 6302, 6366, 6432, 6392, 6370, 6282, 6335, 6422, 6389, 5143, 6338, 6272, 6336, 6334, 6383, 6306, 6372, 6384, 6405, 6322, 5124, 5150, 6379, 6399, 6328, 6327, 6424, 5154, 6451, 5117, 6332, 6360, 6344, 6300, 6431, 6356, 6273, 6408, 6377]
+continual GPC started.
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+GPC killed in continualGPC().
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 37847067.57 ON nid05117 CANCELLED AT 2021-01-11T15:38:35 ***
+srun: error: nid06451: tasks 4216-4283: Killed
+srun: Terminating job step 37847067.57
+srun: error: nid06424: tasks 3672-3739: Killed
+srun: error: nid06442: tasks 4012-4079: Killed
+srun: error: nid06421: tasks 3536-3603: Killed
+srun: error: nid06282: tasks 748-815: Killed
+srun: error: nid06295: tasks 816-883: Killed
+srun: error: nid06432: tasks 3876-3943: Killed
+srun: error: nid05154: tasks 408-475: Killed
+srun: error: nid06299: tasks 884-951: Killed
+srun: error: nid06356: tasks 2176-2243: Killed
+srun: error: nid06405: tasks 3332-3399: Killed
+srun: error: nid06278: tasks 680-747: Killed
+srun: error: nid06302: tasks 1020-1087: Killed
+srun: error: nid06322: tasks 1224-1291: Killed
+srun: error: nid05150: tasks 340-407: Killed
+srun: error: nid05129: tasks 136-203: Killed
+srun: error: nid05143: tasks 204-271: Killed
+srun: error: nid06445: tasks 4080-4147: Killed
+srun: error: nid06447: tasks 4148-4215: Killed
+srun: error: nid06438: tasks 3944-4011: Killed
+srun: error: nid06344: tasks 1972-2039: Killed
+srun: error: nid05117: tasks 0-67: Killed
+srun: error: nid06426: tasks 3740-3807: Killed
+srun: error: nid06272: tasks 544-611: Killed
+srun: error: nid06271: tasks 476-543: Killed
+srun: error: nid06343: tasks 1904-1971: Killed
+srun: error: nid06365: tasks 2380-2447: Killed
+srun: error: nid05149: tasks 272-339: Killed
+srun: error: nid06358: tasks 2244-2311: Killed
+srun: error: nid06300: tasks 952-1019: Killed
+srun: error: nid06353: tasks 2108-2175: Killed
+srun: error: nid06328: tasks 1360-1427: Killed
+srun: error: nid06422: tasks 3604-3671: Killed
+srun: error: nid06392: tasks 3128-3195: Killed
+srun: error: nid06384: tasks 2924-2991: Killed
+srun: error: nid06332: tasks 1496-1563: Killed
+srun: error: nid06391: tasks 3060-3127: Killed
+srun: error: nid06337: tasks 1768-1835: Killed
+srun: error: nid06379: tasks 2788-2855: Killed
+srun: error: nid06352: tasks 2040-2107: Killed
+srun: error: nid06336: tasks 1700-1767: Killed
+srun: error: nid06377: tasks 2720-2787: Killed
+srun: error: nid06334: tasks 1564-1631: Killed
+srun: error: nid06408: tasks 3400-3467: Killed
+srun: error: nid06329: tasks 1428-1495: Killed
+srun: error: nid06335: tasks 1632-1699: Killed
+srun: error: nid06327: tasks 1292-1359: Killed
+srun: error: nid06383: tasks 2856-2923: Killed
+srun: error: nid05124: tasks 68-135: Killed
+srun: error: nid06431: tasks 3808-3875: Killed
+srun: error: nid06338: tasks 1836-1903: Killed
+srun: error: nid06389: tasks 2992-3059: Killed
+srun: error: nid06273: tasks 612-679: Killed
+srun: error: nid06366: tasks 2448-2515: Killed
+srun: error: nid06395: tasks 3196-3263: Killed
+srun: error: nid06360: tasks 2312-2379: Killed
+srun: error: nid06307: tasks 1156-1223: Killed
+srun: error: nid06306: tasks 1088-1155: Killed
+srun: error: nid06452: tasks 4284-4351: Killed
+srun: error: nid06399: tasks 3264-3331: Killed
+srun: error: nid06370: tasks 2516-2583: Killed
+srun: error: nid06372: tasks 2584-2651: Killed
+srun: error: nid06415: tasks 3468-3535: Killed
+srun: error: nid06376: tasks 2652-2719: Killed
+GPC checker started.
+Monitor end timestamp: 1610406864
+Starting sortCongestion()..
+Copying file..
+Removing last line..
+deleteLastLine() finished.
+Reading cray csv..
+7318.0 seconds collected in total.
+Calculating stall sum..
+Calculating node stall..
+Replacing no-value data..
+Sorting nodes..
+[(6311, 49767.574325802256), (6308, 49767.904167308669), (6310, 49767.957006250355), (6309, 49768.037296147471), (6373, 75009.636538548439), (6375, 75009.941798842832), (6374, 75010.130661508723), (6385, 101994.7488817042), (6386, 101995.3166445625), (6387, 101995.84187466378), (6297, 193585.82461487065), (6298, 193587.32170690529), (6296, 193587.38184931804), (6425, 232374.69128644231), (6427, 232375.28228434263), (6330, 263339.61662647291), (6331, 263340.70114144526), (6333, 299471.64791969844), (6323, 305301.56946323719), (6321, 305302.01988108369), (6320, 305303.44679347659), (6397, 406365.38372001471), (6398, 406365.48540208163), (6396, 406365.82849690458), (6371, 433226.60120842344), (6369, 433229.87124261481), (6368, 433232.7476666898), (5130, 727885.34664067021), (5131, 727945.59064804949), (5128, 728141.95184949506), (5116, 743844.9123639426), (5118, 750767.01356609177), (5119, 750827.93862631125), (6304, 771997.70461038686), (6305, 772001.18876253499), (5120, 1041717.3234719611), (5121, 1041752.7852948675), (5122, 1041803.5148463526), (5123, 1041868.5815047243), (5145, 1049019.0591608144), (5147, 1049242.22736998), (5146, 1049307.6893135856), (5144, 1049329.1441423139), (6276, 1100051.3496928543), (6277, 1100054.6540884608), (6279, 1100057.2160085132), (6409, 1215068.9208098231), (6411, 1215071.9187068983), (6410, 1215077.441329045), (6281, 1351065.2545791157), (6283, 1351073.6234472254), (6280, 1351081.7992066545), (6303, 1454204.3661114362), (6301, 1454227.1963994557), (5125, 2415612.3340938333), (5126, 2415623.1904370128), (5127, 2415638.5761056202), (6439, 2831037.0120172077), (6437, 2831041.7183407424), (6436, 2831057.430117249), (6325, 2854103.6146700159), (6326, 2854209.8410333693), (6324, 2854218.2953702724), (6407, 2943960.8147684964), (6404, 2943973.0743528893), (6406, 2944002.1752161854), (6340, 3020121.3686341355), (6342, 3020146.9119017515), (6341, 3022213.9342777282), (6317, 3351576.6792537435), (6319, 3351590.5995059144), (6318, 3351611.5047820015), (6316, 3351615.4795544879), (6314, 4237021.9341736231), (6312, 4237025.7578676743), (6315, 4237050.5678100297), (6313, 4237332.5794448778), (6339, 4257430.3403630778), (5140, 5514535.5717736119), (5142, 5514636.352571697), (5141, 5514639.6045227461), (6393, 5870862.0235167062), (6394, 5870881.909460973), (6381, 6268292.9901700392), (6380, 6268326.1395935863), (6382, 6268344.1692436896), (6363, 6548050.4669970786), (6361, 6548130.7333140969), (6362, 6548225.6520198155), (6357, 6907725.4783910988), (6359, 6907773.3053710973), (6346, 7142482.79802451), (6345, 7142490.4918327359), (6347, 7142537.6727196043), (6390, 8002662.6966179488), (6388, 8002674.3026189627), (6367, 8512634.1428252999), (6364, 8512660.025450049), (5155, 9553023.956863543), (5153, 9553090.5602275208), (5152, 9553099.3256651871), (5148, 10460315.646130553), (5151, 10460423.209192554), (6378, 15850350.38718538), (6449, 16293926.925705839), (6448, 16293993.742447667), (6450, 16294071.318348639), (6294, 17906928.601294279), (6292, 17906929.1377366), (6293, 17907241.79939656), (6453, 21936937.633130755), (6454, 21937033.288795944), (6275, 44160655.553233713), (6274, 44160942.241296306), (6434, 46918914.702877559), (6433, 46919046.796958186), (6435, 46931198.930086493), (6440, 69983223.692233503), (6441, 69983347.156133354), (6443, 69983364.422232285), (6444, 73673499.948578715), (6446, 73673685.422881648), (6420, 94367093.086160913), (6423, 94368833.202327326), (6413, 105932315.61520146), (6414, 105932630.33608715), (6412, 105933347.85393924), (6428, 106978135.65586866), (6429, 106978469.98061784), (6430, 106978484.97872753), (6400, 122044626.98129497), (6402, 122044763.02064115), (6403, 122044893.97662592), (6401, 122044910.77159317), (6354, 268755852.42923474), (6355, 268757093.31736439)]
+nedd nodeInfo:
+[(5120, 3, 0, 1041717.3234719611), (5121, 3, 0, 1041752.7852948675), (5122, 3, 0, 1041803.5148463526), (5123, 3, 0, 1041868.5815047243), (5144, 3, 0, 1049329.1441423139), (5145, 3, 0, 1049019.0591608144), (5146, 3, 0, 1049307.6893135856), (5147, 3, 0, 1049242.22736998), (6308, 3, 0, 49767.904167308669), (6309, 3, 0, 49768.037296147471), (6310, 3, 0, 49767.957006250355), (6311, 3, 0, 49767.574325802256), (6312, 3, 0, 4237025.7578676743), (6313, 3, 0, 4237332.5794448778), (6314, 3, 0, 4237021.9341736231), (6315, 3, 0, 4237050.5678100297), (6316, 3, 0, 3351615.4795544879), (6317, 3, 0, 3351576.6792537435), (6318, 3, 0, 3351611.5047820015), (6319, 3, 0, 3351590.5995059144), (6400, 3, 0, 122044626.98129497), (6401, 3, 0, 122044910.77159317), (6402, 3, 0, 122044763.02064115), (6403, 3, 0, 122044893.97662592), (5116, 2, 1, 743844.9123639426), (5118, 2, 1, 750767.01356609177), (5119, 2, 1, 750827.93862631125), (5125, 2, 1, 2415612.3340938333), (5126, 2, 1, 2415623.1904370128), (5127, 2, 1, 2415638.5761056202), (5128, 2, 1, 728141.95184949506), (5130, 2, 1, 727885.34664067021), (5131, 2, 1, 727945.59064804949), (5140, 2, 1, 5514535.5717736119), (5141, 2, 1, 5514639.6045227461), (5142, 2, 1, 5514636.352571697), (5152, 2, 1, 9553099.3256651871), (5153, 2, 1, 9553090.5602275208), (5155, 2, 1, 9553023.956863543), (6276, 2, 1, 1100051.3496928543), (6277, 2, 1, 1100054.6540884608), (6279, 2, 1, 1100057.2160085132), (6280, 2, 1, 1351081.7992066545), (6281, 2, 1, 1351065.2545791157), (6283, 2, 1, 1351073.6234472254), (6292, 2, 1, 17906929.1377366), (6293, 2, 1, 17907241.79939656), (6294, 2, 1, 17906928.601294279), (6296, 2, 1, 193587.38184931804), (6297, 2, 1, 193585.82461487065), (6298, 2, 1, 193587.32170690529), (6320, 2, 1, 305303.44679347659), (6321, 2, 1, 305302.01988108369), (6323, 2, 1, 305301.56946323719), (6324, 2, 1, 2854218.2953702724), (6325, 2, 1, 2854103.6146700159), (6326, 2, 1, 2854209.8410333693), (6340, 2, 1, 3020121.3686341355), (6341, 2, 1, 3022213.9342777282), (6342, 2, 1, 3020146.9119017515), (6345, 2, 1, 7142490.4918327359), (6346, 2, 1, 7142482.79802451), (6347, 2, 1, 7142537.6727196043), (6361, 2, 1, 6548130.7333140969), (6362, 2, 1, 6548225.6520198155), (6363, 2, 1, 6548050.4669970786), (6368, 2, 1, 433232.7476666898), (6369, 2, 1, 433229.87124261481), (6371, 2, 1, 433226.60120842344), (6373, 2, 1, 75009.636538548439), (6374, 2, 1, 75010.130661508723), (6375, 2, 1, 75009.941798842832), (6380, 2, 1, 6268326.1395935863), (6381, 2, 1, 6268292.9901700392), (6382, 2, 1, 6268344.1692436896), (6385, 2, 1, 101994.7488817042), (6386, 2, 1, 101995.3166445625), (6387, 2, 1, 101995.84187466378), (6396, 2, 1, 406365.82849690458), (6397, 2, 1, 406365.38372001471), (6398, 2, 1, 406365.48540208163), (6404, 2, 1, 2943973.0743528893), (6406, 2, 1, 2944002.1752161854), (6407, 2, 1, 2943960.8147684964), (6409, 2, 1, 1215068.9208098231), (6410, 2, 1, 1215077.441329045), (6411, 2, 1, 1215071.9187068983), (6412, 2, 1, 105933347.85393924), (6413, 2, 1, 105932315.61520146), (6414, 2, 1, 105932630.33608715), (6428, 2, 1, 106978135.65586866), (6429, 2, 1, 106978469.98061784), (6430, 2, 1, 106978484.97872753), (6433, 2, 1, 46919046.796958186), (6434, 2, 1, 46918914.702877559), (6435, 2, 1, 46931198.930086493), (6436, 2, 1, 2831057.430117249), (6437, 2, 1, 2831041.7183407424), (6439, 2, 1, 2831037.0120172077), (6440, 2, 1, 69983223.692233503), (6441, 2, 1, 69983347.156133354), (6443, 2, 1, 69983364.422232285), (6448, 2, 1, 16293993.742447667), (6449, 2, 1, 16293926.925705839), (6450, 2, 1, 16294071.318348639), (6453, 1, 1, 21936937.633130755), (6454, 1, 1, 21937033.288795944), (5148, 1, 2, 10460315.646130553), (5151, 1, 2, 10460423.209192554), (6274, 1, 2, 44160942.241296306), (6275, 1, 2, 44160655.553233713), (6301, 1, 2, 1454227.1963994557), (6303, 1, 2, 1454204.3661114362), (6304, 1, 2, 771997.70461038686), (6305, 1, 2, 772001.18876253499), (6330, 1, 2, 263339.61662647291), (6331, 1, 2, 263340.70114144526), (6354, 1, 2, 268755852.42923474), (6355, 1, 2, 268757093.31736439), (6357, 1, 2, 6907725.4783910988), (6359, 1, 2, 6907773.3053710973), (6364, 1, 2, 8512660.025450049), (6367, 1, 2, 8512634.1428252999), (6388, 1, 2, 8002674.3026189627), (6390, 1, 2, 8002662.6966179488), (6393, 1, 2, 5870862.0235167062), (6394, 1, 2, 5870881.909460973), (6420, 1, 2, 94367093.086160913), (6423, 1, 2, 94368833.202327326), (6425, 1, 2, 232374.69128644231), (6427, 1, 2, 232375.28228434263), (6444, 1, 2, 73673499.948578715), (6446, 1, 2, 73673685.422881648), (6333, 0, 3, 299471.64791969844), (6339, 0, 3, 4257430.3403630778), (6378, 0, 3, 15850350.38718538)]
+Run job in nedd policy..
+app-node list:
+[5120, 5121, 5122, 5123, 5144, 5145, 5146, 5147, 6308, 6309, 6310, 6311, 6312, 6313, 6314, 6315, 6316, 6317, 6318, 6319, 6400, 6401, 6402, 6403, 5116, 5118, 5119, 5125, 5126, 5127, 5128, 5130]
+
+Run job in lowerRouterStall policy..
+app-node list:
+[6311, 6308, 6310, 6309, 6373, 6375, 6374, 6385, 6386, 6387, 6297, 6298, 6296, 6425, 6427, 6330, 6331, 6333, 6323, 6321, 6320, 6397, 6398, 6396, 6371, 6369, 6368, 5130, 5131, 5128, 5116, 5118]
+
+Run job in fewerSwitch policy..
+app-node list:
+[5120, 5121, 5122, 5123, 5144, 5145, 5146, 5147, 6308, 6309, 6310, 6311, 6312, 6313, 6314, 6315, 6316, 6317, 6318, 6319, 6400, 6401, 6402, 6403, 5116, 5118, 5119, 5125, 5126, 5127, 5128, 5130]
+
+Run job in random policy..
+app-node list:
+[6324, 6441, 6279, 6308, 6292, 6443, 6319, 5151, 6294, 5125, 6298, 6407, 6410, 6331, 6275, 6367, 6382, 6304, 5152, 6276, 6420, 6374, 5127, 6411, 6274, 6440, 6355, 6347, 5141, 5118, 6317, 6429]
+
+Run job in antinedd policy..
+app-node list:
+[6450, 6453, 6454, 5148, 5151, 6274, 6275, 6301, 6303, 6304, 6305, 6330, 6331, 6354, 6355, 6357, 6359, 6364, 6367, 6388, 6390, 6393, 6394, 6420, 6423, 6425, 6427, 6444, 6446, 6333, 6339, 6378]
+
+continualGPC() finished.
+GPC killed.
+Run job in fewerNoCong policy.
+app-node list:
+[5120, 5121, 5122, 5123, 5144, 5145, 5146, 5147, 6308, 6309, 6310, 6311, 6312, 6313, 6314, 6315, 6316, 6317, 6318, 6319, 6400, 6401, 6402, 6403, 5116, 5118, 5119, 5125, 5126, 5127, 5128, 5130]
+Iteration end.
+
+====================
+iteration 5
+Congestor nodes:
+[6393, 6441, 6385, 6334, 6357, 5122, 6324, 6296, 6304, 6328, 6336, 6423, 6390, 5120, 6434, 6309, 6382, 6367, 5119, 5142, 6338, 6394, 6274, 6442, 6439, 6322, 6389, 6429, 6365, 6421, 6450, 5146, 6321, 6432, 6407, 6436, 6425, 6356, 6306, 6369, 5124, 6293, 6273, 6444, 6316, 6379, 6313, 6297, 6329, 6353, 6308, 6400, 6428, 6318, 5152, 5147, 6315, 6377, 6391, 6280, 6427, 6447, 6298, 6347]
+srun: forcing job termination
+[6393, 6441, 6385, 6334, 6357, 5122, 6324, 6296, 6304, 6328, 6336, 6423, 6390, 5120, 6434, 6309, 6382, 6367, 5119, 5142, 6338, 6394, 6274, 6442, 6439, 6322, 6389, 6429, 6365, 6421, 6450, 5146, 6321, 6432, 6407, 6436, 6425, 6356, 6306, 6369, 5124, 6293, 6273, 6444, 6316, 6379, 6313, 6297, 6329, 6353, 6308, 6400, 6428, 6318, 5152, 5147, 6315, 6377, 6391, 6280, 6427, 6447, 6298, 6347]
+continual GPC started.
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+GPC killed in continualGPC().
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 37847067.70 ON nid05119 CANCELLED AT 2021-01-11T16:15:09 ***
+srun: error: nid06423: tasks 3400-3467: Killed
+srun: Terminating job step 37847067.70
+srun: error: nid05142: tasks 272-339: Killed
+srun: error: nid06329: tasks 1836-1903: Killed
+srun: error: nid05147: tasks 408-475: Killed
+srun: error: nid05146: tasks 340-407: Killed
+srun: error: nid06357: tasks 2312-2379: Killed
+srun: error: nid06274: tasks 612-679: Killed
+srun: error: nid06442: tasks 4080-4147: Killed
+srun: error: nid06297: tasks 884-951: Killed
+srun: error: nid06439: tasks 3944-4011: Killed
+srun: error: nid06450: tasks 4284-4351: Killed
+srun: error: nid06298: tasks 952-1019: Killed
+srun: error: nid06432: tasks 3740-3807: Killed
+srun: error: nid06334: tasks 1904-1971: Killed
+srun: error: nid06321: tasks 1564-1631: Killed
+srun: error: nid06296: tasks 816-883: Killed
+srun: error: nid06293: tasks 748-815: Killed
+srun: error: nid06394: tasks 3128-3195: Killed
+srun: error: nid05152: tasks 476-543: Killed
+srun: error: nid05122: tasks 136-203: Killed
+srun: error: nid06390: tasks 2924-2991: Killed
+srun: error: nid06407: tasks 3264-3331: Killed
+srun: error: nid06356: tasks 2244-2311: Killed
+srun: error: nid06447: tasks 4216-4283: Killed
+srun: error: nid06425: tasks 3468-3535: Killed
+srun: error: nid06389: tasks 2856-2923: Killed
+srun: error: nid05120: tasks 68-135: Killed
+srun: error: nid06322: tasks 1632-1699: Killed
+srun: error: nid06324: tasks 1700-1767: Killed
+srun: error: nid06318: tasks 1496-1563: Killed
+srun: error: nid06441: tasks 4012-4079: Killed
+srun: error: nid06367: tasks 2448-2515: Killed
+srun: error: nid06308: tasks 1156-1223: Killed
+srun: error: nid06328: tasks 1768-1835: Killed
+srun: error: nid06444: tasks 4148-4215: Killed
+srun: error: nid06353: tasks 2176-2243: Killed
+srun: error: nid06304: tasks 1020-1087: Killed
+srun: error: nid06306: tasks 1088-1155: Killed
+srun: error: nid06385: tasks 2788-2855: Killed
+srun: error: nid06377: tasks 2584-2651: Killed
+srun: error: nid06379: tasks 2652-2719: Killed
+srun: error: nid06434: tasks 3808-3875: Killed
+srun: error: nid06369: tasks 2516-2583: Killed
+srun: error: nid05119: tasks 0-67: Killed
+srun: error: nid06428: tasks 3604-3671: Killed
+srun: error: nid06309: tasks 1224-1291: Killed
+srun: error: nid06393: tasks 3060-3127: Killed
+srun: error: nid06280: tasks 680-747: Killed
+srun: error: nid05124: tasks 204-271: Killed
+srun: error: nid06391: tasks 2992-3059: Killed
+srun: error: nid06336: tasks 1972-2039: Killed
+srun: error: nid06273: tasks 544-611: Killed
+srun: error: nid06347: tasks 2108-2175: Killed
+srun: error: nid06315: tasks 1360-1427: Killed
+srun: error: nid06400: tasks 3196-3263: Killed
+srun: error: nid06427: tasks 3536-3603: Killed
+srun: error: nid06313: tasks 1292-1359: Killed
+srun: error: nid06429: tasks 3672-3739: Killed
+srun: error: nid06421: tasks 3332-3399: Killed
+srun: error: nid06338: tasks 2040-2107: Killed
+srun: error: nid06436: tasks 3876-3943: Killed
+srun: error: nid06382: tasks 2720-2787: Killed
+srun: error: nid06365: tasks 2380-2447: Killed
+srun: error: nid06316: tasks 1428-1495: Killed
+GPC checker started.
+Monitor end timestamp: 1610408661
+Starting sortCongestion()..
+Copying file..
+Removing last line..
+deleteLastLine() finished.
+Reading cray csv..
+9116.0 seconds collected in total.
+Calculating stall sum..
+Calculating node stall..
+Replacing no-value data..
+Sorting nodes..
+[(6438, 66214.428660140562), (6437, 66214.711472467839), (6378, 67208.33854907396), (6376, 67208.621186379765), (6310, 147049.89775768056), (6311, 147050.67908484847), (6380, 153893.21337354564), (6383, 153894.05681663618), (6381, 153895.32374056481), (6331, 170917.33336206019), (6330, 171036.53363362933), (6372, 187968.48221787554), (6375, 187968.69305912137), (6373, 187969.46751421838), (6374, 187969.75280329576), (6299, 270830.5575120555), (6346, 325056.22282418911), (6344, 325058.54196077911), (6345, 325060.97400124767), (6384, 589476.11561899784), (6386, 589476.8048684086), (6387, 589485.32018297561), (6396, 603767.58368093509), (6399, 603768.31404354051), (6397, 603769.75112724467), (6398, 603773.65968449833), (6340, 685014.32238490926), (6341, 685014.42026644351), (6343, 685014.9386081791), (6342, 685016.72277980007), (6300, 743318.10669586901), (6301, 743319.20763414912), (6303, 743321.60557352507), (6302, 743324.63877085445), (5151, 915011.7749148513), (5149, 915012.35888124898), (5150, 915013.76964744728), (5148, 915020.22398351494), (5145, 1022699.9805282884), (5144, 1022704.2455454086), (5153, 1143282.0189457848), (5155, 1143296.7698904795), (5154, 1143301.0294664055), (5131, 1151426.5693110768), (5129, 1151938.9744555103), (5128, 1151945.4707047949), (5130, 1151947.6849998203), (6363, 1221824.4591836189), (6362, 1221832.5211761913), (6360, 1221839.9270770394), (6361, 1221840.190082975), (6326, 1336115.1703806017), (6327, 1336115.2659248917), (6325, 1336125.2640719984), (6282, 1613934.6582787316), (6283, 1613935.1203022946), (6281, 1613943.4401497827), (6370, 1646736.8637212969), (6368, 1646738.3969411491), (6371, 1646740.8869510253), (5143, 1905733.4202451115), (5140, 1905738.8511089038), (5141, 1905745.6354063274), (6278, 1948602.7731187174), (6279, 1948603.9326207456), (6276, 1948604.1473434949), (6277, 1948609.0742675774), (5118, 1951098.628625625), (5117, 1951114.5862995619), (5116, 1964977.7527496906), (6339, 2425214.3870498799), (6337, 2425228.2168232468), (6395, 2512673.0226302515), (6392, 2512679.2035843637), (6452, 2910986.8955364758), (6454, 2910992.739421078), (6453, 2911004.0190012213), (6305, 3180422.6144361598), (6307, 3180427.8680142378), (6354, 3232541.661631396), (6355, 3232551.4583737049), (6352, 3232559.6179168215), (6388, 3463301.220528964), (6320, 3639881.9840406668), (6323, 3639897.5342743159), (6272, 3687039.126455931), (6275, 3687046.2956951642), (6295, 4386052.9129078956), (6292, 4386054.2958758101), (6294, 4386063.9108781256), (6366, 5198074.118980376), (6364, 5198117.0030435128), (5121, 5649814.6698649544), (5123, 5649889.2460995559), (5126, 6457511.6508539598), (5125, 6457555.6756784357), (5127, 6457575.2613217458), (6359, 8438336.0183629449), (6358, 8438349.7229157109), (6433, 18085499.930981211), (6435, 18100671.512694996), (6335, 18991159.173011016), (6333, 18991261.477917802), (6332, 18991331.490394849), (6314, 19298768.813297316), (6312, 19298806.087207463), (6403, 32076116.007988129), (6401, 32076369.268891923), (6402, 32076564.914478406), (6426, 38415197.334212571), (6424, 38415231.98076082), (6410, 48179383.143547706), (6408, 48179414.318220884), (6411, 48179428.506960876), (6409, 48179588.456952833), (6404, 57308190.804356478), (6405, 57308390.009981327), (6406, 57308805.771178581), (6430, 65964224.878661752), (6431, 65964470.550348029), (6451, 67853995.277630627), (6449, 67854797.596684054), (6448, 67854872.929345191), (6443, 69784941.858252406), (6440, 69785018.501191661), (6420, 89516754.059847325), (6422, 89516809.638328969), (6412, 108232159.08015949), (6413, 108232738.89866191), (6415, 108232862.69471566), (6414, 108232959.62663342), (6271, 173342437.4547731), (6445, 239852844.99818569), (6446, 239854091.41194806), (6317, 293070462.94471401), (6319, 293070754.20409703)]
+nedd nodeInfo:
+[(5128, 3, 0, 1151945.4707047949), (5129, 3, 0, 1151938.9744555103), (5130, 3, 0, 1151947.6849998203), (5131, 3, 0, 1151426.5693110768), (5148, 3, 0, 915020.22398351494), (5149, 3, 0, 915012.35888124898), (5150, 3, 0, 915013.76964744728), (5151, 3, 0, 915011.7749148513), (6276, 3, 0, 1948604.1473434949), (6277, 3, 0, 1948609.0742675774), (6278, 3, 0, 1948602.7731187174), (6279, 3, 0, 1948603.9326207456), (6300, 3, 0, 743318.10669586901), (6301, 3, 0, 743319.20763414912), (6302, 3, 0, 743324.63877085445), (6303, 3, 0, 743321.60557352507), (6340, 3, 0, 685014.32238490926), (6341, 3, 0, 685014.42026644351), (6342, 3, 0, 685016.72277980007), (6343, 3, 0, 685014.9386081791), (6360, 3, 0, 1221839.9270770394), (6361, 3, 0, 1221840.190082975), (6362, 3, 0, 1221832.5211761913), (6363, 3, 0, 1221824.4591836189), (6372, 3, 0, 187968.48221787554), (6373, 3, 0, 187969.46751421838), (6374, 3, 0, 187969.75280329576), (6375, 3, 0, 187968.69305912137), (6396, 3, 0, 603767.58368093509), (6397, 3, 0, 603769.75112724467), (6398, 3, 0, 603773.65968449833), (6399, 3, 0, 603768.31404354051), (6408, 3, 0, 48179414.318220884), (6409, 3, 0, 48179588.456952833), (6410, 3, 0, 48179383.143547706), (6411, 3, 0, 48179428.506960876), (6412, 3, 0, 108232159.08015949), (6413, 3, 0, 108232738.89866191), (6414, 3, 0, 108232959.62663342), (6415, 3, 0, 108232862.69471566), (6452, 2, 0, 2910986.8955364758), (6453, 2, 0, 2911004.0190012213), (6454, 2, 0, 2910992.739421078), (6271, 0, 0, 173342437.4547731), (5116, 2, 1, 1964977.7527496906), (5117, 2, 1, 1951114.5862995619), (5118, 2, 1, 1951098.628625625), (5125, 2, 1, 6457555.6756784357), (5126, 2, 1, 6457511.6508539598), (5127, 2, 1, 6457575.2613217458), (5140, 2, 1, 1905738.8511089038), (5141, 2, 1, 1905745.6354063274), (5143, 2, 1, 1905733.4202451115), (5153, 2, 1, 1143282.0189457848), (5154, 2, 1, 1143301.0294664055), (5155, 2, 1, 1143296.7698904795), (6281, 2, 1, 1613943.4401497827), (6282, 2, 1, 1613934.6582787316), (6283, 2, 1, 1613935.1203022946), (6292, 2, 1, 4386054.2958758101), (6294, 2, 1, 4386063.9108781256), (6295, 2, 1, 4386052.9129078956), (6325, 2, 1, 1336125.2640719984), (6326, 2, 1, 1336115.1703806017), (6327, 2, 1, 1336115.2659248917), (6332, 2, 1, 18991331.490394849), (6333, 2, 1, 18991261.477917802), (6335, 2, 1, 18991159.173011016), (6344, 2, 1, 325058.54196077911), (6345, 2, 1, 325060.97400124767), (6346, 2, 1, 325056.22282418911), (6352, 2, 1, 3232559.6179168215), (6354, 2, 1, 3232541.661631396), (6355, 2, 1, 3232551.4583737049), (6368, 2, 1, 1646738.3969411491), (6370, 2, 1, 1646736.8637212969), (6371, 2, 1, 1646740.8869510253), (6380, 2, 1, 153893.21337354564), (6381, 2, 1, 153895.32374056481), (6383, 2, 1, 153894.05681663618), (6384, 2, 1, 589476.11561899784), (6386, 2, 1, 589476.8048684086), (6387, 2, 1, 589485.32018297561), (6401, 2, 1, 32076369.268891923), (6402, 2, 1, 32076564.914478406), (6403, 2, 1, 32076116.007988129), (6404, 2, 1, 57308190.804356478), (6405, 2, 1, 57308390.009981327), (6406, 2, 1, 57308805.771178581), (6448, 2, 1, 67854872.929345191), (6449, 2, 1, 67854797.596684054), (6451, 2, 1, 67853995.277630627), (5121, 1, 2, 5649814.6698649544), (5123, 1, 2, 5649889.2460995559), (5144, 1, 2, 1022704.2455454086), (5145, 1, 2, 1022699.9805282884), (6272, 1, 2, 3687039.126455931), (6275, 1, 2, 3687046.2956951642), (6305, 1, 2, 3180422.6144361598), (6307, 1, 2, 3180427.8680142378), (6310, 1, 2, 147049.89775768056), (6311, 1, 2, 147050.67908484847), (6312, 1, 2, 19298806.087207463), (6314, 1, 2, 19298768.813297316), (6317, 1, 2, 293070462.94471401), (6319, 1, 2, 293070754.20409703), (6320, 1, 2, 3639881.9840406668), (6323, 1, 2, 3639897.5342743159), (6330, 1, 2, 171036.53363362933), (6331, 1, 2, 170917.33336206019), (6337, 1, 2, 2425228.2168232468), (6339, 1, 2, 2425214.3870498799), (6358, 1, 2, 8438349.7229157109), (6359, 1, 2, 8438336.0183629449), (6364, 1, 2, 5198117.0030435128), (6366, 1, 2, 5198074.118980376), (6376, 1, 2, 67208.621186379765), (6378, 1, 2, 67208.33854907396), (6392, 1, 2, 2512679.2035843637), (6395, 1, 2, 2512673.0226302515), (6420, 1, 2, 89516754.059847325), (6422, 1, 2, 89516809.638328969), (6424, 1, 2, 38415231.98076082), (6426, 1, 2, 38415197.334212571), (6430, 1, 2, 65964224.878661752), (6431, 1, 2, 65964470.550348029), (6433, 1, 2, 18085499.930981211), (6435, 1, 2, 18100671.512694996), (6437, 1, 2, 66214.711472467839), (6438, 1, 2, 66214.428660140562), (6440, 1, 2, 69785018.501191661), (6443, 1, 2, 69784941.858252406), (6445, 1, 2, 239852844.99818569), (6446, 1, 2, 239854091.41194806), (6299, 0, 3, 270830.5575120555), (6388, 0, 3, 3463301.220528964)]
+Run job in nedd policy..
+app-node list:
+[5128, 5129, 5130, 5131, 5148, 5149, 5150, 5151, 6276, 6277, 6278, 6279, 6300, 6301, 6302, 6303, 6340, 6341, 6342, 6343, 6360, 6361, 6362, 6363, 6372, 6373, 6374, 6375, 6396, 6397, 6398, 6399]
+
+Run job in lowerRouterStall policy..
+app-node list:
+[6438, 6437, 6378, 6376, 6310, 6311, 6380, 6383, 6381, 6331, 6330, 6372, 6375, 6373, 6374, 6299, 6346, 6344, 6345, 6384, 6386, 6387, 6396, 6399, 6397, 6398, 6340, 6341, 6343, 6342, 6300, 6301]
+
+Run job in fewerSwitch policy..
+app-node list:
+[5128, 5129, 5130, 5131, 5148, 5149, 5150, 5151, 6276, 6277, 6278, 6279, 6300, 6301, 6302, 6303, 6340, 6341, 6342, 6343, 6360, 6361, 6362, 6363, 6372, 6373, 6374, 6375, 6396, 6397, 6398, 6399]
+
+Run job in random policy..
+app-node list:
+[6408, 6375, 6438, 5116, 6392, 6414, 6326, 6344, 6449, 5140, 6325, 6354, 6380, 6395, 5125, 6346, 6319, 6301, 6271, 6300, 6292, 6426, 6303, 6403, 6371, 6331, 6381, 6364, 6279, 6295, 6420, 6360]
+
+Run job in antinedd policy..
+app-node list:
+[6317, 6319, 6320, 6323, 6330, 6331, 6337, 6339, 6358, 6359, 6364, 6366, 6376, 6378, 6392, 6395, 6420, 6422, 6424, 6426, 6430, 6431, 6433, 6435, 6437, 6438, 6440, 6443, 6445, 6446, 6299, 6388]
+
+continualGPC() finished.
+GPC killed.
+Run job in fewerNoCong policy.
+app-node list:
+[5128, 5129, 5130, 5131, 5148, 5149, 5150, 5151, 6276, 6277, 6278, 6279, 6300, 6301, 6302, 6303, 6340, 6341, 6342, 6343, 6360, 6361, 6362, 6363, 6372, 6373, 6374, 6375, 6396, 6397, 6398, 6399]
+Iteration end.
+
+====================
+iteration 6
+Congestor nodes:
+[6395, 5118, 6305, 6317, 6398, 6280, 6283, 6414, 6327, 6276, 6293, 6321, 6314, 6311, 6382, 6423, 6385, 6296, 6452, 6388, 6368, 6422, 6409, 6335, 6324, 6430, 6405, 5119, 6354, 5153, 5141, 6380, 6427, 5149, 6425, 6353, 6443, 6375, 5121, 6433, 6347, 6413, 6403, 6281, 6318, 6273, 6323, 5145, 5125, 6386, 6394, 6381, 6431, 5129, 6401, 5116, 6387, 6345, 6357, 6315, 5122, 6319, 6308, 6334]
+srun: Job 37847067 step creation temporarily disabled, retrying (Requested nodes are busy)
+srun: Step created for job 37847067
+srun: forcing job termination
+[6395, 5118, 6305, 6317, 6398, 6280, 6283, 6414, 6327, 6276, 6293, 6321, 6314, 6311, 6382, 6423, 6385, 6296, 6452, 6388, 6368, 6422, 6409, 6335, 6324, 6430, 6405, 5119, 6354, 5153, 5141, 6380, 6427, 5149, 6425, 6353, 6443, 6375, 5121, 6433, 6347, 6413, 6403, 6281, 6318, 6273, 6323, 5145, 5125, 6386, 6394, 6381, 6431, 5129, 6401, 5116, 6387, 6345, 6357, 6315, 5122, 6319, 6308, 6334]
+continual GPC started.
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+restarting GPC..
+GPC killed in continualGPC().
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 37847067.84 ON nid05116 CANCELLED AT 2021-01-11T16:55:50 ***
+srun: error: nid06433: tasks 4148-4215: Killed
+srun: Terminating job step 37847067.84
+srun: error: nid06443: tasks 4216-4283: Killed
+srun: error: nid06308: tasks 1292-1359: Killed
+srun: error: nid05119: tasks 136-203: Killed
+srun: error: nid06335: tasks 2108-2175: Killed
+srun: error: nid06324: tasks 1904-1971: Killed
+srun: error: nid06354: tasks 2380-2447: Killed
+srun: error: nid06409: tasks 3536-3603: Killed
+srun: error: nid06296: tasks 1156-1223: Killed
+srun: error: nid06293: tasks 1088-1155: Killed
+srun: error: nid05149: tasks 612-679: Killed
+srun: error: nid05122: tasks 272-339: Killed
+srun: error: nid06319: tasks 1700-1767: Killed
+srun: error: nid06318: tasks 1632-1699: Killed
+srun: error: nid06430: tasks 4012-4079: Killed
+srun: error: nid06357: tasks 2448-2515: Killed
+srun: error: nid05125: tasks 340-407: Killed
+srun: error: nid06387: tasks 2992-3059: Killed
+srun: error: nid06280: tasks 884-951: Killed
+srun: error: nid05145: tasks 544-611: Killed
+srun: error: nid06395: tasks 3196-3263: Killed
+srun: error: nid06381: tasks 2720-2787: Killed
+srun: error: nid05141: tasks 476-543: Killed
+srun: error: nid06403: tasks 3400-3467: Killed
+srun: error: nid05121: tasks 204-271: Killed
+srun: error: nid05153: tasks 680-747: Killed
+srun: error: nid06422: tasks 3740-3807: Killed
+srun: error: nid05129: tasks 408-475: Killed
+srun: error: nid06401: tasks 3332-3399: Killed
+srun: error: nid06353: tasks 2312-2379: Killed
+srun: error: nid06314: tasks 1428-1495: Killed
+srun: error: nid05116: tasks 0-67: Killed
+srun: error: nid06425: tasks 3876-3943: Killed
+srun: error: nid06281: tasks 952-1019: Killed
+srun: error: nid06327: tasks 1972-2039: Killed
+srun: error: nid06334: tasks 2040-2107: Killed
+srun: error: nid06273: tasks 748-815: Killed
+srun: error: nid06276: tasks 816-883: Killed
+srun: error: nid06323: tasks 1836-1903: Killed
+srun: error: nid06394: tasks 3128-3195: Killed
+srun: error: nid06405: tasks 3468-3535: Killed
+srun: error: nid06427: tasks 3944-4011: Killed
+srun: error: nid06317: tasks 1564-1631: Killed
+srun: error: nid06345: tasks 2176-2243: Killed
+srun: error: nid06380: tasks 2652-2719: Killed
+srun: error: nid06423: tasks 3808-3875: Killed
+srun: error: nid06347: tasks 2244-2311: Killed
+srun: error: nid06375: tasks 2584-2651: Killed
+srun: error: nid06368: tasks 2516-2583: Killed
+srun: error: nid06311: tasks 1360-1427: Killed
+srun: error: nid06283: tasks 1020-1087: Killed
+srun: error: nid06305: tasks 1224-1291: Killed
+srun: error: nid05118: tasks 68-135: Killed
+srun: error: nid06398: tasks 3264-3331: Killed
+srun: error: nid06382: tasks 2788-2855: Killed
+srun: error: nid06414: tasks 3672-3739: Killed
+srun: error: nid06452: tasks 4284-4351: Killed
+srun: error: nid06315: tasks 1496-1563: Killed
+srun: error: nid06386: tasks 2924-2991: Killed
+srun: error: nid06385: tasks 2856-2923: Killed
+srun: error: nid06413: tasks 3604-3671: Killed
+srun: error: nid06321: tasks 1768-1835: Killed
+srun: error: nid06388: tasks 3060-3127: Killed
+srun: error: nid06431: tasks 4080-4147: Killed
+GPC checker started.
+Monitor end timestamp: 1610410865
+Starting sortCongestion()..
+Copying file..
+Removing last line..
+deleteLastLine() finished.
+Reading cray csv..
+11326.0 seconds collected in total.
+Calculating stall sum..
+Calculating node stall..
+Replacing no-value data..
+Sorting nodes..
+[(6435, 25746.989711703896), (6434, 25747.176155228761), (6432, 25747.181385579304), (6301, 46798.491049372176), (6300, 46798.617289735201), (6303, 46798.81312284118), (6302, 46798.935877278753), (6366, 48850.117603290622), (6367, 48850.254728993859), (6364, 48850.364548943049), (6365, 48850.557351440773), (6378, 62822.224996310928), (6379, 62822.412408976335), (6376, 62822.452680022558), (6377, 62822.486915409128), (6428, 80538.563067500596), (6429, 80539.239377525082), (6442, 296142.17974034196), (6440, 296142.3246283771), (6441, 296142.36258098669), (6306, 357910.25565670902), (6304, 357911.36349296372), (6307, 357913.77928023395), (6437, 368482.97956774553), (6436, 368483.35173427715), (6439, 368489.96666387049), (6438, 368490.86466606759), (6312, 396675.77824338485), (6313, 396680.93969485979), (6271, 407079.43426944374), (6412, 424696.99964852346), (6415, 424701.87273487862), (6424, 457188.56059941091), (6426, 457190.03411771002), (6338, 492100.25734095927), (6337, 492107.278619071), (6339, 492107.55098075629), (6336, 492111.43314678187), (6346, 528758.61990739545), (6344, 528833.71801092522), (6397, 576731.91370541835), (6399, 576735.58739754488), (6396, 576735.87431121862), (6369, 676925.44089031662), (6370, 676927.59155725641), (6371, 676931.58549824357), (6355, 688779.6595140181), (6352, 688781.37224736006), (6342, 693470.59747718996), (6341, 693472.01465137873), (6343, 693474.47573541501), (6340, 693481.46631759172), (5155, 702163.99696537654), (5154, 702167.20067267632), (5152, 702169.97540157894), (6384, 914470.687234996), (6451, 918287.56000979652), (6448, 918287.58980343631), (6449, 918289.7061533638), (6450, 918290.40945465432), (6404, 930535.91046719823), (6407, 930536.2924264638), (6406, 930539.30847826274), (6445, 958546.21086026833), (6447, 958546.58104196505), (6444, 958548.24060836353), (6446, 958549.63852942444), (6374, 1152166.2801020988), (6372, 1152168.145511386), (6373, 1152182.6188047228), (6362, 1160784.7934885295), (6363, 1160788.9345163121), (6360, 1160794.0931518814), (6361, 1160796.8522986216), (6402, 1382679.3995608604), (6400, 1382700.7715623421), (6329, 1448546.105693331), (6330, 1448554.5991344575), (6328, 1448560.6045997893), (6331, 1448562.2262646428), (6277, 2258758.8857449042), (6279, 2258766.2701008325), (6278, 2258767.1931065624), (6389, 2642537.9423377002), (6390, 2642539.4978993544), (6391, 2642550.9819795047), (6410, 3495533.9162396216), (6411, 3495549.9228129503), (6408, 3495871.8407540168), (6294, 3741483.7750319), (6292, 3741489.9575063642), (6295, 3741508.3042353764), (6272, 4260734.6927462704), (6275, 4260747.1759960959), (6274, 4260753.7109060353), (6326, 4674767.0226080706), (6325, 4674787.2947353628), (6299, 5897582.8496099738), (6298, 5897590.7923370507), (6309, 5921450.908441714), (6310, 5921483.9692218769), (6297, 5947345.4290262274), (6421, 5972809.8743630424), (6420, 5972873.788551989), (6392, 6003076.2612867393), (6393, 6003098.8706399743), (6332, 6605714.7809234317), (6333, 6605779.2433810998), (6358, 7027947.0609957166), (6359, 7027947.0995025672), (6356, 7027971.0808682181), (6316, 7241165.0425697258), (6383, 7780817.1347510042), (6282, 9415278.2665612474), (6454, 12680272.599154107), (6453, 12680406.216007736), (6320, 12692436.107780464), (6322, 12692520.710409693), (5140, 22381533.779516052), (5142, 22381554.66521503), (5143, 22381624.221411981), (5148, 86263293.368129358), (5151, 86263890.312152803), (5150, 86263944.957128271), (5144, 88006043.385961086), (5147, 88006293.572779), (5146, 88006585.910363689), (5123, 116951373.4265565), (5120, 116953040.75806038), (5131, 139645906.86352995), (5130, 139646894.38910374), (5128, 139646902.2029449), (5127, 159550295.04886523), (5124, 159551600.74746704), (5126, 159553274.88402778), (5117, 392927169.86342287)]
+nedd nodeInfo:
+[(6300, 3, 0, 46798.617289735201), (6301, 3, 0, 46798.491049372176), (6302, 3, 0, 46798.935877278753), (6303, 3, 0, 46798.81312284118), (6328, 3, 0, 1448560.6045997893), (6329, 3, 0, 1448546.105693331), (6330, 3, 0, 1448554.5991344575), (6331, 3, 0, 1448562.2262646428), (6336, 3, 0, 492111.43314678187), (6337, 3, 0, 492107.278619071), (6338, 3, 0, 492100.25734095927), (6339, 3, 0, 492107.55098075629), (6340, 3, 0, 693481.46631759172), (6341, 3, 0, 693472.01465137873), (6342, 3, 0, 693470.59747718996), (6343, 3, 0, 693474.47573541501), (6360, 3, 0, 1160794.0931518814), (6361, 3, 0, 1160796.8522986216), (6362, 3, 0, 1160784.7934885295), (6363, 3, 0, 1160788.9345163121), (6364, 3, 0, 48850.364548943049), (6365, 3, 0, 48850.557351440773), (6366, 3, 0, 48850.117603290622), (6367, 3, 0, 48850.254728993859), (6376, 3, 0, 62822.452680022558), (6377, 3, 0, 62822.486915409128), (6378, 3, 0, 62822.224996310928), (6379, 3, 0, 62822.412408976335), (6436, 3, 0, 368483.35173427715), (6437, 3, 0, 368482.97956774553), (6438, 3, 0, 368490.86466606759), (6439, 3, 0, 368489.96666387049), (6444, 3, 0, 958548.24060836353), (6445, 3, 0, 958546.21086026833), (6446, 3, 0, 958549.63852942444), (6447, 3, 0, 958546.58104196505), (6448, 3, 0, 918287.58980343631), (6449, 3, 0, 918289.7061533638), (6450, 3, 0, 918290.40945465432), (6451, 3, 0, 918287.56000979652), (6271, 0, 0, 407079.43426944374), (5124, 2, 1, 159551600.74746704), (5126, 2, 1, 159553274.88402778), (5127, 2, 1, 159550295.04886523), (5128, 2, 1, 139646902.2029449), (5130, 2, 1, 139646894.38910374), (5131, 2, 1, 139645906.86352995), (5140, 2, 1, 22381533.779516052), (5142, 2, 1, 22381554.66521503), (5143, 2, 1, 22381624.221411981), (5144, 2, 1, 88006043.385961086), (5146, 2, 1, 88006585.910363689), (5147, 2, 1, 88006293.572779), (5148, 2, 1, 86263293.368129358), (5150, 2, 1, 86263944.957128271), (5151, 2, 1, 86263890.312152803), (5152, 2, 1, 702169.97540157894), (5154, 2, 1, 702167.20067267632), (5155, 2, 1, 702163.99696537654), (6272, 2, 1, 4260734.6927462704), (6274, 2, 1, 4260753.7109060353), (6275, 2, 1, 4260747.1759960959), (6277, 2, 1, 2258758.8857449042), (6278, 2, 1, 2258767.1931065624), (6279, 2, 1, 2258766.2701008325), (6292, 2, 1, 3741489.9575063642), (6294, 2, 1, 3741483.7750319), (6295, 2, 1, 3741508.3042353764), (6297, 2, 1, 5947345.4290262274), (6298, 2, 1, 5897590.7923370507), (6299, 2, 1, 5897582.8496099738), (6304, 2, 1, 357911.36349296372), (6306, 2, 1, 357910.25565670902), (6307, 2, 1, 357913.77928023395), (6356, 2, 1, 7027971.0808682181), (6358, 2, 1, 7027947.0609957166), (6359, 2, 1, 7027947.0995025672), (6369, 2, 1, 676925.44089031662), (6370, 2, 1, 676927.59155725641), (6371, 2, 1, 676931.58549824357), (6372, 2, 1, 1152168.145511386), (6373, 2, 1, 1152182.6188047228), (6374, 2, 1, 1152166.2801020988), (6389, 2, 1, 2642537.9423377002), (6390, 2, 1, 2642539.4978993544), (6391, 2, 1, 2642550.9819795047), (6396, 2, 1, 576735.87431121862), (6397, 2, 1, 576731.91370541835), (6399, 2, 1, 576735.58739754488), (6404, 2, 1, 930535.91046719823), (6406, 2, 1, 930539.30847826274), (6407, 2, 1, 930536.2924264638), (6408, 2, 1, 3495871.8407540168), (6410, 2, 1, 3495533.9162396216), (6411, 2, 1, 3495549.9228129503), (6432, 2, 1, 25747.181385579304), (6434, 2, 1, 25747.176155228761), (6435, 2, 1, 25746.989711703896), (6440, 2, 1, 296142.3246283771), (6441, 2, 1, 296142.36258098669), (6442, 2, 1, 296142.17974034196), (6453, 1, 1, 12680406.216007736), (6454, 1, 1, 12680272.599154107), (5120, 1, 2, 116953040.75806038), (5123, 1, 2, 116951373.4265565), (6309, 1, 2, 5921450.908441714), (6310, 1, 2, 5921483.9692218769), (6312, 1, 2, 396675.77824338485), (6313, 1, 2, 396680.93969485979), (6320, 1, 2, 12692436.107780464), (6322, 1, 2, 12692520.710409693), (6325, 1, 2, 4674787.2947353628), (6326, 1, 2, 4674767.0226080706), (6332, 1, 2, 6605714.7809234317), (6333, 1, 2, 6605779.2433810998), (6344, 1, 2, 528833.71801092522), (6346, 1, 2, 528758.61990739545), (6352, 1, 2, 688781.37224736006), (6355, 1, 2, 688779.6595140181), (6392, 1, 2, 6003076.2612867393), (6393, 1, 2, 6003098.8706399743), (6400, 1, 2, 1382700.7715623421), (6402, 1, 2, 1382679.3995608604), (6412, 1, 2, 424696.99964852346), (6415, 1, 2, 424701.87273487862), (6420, 1, 2, 5972873.788551989), (6421, 1, 2, 5972809.8743630424), (6424, 1, 2, 457188.56059941091), (6426, 1, 2, 457190.03411771002), (6428, 1, 2, 80538.563067500596), (6429, 1, 2, 80539.239377525082), (5117, 0, 3, 392927169.86342287), (6282, 0, 3, 9415278.2665612474), (6316, 0, 3, 7241165.0425697258), (6383, 0, 3, 7780817.1347510042), (6384, 0, 3, 914470.687234996)]
+Run job in nedd policy..
+app-node list:
+[6300, 6301, 6302, 6303, 6328, 6329, 6330, 6331, 6336, 6337, 6338, 6339, 6340, 6341, 6342, 6343, 6360, 6361, 6362, 6363, 6364, 6365, 6366, 6367, 6376, 6377, 6378, 6379, 6436, 6437, 6438, 6439]
+
+Run job in lowerRouterStall policy..
+app-node list:
+[6435, 6434, 6432, 6301, 6300, 6303, 6302, 6366, 6367, 6364, 6365, 6378, 6379, 6376, 6377, 6428, 6429, 6442, 6440, 6441, 6306, 6304, 6307, 6437, 6436, 6439, 6438, 6312, 6313, 6271, 6412, 6415]
+
+Run job in fewerSwitch policy..
+app-node list:
+[6300, 6301, 6302, 6303, 6328, 6329, 6330, 6331, 6336, 6337, 6338, 6339, 6340, 6341, 6342, 6343, 6360, 6361, 6362, 6363, 6364, 6365, 6366, 6367, 6376, 6377, 6378, 6379, 6436, 6437, 6438, 6439]
+
+Run job in random policy..
+app-node list:
+[6299, 6451, 6390, 6362, 6292, 5128, 5150, 5143, 6424, 5144, 6421, 6370, 6364, 6410, 6333, 5126, 6301, 6379, 6279, 6439, 6275, 6400, 6282, 6447, 6278, 6271, 6446, 6432, 6342, 5146, 6420, 6366]
+
+Run job in antinedd policy..
+app-node list:
+[5123, 6309, 6310, 6312, 6313, 6320, 6322, 6325, 6326, 6332, 6333, 6344, 6346, 6352, 6355, 6392, 6393, 6400, 6402, 6412, 6415, 6420, 6421, 6424, 6426, 6428, 6429, 5117, 6282, 6316, 6383, 6384]
+
+continualGPC() finished.
+GPC killed.
+Run job in fewerNoCong policy.
+app-node list:
+[6300, 6301, 6302, 6303, 6328, 6329, 6330, 6331, 6336, 6337, 6338, 6339, 6340, 6341, 6342, 6343, 6360, 6361, 6362, 6363, 6364, 6365, 6366, 6367, 6376, 6377, 6378, 6379, 6436, 6437, 6438, 6439]
+Iteration end.
+
+====================
+iteration 7
+Congestor nodes:
+[6339, 6434, 6407, 6338, 6428, 5147, 6381, 6273, 6399, 6377, 6271, 5121, 6317, 6292, 6450, 6452, 6327, 6276, 6356, 6432, 6442, 6279, 6408, 6433, 6274, 5120, 6295, 6340, 6425, 6376, 6318, 6422, 6335, 6391, 6375, 5117, 6305, 6435, 6372, 6370, 6404, 6439, 6330, 6310, 6344, 6423, 6358, 5155, 6353, 6275, 6325, 6302, 6398, 6394, 6401, 6346, 6277, 6415, 6337, 6411, 5154, 6320, 6352, 6303]
+GPC checker started.
+Monitor end timestamp: 1610413309
+Starting sortCongestion()..
+Copying file..
+Removing last line..
+deleteLastLine() finished.
+Reading cray csv..
+13769.0 seconds collected in total.
+Calculating stall sum..
+Calculating node stall..
+Replacing no-value data..
+Sorting nodes..
+[(6298, 145181.8932571077), (6299, 145182.88369180047), (6296, 145183.22967661769), (6297, 146401.99266101548), (6385, 204001.32665646146), (6384, 204002.14539156473), (6386, 204002.26877886234), (6387, 204002.31681780732), (6393, 262850.9835441254), (6392, 262854.22659353889), (6395, 262855.06895011204), (6373, 306911.6856260887), (6374, 306912.71039135725), (6354, 321785.55078815506), (6355, 321785.82327642647), (6396, 423091.00166888093), (6397, 423092.14941188082), (6308, 455427.43458775419), (6311, 455428.37220530683), (6309, 455431.87423139159), (6382, 479571.83800229937), (6380, 479572.12050648162), (6383, 479573.26870068681), (6301, 507023.44016266963), (6300, 507029.48112770764), (6366, 527691.539230639), (6364, 527692.20969232765), (6365, 527694.61944253289), (6367, 527728.30727035913), (6328, 580501.9980260384), (6331, 580513.34700451302), (6329, 580513.66414676618), (5151, 1467068.9060059176), (5150, 1467072.4941762988), (5149, 1467077.8610632725), (5148, 1467082.5761570616), (5131, 1544682.8347702911), (5129, 1544690.0884838293), (5130, 1544740.6043058631), (5128, 1544746.0131536659), (5122, 1631760.359083469), (5123, 1631787.6936879444), (5144, 1675689.1313376164), (5145, 1675706.6057557932), (5146, 1675721.7514388317), (6390, 1779014.4096114154), (6388, 1779032.1836223912), (6389, 1779128.9379892591), (6332, 1942895.1102732492), (6333, 1942899.024716848), (6334, 1942922.5002854038), (6307, 2167093.4970642976), (6306, 2167102.6685443199), (6304, 2167193.169686656), (6371, 2390951.3976426441), (6368, 2390969.4844670161), (6369, 2391149.663152134), (5142, 2531558.7123080306), (5140, 2531606.4656642857), (5143, 2531613.838360114), (5141, 2531631.4208733048), (6326, 2998700.1824962562), (6324, 2998894.3922061245), (5125, 3039236.3675969332), (5126, 3039417.0152099053), (5127, 3039418.4408741924), (5124, 3039430.3599679763), (6363, 3077264.8840580862), (6360, 3077265.7398806983), (6362, 3077288.0275767464), (6361, 3077295.6934908149), (6436, 3231779.2103479239), (6437, 3231829.9604393137), (6438, 3231959.8812001473), (6347, 4082987.2900346774), (6345, 4083104.3220675322), (6278, 4133404.9403889528), (6378, 4399643.011407638), (6379, 4399674.3332964666), (6294, 4719251.1631580181), (6293, 4719267.5103510832), (5152, 5831022.0298047047), (5153, 5831031.3481068425), (6454, 6136274.5249607023), (6453, 6136337.0379685266), (6357, 6753766.1440759907), (6359, 6753777.726363848), (6314, 7378667.8481155923), (6315, 7378719.306746454), (6313, 7378756.8351095375), (6312, 7378855.4714969201), (6281, 7459925.1193422424), (6280, 7460029.2380144615), (6283, 7460049.541301433), (6282, 7461509.7224799134), (6323, 8371019.4678489463), (6321, 8371047.5218940079), (6322, 8371066.4580269838), (6272, 9033482.2840062417), (5118, 9182480.1272924338), (5119, 9182485.6007445361), (5116, 9204620.2417577785), (6336, 9854746.4192309286), (6341, 15289912.44797937), (6342, 15290049.823681556), (6343, 15290083.205128793), (6449, 51406057.392651051), (6451, 51406277.334929019), (6448, 51406433.299138024), (6424, 54535326.260429017), (6427, 54535577.017671935), (6426, 54536230.473840751), (6410, 58454344.25061737), (6409, 58454663.871948399), (6430, 66634081.639465332), (6429, 66634276.953463078), (6431, 66635823.174136244), (6412, 76215337.23181507), (6413, 76216963.949092045), (6414, 76217686.364435941), (6440, 80140834.427689373), (6441, 80141070.656793922), (6443, 80141093.862339944), (6405, 85563252.834281445), (6406, 85563443.129816234), (6402, 91002618.86833851), (6403, 91002641.668566152), (6400, 91007804.645764545), (6421, 119455112.99988702), (6420, 119455260.42430456), (6446, 204132254.85831681), (6445, 204133664.02284232), (6447, 204135597.38698068), (6444, 204143978.90299216), (6319, 239731340.95204264), (6316, 239733562.33296239)]
+nedd nodeInfo:
+[(5124, 3, 0, 3039430.3599679763), (5125, 3, 0, 3039236.3675969332), (5126, 3, 0, 3039417.0152099053), (5127, 3, 0, 3039418.4408741924), (5128, 3, 0, 1544746.0131536659), (5129, 3, 0, 1544690.0884838293), (5130, 3, 0, 1544740.6043058631), (5131, 3, 0, 1544682.8347702911), (5140, 3, 0, 2531606.4656642857), (5141, 3, 0, 2531631.4208733048), (5142, 3, 0, 2531558.7123080306), (5143, 3, 0, 2531613.838360114), (5148, 3, 0, 1467082.5761570616), (5149, 3, 0, 1467077.8610632725), (5150, 3, 0, 1467072.4941762988), (5151, 3, 0, 1467068.9060059176), (6280, 3, 0, 7460029.2380144615), (6281, 3, 0, 7459925

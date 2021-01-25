@@ -1,0 +1,2397 @@
+Starting..
+====================
+iteration 0
+Starting job in nedd policy..
+startTime:Tue Jan 12 21:16:03 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               22.4063
+num_mpi_processes:              2048
+construction_time:              6.97948
+bfs  min_time:                  0.477488
+bfs  firstquartile_time:        0.518581
+bfs  median_time:               0.612301
+bfs  thirdquartile_time:        1.04714
+bfs  max_time:                  1.26862
+bfs  mean_time:                 0.76875
+bfs  stddev_time:               0.273485
+sssp min_time:                  1.20645
+sssp firstquartile_time:        1.39611
+sssp median_time:               2.26583
+sssp thirdquartile_time:        3.80344
+sssp max_time:                  4.55033
+sssp mean_time:                 2.56062
+sssp stddev_time:               1.18929
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  8.46374e+08
+bfs  firstquartile_TEPS:        1.02539e+09
+bfs  median_TEPS:               1.75359e+09
+bfs  thirdquartile_TEPS:        2.07051e+09
+bfs  max_TEPS:                  2.2487e+09
+bfs  harmonic_mean_TEPS:     !  1.39672e+09
+bfs  harmonic_stddev_TEPS:      6.26018e+07
+sssp min_TEPS:                  2.35967e+08
+sssp firstquartile_TEPS:        2.82304e+08
+sssp median_TEPS:               4.73877e+08
+sssp thirdquartile_TEPS:        7.69087e+08
+sssp max_TEPS:                  8.89991e+08
+sssp harmonic_mean_TEPS:     !  4.19324e+08
+sssp harmonic_stddev_TEPS:      2.4537e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 21:21:58 PST 2021
+
+
+Starting job in lowerRouterStall policy..
+startTime:Tue Jan 12 21:21:58 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               22.8056
+num_mpi_processes:              2048
+construction_time:              6.68748
+bfs  min_time:                  0.506059
+bfs  firstquartile_time:        0.663539
+bfs  median_time:               0.992452
+bfs  thirdquartile_time:        1.05003
+bfs  max_time:                  1.33983
+bfs  mean_time:                 0.883949
+bfs  stddev_time:               0.232608
+sssp min_time:                  1.22269
+sssp firstquartile_time:        1.89005
+sssp median_time:               3.69611
+sssp thirdquartile_time:        4.20205
+sssp max_time:                  4.96564
+sssp mean_time:                 3.22592
+sssp stddev_time:               1.1878
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  8.0139e+08
+bfs  firstquartile_TEPS:        1.02257e+09
+bfs  median_TEPS:               1.08189e+09
+bfs  thirdquartile_TEPS:        1.61818e+09
+bfs  max_TEPS:                  2.12174e+09
+bfs  harmonic_mean_TEPS:     !  1.21469e+09
+bfs  harmonic_stddev_TEPS:      4.02711e+07
+sssp min_TEPS:                  2.16231e+08
+sssp firstquartile_TEPS:        2.55524e+08
+sssp median_TEPS:               2.90502e+08
+sssp thirdquartile_TEPS:        5.68095e+08
+sssp max_TEPS:                  8.7817e+08
+sssp harmonic_mean_TEPS:     !  3.32844e+08
+sssp harmonic_stddev_TEPS:      1.54404e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 21:29:08 PST 2021
+
+
+Starting job in fewerSwitch policy..
+startTime:Tue Jan 12 21:29:08 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               24.8172
+num_mpi_processes:              2048
+construction_time:              6.88866
+bfs  min_time:                  0.493678
+bfs  firstquartile_time:        0.535723
+bfs  median_time:               0.93755
+bfs  thirdquartile_time:        0.996705
+bfs  max_time:                  1.17083
+bfs  mean_time:                 0.825117
+bfs  stddev_time:               0.223996
+sssp min_time:                  1.2096
+sssp firstquartile_time:        2.3149
+sssp median_time:               3.72072
+sssp thirdquartile_time:        4.05472
+sssp max_time:                  4.69716
+sssp mean_time:                 3.22699
+sssp stddev_time:               1.08683
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  9.17062e+08
+bfs  firstquartile_TEPS:        1.07728e+09
+bfs  median_TEPS:               1.14525e+09
+bfs  thirdquartile_TEPS:        2.00426e+09
+bfs  max_TEPS:                  2.17495e+09
+bfs  harmonic_mean_TEPS:     !  1.3013e+09
+bfs  harmonic_stddev_TEPS:      4.45075e+07
+sssp min_TEPS:                  2.28591e+08
+sssp firstquartile_TEPS:        2.64809e+08
+sssp median_TEPS:               2.8858e+08
+sssp thirdquartile_TEPS:        4.63833e+08
+sssp max_TEPS:                  8.8767e+08
+sssp harmonic_mean_TEPS:     !  3.32733e+08
+sssp harmonic_stddev_TEPS:      1.41185e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 21:38:14 PST 2021
+
+
+Starting job in random policy..
+startTime:Tue Jan 12 21:38:14 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.1139
+num_mpi_processes:              2048
+construction_time:              7.94124
+bfs  min_time:                  0.471252
+bfs  firstquartile_time:        1.00389
+bfs  median_time:               1.08501
+bfs  thirdquartile_time:        1.15099
+bfs  max_time:                  1.4752
+bfs  mean_time:                 1.00065
+bfs  stddev_time:               0.250941
+sssp min_time:                  1.09032
+sssp firstquartile_time:        1.37316
+sssp median_time:               2.06614
+sssp thirdquartile_time:        4.94462
+sssp max_time:                  7.0841
+sssp mean_time:                 2.9847
+sssp stddev_time:               1.78297
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  7.27853e+08
+bfs  firstquartile_TEPS:        9.32876e+08
+bfs  median_TEPS:               9.896e+08
+bfs  thirdquartile_TEPS:        1.06957e+09
+bfs  max_TEPS:                  2.27846e+09
+bfs  harmonic_mean_TEPS:     !  1.07302e+09
+bfs  harmonic_stddev_TEPS:      3.39021e+07
+sssp min_TEPS:                  1.51569e+08
+sssp firstquartile_TEPS:        2.17151e+08
+sssp median_TEPS:               5.19678e+08
+sssp thirdquartile_TEPS:        7.8194e+08
+sssp max_TEPS:                  9.84779e+08
+sssp harmonic_mean_TEPS:     !  3.59744e+08
+sssp harmonic_stddev_TEPS:      2.70749e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 21:43:36 PST 2021
+
+
+Starting job in antinedd policy..
+startTime:Tue Jan 12 21:43:36 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.0056
+num_mpi_processes:              2048
+construction_time:              7.54843
+bfs  min_time:                  0.51327
+bfs  firstquartile_time:        0.900443
+bfs  median_time:               0.947335
+bfs  thirdquartile_time:        1.01336
+bfs  max_time:                  1.21083
+bfs  mean_time:                 0.907699
+bfs  stddev_time:               0.170985
+sssp min_time:                  1.14697
+sssp firstquartile_time:        1.36678
+sssp median_time:               2.67245
+sssp thirdquartile_time:        4.00479
+sssp max_time:                  4.86753
+sssp mean_time:                 2.69842
+sssp stddev_time:               1.32509
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  8.86769e+08
+bfs  firstquartile_TEPS:        1.05957e+09
+bfs  median_TEPS:               1.13342e+09
+bfs  thirdquartile_TEPS:        1.19244e+09
+bfs  max_TEPS:                  2.09193e+09
+bfs  harmonic_mean_TEPS:     !  1.18291e+09
+bfs  harmonic_stddev_TEPS:      2.80736e+07
+sssp min_TEPS:                  2.2059e+08
+sssp firstquartile_TEPS:        2.68111e+08
+sssp median_TEPS:               4.01777e+08
+sssp thirdquartile_TEPS:        7.85589e+08
+sssp max_TEPS:                  9.36145e+08
+sssp harmonic_mean_TEPS:     !  3.97909e+08
+sssp harmonic_stddev_TEPS:      2.46178e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 21:48:29 PST 2021
+
+
+Starting job in fewerNoCong policy..
+startTime:Tue Jan 12 21:48:35 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.0999
+num_mpi_processes:              2048
+construction_time:              6.85118
+bfs  min_time:                  0.479154
+bfs  firstquartile_time:        0.505301
+bfs  median_time:               0.518515
+bfs  thirdquartile_time:        0.534021
+bfs  max_time:                  0.811485
+bfs  mean_time:                 0.527274
+bfs  stddev_time:               0.0480041
+sssp min_time:                  1.18672
+sssp firstquartile_time:        1.33399
+sssp median_time:               1.39783
+sssp thirdquartile_time:        1.45944
+sssp max_time:                  1.59671
+sssp mean_time:                 1.39498
+sssp stddev_time:               0.0948828
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.32316e+09
+bfs  firstquartile_TEPS:        2.01065e+09
+bfs  median_TEPS:               2.07077e+09
+bfs  thirdquartile_TEPS:        2.12493e+09
+bfs  max_TEPS:                  2.24088e+09
+bfs  harmonic_mean_TEPS:     !  2.03637e+09
+bfs  harmonic_stddev_TEPS:      2.33577e+07
+sssp min_TEPS:                  6.7246e+08
+sssp firstquartile_TEPS:        7.35712e+08
+sssp median_TEPS:               7.68138e+08
+sssp thirdquartile_TEPS:        8.04896e+08
+sssp max_TEPS:                  9.04786e+08
+sssp harmonic_mean_TEPS:     !  7.69708e+08
+sssp harmonic_stddev_TEPS:      6.59591e+06
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 21:51:35 PST 2021
+
+
+====================
+iteration 1
+Starting job in nedd policy..
+startTime:Tue Jan 12 21:55:00 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.0214
+num_mpi_processes:              2048
+construction_time:              6.93172
+bfs  min_time:                  0.50568
+bfs  firstquartile_time:        0.534799
+bfs  median_time:               0.828074
+bfs  thirdquartile_time:        1.07057
+bfs  max_time:                  1.2818
+bfs  mean_time:                 0.814067
+bfs  stddev_time:               0.278003
+sssp min_time:                  1.22986
+sssp firstquartile_time:        1.43846
+sssp median_time:               3.48965
+sssp thirdquartile_time:        4.38548
+sssp max_time:                  4.83985
+sssp mean_time:                 2.98497
+sssp stddev_time:               1.43971
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  8.3767e+08
+bfs  firstquartile_TEPS:        1.00295e+09
+bfs  median_TEPS:               1.29666e+09
+bfs  thirdquartile_TEPS:        2.00772e+09
+bfs  max_TEPS:                  2.12333e+09
+bfs  harmonic_mean_TEPS:     !  1.31897e+09
+bfs  harmonic_stddev_TEPS:      5.67482e+07
+sssp min_TEPS:                  2.21851e+08
+sssp firstquartile_TEPS:        2.44837e+08
+sssp median_TEPS:               3.07689e+08
+sssp thirdquartile_TEPS:        7.4644e+08
+sssp max_TEPS:                  8.73049e+08
+sssp harmonic_mean_TEPS:     !  3.59711e+08
+sssp harmonic_stddev_TEPS:      2.18584e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:00:04 PST 2021
+
+
+Starting job in lowerRouterStall policy..
+startTime:Tue Jan 12 22:00:04 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.9314
+num_mpi_processes:              2048
+construction_time:              6.72606
+bfs  min_time:                  0.49336
+bfs  firstquartile_time:        0.523857
+bfs  median_time:               0.536913
+bfs  thirdquartile_time:        0.554995
+bfs  max_time:                  0.611187
+bfs  mean_time:                 0.540396
+bfs  stddev_time:               0.0267866
+sssp min_time:                  1.21213
+sssp firstquartile_time:        1.41778
+sssp median_time:               3.17562
+sssp thirdquartile_time:        4.71389
+sssp max_time:                  5.54866
+sssp mean_time:                 3.05837
+sssp stddev_time:               1.65085
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.75679e+09
+bfs  firstquartile_TEPS:        1.93466e+09
+bfs  median_TEPS:               1.99982e+09
+bfs  thirdquartile_TEPS:        2.04966e+09
+bfs  max_TEPS:                  2.17635e+09
+bfs  harmonic_mean_TEPS:     !  1.98693e+09
+bfs  harmonic_stddev_TEPS:      1.24085e+07
+sssp min_TEPS:                  1.93511e+08
+sssp firstquartile_TEPS:        2.27779e+08
+sssp median_TEPS:               3.38115e+08
+sssp thirdquartile_TEPS:        7.57329e+08
+sssp max_TEPS:                  8.85822e+08
+sssp harmonic_mean_TEPS:     !  3.51078e+08
+sssp harmonic_stddev_TEPS:      2.38754e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:05:04 PST 2021
+
+
+Starting job in fewerSwitch policy..
+startTime:Tue Jan 12 22:05:04 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.3853
+num_mpi_processes:              2048
+construction_time:              6.84103
+bfs  min_time:                  0.499992
+bfs  firstquartile_time:        0.521625
+bfs  median_time:               0.537561
+bfs  thirdquartile_time:        0.546971
+bfs  max_time:                  0.591276
+bfs  mean_time:                 0.538426
+bfs  stddev_time:               0.0226544
+sssp min_time:                  1.39918
+sssp firstquartile_time:        1.67352
+sssp median_time:               1.77398
+sssp thirdquartile_time:        1.84144
+sssp max_time:                  2.43797
+sssp mean_time:                 1.76719
+sssp stddev_time:               0.1665
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.81595e+09
+bfs  firstquartile_TEPS:        1.96304e+09
+bfs  median_TEPS:               1.9974e+09
+bfs  thirdquartile_TEPS:        2.05843e+09
+bfs  max_TEPS:                  2.14749e+09
+bfs  harmonic_mean_TEPS:     !  1.99419e+09
+bfs  harmonic_stddev_TEPS:      1.05712e+07
+sssp min_TEPS:                  4.40419e+08
+sssp firstquartile_TEPS:        5.8309e+08
+sssp median_TEPS:               6.05264e+08
+sssp thirdquartile_TEPS:        6.41599e+08
+sssp max_TEPS:                  7.67399e+08
+sssp harmonic_mean_TEPS:     !  6.07592e+08
+sssp harmonic_stddev_TEPS:      7.2123e+06
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:09:45 PST 2021
+
+
+Starting job in random policy..
+startTime:Tue Jan 12 22:09:45 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               26.8649
+num_mpi_processes:              2048
+construction_time:              7.09604
+bfs  min_time:                  0.462073
+bfs  firstquartile_time:        0.9153
+bfs  median_time:               0.963227
+bfs  thirdquartile_time:        1.05742
+bfs  max_time:                  1.46675
+bfs  mean_time:                 0.938845
+bfs  stddev_time:               0.212016
+sssp min_time:                  1.0804
+sssp firstquartile_time:        1.43293
+sssp median_time:               3.37117
+sssp thirdquartile_time:        4.14583
+sssp max_time:                  4.62748
+sssp mean_time:                 2.97206
+sssp stddev_time:               1.30507
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  7.32046e+08
+bfs  firstquartile_TEPS:        1.01542e+09
+bfs  median_TEPS:               1.11472e+09
+bfs  thirdquartile_TEPS:        1.17309e+09
+bfs  max_TEPS:                  2.32372e+09
+bfs  harmonic_mean_TEPS:     !  1.14367e+09
+bfs  harmonic_stddev_TEPS:      3.2539e+07
+sssp min_TEPS:                  2.32033e+08
+sssp firstquartile_TEPS:        2.5899e+08
+sssp median_TEPS:               3.18503e+08
+sssp thirdquartile_TEPS:        7.49322e+08
+sssp max_TEPS:                  9.93823e+08
+sssp harmonic_mean_TEPS:     !  3.61274e+08
+sssp harmonic_stddev_TEPS:      1.99868e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:17:00 PST 2021
+
+
+Starting job in antinedd policy..
+startTime:Tue Jan 12 22:17:00 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.0306
+num_mpi_processes:              2048
+construction_time:              6.30249
+bfs  min_time:                  0.485887
+bfs  firstquartile_time:        0.542336
+bfs  median_time:               0.991764
+bfs  thirdquartile_time:        1.31311
+bfs  max_time:                  2.20019
+bfs  mean_time:                 0.989307
+bfs  stddev_time:               0.432681
+sssp min_time:                  1.15007
+sssp firstquartile_time:        1.36629
+sssp median_time:               1.6164
+sssp thirdquartile_time:        4.2075
+sssp max_time:                  6.27002
+sssp mean_time:                 2.74047
+sssp stddev_time:               1.78143
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  4.88016e+08
+bfs  firstquartile_TEPS:        8.17698e+08
+bfs  median_TEPS:               1.08264e+09
+bfs  thirdquartile_TEPS:        1.97982e+09
+bfs  max_TEPS:                  2.20983e+09
+bfs  harmonic_mean_TEPS:     !  1.08533e+09
+bfs  harmonic_stddev_TEPS:      5.98039e+07
+sssp min_TEPS:                  1.71248e+08
+sssp firstquartile_TEPS:        2.55194e+08
+sssp median_TEPS:               6.64272e+08
+sssp thirdquartile_TEPS:        7.8587e+08
+sssp max_TEPS:                  9.3362e+08
+sssp harmonic_mean_TEPS:     !  3.91804e+08
+sssp harmonic_stddev_TEPS:      3.2088e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:22:00 PST 2021
+
+
+Starting job in fewerNoCong policy..
+startTime:Tue Jan 12 22:22:05 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               22.5469
+num_mpi_processes:              2048
+construction_time:              6.80829
+bfs  min_time:                  0.494819
+bfs  firstquartile_time:        0.507858
+bfs  median_time:               0.525739
+bfs  thirdquartile_time:        0.534557
+bfs  max_time:                  0.569553
+bfs  mean_time:                 0.525029
+bfs  stddev_time:               0.0168917
+sssp min_time:                  1.20396
+sssp firstquartile_time:        1.35874
+sssp median_time:               1.42249
+sssp thirdquartile_time:        1.48586
+sssp max_time:                  1.65059
+sssp mean_time:                 1.42885
+sssp stddev_time:               0.108497
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.88521e+09
+bfs  firstquartile_TEPS:        2.00863e+09
+bfs  median_TEPS:               2.04232e+09
+bfs  thirdquartile_TEPS:        2.11423e+09
+bfs  max_TEPS:                  2.16994e+09
+bfs  harmonic_mean_TEPS:     !  2.04508e+09
+bfs  harmonic_stddev_TEPS:      8.28954e+06
+sssp min_TEPS:                  6.50512e+08
+sssp firstquartile_TEPS:        7.22632e+08
+sssp median_TEPS:               7.54823e+08
+sssp thirdquartile_TEPS:        7.9024e+08
+sssp max_TEPS:                  8.91829e+08
+sssp harmonic_mean_TEPS:     !  7.5146e+08
+sssp harmonic_stddev_TEPS:      7.18898e+06
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:25:40 PST 2021
+
+
+====================
+iteration 2
+Starting job in nedd policy..
+startTime:Tue Jan 12 22:30:23 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.9583
+num_mpi_processes:              2048
+construction_time:              6.90277
+bfs  min_time:                  0.456467
+bfs  firstquartile_time:        0.477051
+bfs  median_time:               0.49015
+bfs  thirdquartile_time:        0.502907
+bfs  max_time:                  0.527428
+bfs  mean_time:                 0.490557
+bfs  stddev_time:               0.0173436
+sssp min_time:                  1.24481
+sssp firstquartile_time:        3.40818
+sssp median_time:               3.90227
+sssp thirdquartile_time:        4.24236
+sssp max_time:                  4.93654
+sssp mean_time:                 3.62328
+sssp stddev_time:               0.935216
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  2.03578e+09
+bfs  firstquartile_TEPS:        2.13504e+09
+bfs  median_TEPS:               2.19061e+09
+bfs  thirdquartile_TEPS:        2.25076e+09
+bfs  max_TEPS:                  2.35226e+09
+bfs  harmonic_mean_TEPS:     !  2.18879e+09
+bfs  harmonic_stddev_TEPS:      9.74953e+06
+sssp min_TEPS:                  2.17506e+08
+sssp firstquartile_TEPS:        2.53096e+08
+sssp median_TEPS:               2.75155e+08
+sssp thirdquartile_TEPS:        3.15044e+08
+sssp max_TEPS:                  8.62559e+08
+sssp harmonic_mean_TEPS:     !  2.96341e+08
+sssp harmonic_stddev_TEPS:      9.63675e+06
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:35:43 PST 2021
+
+
+Starting job in lowerRouterStall policy..
+startTime:Tue Jan 12 22:35:43 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.9158
+num_mpi_processes:              2048
+construction_time:              7.02999
+bfs  min_time:                  0.508986
+bfs  firstquartile_time:        0.527038
+bfs  median_time:               0.538848
+bfs  thirdquartile_time:        0.55044
+bfs  max_time:                  0.601816
+bfs  mean_time:                 0.540764
+bfs  stddev_time:               0.0189395
+sssp min_time:                  1.32246
+sssp firstquartile_time:        1.84839
+sssp median_time:               1.94291
+sssp thirdquartile_time:        2.02611
+sssp max_time:                  2.3033
+sssp mean_time:                 1.91738
+sssp stddev_time:               0.189234
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.78414e+09
+bfs  firstquartile_TEPS:        1.95067e+09
+bfs  median_TEPS:               1.99263e+09
+bfs  thirdquartile_TEPS:        2.03728e+09
+bfs  max_TEPS:                  2.10954e+09
+bfs  harmonic_mean_TEPS:     !  1.98557e+09
+bfs  harmonic_stddev_TEPS:      8.76145e+06
+sssp min_TEPS:                  4.6617e+08
+sssp firstquartile_TEPS:        5.29946e+08
+sssp median_TEPS:               5.52639e+08
+sssp thirdquartile_TEPS:        5.80898e+08
+sssp max_TEPS:                  8.11913e+08
+sssp harmonic_mean_TEPS:     !  5.59997e+08
+sssp harmonic_stddev_TEPS:      6.96316e+06
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:39:17 PST 2021
+
+
+Starting job in fewerSwitch policy..
+startTime:Tue Jan 12 22:39:18 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.0639
+num_mpi_processes:              2048
+construction_time:              6.86657
+bfs  min_time:                  0.499986
+bfs  firstquartile_time:        0.823745
+bfs  median_time:               0.875227
+bfs  thirdquartile_time:        0.95053
+bfs  max_time:                  1.20265
+bfs  mean_time:                 0.871684
+bfs  stddev_time:               0.145557
+sssp min_time:                  1.13699
+sssp firstquartile_time:        1.33187
+sssp median_time:               1.38819
+sssp thirdquartile_time:        1.48271
+sssp max_time:                  3.9531
+sssp mean_time:                 1.63481
+sssp stddev_time:               0.716606
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  8.92802e+08
+bfs  firstquartile_TEPS:        1.12961e+09
+bfs  median_TEPS:               1.2268e+09
+bfs  thirdquartile_TEPS:        1.30347e+09
+bfs  max_TEPS:                  2.14751e+09
+bfs  harmonic_mean_TEPS:     !  1.23178e+09
+bfs  harmonic_stddev_TEPS:      2.59142e+07
+sssp min_TEPS:                  2.71617e+08
+sssp firstquartile_TEPS:        7.24165e+08
+sssp median_TEPS:               7.7347e+08
+sssp thirdquartile_TEPS:        8.06179e+08
+sssp max_TEPS:                  9.44362e+08
+sssp harmonic_mean_TEPS:     !  6.56789e+08
+sssp harmonic_stddev_TEPS:      3.62717e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:43:02 PST 2021
+
+
+Starting job in random policy..
+startTime:Tue Jan 12 22:43:02 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.7221
+num_mpi_processes:              2048
+construction_time:              8.21524
+bfs  min_time:                  0.470339
+bfs  firstquartile_time:        0.861256
+bfs  median_time:               1.02063
+bfs  thirdquartile_time:        1.08545
+bfs  max_time:                  1.39783
+bfs  mean_time:                 0.968868
+bfs  stddev_time:               0.233777
+sssp min_time:                  1.14013
+sssp firstquartile_time:        1.35505
+sssp median_time:               1.58091
+sssp thirdquartile_time:        4.39769
+sssp max_time:                  5.2133
+sssp mean_time:                 2.61329
+sssp stddev_time:               1.51678
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  7.68136e+08
+bfs  firstquartile_TEPS:        9.892e+08
+bfs  median_TEPS:               1.05203e+09
+bfs  thirdquartile_TEPS:        1.2467e+09
+bfs  max_TEPS:                  2.28288e+09
+bfs  harmonic_mean_TEPS:     !  1.10823e+09
+bfs  harmonic_stddev_TEPS:      3.36896e+07
+sssp min_TEPS:                  2.05959e+08
+sssp firstquartile_TEPS:        2.44157e+08
+sssp median_TEPS:               6.79183e+08
+sssp thirdquartile_TEPS:        7.92392e+08
+sssp max_TEPS:                  9.41755e+08
+sssp harmonic_mean_TEPS:     !  4.10872e+08
+sssp harmonic_stddev_TEPS:      3.00448e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:47:55 PST 2021
+
+
+Starting job in antinedd policy..
+startTime:Tue Jan 12 22:47:56 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.0313
+num_mpi_processes:              2048
+construction_time:              13.6409
+bfs  min_time:                  0.488506
+bfs  firstquartile_time:        0.851205
+bfs  median_time:               0.946155
+bfs  thirdquartile_time:        0.989041
+bfs  max_time:                  1.37671
+bfs  mean_time:                 0.917807
+bfs  stddev_time:               0.149231
+sssp min_time:                  1.12967
+sssp firstquartile_time:        1.34969
+sssp median_time:               2.67926
+sssp thirdquartile_time:        4.3074
+sssp max_time:                  6.45464
+sssp mean_time:                 2.8296
+sssp stddev_time:               1.50298
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  7.79923e+08
+bfs  firstquartile_TEPS:        1.08562e+09
+bfs  median_TEPS:               1.13483e+09
+bfs  thirdquartile_TEPS:        1.26142e+09
+bfs  max_TEPS:                  2.19798e+09
+bfs  harmonic_mean_TEPS:     !  1.16988e+09
+bfs  harmonic_stddev_TEPS:      2.39652e+07
+sssp min_TEPS:                  1.6635e+08
+sssp firstquartile_TEPS:        2.49275e+08
+sssp median_TEPS:               4.00755e+08
+sssp thirdquartile_TEPS:        7.95538e+08
+sssp max_TEPS:                  9.50478e+08
+sssp harmonic_mean_TEPS:     !  3.79462e+08
+sssp harmonic_stddev_TEPS:      2.53936e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:53:04 PST 2021
+
+
+Starting job in fewerNoCong policy..
+startTime:Tue Jan 12 22:53:09 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.9343
+num_mpi_processes:              2048
+construction_time:              6.80009
+bfs  min_time:                  0.448954
+bfs  firstquartile_time:        0.468013
+bfs  median_time:               0.485889
+bfs  thirdquartile_time:        0.496292
+bfs  max_time:                  0.526526
+bfs  mean_time:                 0.484234
+bfs  stddev_time:               0.0174784
+sssp min_time:                  1.15704
+sssp firstquartile_time:        1.28171
+sssp median_time:               1.35191
+sssp thirdquartile_time:        1.41463
+sssp max_time:                  1.58265
+sssp mean_time:                 1.35152
+sssp stddev_time:               0.1043
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  2.03927e+09
+bfs  firstquartile_TEPS:        2.1635e+09
+bfs  median_TEPS:               2.20982e+09
+bfs  thirdquartile_TEPS:        2.29422e+09
+bfs  max_TEPS:                  2.39162e+09
+bfs  harmonic_mean_TEPS:     !  2.21737e+09
+bfs  harmonic_stddev_TEPS:      1.00836e+07
+sssp min_TEPS:                  6.78436e+08
+sssp firstquartile_TEPS:        7.59014e+08
+sssp median_TEPS:               7.94232e+08
+sssp thirdquartile_TEPS:        8.37729e+08
+sssp max_TEPS:                  9.27998e+08
+sssp harmonic_mean_TEPS:     !  7.94459e+08
+sssp harmonic_stddev_TEPS:      7.72436e+06
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 22:56:02 PST 2021
+
+
+====================
+iteration 3
+Starting job in nedd policy..
+startTime:Tue Jan 12 23:02:15 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.0106
+num_mpi_processes:              2048
+construction_time:              11.0714
+bfs  min_time:                  0.623393
+bfs  firstquartile_time:        1.13212
+bfs  median_time:               1.21211
+bfs  thirdquartile_time:        1.27858
+bfs  max_time:                  1.4511
+bfs  mean_time:                 1.17463
+bfs  stddev_time:               0.173261
+sssp min_time:                  1.22243
+sssp firstquartile_time:        1.4705
+sssp median_time:               1.68975
+sssp thirdquartile_time:        3.86674
+sssp max_time:                  5.19709
+sssp mean_time:                 2.44386
+sssp stddev_time:               1.33738
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  7.3994e+08
+bfs  firstquartile_TEPS:        8.39781e+08
+bfs  median_TEPS:               8.85831e+08
+bfs  thirdquartile_TEPS:        9.48419e+08
+bfs  max_TEPS:                  1.72239e+09
+bfs  harmonic_mean_TEPS:     !  9.14096e+08
+bfs  harmonic_stddev_TEPS:      1.69871e+07
+sssp min_TEPS:                  2.06601e+08
+sssp firstquartile_TEPS:        2.77683e+08
+sssp median_TEPS:               6.35434e+08
+sssp thirdquartile_TEPS:        7.30177e+08
+sssp max_TEPS:                  8.78351e+08
+sssp harmonic_mean_TEPS:     !  4.39357e+08
+sssp harmonic_stddev_TEPS:      3.02918e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 23:07:12 PST 2021
+
+
+Starting job in lowerRouterStall policy..
+startTime:Tue Jan 12 23:07:12 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               21.4967
+num_mpi_processes:              2048
+construction_time:              7.2686
+bfs  min_time:                  0.514215
+bfs  firstquartile_time:        0.565505
+bfs  median_time:               0.580758
+bfs  thirdquartile_time:        0.594821
+bfs  max_time:                  0.647843
+bfs  mean_time:                 0.580511
+bfs  stddev_time:               0.0238202
+sssp min_time:                  1.21946
+sssp firstquartile_time:        1.87507
+sssp median_time:               2.00946
+sssp thirdquartile_time:        2.12759
+sssp max_time:                  2.34264
+sssp mean_time:                 1.94632
+sssp stddev_time:               0.285318
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.65739e+09
+bfs  firstquartile_TEPS:        1.80513e+09
+bfs  median_TEPS:               1.84884e+09
+bfs  thirdquartile_TEPS:        1.8987e+09
+bfs  max_TEPS:                  2.08809e+09
+bfs  harmonic_mean_TEPS:     !  1.84962e+09
+bfs  harmonic_stddev_TEPS:      9.56201e+06
+sssp min_TEPS:                  4.5834e+08
+sssp firstquartile_TEPS:        5.04667e+08
+sssp median_TEPS:               5.34335e+08
+sssp thirdquartile_TEPS:        5.72634e+08
+sssp max_TEPS:                  8.80492e+08
+sssp harmonic_mean_TEPS:     !  5.51671e+08
+sssp harmonic_stddev_TEPS:      1.01889e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 23:11:12 PST 2021
+
+
+Starting job in fewerSwitch policy..
+startTime:Tue Jan 12 23:11:12 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.9385
+num_mpi_processes:              2048
+construction_time:              6.76516
+bfs  min_time:                  0.546306
+bfs  firstquartile_time:        0.871527
+bfs  median_time:               0.93898
+bfs  thirdquartile_time:        1.01729
+bfs  max_time:                  1.10555
+bfs  mean_time:                 0.907471
+bfs  stddev_time:               0.151426
+sssp min_time:                  1.19379
+sssp firstquartile_time:        1.46528
+sssp median_time:               3.62919
+sssp thirdquartile_time:        4.33407
+sssp max_time:                  5.05401
+sssp mean_time:                 3.06614
+sssp stddev_time:               1.40173
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  9.71213e+08
+bfs  firstquartile_TEPS:        1.05547e+09
+bfs  median_TEPS:               1.1435e+09
+bfs  thirdquartile_TEPS:        1.23201e+09
+bfs  max_TEPS:                  1.96543e+09
+bfs  harmonic_mean_TEPS:     !  1.18321e+09
+bfs  harmonic_stddev_TEPS:      2.48748e+07
+sssp min_TEPS:                  2.12451e+08
+sssp firstquartile_TEPS:        2.47741e+08
+sssp median_TEPS:               2.95858e+08
+sssp thirdquartile_TEPS:        7.32781e+08
+sssp max_TEPS:                  8.99425e+08
+sssp harmonic_mean_TEPS:     !  3.50188e+08
+sssp harmonic_stddev_TEPS:      2.01699e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 23:16:26 PST 2021
+
+
+Starting job in random policy..
+startTime:Tue Jan 12 23:16:26 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.9963
+num_mpi_processes:              2048
+construction_time:              7.585
+bfs  min_time:                  0.450974
+bfs  firstquartile_time:        0.818324
+bfs  median_time:               0.954025
+bfs  thirdquartile_time:        1.04554
+bfs  max_time:                  1.36008
+bfs  mean_time:                 0.912087
+bfs  stddev_time:               0.228994
+sssp min_time:                  1.1286
+sssp firstquartile_time:        1.34039
+sssp median_time:               2.61945
+sssp thirdquartile_time:        4.15051
+sssp max_time:                  4.88432
+sssp mean_time:                 2.75907
+sssp stddev_time:               1.39143
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  7.89459e+08
+bfs  firstquartile_TEPS:        1.02696e+09
+bfs  median_TEPS:               1.12547e+09
+bfs  thirdquartile_TEPS:        1.3121e+09
+bfs  max_TEPS:                  2.3809e+09
+bfs  harmonic_mean_TEPS:     !  1.17722e+09
+bfs  harmonic_stddev_TEPS:      3.7237e+07
+sssp min_TEPS:                  2.19831e+08
+sssp firstquartile_TEPS:        2.58698e+08
+sssp median_TEPS:               4.09905e+08
+sssp thirdquartile_TEPS:        8.01058e+08
+sssp max_TEPS:                  9.51378e+08
+sssp harmonic_mean_TEPS:     !  3.89162e+08
+sssp harmonic_stddev_TEPS:      2.47262e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 23:21:22 PST 2021
+
+
+Starting job in antinedd policy..
+startTime:Tue Jan 12 23:21:22 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.8771
+num_mpi_processes:              2048
+construction_time:              6.68244
+bfs  min_time:                  0.492872
+bfs  firstquartile_time:        0.729222
+bfs  median_time:               1.68609
+bfs  thirdquartile_time:        2.02869
+bfs  max_time:                  2.57936
+bfs  mean_time:                 1.48774
+bfs  stddev_time:               0.672023
+sssp min_time:                  1.17536
+sssp firstquartile_time:        1.39211
+sssp median_time:               1.51487
+sssp thirdquartile_time:        3.45794
+sssp max_time:                  7.77931
+sssp mean_time:                 2.92985
+sssp stddev_time:               2.31673
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  4.16276e+08
+bfs  firstquartile_TEPS:        5.2927e+08
+bfs  median_TEPS:               6.36816e+08
+bfs  thirdquartile_TEPS:        1.47243e+09
+bfs  max_TEPS:                  2.17851e+09
+bfs  harmonic_mean_TEPS:     !  7.21717e+08
+bfs  harmonic_stddev_TEPS:      4.10728e+07
+sssp min_TEPS:                  1.38023e+08
+sssp firstquartile_TEPS:        3.1051e+08
+sssp median_TEPS:               7.08789e+08
+sssp thirdquartile_TEPS:        7.71292e+08
+sssp max_TEPS:                  9.13528e+08
+sssp harmonic_mean_TEPS:     !  3.66478e+08
+sssp harmonic_stddev_TEPS:      3.65097e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 23:28:14 PST 2021
+
+
+Starting job in fewerNoCong policy..
+startTime:Tue Jan 12 23:28:20 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.9506
+num_mpi_processes:              2048
+construction_time:              6.72805
+bfs  min_time:                  0.498395
+bfs  firstquartile_time:        0.513503
+bfs  median_time:               0.52758
+bfs  thirdquartile_time:        0.537126
+bfs  max_time:                  0.567513
+bfs  mean_time:                 0.527446
+bfs  stddev_time:               0.016656
+sssp min_time:                  1.19652
+sssp firstquartile_time:        1.3553
+sssp median_time:               1.42815
+sssp thirdquartile_time:        1.48875
+sssp max_time:                  1.65883
+sssp mean_time:                 1.42303
+sssp stddev_time:               0.100386
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.89198e+09
+bfs  firstquartile_TEPS:        1.99902e+09
+bfs  median_TEPS:               2.03519e+09
+bfs  thirdquartile_TEPS:        2.09099e+09
+bfs  max_TEPS:                  2.15437e+09
+bfs  harmonic_mean_TEPS:     !  2.03571e+09
+bfs  harmonic_stddev_TEPS:      8.09911e+06
+sssp min_TEPS:                  6.4728e+08
+sssp firstquartile_TEPS:        7.21229e+08
+sssp median_TEPS:               7.51833e+08
+sssp thirdquartile_TEPS:        7.92244e+08
+sssp max_TEPS:                  8.97376e+08
+sssp harmonic_mean_TEPS:     !  7.54538e+08
+sssp harmonic_stddev_TEPS:      6.70612e+06
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 23:31:21 PST 2021
+
+
+====================
+iteration 4
+Starting job in nedd policy..
+startTime:Tue Jan 12 23:38:36 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.4977
+num_mpi_processes:              2048
+construction_time:              6.81838
+bfs  min_time:                  0.543145
+bfs  firstquartile_time:        0.789438
+bfs  median_time:               0.8945
+bfs  thirdquartile_time:        0.918772
+bfs  max_time:                  1.04709
+bfs  mean_time:                 0.839299
+bfs  stddev_time:               0.127686
+sssp min_time:                  1.20838
+sssp firstquartile_time:        1.37903
+sssp median_time:               1.45247
+sssp thirdquartile_time:        1.57398
+sssp max_time:                  4.00188
+sssp mean_time:                 1.83761
+sssp stddev_time:               0.870493
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.02543e+09
+bfs  firstquartile_TEPS:        1.16865e+09
+bfs  median_TEPS:               1.20037e+09
+bfs  thirdquartile_TEPS:        1.36012e+09
+bfs  max_TEPS:                  1.97687e+09
+bfs  harmonic_mean_TEPS:     !  1.27931e+09
+bfs  harmonic_stddev_TEPS:      2.45208e+07
+sssp min_TEPS:                  2.68305e+08
+sssp firstquartile_TEPS:        6.82173e+08
+sssp median_TEPS:               7.39244e+08
+sssp thirdquartile_TEPS:        7.78608e+08
+sssp max_TEPS:                  8.88566e+08
+sssp harmonic_mean_TEPS:     !  5.84306e+08
+sssp harmonic_stddev_TEPS:      3.48724e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 23:42:53 PST 2021
+
+
+Starting job in lowerRouterStall policy..
+startTime:Tue Jan 12 23:42:54 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.1359
+num_mpi_processes:              2048
+construction_time:              7.04205
+bfs  min_time:                  0.49867
+bfs  firstquartile_time:        1.4389
+bfs  median_time:               2.03802
+bfs  thirdquartile_time:        2.56152
+bfs  max_time:                  3.84831
+bfs  mean_time:                 1.9727
+bfs  stddev_time:               0.867067
+sssp min_time:                  1.23013
+sssp firstquartile_time:        1.40865
+sssp median_time:               1.49338
+sssp thirdquartile_time:        1.66993
+sssp max_time:                  8.7574
+sssp mean_time:                 2.3483
+sssp stddev_time:               1.98756
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  2.79012e+08
+bfs  firstquartile_TEPS:        4.19176e+08
+bfs  median_TEPS:               5.26849e+08
+bfs  thirdquartile_TEPS:        7.46216e+08
+bfs  max_TEPS:                  2.15318e+09
+bfs  harmonic_mean_TEPS:     !  5.44292e+08
+bfs  harmonic_stddev_TEPS:      3.01407e+07
+sssp min_TEPS:                  1.22608e+08
+sssp firstquartile_TEPS:        6.42978e+08
+sssp median_TEPS:               7.18993e+08
+sssp thirdquartile_TEPS:        7.6224e+08
+sssp max_TEPS:                  8.72858e+08
+sssp harmonic_mean_TEPS:     !  4.57235e+08
+sssp harmonic_stddev_TEPS:      4.87567e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 23:48:41 PST 2021
+
+
+Starting job in fewerSwitch policy..
+startTime:Tue Jan 12 23:48:42 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.8742
+num_mpi_processes:              2048
+construction_time:              6.78353
+bfs  min_time:                  0.515577
+bfs  firstquartile_time:        0.688797
+bfs  median_time:               0.7824
+bfs  thirdquartile_time:        0.913502
+bfs  max_time:                  1.12259
+bfs  mean_time:                 0.787455
+bfs  stddev_time:               0.160795
+sssp min_time:                  1.19779
+sssp firstquartile_time:        1.53035
+sssp median_time:               2.81363
+sssp thirdquartile_time:        3.13656
+sssp max_time:                  4.21391
+sssp mean_time:                 2.49064
+sssp stddev_time:               0.815292
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  9.56469e+08
+bfs  firstquartile_TEPS:        1.1754e+09
+bfs  median_TEPS:               1.37235e+09
+bfs  thirdquartile_TEPS:        1.55884e+09
+bfs  max_TEPS:                  2.08257e+09
+bfs  harmonic_mean_TEPS:     !  1.36354e+09
+bfs  harmonic_stddev_TEPS:      3.50788e+07
+sssp min_TEPS:                  2.54805e+08
+sssp firstquartile_TEPS:        3.42327e+08
+sssp median_TEPS:               3.81617e+08
+sssp thirdquartile_TEPS:        7.0162e+08
+sssp max_TEPS:                  8.96424e+08
+sssp harmonic_mean_TEPS:     !  4.31105e+08
+sssp harmonic_stddev_TEPS:      1.77793e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 23:53:12 PST 2021
+
+
+Starting job in random policy..
+startTime:Tue Jan 12 23:53:12 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.7113
+num_mpi_processes:              2048
+construction_time:              7.41489
+bfs  min_time:                  0.472433
+bfs  firstquartile_time:        0.857955
+bfs  median_time:               0.966021
+bfs  thirdquartile_time:        1.01816
+bfs  max_time:                  1.18009
+bfs  mean_time:                 0.896455
+bfs  stddev_time:               0.188779
+sssp min_time:                  1.10863
+sssp firstquartile_time:        1.32975
+sssp median_time:               3.03302
+sssp thirdquartile_time:        4.53359
+sssp max_time:                  4.97677
+sssp mean_time:                 2.91629
+sssp stddev_time:               1.56502
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  9.09867e+08
+bfs  firstquartile_TEPS:        1.05458e+09
+bfs  median_TEPS:               1.11149e+09
+bfs  thirdquartile_TEPS:        1.2515e+09
+bfs  max_TEPS:                  2.27276e+09
+bfs  harmonic_mean_TEPS:     !  1.19775e+09
+bfs  harmonic_stddev_TEPS:      3.17775e+07
+sssp min_TEPS:                  2.15748e+08
+sssp firstquartile_TEPS:        2.36838e+08
+sssp median_TEPS:               3.54012e+08
+sssp thirdquartile_TEPS:        8.07464e+08
+sssp max_TEPS:                  9.68513e+08
+sssp harmonic_mean_TEPS:     !  3.68183e+08
+sssp harmonic_stddev_TEPS:      2.48933e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Tue Jan 12 23:58:25 PST 2021
+
+
+Starting job in antinedd policy..
+startTime:Tue Jan 12 23:58:25 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.6942
+num_mpi_processes:              2048
+construction_time:              6.74031
+bfs  min_time:                  0.493681
+bfs  firstquartile_time:        0.523686
+bfs  median_time:               1.34526
+bfs  thirdquartile_time:        1.92927
+bfs  max_time:                  2.31922
+bfs  mean_time:                 1.28095
+bfs  stddev_time:               0.654735
+sssp min_time:                  1.15847
+sssp firstquartile_time:        1.37821
+sssp median_time:               1.70492
+sssp thirdquartile_time:        5.1932
+sssp max_time:                  8.54236
+sssp mean_time:                 3.12639
+sssp stddev_time:               2.33586
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  4.6297e+08
+bfs  firstquartile_TEPS:        5.56545e+08
+bfs  median_TEPS:               7.98156e+08
+bfs  thirdquartile_TEPS:        2.05033e+09
+bfs  max_TEPS:                  2.17494e+09
+bfs  harmonic_mean_TEPS:     !  8.38226e+08
+bfs  harmonic_stddev_TEPS:      5.39788e+07
+sssp min_TEPS:                  1.25694e+08
+sssp firstquartile_TEPS:        2.06756e+08
+sssp median_TEPS:               6.29781e+08
+sssp thirdquartile_TEPS:        7.79074e+08
+sssp max_TEPS:                  9.26851e+08
+sssp harmonic_mean_TEPS:     !  3.4344e+08
+sssp harmonic_stddev_TEPS:      3.23283e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 00:04:19 PST 2021
+
+
+Starting job in fewerNoCong policy..
+startTime:Wed Jan 13 00:04:25 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.9475
+num_mpi_processes:              2048
+construction_time:              6.75817
+bfs  min_time:                  0.491691
+bfs  firstquartile_time:        0.508773
+bfs  median_time:               0.522951
+bfs  thirdquartile_time:        0.533961
+bfs  max_time:                  0.559703
+bfs  mean_time:                 0.52229
+bfs  stddev_time:               0.0159974
+sssp min_time:                  1.2016
+sssp firstquartile_time:        1.3531
+sssp median_time:               1.42082
+sssp thirdquartile_time:        1.49432
+sssp max_time:                  1.70164
+sssp mean_time:                 1.42493
+sssp stddev_time:               0.105995
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.91839e+09
+bfs  firstquartile_TEPS:        2.01087e+09
+bfs  median_TEPS:               2.05321e+09
+bfs  thirdquartile_TEPS:        2.11042e+09
+bfs  max_TEPS:                  2.18374e+09
+bfs  harmonic_mean_TEPS:     !  2.05581e+09
+bfs  harmonic_stddev_TEPS:      7.93324e+06
+sssp min_TEPS:                  6.30997e+08
+sssp firstquartile_TEPS:        7.18539e+08
+sssp median_TEPS:               7.55709e+08
+sssp thirdquartile_TEPS:        7.9353e+08
+sssp max_TEPS:                  8.93582e+08
+sssp harmonic_mean_TEPS:     !  7.53532e+08
+sssp harmonic_stddev_TEPS:      7.06193e+06
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 00:07:31 PST 2021
+
+
+====================
+iteration 5
+Starting job in nedd policy..
+startTime:Wed Jan 13 00:16:20 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.3435
+num_mpi_processes:              2048
+construction_time:              7.1318
+bfs  min_time:                  0.474506
+bfs  firstquartile_time:        0.497195
+bfs  median_time:               0.512695
+bfs  thirdquartile_time:        0.803838
+bfs  max_time:                  1.1288
+bfs  mean_time:                 0.630092
+bfs  stddev_time:               0.206269
+sssp min_time:                  1.18766
+sssp firstquartile_time:        2.63875
+sssp median_time:               4.09121
+sssp thirdquartile_time:        4.49399
+sssp max_time:                  5.13512
+sssp mean_time:                 3.52188
+sssp stddev_time:               1.2612
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  9.51211e+08
+bfs  firstquartile_TEPS:        1.33575e+09
+bfs  median_TEPS:               2.09428e+09
+bfs  thirdquartile_TEPS:        2.15957e+09
+bfs  max_TEPS:                  2.26283e+09
+bfs  harmonic_mean_TEPS:     !  1.70408e+09
+bfs  harmonic_stddev_TEPS:      7.0283e+07
+sssp min_TEPS:                  2.09095e+08
+sssp firstquartile_TEPS:        2.38925e+08
+sssp median_TEPS:               2.62447e+08
+sssp thirdquartile_TEPS:        4.06907e+08
+sssp max_TEPS:                  9.04067e+08
+sssp harmonic_mean_TEPS:     !  3.04873e+08
+sssp harmonic_stddev_TEPS:      1.37549e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 00:21:45 PST 2021
+
+
+Starting job in lowerRouterStall policy..
+startTime:Wed Jan 13 00:21:46 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.1574
+num_mpi_processes:              2048
+construction_time:              7.01095
+bfs  min_time:                  0.48439
+bfs  firstquartile_time:        0.503713
+bfs  median_time:               0.520105
+bfs  thirdquartile_time:        0.53612
+bfs  max_time:                  1.02886
+bfs  mean_time:                 0.529925
+bfs  stddev_time:               0.0676119
+sssp min_time:                  1.35598
+sssp firstquartile_time:        1.72903
+sssp median_time:               1.97758
+sssp thirdquartile_time:        2.31231
+sssp max_time:                  3.27809
+sssp mean_time:                 2.03249
+sssp stddev_time:               0.381218
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.04361e+09
+bfs  firstquartile_TEPS:        2.00277e+09
+bfs  median_TEPS:               2.06444e+09
+bfs  thirdquartile_TEPS:        2.13163e+09
+bfs  max_TEPS:                  2.21666e+09
+bfs  harmonic_mean_TEPS:     !  2.02619e+09
+bfs  harmonic_stddev_TEPS:      3.257e+07
+sssp min_TEPS:                  3.27546e+08
+sssp firstquartile_TEPS:        4.64352e+08
+sssp median_TEPS:               5.42951e+08
+sssp thirdquartile_TEPS:        6.20998e+08
+sssp max_TEPS:                  7.91843e+08
+sssp harmonic_mean_TEPS:     !  5.28281e+08
+sssp harmonic_stddev_TEPS:      1.24836e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 00:25:30 PST 2021
+
+
+Starting job in fewerSwitch policy..
+startTime:Wed Jan 13 00:25:30 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.0405
+num_mpi_processes:              2048
+construction_time:              7.1779
+bfs  min_time:                  0.4628
+bfs  firstquartile_time:        0.612521
+bfs  median_time:               0.9095
+bfs  thirdquartile_time:        0.95498
+bfs  max_time:                  1.16936
+bfs  mean_time:                 0.825818
+bfs  stddev_time:               0.205388
+sssp min_time:                  1.16089
+sssp firstquartile_time:        1.38082
+sssp median_time:               1.73043
+sssp thirdquartile_time:        4.15075
+sssp max_time:                  5.05207
+sssp mean_time:                 2.67806
+sssp stddev_time:               1.42863
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  9.18215e+08
+bfs  firstquartile_TEPS:        1.12434e+09
+bfs  median_TEPS:               1.18057e+09
+bfs  thirdquartile_TEPS:        1.75296e+09
+bfs  max_TEPS:                  2.32007e+09
+bfs  harmonic_mean_TEPS:     !  1.3002e+09
+bfs  harmonic_stddev_TEPS:      4.07409e+07
+sssp min_TEPS:                  2.12532e+08
+sssp firstquartile_TEPS:        2.58682e+08
+sssp median_TEPS:               6.20498e+08
+sssp thirdquartile_TEPS:        7.77603e+08
+sssp max_TEPS:                  9.24916e+08
+sssp harmonic_mean_TEPS:     !  4.00935e+08
+sssp harmonic_stddev_TEPS:      2.69465e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 00:30:13 PST 2021
+
+
+Starting job in random policy..
+startTime:Wed Jan 13 00:30:13 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.7774
+num_mpi_processes:              2048
+construction_time:              8.24055
+bfs  min_time:                  0.459606
+bfs  firstquartile_time:        0.839571
+bfs  median_time:               1.07017
+bfs  thirdquartile_time:        1.11543
+bfs  max_time:                  1.31257
+bfs  mean_time:                 0.98848
+bfs  stddev_time:               0.21034
+sssp min_time:                  1.10708
+sssp firstquartile_time:        1.25499
+sssp median_time:               1.40586
+sssp thirdquartile_time:        4.58223
+sssp max_time:                  5.51758
+sssp mean_time:                 2.68267
+sssp stddev_time:               1.68066
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  8.18033e+08
+bfs  firstquartile_TEPS:        9.62616e+08
+bfs  median_TEPS:               1.00332e+09
+bfs  thirdquartile_TEPS:        1.2789e+09
+bfs  max_TEPS:                  2.33619e+09
+bfs  harmonic_mean_TEPS:     !  1.08624e+09
+bfs  harmonic_stddev_TEPS:      2.91212e+07
+sssp min_TEPS:                  1.94601e+08
+sssp firstquartile_TEPS:        2.34324e+08
+sssp median_TEPS:               7.63751e+08
+sssp thirdquartile_TEPS:        8.55563e+08
+sssp max_TEPS:                  9.69871e+08
+sssp harmonic_mean_TEPS:     !  4.00245e+08
+sssp harmonic_stddev_TEPS:      3.15914e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 00:35:13 PST 2021
+
+
+Starting job in antinedd policy..
+startTime:Wed Jan 13 00:35:13 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.6974
+num_mpi_processes:              2048
+construction_time:              7.28954
+bfs  min_time:                  0.48243
+bfs  firstquartile_time:        0.918353
+bfs  median_time:               1.01665
+bfs  thirdquartile_time:        1.14485
+bfs  max_time:                  1.59366
+bfs  mean_time:                 1.00106
+bfs  stddev_time:               0.274182
+sssp min_time:                  1.15455
+sssp firstquartile_time:        1.34317
+sssp median_time:               1.82783
+sssp thirdquartile_time:        3.17127
+sssp max_time:                  3.80452
+sssp mean_time:                 2.23386
+sssp stddev_time:               0.924022
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  6.73747e+08
+bfs  firstquartile_TEPS:        9.37873e+08
+bfs  median_TEPS:               1.05614e+09
+bfs  thirdquartile_TEPS:        1.16919e+09
+bfs  max_TEPS:                  2.22566e+09
+bfs  harmonic_mean_TEPS:     !  1.07259e+09
+bfs  harmonic_stddev_TEPS:      3.70119e+07
+sssp min_TEPS:                  2.82224e+08
+sssp firstquartile_TEPS:        3.38579e+08
+sssp median_TEPS:               5.87432e+08
+sssp thirdquartile_TEPS:        7.99399e+08
+sssp max_TEPS:                  9.29997e+08
+sssp harmonic_mean_TEPS:     !  4.80659e+08
+sssp harmonic_stddev_TEPS:      2.50491e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 00:39:41 PST 2021
+
+
+Starting job in fewerNoCong policy..
+startTime:Wed Jan 13 00:39:47 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.933
+num_mpi_processes:              2048
+construction_time:              6.94024
+bfs  min_time:                  0.461595
+bfs  firstquartile_time:        0.475977
+bfs  median_time:               0.488027
+bfs  thirdquartile_time:        0.504256
+bfs  max_time:                  0.525307
+bfs  mean_time:                 0.489422
+bfs  stddev_time:               0.0170755
+sssp min_time:                  1.15066
+sssp firstquartile_time:        1.29801
+sssp median_time:               1.36084
+sssp thirdquartile_time:        1.41386
+sssp max_time:                  1.60939
+sssp mean_time:                 1.3571
+sssp stddev_time:               0.102662
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  2.044e+09
+bfs  firstquartile_TEPS:        2.12933e+09
+bfs  median_TEPS:               2.20014e+09
+bfs  thirdquartile_TEPS:        2.25584e+09
+bfs  max_TEPS:                  2.32612e+09
+bfs  harmonic_mean_TEPS:     !  2.19387e+09
+bfs  harmonic_stddev_TEPS:      9.6434e+06
+sssp min_TEPS:                  6.67163e+08
+sssp firstquartile_TEPS:        7.59431e+08
+sssp median_TEPS:               7.89017e+08
+sssp thirdquartile_TEPS:        8.27211e+08
+sssp max_TEPS:                  9.33143e+08
+sssp harmonic_mean_TEPS:     !  7.91192e+08
+sssp harmonic_stddev_TEPS:      7.54064e+06
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 00:42:46 PST 2021
+
+
+====================
+iteration 6
+Starting job in nedd policy..
+startTime:Wed Jan 13 00:53:07 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.9196
+num_mpi_processes:              2048
+construction_time:              11.0577
+bfs  min_time:                  0.516642
+bfs  firstquartile_time:        0.781767
+bfs  median_time:               0.890307
+bfs  thirdquartile_time:        0.938214
+bfs  max_time:                  1.10286
+bfs  mean_time:                 0.859837
+bfs  stddev_time:               0.118811
+sssp min_time:                  1.18825
+sssp firstquartile_time:        1.50704
+sssp median_time:               3.45561
+sssp thirdquartile_time:        3.9136
+sssp max_time:                  4.3107
+sssp mean_time:                 2.99232
+sssp stddev_time:               1.0935
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  9.73587e+08
+bfs  firstquartile_TEPS:        1.14444e+09
+bfs  median_TEPS:               1.20602e+09
+bfs  thirdquartile_TEPS:        1.37346e+09
+bfs  max_TEPS:                  2.07828e+09
+bfs  harmonic_mean_TEPS:     !  1.24876e+09
+bfs  harmonic_stddev_TEPS:      2.17395e+07
+sssp min_TEPS:                  2.49084e+08
+sssp firstquartile_TEPS:        2.74358e+08
+sssp median_TEPS:               3.1072e+08
+sssp thirdquartile_TEPS:        7.12475e+08
+sssp max_TEPS:                  9.03617e+08
+sssp harmonic_mean_TEPS:     !  3.58828e+08
+sssp harmonic_stddev_TEPS:      1.65206e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 00:58:17 PST 2021
+
+
+Starting job in lowerRouterStall policy..
+startTime:Wed Jan 13 00:58:18 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               19.9501
+num_mpi_processes:              2048
+construction_time:              6.49214
+bfs  min_time:                  0.494249
+bfs  firstquartile_time:        0.559986
+bfs  median_time:               0.574879
+bfs  thirdquartile_time:        0.587581
+bfs  max_time:                  0.622685
+bfs  mean_time:                 0.57243
+bfs  stddev_time:               0.0247394
+sssp min_time:                  1.41786
+sssp firstquartile_time:        1.70511
+sssp median_time:               1.85643
+sssp thirdquartile_time:        1.95104
+sssp max_time:                  3.036
+sssp mean_time:                 1.89998
+sssp stddev_time:               0.311893
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  1.72435e+09
+bfs  firstquartile_TEPS:        1.82737e+09
+bfs  median_TEPS:               1.86774e+09
+bfs  thirdquartile_TEPS:        1.91742e+09
+bfs  max_TEPS:                  2.17244e+09
+bfs  harmonic_mean_TEPS:     !  1.87573e+09
+bfs  harmonic_stddev_TEPS:      1.02133e+07
+sssp min_TEPS:                  3.53665e+08
+sssp firstquartile_TEPS:        5.50335e+08
+sssp median_TEPS:               5.78383e+08
+sssp thirdquartile_TEPS:        6.2971e+08
+sssp max_TEPS:                  7.57288e+08
+sssp harmonic_mean_TEPS:     !  5.65125e+08
+sssp harmonic_stddev_TEPS:      1.16877e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 01:01:54 PST 2021
+
+
+Starting job in fewerSwitch policy..
+startTime:Wed Jan 13 01:01:54 PST 2021
+
+SCALE:                          26
+edgefactor:                     16
+NBFS:                           64
+graph_generation:               20.0486
+num_mpi_processes:              2048
+construction_time:              6.88898
+bfs  min_time:                  0.487974
+bfs  firstquartile_time:        0.570092
+bfs  median_time:               0.980644
+bfs  thirdquartile_time:        1.04935
+bfs  max_time:                  1.23098
+bfs  mean_time:                 0.872564
+bfs  stddev_time:               0.240921
+sssp min_time:                  1.19612
+sssp firstquartile_time:        1.34842
+sssp median_time:               1.42409
+sssp thirdquartile_time:        1.94194
+sssp max_time:                  4.47444
+sssp mean_time:                 1.96841
+sssp stddev_time:               1.05855
+min_nedge:                      1073726823
+firstquartile_nedge:            1073726823
+median_nedge:                   1073726823
+thirdquartile_nedge:            1073726823
+max_nedge:                      1073726823
+mean_nedge:                     1073726823
+stddev_nedge:                   0
+bfs  min_TEPS:                  8.72252e+08
+bfs  firstquartile_TEPS:        1.02323e+09
+bfs  median_TEPS:               1.09492e+09
+bfs  thirdquartile_TEPS:        1.88343e+09
+bfs  max_TEPS:                  2.20038e+09
+bfs  harmonic_mean_TEPS:     !  1.23054e+09
+bfs  harmonic_stddev_TEPS:      4.28059e+07
+sssp min_TEPS:                  2.39969e+08
+sssp firstquartile_TEPS:        5.52914e+08
+sssp median_TEPS:               7.53974e+08
+sssp thirdquartile_TEPS:        7.96286e+08
+sssp max_TEPS:                  8.97672e+08
+sssp harmonic_mean_TEPS:     !  5.45479e+08
+sssp harmonic_stddev_TEPS:      3.69576e+07
+bfs  min_validate:              -1
+bfs  firstquartile_validate:    -1
+bfs  median_validate:           -1
+bfs  thirdquartile_validate:    -1
+bfs  max_validate:              -1
+bfs  mean_validate:             -1
+bfs  stddev_validate:           0
+sssp min_validate:              -1
+sssp firstquartile_validate:    -1
+sssp median_validate:           -1
+sssp thirdquartile_validate:    -1
+sssp max_validate:              -1
+sssp mean_validate:             -1
+sssp stddev_validate:           0
+endTime:Wed Jan 13 01:05:56 PST 2021
+
+
+Starting job in random policy..
+startTime:Wed Jan 13 01:05:56 PST 2021
+

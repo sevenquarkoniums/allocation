@@ -1,0 +1,496 @@
+CrayPat/X:  Version 7.1.1 Revision 7c0ddd79b  08/19/19 16:58:46
+
+Number of PEs (MPI ranks):   2,048
+                           
+Numbers of PEs per Node:        64  PEs on each of  32  Nodes
+                           
+Numbers of Threads per PE:       1
+                           
+Number of Cores per Socket:     68
+
+Execution start time:  Sat Jan 23 00:00:20 2021
+
+System name and speed:  nid08044  1.401 GHz (nominal)
+
+Intel Knights Landing CPU  Family:  6  Model: 87  Stepping:  1
+
+DRAM:  96 GiB DDR4-2400 on 1.4 GHz nodes
+
+MCDRAM: 7.2 GHz, 16 GiB available as quad, cache (100% cache)
+
+Current path to data file:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/MILC/su3_rmd+pat+229395-8044t   (RTS, 256 data files)
+
+
+Notes for table 1:
+
+  This table shows functions that have significant exclusive time,
+    averaged across ranks.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile ...
+
+Table 1:  Profile by Function Group and Function
+
+  Time% |       Time | Imb. Time |  Imb. |       Calls | Group
+        |            |           | Time% |             |  Function
+        |            |           |       |             |   PE=HIDE
+       
+ 100.0% | 109.563762 |        -- |    -- | 4,489,949.2 | Total
+|---------------------------------------------------------------------------
+|  48.2% |  52.804621 |        -- |    -- | 4,476,716.2 | MPI
+||--------------------------------------------------------------------------
+||  34.0% |  37.200460 |  7.157440 | 16.1% | 1,055,672.0 | MPI_Wait
+||   7.7% |   8.438806 |  2.087775 | 19.8% |   527,836.0 | MPI_Isend
+||   2.8% |   3.029837 |  1.413983 | 31.8% |   527,836.0 | MPI_Irecv
+||   1.9% |   2.077244 |  0.158122 |  7.1% |    13,223.0 | MPI_Allreduce
+||   1.7% |   1.878699 |  0.282055 | 13.1% | 2,154,520.0 | MPI_Comm_rank
+||==========================================================================
+|  44.7% |  48.963638 |        -- |    -- |         2.0 | USER
+||--------------------------------------------------------------------------
+||  44.7% |  48.963546 | 11.294802 | 18.8% |         1.0 | main
+||==========================================================================
+|   7.1% |   7.795503 |        -- |    -- |    13,231.0 | MPI_SYNC
+||--------------------------------------------------------------------------
+||   7.1% |   7.753674 |  3.255655 | 42.0% |    13,223.0 | MPI_Allreduce(sync)
+|===========================================================================
+
+Notes for table 2:
+
+  This table shows functions that have the most significant exclusive
+    time, taking the maximum time across ranks and threads.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile_max ...
+
+Table 2:  Profile of maximum function times
+
+  Time% |      Time | Imb. Time |  Imb. | Function
+        |           |           | Time% |  PE=[max,min]
+|------------------------------------------------------------
+| 100.0% | 60.258348 | 11.294802 | 18.8% | main
+||-----------------------------------------------------------
+|| 100.0% | 60.258348 |        -- |    -- | pe.311
+||  71.3% | 42.937507 |        -- |    -- | pe.1010
+||===========================================================
+|  73.6% | 44.357899 |  7.157440 | 16.1% | MPI_Wait
+||-----------------------------------------------------------
+||  73.6% | 44.357899 |        -- |    -- | pe.1010
+||  42.8% | 25.776241 |        -- |    -- | pe.311
+||===========================================================
+|  17.5% | 10.526580 |  2.087775 | 19.8% | MPI_Isend
+||-----------------------------------------------------------
+||  17.5% | 10.526580 |        -- |    -- | pe.1832
+||  10.3% |  6.179935 |        -- |    -- | pe.638
+||===========================================================
+|  17.4% | 10.481291 |  3.255655 | 42.0% | MPI_Allreduce(sync)
+||-----------------------------------------------------------
+||  17.4% | 10.481291 |        -- |    -- | pe.720
+||   7.5% |  4.498019 |        -- |    -- | pe.1958
+||===========================================================
+|   7.4% |  4.443821 |  1.413983 | 31.8% | MPI_Irecv
+||-----------------------------------------------------------
+||   7.4% |  4.443821 |        -- |    -- | pe.1832
+||   3.8% |  2.261805 |        -- |    -- | pe.1623
+||===========================================================
+|   3.7% |  2.235365 |  0.158122 |  7.1% | MPI_Allreduce
+||-----------------------------------------------------------
+||   3.7% |  2.235365 |        -- |    -- | pe.1408
+||   3.3% |  1.988480 |        -- |    -- | pe.1520
+||===========================================================
+|   3.6% |  2.160755 |  0.282055 | 13.1% | MPI_Comm_rank
+||-----------------------------------------------------------
+||   3.6% |  2.160755 |        -- |    -- | pe.1408
+||   3.1% |  1.842700 |        -- |    -- | pe.8
+|============================================================
+
+Observation:  MPI Grid Detection
+
+    There appears to be point-to-point MPI communication in a 32 X 8 X 8
+    grid pattern. The 48.2% of the total execution time spent in MPI
+    functions might be reduced with a rank order that maximizes
+    communication between ranks on the same node. The effect of several
+    rank orders is estimated below.
+
+    A file named MPICH_RANK_ORDER.Grid was generated along with this
+    report and contains usage instructions and the Custom rank order
+    from the following table.
+
+    Rank Order    On-Node    On-Node  MPICH_RANK_REORDER_METHOD
+                 Bytes/PE  Bytes/PE%  
+                            of Total  
+                            Bytes/PE  
+
+        Custom  3.705e+12     61.56%  3
+           SMP  3.021e+12     50.20%  1
+          Fold  2.634e+12     43.77%  2
+    RoundRobin  2.582e+12     42.90%  0
+
+
+Observation:  Metric-Based Rank Order
+
+    No rank order was suggested based on the USER Time metric because
+    that metric was already well balanced across the nodes.
+
+
+Observation:  MPI utilization
+
+    The time spent on overall MPI communications is relatively high. 
+    Functions and callsites responsible for consuming the most time can
+    be found in the table generated by pat_report -O callers+src (within
+    the MPI group).
+
+
+Notes for table 3:
+
+  This table shows the ranks with maximum, mean, and minimum time for
+    functions with significant time, within the function groups. It
+    also shows MPI message statistics for functions in the MPI group.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O load_balance_m ...
+
+Table 3:  Load Balance with MPI Message Stats
+
+  Time% |       Time |   MPI Msg |   MPI Msg Bytes |  Avg MPI | Group
+        |            |     Count |                 | Msg Size |  PE=[mmm]
+       
+ 100.0% | 109.563762 | 541,063.0 | 2,938,914,332.0 | 5,431.74 | Total
+|------------------------------------------------------------------------
+|  48.2% |  52.804621 | 541,063.0 | 2,938,914,332.0 | 5,431.74 | MPI
+||-----------------------------------------------------------------------
+||  52.0% |  56.945150 | 541,063.0 | 2,938,914,332.0 | 5,431.74 | pe.1010
+||  48.1% |  52.709888 | 541,063.0 | 2,938,914,332.0 | 5,431.74 | pe.1361
+||  40.7% |  44.540540 | 541,063.0 | 2,938,914,332.0 | 5,431.74 | pe.311
+||=======================================================================
+|  44.7% |  48.963638 |       0.0 |             0.0 |       -- | USER
+||-----------------------------------------------------------------------
+||  55.0% |  60.258437 |       0.0 |             0.0 |       -- | pe.311
+||  44.9% |  49.143180 |       0.0 |             0.0 |       -- | pe.1987
+||  39.2% |  42.937596 |       0.0 |             0.0 |       -- | pe.1010
+||=======================================================================
+|   7.1% |   7.795503 |       0.0 |             0.0 |       -- | MPI_SYNC
+||-----------------------------------------------------------------------
+||   9.6% |  10.523214 |       0.0 |             0.0 |       -- | pe.720
+||   7.0% |   7.715185 |       0.0 |             0.0 |       -- | pe.574
+||   4.1% |   4.534676 |       0.0 |             0.0 |       -- | pe.1958
+|========================================================================
+
+Notes for table 4:
+
+  This table shows the MPI library functions that are used to send a
+    significant number of bytes, taking the average across sender
+    ranks of the sum of bytes sent from the sender to all destination
+    ranks. It also shows how many bytes are attributable to each of
+    its call paths. It also shows a count of messages and the number
+    of messages that fall into each bin of message sizes. For each
+    path, it shows the ranks that send the minimum, mean, and maximum
+    number of bytes.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O mpi_callers ...
+
+Table 4:  MPI Message Stats by Caller
+
+    MPI |   MPI Msg Bytes |   MPI Msg |   MsgSz |     16<= |     256<= |    4KiB<= | Function
+    Msg |                 |     Count |     <16 |    MsgSz |     MsgSz |     MsgSz |  Caller
+ Bytes% |                 |           |   Count |     <256 |     <4KiB |    <64KiB |   PE=[mmm]
+        |                 |           |         |    Count |     Count |     Count | 
+       
+ 100.0% | 2,938,914,332.0 | 541,063.0 | 1,325.0 | 11,914.0 | 108,256.0 | 419,568.0 | Total
+|-----------------------------------------------------------------------------
+| 100.0% | 2,938,517,056.0 | 527,836.0 |    16.0 |      0.0 | 108,252.0 | 419,568.0 | MPI_Isend
+||----------------------------------------------------------------------------
+||  48.3% | 1,418,640,384.0 | 309,072.0 |     0.0 |      0.0 |  77,268.0 | 231,804.0 | restart_gather_field
+|||---------------------------------------------------------------------------
+3||  24.8% |   728,792,064.0 | 180,752.0 |     0.0 |      0.0 |  45,188.0 | 135,564.0 | dslash_fn_field_special
+4||        |                 |           |         |          |           |           |  ks_congrad_parity_cpu
+|||||-------------------------------------------------------------------------
+5||||  20.7% |   607,122,432.0 | 150,576.0 |     0.0 |      0.0 |  37,644.0 | 112,932.0 | ks_congrad
+6||||        |                 |           |         |          |           |           |  ks_congrad_two_src
+7||||        |                 |           |         |          |           |           |   update
+8||||        |                 |           |         |          |           |           |    main
+|||||||||---------------------------------------------------------------------
+9||||||||  20.7% |   607,122,432.0 | 150,576.0 |     0.0 |      0.0 |  37,644.0 | 112,932.0 | pe.0
+9||||||||  20.7% |   607,122,432.0 | 150,576.0 |     0.0 |      0.0 |  37,644.0 | 112,932.0 | pe.1024
+9||||||||  20.7% |   607,122,432.0 | 150,576.0 |     0.0 |      0.0 |  37,644.0 | 112,932.0 | pe.2047
+|||||||||=====================================================================
+5||||   4.1% |   121,669,632.0 |  30,176.0 |     0.0 |      0.0 |   7,544.0 |  22,632.0 | ks_congrad_field
+6||||        |                 |           |         |          |           |           |  mat_invert_uml_field
+7||||        |                 |           |         |          |           |           |   f_meas_imp
+8||||        |                 |           |         |          |           |           |    main
+|||||||||---------------------------------------------------------------------
+9||||||||   4.1% |   121,669,632.0 |  30,176.0 |     0.0 |      0.0 |   7,544.0 |  22,632.0 | pe.0
+9||||||||   4.1% |   121,669,632.0 |  30,176.0 |     0.0 |      0.0 |   7,544.0 |  22,632.0 | pe.1024
+9||||||||   4.1% |   121,669,632.0 |  30,176.0 |     0.0 |      0.0 |   7,544.0 |  22,632.0 | pe.2047
+|||||=========================================================================
+3||  21.9% |   642,908,160.0 | 119,600.0 |     0.0 |      0.0 |  29,920.0 |  89,680.0 | eo_fermion_force_twoterms_hwv
+4||        |                 |           |         |          |           |           |  eo_fermion_force_twoterms_site_cpu
+5||        |                 |           |         |          |           |           |   update_h
+6||        |                 |           |         |          |           |           |    update
+7||        |                 |           |         |          |           |           |     main
+||||||||----------------------------------------------------------------------
+8|||||||  21.9% |   642,908,160.0 | 119,600.0 |     0.0 |      0.0 |  29,920.0 |  89,680.0 | pe.0
+8|||||||  21.9% |   642,908,160.0 | 119,600.0 |     0.0 |      0.0 |  29,920.0 |  89,680.0 | pe.1024
+8|||||||  21.9% |   642,908,160.0 | 119,600.0 |     0.0 |      0.0 |  29,920.0 |  89,680.0 | pe.2047
+||||||||======================================================================
+3||   1.6% |    46,940,160.0 |   8,720.0 |     0.0 |      0.0 |   2,160.0 |   6,560.0 | u_shift_hw_fermion
+4||        |                 |           |         |          |           |           |  eo_fermion_force_twoterms_hwv
+5||        |                 |           |         |          |           |           |   eo_fermion_force_twoterms_site_cpu
+6||        |                 |           |         |          |           |           |    update_h
+7||        |                 |           |         |          |           |           |     update
+8||        |                 |           |         |          |           |           |      main
+|||||||||---------------------------------------------------------------------
+9||||||||   1.6% |    46,940,160.0 |   8,720.0 |     0.0 |      0.0 |   2,160.0 |   6,560.0 | pe.0
+9||||||||   1.6% |    46,940,160.0 |   8,720.0 |     0.0 |      0.0 |   2,160.0 |   6,560.0 | pe.1024
+9||||||||   1.6% |    46,940,160.0 |   8,720.0 |     0.0 |      0.0 |   2,160.0 |   6,560.0 | pe.2047
+|||===========================================================================
+||  29.3% |   860,688,384.0 | 135,392.0 |     0.0 |      0.0 |  29,376.0 | 106,016.0 | start_gather_field
+|||---------------------------------------------------------------------------
+3||  16.9% |   495,765,504.0 |  61,504.0 |     0.0 |      0.0 |       0.0 |  61,504.0 | path_product_fields
+4||  15.8% |   464,486,400.0 |  57,600.0 |     0.0 |      0.0 |       0.0 |  57,600.0 |  imp_gauge_force_cpu
+5||        |                 |           |         |          |           |           |   update_h
+6||        |                 |           |         |          |           |           |    update
+7||        |                 |           |         |          |           |           |     main
+||||||||----------------------------------------------------------------------
+8|||||||  15.8% |   464,486,400.0 |  57,600.0 |     0.0 |      0.0 |       0.0 |  57,600.0 | pe.0
+8|||||||  15.8% |   464,486,400.0 |  57,600.0 |     0.0 |      0.0 |       0.0 |  57,600.0 | pe.1024
+8|||||||  15.8% |   464,486,400.0 |  57,600.0 |     0.0 |      0.0 |       0.0 |  57,600.0 | pe.2047
+||||||||======================================================================
+3||   6.5% |   191,600,640.0 |  23,760.0 |     0.0 |      0.0 |       0.0 |  23,760.0 | compute_gen_staple_field
+4||        |                 |           |         |          |           |           |  load_fn_links_cpu
+5||   6.5% |   190,439,424.0 |  23,616.0 |     0.0 |      0.0 |       0.0 |  23,616.0 |   restore_fermion_links
+6||        |                 |           |         |          |           |           |    restore_fermion_links_from_site
+|||||||-----------------------------------------------------------------------
+7||||||   4.7% |   139,345,920.0 |  17,280.0 |     0.0 |      0.0 |       0.0 |  17,280.0 | update
+8||||||        |                 |           |         |          |           |           |  main
+|||||||||---------------------------------------------------------------------
+9||||||||   4.7% |   139,345,920.0 |  17,280.0 |     0.0 |      0.0 |       0.0 |  17,280.0 | pe.0
+9||||||||   4.7% |   139,345,920.0 |  17,280.0 |     0.0 |      0.0 |       0.0 |  17,280.0 | pe.1024
+9||||||||   4.7% |   139,345,920.0 |  17,280.0 |     0.0 |      0.0 |       0.0 |  17,280.0 | pe.2047
+|||||||||=====================================================================
+7||||||   1.6% |    46,448,640.0 |   5,760.0 |     0.0 |      0.0 |       0.0 |   5,760.0 | update_h
+8||||||        |                 |           |         |          |           |           |  update
+9||||||        |                 |           |         |          |           |           |   main
+||||||||||--------------------------------------------------------------------
+10||||||||   1.6% |    46,448,640.0 |   5,760.0 |     0.0 |      0.0 |       0.0 |   5,760.0 | pe.0
+10||||||||   1.6% |    46,448,640.0 |   5,760.0 |     0.0 |      0.0 |       0.0 |   5,760.0 | pe.1024
+10||||||||   1.6% |    46,448,640.0 |   5,760.0 |     0.0 |      0.0 |       0.0 |   5,760.0 | pe.2047
+|||||||=======================================================================
+3||   2.6% |    77,070,336.0 |  28,160.0 |     0.0 |      0.0 |  17,536.0 |  10,624.0 | dslash_fn_field
+4||   2.3% |    66,748,416.0 |  24,832.0 |     0.0 |      0.0 |  15,520.0 |   9,312.0 |  ks_congrad_parity_cpu
+5||   1.9% |    55,050,240.0 |  20,480.0 |     0.0 |      0.0 |  12,800.0 |   7,680.0 |   ks_congrad
+6||        |                 |           |         |          |           |           |    ks_congrad_two_src
+7||        |                 |           |         |          |           |           |     update
+8||        |                 |           |         |          |           |           |      main
+|||||||||---------------------------------------------------------------------
+9||||||||   1.9% |    55,050,240.0 |  20,480.0 |     0.0 |      0.0 |  12,800.0 |   7,680.0 | pe.0
+9||||||||   1.9% |    55,050,240.0 |  20,480.0 |     0.0 |      0.0 |  12,800.0 |   7,680.0 | pe.1024
+9||||||||   1.9% |    55,050,240.0 |  20,480.0 |     0.0 |      0.0 |  12,800.0 |   7,680.0 | pe.2047
+|||||||||=====================================================================
+3||   1.7% |    50,233,344.0 |  18,688.0 |     0.0 |      0.0 |  11,680.0 |   7,008.0 | dslash_fn_field_special
+4||        |                 |           |         |          |           |           |  ks_congrad_parity_cpu
+5||   1.4% |    41,287,680.0 |  15,360.0 |     0.0 |      0.0 |   9,600.0 |   5,760.0 |   ks_congrad
+6||        |                 |           |         |          |           |           |    ks_congrad_two_src
+7||        |                 |           |         |          |           |           |     update
+8||        |                 |           |         |          |           |           |      main
+|||||||||---------------------------------------------------------------------
+9||||||||   1.4% |    41,287,680.0 |  15,360.0 |     0.0 |      0.0 |   9,600.0 |   5,760.0 | pe.0
+9||||||||   1.4% |    41,287,680.0 |  15,360.0 |     0.0 |      0.0 |   9,600.0 |   5,760.0 | pe.1024
+9||||||||   1.4% |    41,287,680.0 |  15,360.0 |     0.0 |      0.0 |   9,600.0 |   5,760.0 | pe.2047
+|||||||||=====================================================================
+3||   1.4% |    42,577,920.0 |   2,640.0 |     0.0 |      0.0 |       0.0 |   2,640.0 | load_fn_backlinks
+4||        |                 |           |         |          |           |           |  load_fn_links_cpu
+5||   1.4% |    42,319,872.0 |   2,624.0 |     0.0 |      0.0 |       0.0 |   2,624.0 |   restore_fermion_links
+6||        |                 |           |         |          |           |           |    restore_fermion_links_from_site
+7||   1.1% |    30,965,760.0 |   1,920.0 |     0.0 |      0.0 |       0.0 |   1,920.0 |     update
+8||        |                 |           |         |          |           |           |      main
+|||||||||---------------------------------------------------------------------
+9||||||||   1.1% |    30,965,760.0 |   1,920.0 |     0.0 |      0.0 |       0.0 |   1,920.0 | pe.0
+9||||||||   1.1% |    30,965,760.0 |   1,920.0 |     0.0 |      0.0 |       0.0 |   1,920.0 | pe.1024
+9||||||||   1.1% |    30,965,760.0 |   1,920.0 |     0.0 |      0.0 |       0.0 |   1,920.0 | pe.2047
+|||===========================================================================
+||  22.1% |   650,311,680.0 |  81,472.0 |     0.0 |      0.0 |     800.0 |  80,672.0 | do_gather
+|||---------------------------------------------------------------------------
+3||  19.6% |   574,801,920.0 |  71,280.0 |     0.0 |      0.0 |       0.0 |  71,280.0 | compute_gen_staple_field
+4||        |                 |           |         |          |           |           |  load_fn_links_cpu
+5||  19.4% |   571,318,272.0 |  70,848.0 |     0.0 |      0.0 |       0.0 |  70,848.0 |   restore_fermion_links
+6||        |                 |           |         |          |           |           |    restore_fermion_links_from_site
+|||||||-----------------------------------------------------------------------
+7||||||  14.2% |   418,037,760.0 |  51,840.0 |     0.0 |      0.0 |       0.0 |  51,840.0 | update
+8||||||        |                 |           |         |          |           |           |  main
+|||||||||---------------------------------------------------------------------
+9||||||||  14.2% |   418,037,760.0 |  51,840.0 |     0.0 |      0.0 |       0.0 |  51,840.0 | pe.0
+9||||||||  14.2% |   418,037,760.0 |  51,840.0 |     0.0 |      0.0 |       0.0 |  51,840.0 | pe.1024
+9||||||||  14.2% |   418,037,760.0 |  51,840.0 |     0.0 |      0.0 |       0.0 |  51,840.0 | pe.2047
+|||||||||=====================================================================
+7||||||   4.7% |   139,345,920.0 |  17,280.0 |     0.0 |      0.0 |       0.0 |  17,280.0 | update_h
+8||||||        |                 |           |         |          |           |           |  update
+9||||||        |                 |           |         |          |           |           |   main
+||||||||||--------------------------------------------------------------------
+10||||||||   4.7% |   139,345,920.0 |  17,280.0 |     0.0 |      0.0 |       0.0 |  17,280.0 | pe.0
+10||||||||   4.7% |   139,345,920.0 |  17,280.0 |     0.0 |      0.0 |       0.0 |  17,280.0 | pe.1024
+10||||||||   4.7% |   139,345,920.0 |  17,280.0 |     0.0 |      0.0 |       0.0 |  17,280.0 | pe.2047
+|||||||=======================================================================
+3||   2.5% |    72,069,120.0 |   8,912.0 |     0.0 |      0.0 |       0.0 |   8,912.0 | path_product_fields
+4||   2.4% |    69,672,960.0 |   8,640.0 |     0.0 |      0.0 |       0.0 |   8,640.0 |  imp_gauge_force_cpu
+5||        |                 |           |         |          |           |           |   update_h
+6||        |                 |           |         |          |           |           |    update
+7||        |                 |           |         |          |           |           |     main
+||||||||----------------------------------------------------------------------
+8|||||||   2.4% |    69,672,960.0 |   8,640.0 |     0.0 |      0.0 |       0.0 |   8,640.0 | pe.0
+8|||||||   2.4% |    69,672,960.0 |   8,640.0 |     0.0 |      0.0 |       0.0 |   8,640.0 | pe.1024
+8|||||||   2.4% |    69,672,960.0 |   8,640.0 |     0.0 |      0.0 |       0.0 |   8,640.0 | pe.2047
+|=============================================================================
+
+Notes for table 5:
+
+  This table shows energy and power usage for the nodes with the
+    maximum, mean, and minimum usage, as well as the sum of usage over
+    all nodes.
+    Energy and power for accelerators is also shown, if applicable.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_energy ...
+
+Table 5:  Program energy and power usage (from Cray PM)
+
+    Node |      Node |    Process | Node Id=[mmm]
+  Energy | Power (W) |       Time |  PE=HIDE
+     (J) |           |            | 
+        
+ 784,224 | 6,919.397 | 113.336998 | Total
+|------------------------------------------------
+|  25,864 |   228.398 | 113.241394 | nid.8075
+|  24,593 |   216.725 | 113.474266 | nid.8072
+|  22,480 |   198.774 | 113.094475 | nid.8050
+|================================================
+
+Notes for table 6:
+
+  This table shows total wall clock time for the ranks with the
+    maximum, mean, and minimum time, as well as the average across
+    ranks.
+    It also shows maximum memory usage from /proc/self/numa_maps for
+    those ranks, and on average.  The usage is total size of all
+    pages, including huge pages, that were actually mapped into
+    physical memory from both private and shared memory segments.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_time ...
+
+Table 6:  Wall Clock Time, Memory High Water Mark
+
+    Process |   Process | PE=[mmm]
+       Time |     HiMem | 
+            | (MiBytes) | 
+           
+ 113.336998 |      60.4 | Total
+|---------------------------------
+| 131.298978 |      59.7 | pe.46
+| 113.138959 |      60.3 | pe.1218
+| 112.749568 |      60.2 | pe.416
+|=================================
+
+========================  Additional details  ========================
+
+
+
+General table notes:
+
+    The default notes for a table are based on the default definition of
+    the table, and do not account for the effects of command-line options
+    that may modify the content of the table.
+    
+    Detailed notes, produced by the pat_report -v option, do account for
+    all command-line options, and also show how data is aggregated, and
+    if the table content is limited by thresholds, rank selections, etc.
+    
+    An imbalance metric in a line is based on values in main threads
+    across multiple ranks, or on values across all threads, as applicable.
+    
+    An imbalance percent in a line is relative to the maximum value
+    for that line across ranks or threads, as applicable.
+    
+Experiment:  trace
+
+Original path to data file:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/MILC/su3_rmd+pat+229395-8044t/xf-files   (RTS, 2048 data files)
+
+Original program:
+  /global/u1/c/cookbg/mpi/MILC/milc_qcd-7.8.1/ks_imp_dyn/su3_rmd
+
+Instrumented with:  pat_build -g mpi su3_rmd
+
+Instrumented program:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/MILC/./milc_qcd-7.8.1/ks_imp_dyn/su3_rmd+pat
+
+Program invocation:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/MILC/./milc_qcd-7.8.1/ks_imp_dyn/su3_rmd+pat /global/homes/z/zhangyj/milc_qcd-7.8.1/ks_imp_dyn/test/myinput_knl.in
+
+Exit Status:  0 for 2,048 PEs
+
+Memory pagesize:  4 KiB
+
+Memory hugepagesize:  2 MiB
+
+Programming environment:  INTEL
+
+Runtime environment variables:
+  CRAYPAT_ALPS_COMPONENT=/opt/cray/pe/perftools/7.1.1/sbin/pat_alps
+  CRAYPAT_COMPILER_OPTIONS=1
+  CRAYPAT_LD_LIBRARY_PATH=/opt/cray/pe/gcc-libs:/opt/cray/gcc-libs:/opt/cray/pe/perftools/7.1.1/lib64
+  CRAYPAT_LITE=lite-samples
+  CRAYPAT_OPTS_EXECUTABLE=libexec64/opts
+  CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+  CRAYPE_VERSION=2.6.2
+  CRAY_LIBSCI_VERSION=19.06.1
+  DVS_VERSION=0.9.0
+  HUGETLB_DEFAULT_PAGE_SIZE=2M
+  HUGETLB_ELFMAP=W
+  HUGETLB_FORCE_ELFMAP=yes+
+  HUGETLB_MORECORE=yes
+  HUGETLB_MORECORE_HEAPBASE=10000000000
+  HUGETLB_VERBOSE=0
+  INTEL_MAJOR_VERSION=19
+  INTEL_MINOR_VERSION=19
+  INTEL_VERSION=19.0.3.199
+  LIBSCI_VERSION=19.06.1
+  MODULE_VERSION=3.2.11.4
+  MODULE_VERSION_STACK=3.2.11.4
+  MPICH_ABORT_ON_ERROR=1
+  MPICH_DIR=/opt/cray/pe/mpt/7.7.10/gni/mpich-intel/16.0
+  MPICH_GNI_ROUTING_MODE=ADAPTIVE_3
+  MPICH_MPIIO_DVS_MAXNODES=28
+  PAT_BUILD_PAPI_LIBDIR=/opt/cray/pe/papi/5.7.0.2/lib64
+  PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+  PERFTOOLS_VERSION=7.1.1
+  PMI_CONTROL_PORT=63362
+  PMI_CRAY_NO_SMP_ORDER=0
+  PMI_GNI_COOKIE=361562112:470548480
+  PMI_GNI_DEV_ID=0
+  PMI_GNI_LOC_ADDR=10604:10604
+  PMI_GNI_PTAG=83:84
+  PMI_NO_FORK=1
+
+Report time environment variables:
+    CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+    PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+
+Number of MPI control variables collected:  108
+
+  (To see the list, specify: -s mpi_cvar=show)
+
+Report command line options:  -o craypat_milc.txt
+
+Operating system:
+  Linux 4.12.14-150.17_5.0.92-cray_ari_c #1 SMP Wed Dec 2 16:40:47 UTC 2020 (0d561ce)
+
+Instrumentation overhead could not be estimated.
+
+Number of traced functions that were called:  16
+
+  (To see the list, specify:  -s traced_functions=show)
+

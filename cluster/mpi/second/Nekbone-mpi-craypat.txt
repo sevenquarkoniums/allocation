@@ -1,0 +1,1900 @@
+CrayPat/X:  Version 7.1.1 Revision 7c0ddd79b  08/19/19 16:58:46
+
+Number of PEs (MPI ranks):   2,048
+                           
+Numbers of PEs per Node:        32  PEs on each of  64  Nodes
+                           
+Numbers of Threads per PE:       1
+                           
+Number of Cores per Socket:     16
+
+Execution start time:  Thu May 21 17:35:25 2020
+
+System name and speed:  nid00790  2.301 GHz (nominal)
+
+Intel Haswell    CPU  Family:  6  Model: 63  Stepping:  2
+
+DRAM: 128 GiB DDR4-2400 on 2.3 GHz nodes  for 224 PEs
+DRAM: 128 GiB DDR4-2133 on 2.3 GHz nodes  for 1824 PEs
+
+
+Current path to data file:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/Nekbone/Nekbone/test/example1/nekbone+pat+62995-790t   (RTS, 256 data files)
+
+
+Notes for table 1:
+
+  This table shows functions that have significant exclusive time,
+    averaged across ranks.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile ...
+
+Table 1:  Profile by Function Group and Function
+
+  Time% |      Time |     Imb. |   Imb. |     Calls | Group
+        |           |     Time |  Time% |           |  Function
+        |           |          |        |           |   PE=HIDE
+       
+ 100.0% | 22.739989 |       -- |     -- | 564,025.5 | Total
+|-------------------------------------------------------------------------
+|  50.1% | 11.399192 | 1.340471 |  10.5% |       1.0 | USER
+||------------------------------------------------------------------------
+||  50.1% | 11.399192 | 1.340471 |  10.5% |       1.0 | main
+||========================================================================
+|  28.8% |  6.559761 |       -- |     -- | 533,458.5 | MPI
+||------------------------------------------------------------------------
+||  19.0% |  4.313031 | 0.943213 |  18.0% |  27,860.0 | MPI_Waitall
+||   6.3% |  1.423066 | 0.050317 |   3.4% |  30,100.0 | MPI_ALLREDUCE
+||   2.1% |  0.487935 | 0.147049 |  23.2% | 237,113.3 | MPI_Isend
+||   1.0% |  0.221021 | 0.071958 |  24.6% | 237,113.3 | MPI_Irecv
+||   0.2% |  0.055030 | 0.020308 |  27.0% |      50.0 | MPI_Recv
+||   0.2% |  0.034694 | 0.010913 |  23.9% |     101.0 | MPI_Comm_dup
+||   0.1% |  0.014466 | 0.002560 |  15.0% |     300.0 | MPI_Allreduce
+||   0.0% |  0.005330 | 0.000772 |  12.7% |     100.0 | MPI_Barrier
+||   0.0% |  0.001823 | 0.000545 |  23.0% |      50.0 | MPI_BARRIER
+||   0.0% |  0.001821 | 0.000717 |  28.3% |       1.0 | MPI_COMM_DUP
+||   0.0% |  0.000751 | 0.000768 |  50.6% |     100.0 | MPI_Comm_free
+||   0.0% |  0.000247 | 0.000114 |  31.6% |      13.0 | MPI_BCAST
+||   0.0% |  0.000213 | 0.000156 |  42.3% |     200.0 | MPI_WTIME
+||   0.0% |  0.000177 | 0.000043 |  19.5% |     200.0 | MPI_Wtime
+||   0.0% |  0.000066 | 0.000889 |  93.2% |      50.0 | MPI_Send
+||   0.0% |  0.000059 | 0.000027 |  31.7% |      51.0 | MPI_Comm_rank
+||   0.0% |  0.000023 | 0.000023 |  49.6% |      51.0 | MPI_Comm_size
+||   0.0% |  0.000002 | 0.000006 |  72.5% |       1.0 | MPI_COMM_RANK
+||   0.0% |  0.000002 | 0.000010 |  83.4% |       1.0 | MPI_ATTR_GET
+||   0.0% |  0.000002 | 0.000002 |  51.3% |       1.0 | MPI_INIT
+||   0.0% |  0.000001 | 0.000002 |  64.8% |       1.0 | MPI_COMM_SIZE
+||   0.0% |  0.000001 | 0.000001 |  36.6% |       1.0 | MPI_FINALIZE
+||========================================================================
+|  21.0% |  4.781002 |       -- |     -- |  30,565.0 | MPI_SYNC
+||------------------------------------------------------------------------
+||  15.3% |  3.467947 | 1.556804 |  44.9% |  30,100.0 | mpi_allreduce_(sync)
+||   4.5% |  1.032891 | 1.032841 | 100.0% |       1.0 | mpi_init_(sync)
+||   0.9% |  0.196077 | 0.195201 |  99.6% |      13.0 | mpi_bcast_(sync)
+||   0.2% |  0.047671 | 0.018403 |  38.6% |     100.0 | MPI_Barrier(sync)
+||   0.2% |  0.034293 | 0.016389 |  47.8% |     300.0 | MPI_Allreduce(sync)
+||   0.0% |  0.002058 | 0.000890 |  43.3% |      50.0 | mpi_barrier_(sync)
+||   0.0% |  0.000066 | 0.000040 |  61.3% |       1.0 | mpi_finalize_(sync)
+||========================================================================
+|   0.0% |  0.000034 | 0.000048 |  59.1% |       1.0 | ETC
+||------------------------------------------------------------------------
+||   0.0% |  0.000034 | 0.000048 |  59.1% |       1.0 | for_exit
+|=========================================================================
+
+Notes for table 2:
+
+  This table shows functions that have the most significant exclusive
+    time, taking the maximum time across ranks and threads.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile_max ...
+
+Table 2:  Profile of maximum function times
+
+  Time% |      Time |     Imb. |   Imb. | Function
+        |           |     Time |  Time% |  PE=[max,min]
+|-------------------------------------------------------------
+| 100.0% | 12.739664 | 1.340471 |  10.5% | main
+||------------------------------------------------------------
+|| 100.0% | 12.739664 |       -- |     -- | pe.1188
+||  76.5% |  9.745616 |       -- |     -- | pe.2032
+||============================================================
+|  48.4% |  6.162946 | 1.556804 |  44.9% | mpi_allreduce_(sync)
+||------------------------------------------------------------
+||  48.4% |  6.162946 |       -- |     -- | pe.15
+||  15.0% |  1.911142 |       -- |     -- | pe.1185
+||============================================================
+|  41.3% |  5.256244 | 0.943213 |  18.0% | MPI_Waitall
+||------------------------------------------------------------
+||  41.3% |  5.256244 |       -- |     -- | pe.1974
+||  24.6% |  3.132932 |       -- |     -- | pe.271
+||============================================================
+|  11.6% |  1.473383 | 0.050317 |   3.4% | MPI_ALLREDUCE
+||------------------------------------------------------------
+||  11.6% |  1.473383 |       -- |     -- | pe.992
+||  10.9% |  1.387340 |       -- |     -- | pe.1968
+||============================================================
+|   8.4% |  1.068237 | 1.032841 | 100.0% | mpi_init_(sync)
+||------------------------------------------------------------
+||   8.4% |  1.068237 |       -- |     -- | pe.1865
+||   0.0% |  0.000050 |       -- |     -- | pe.1248
+||============================================================
+|   5.0% |  0.634985 | 0.147049 |  23.2% | MPI_Isend
+||------------------------------------------------------------
+||   5.0% |  0.634985 |       -- |     -- | pe.1345
+||   1.5% |  0.195206 |       -- |     -- | pe.240
+||============================================================
+|   2.3% |  0.292978 | 0.071958 |  24.6% | MPI_Irecv
+||------------------------------------------------------------
+||   2.3% |  0.292978 |       -- |     -- | pe.692
+||   0.7% |  0.094779 |       -- |     -- | pe.240
+||============================================================
+|   1.6% |  0.198369 | 0.195201 |  99.6% | mpi_bcast_(sync)
+||------------------------------------------------------------
+||   1.6% |  0.198369 |       -- |     -- | pe.1280
+||   0.0% |  0.000877 |       -- |     -- | pe.0
+||============================================================
+|   0.7% |  0.083019 | 0.018403 |  38.6% | MPI_Barrier(sync)
+||------------------------------------------------------------
+||   0.7% |  0.083019 |       -- |     -- | pe.240
+||   0.2% |  0.029267 |       -- |     -- | pe.1145
+||============================================================
+|   0.6% |  0.075338 | 0.020308 |  27.0% | MPI_Recv
+||------------------------------------------------------------
+||   0.6% |  0.075338 |       -- |     -- | pe.469
+||   0.0% |  0.000000 |       -- |     -- | pe.0
+||============================================================
+|   0.5% |  0.066811 | 0.016389 |  47.8% | MPI_Allreduce(sync)
+||------------------------------------------------------------
+||   0.5% |  0.066811 |       -- |     -- | pe.15
+||   0.1% |  0.017904 |       -- |     -- | pe.1463
+||============================================================
+|   0.4% |  0.045608 | 0.010913 |  23.9% | MPI_Comm_dup
+||------------------------------------------------------------
+||   0.4% |  0.045608 |       -- |     -- | pe.1352
+||   0.1% |  0.016358 |       -- |     -- | pe.774
+||============================================================
+|   0.1% |  0.017027 | 0.002560 |  15.0% | MPI_Allreduce
+||------------------------------------------------------------
+||   0.1% |  0.017027 |       -- |     -- | pe.245
+||   0.1% |  0.012295 |       -- |     -- | pe.1747
+||============================================================
+|   0.0% |  0.006102 | 0.000772 |  12.7% | MPI_Barrier
+||------------------------------------------------------------
+||   0.0% |  0.006102 |       -- |     -- | pe.393
+||   0.0% |  0.004645 |       -- |     -- | pe.1756
+||============================================================
+|   0.0% |  0.002538 | 0.000717 |  28.3% | MPI_COMM_DUP
+||------------------------------------------------------------
+||   0.0% |  0.002538 |       -- |     -- | pe.261
+||   0.0% |  0.000929 |       -- |     -- | pe.1878
+||============================================================
+|   0.0% |  0.002475 | 0.000890 |  43.3% | mpi_barrier_(sync)
+||------------------------------------------------------------
+||   0.0% |  0.002475 |       -- |     -- | pe.148
+||   0.0% |  0.001167 |       -- |     -- | pe.0
+||============================================================
+|   0.0% |  0.002368 | 0.000545 |  23.0% | MPI_BARRIER
+||------------------------------------------------------------
+||   0.0% |  0.002368 |       -- |     -- | pe.427
+||   0.0% |  0.001381 |       -- |     -- | pe.144
+||============================================================
+|   0.0% |  0.001519 | 0.000768 |  50.6% | MPI_Comm_free
+||------------------------------------------------------------
+||   0.0% |  0.001519 |       -- |     -- | pe.0
+||   0.0% |  0.000552 |       -- |     -- | pe.1
+||============================================================
+|   0.0% |  0.000955 | 0.000889 |  93.2% | MPI_Send
+||------------------------------------------------------------
+||   0.0% |  0.000955 |       -- |     -- | pe.0
+||   0.0% |  0.000000 |       -- |     -- | pe.2047
+||============================================================
+|   0.0% |  0.000369 | 0.000156 |  42.3% | MPI_WTIME
+||------------------------------------------------------------
+||   0.0% |  0.000369 |       -- |     -- | pe.0
+||   0.0% |  0.000180 |       -- |     -- | pe.113
+||============================================================
+|   0.0% |  0.000361 | 0.000114 |  31.6% | MPI_BCAST
+||------------------------------------------------------------
+||   0.0% |  0.000361 |       -- |     -- | pe.122
+||   0.0% |  0.000200 |       -- |     -- | pe.528
+||============================================================
+|   0.0% |  0.000219 | 0.000043 |  19.5% | MPI_Wtime
+||------------------------------------------------------------
+||   0.0% |  0.000219 |       -- |     -- | pe.1120
+||   0.0% |  0.000138 |       -- |     -- | pe.11
+||============================================================
+|   0.0% |  0.000086 | 0.000027 |  31.7% | MPI_Comm_rank
+||------------------------------------------------------------
+||   0.0% |  0.000086 |       -- |     -- | pe.117
+||   0.0% |  0.000047 |       -- |     -- | pe.527
+||============================================================
+|   0.0% |  0.000083 | 0.000040 |  61.3% | mpi_finalize_(sync)
+||------------------------------------------------------------
+||   0.0% |  0.000083 |       -- |     -- | pe.21
+||   0.0% |  0.000025 |       -- |     -- | pe.0
+||============================================================
+|   0.0% |  0.000082 | 0.000048 |  59.1% | for_exit
+||------------------------------------------------------------
+||   0.0% |  0.000082 |       -- |     -- | pe.360
+||   0.0% |  0.000023 |       -- |     -- | pe.1494
+||============================================================
+|   0.0% |  0.000045 | 0.000023 |  49.6% | MPI_Comm_size
+||------------------------------------------------------------
+||   0.0% |  0.000045 |       -- |     -- | pe.105
+||   0.0% |  0.000019 |       -- |     -- | pe.1252
+||============================================================
+|   0.0% |  0.000012 | 0.000010 |  83.4% | MPI_ATTR_GET
+||------------------------------------------------------------
+||   0.0% |  0.000012 |       -- |     -- | pe.68
+||   0.0% |  0.000001 |       -- |     -- | pe.1996
+||============================================================
+|   0.0% |  0.000008 | 0.000006 |  72.5% | MPI_COMM_RANK
+||------------------------------------------------------------
+||   0.0% |  0.000008 |       -- |     -- | pe.814
+||   0.0% |  0.000002 |       -- |     -- | pe.1911
+||============================================================
+|   0.0% |  0.000003 | 0.000002 |  51.3% | MPI_INIT
+||------------------------------------------------------------
+||   0.0% |  0.000003 |       -- |     -- | pe.1861
+||   0.0% |  0.000001 |       -- |     -- | pe.1694
+||============================================================
+|   0.0% |  0.000003 | 0.000002 |  64.8% | MPI_COMM_SIZE
+||------------------------------------------------------------
+||   0.0% |  0.000003 |       -- |     -- | pe.170
+||   0.0% |  0.000001 |       -- |     -- | pe.1359
+||============================================================
+|   0.0% |  0.000002 | 0.000001 |  36.6% | MPI_FINALIZE
+||------------------------------------------------------------
+||   0.0% |  0.000002 |       -- |     -- | pe.0
+||   0.0% |  0.000001 |       -- |     -- | pe.1988
+|=============================================================
+
+Observation:  MPI Grid Detection
+
+    There appears to be point-to-point MPI communication in a 8 X 16 X
+    16 grid pattern. The 28.8% of the total execution time spent in MPI
+    functions might be reduced with a rank order that maximizes
+    communication between ranks on the same node. The effect of several
+    rank orders is estimated below.
+
+    A file named MPICH_RANK_ORDER.Grid was generated along with this
+    report and contains usage instructions and the Custom rank order
+    from the following table.
+
+    Rank Order    On-Node    On-Node  MPICH_RANK_REORDER_METHOD
+                 Bytes/PE  Bytes/PE%  
+                            of Total  
+                            Bytes/PE  
+
+        Custom  8.781e+11     54.91%  3
+          Fold  5.231e+11     32.71%  2
+    RoundRobin  5.131e+11     32.09%  0
+           SMP  4.906e+11     30.68%  1
+
+
+Observation:  Metric-Based Rank Order
+
+    When the use of a shared resource like memory bandwidth is unbalanced
+    across nodes, total execution time may be reduced with a rank order
+    that improves the balance.  The metric used here for resource usage
+    is: USER Time
+
+    For each node, the metric values for the ranks on that node are
+    summed.  The maximum and average value of those sums are shown below
+    for both the current rank order and a custom rank order that seeks
+    to reduce the maximum value.
+
+    A file named MPICH_RANK_ORDER.USER_Time was generated
+    along with this report and contains usage instructions and the
+    Custom rank order from the following table.
+
+       Rank    Node Reduction    Maximum  Average
+      Order  Metric    in Max      Value  Value
+               Imb.     Value             
+
+    Current   7.63%            3.949e+02  3.648e+02
+     Custom   0.02%    7.613%  3.648e+02  3.648e+02
+
+
+Observation:  MPI Hybrid Rank Order
+
+    A hybrid rank order has been calculated that attempts to take both
+    the MPI communication and USER Time resources into account.
+    The table below shows the metric-based calculations along with the
+    final on-node bytes/PE value.
+
+    A file named MPICH_RANK_ORDER.USER_Time_hybrid was generated
+    along with this report and contains usage instructions for this
+    custom rank order.
+
+       Rank    Node Reduction    Maximum    Average  On-Node
+      Order  Metric    in Max      Value      Value  Bytes/PE%
+               Imb.     Value                        of Total
+                                                     Bytes/PE
+
+    Current   7.63%            3.949e+02  3.648e+02  30.68%
+     Custom   0.63%     7.04%  3.671e+02  3.648e+02  48.02%
+
+
+Observation:  MPI utilization
+
+    The time spent waiting for all required ranks to become available to
+    participate in MPI collectives is relatively high.  Functions and
+    callsites responsible for consuming the most time can be found in
+    the table generated by pat_report -O callers+src (within the
+    MPI_SYNC group).
+
+    The time spent on overall MPI communications is relatively high. 
+    Functions and callsites responsible for consuming the most time can
+    be found in the table generated by pat_report -O callers+src (within
+    the MPI group).
+
+
+Notes for table 3:
+
+  This table shows the ranks with maximum, mean, and minimum time for
+    functions with significant time, within the function groups. It
+    also shows MPI message statistics for functions in the MPI group.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O load_balance_m ...
+
+Table 3:  Load Balance with MPI Message Stats
+
+  Time% |      Time |   MPI Msg | MPI Msg Bytes |  Avg MPI | Group
+        |           |     Count |               | Msg Size |  PE=[mmm]
+       
+ 100.0% | 22.739989 | 267,576.3 | 781,038,812.6 | 2,918.94 | Total
+|---------------------------------------------------------------------
+|  50.1% | 11.399192 |       0.0 |           0.0 |       -- | USER
+||--------------------------------------------------------------------
+||  56.0% | 12.739664 |       0.0 |           0.0 |       -- | pe.1188
+||  51.0% | 11.602993 |       0.0 |           0.0 |       -- | pe.910
+||  42.9% |  9.745616 |       0.0 |           0.0 |       -- | pe.2032
+||====================================================================
+|  28.8% |  6.559761 | 267,576.3 | 781,038,812.6 | 2,918.94 | MPI
+||--------------------------------------------------------------------
+||  32.2% |  7.322653 | 219,827.0 | 643,599,860.0 | 2,927.76 | pe.1974
+||  29.2% |  6.644845 | 219,727.0 | 642,912,768.0 | 2,925.96 | pe.117
+||  22.4% |  5.095310 | 159,163.0 | 671,475,336.0 | 4,218.79 | pe.271
+||====================================================================
+|  21.0% |  4.781002 |       0.0 |           0.0 |       -- | MPI_SYNC
+||--------------------------------------------------------------------
+||  33.3% |  7.570992 |       0.0 |           0.0 |       -- | pe.15
+||  20.4% |  4.639647 |       0.0 |           0.0 |       -- | pe.291
+||  12.2% |  2.781493 |       0.0 |           0.0 |       -- | pe.1195
+||====================================================================
+|   0.0% |  0.000034 |       0.0 |           0.0 |       -- | ETC
+||--------------------------------------------------------------------
+||   0.0% |  0.000082 |       0.0 |           0.0 |       -- | pe.360
+||   0.0% |  0.000031 |       0.0 |           0.0 |       -- | pe.1403
+||   0.0% |  0.000023 |       0.0 |           0.0 |       -- | pe.1494
+|=====================================================================
+
+Notes for table 4:
+
+  This table shows the MPI library functions that are used to send a
+    significant number of bytes, taking the average across sender
+    ranks of the sum of bytes sent from the sender to all destination
+    ranks. It also shows how many bytes are attributable to each of
+    its call paths. It also shows a count of messages and the number
+    of messages that fall into each bin of message sizes. For each
+    path, it shows the ranks that send the minimum, mean, and maximum
+    number of bytes.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O mpi_callers ...
+
+Table 4:  MPI Message Stats by Caller
+
+Function / Caller / PE=[mmm]
+
+  
+=============================================================================
+  Total
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                       100.0% 
+  MPI Msg Bytes                 781,038,812.6 
+  MPI Msg Count                     267,576.3 msgs
+  MsgSz <16 Count                    99,712.2 msgs
+  16<= MsgSz <256 Count              70,764.2 msgs
+  256<= MsgSz <4KiB Count            54,193.2 msgs
+  4KiB<= MsgSz <64KiB Count          41,828.3 msgs
+  64KiB<= MsgSz <1MiB Count           1,078.3 msgs
+=============================================================================
+  MPI_Isend
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                       100.0% 
+  MPI Msg Bytes                 780,794,761.0 
+  MPI Msg Count                     237,113.3 msgs
+  MsgSz <16 Count                    69,299.2 msgs
+  16<= MsgSz <256 Count              70,714.2 msgs
+  256<= MsgSz <4KiB Count            54,193.2 msgs
+  4KiB<= MsgSz <64KiB Count          41,828.3 msgs
+  64KiB<= MsgSz <1MiB Count           1,078.3 msgs
+=============================================================================
+  MPI_Isend / pw_exec
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                        67.2% 
+  MPI Msg Bytes                 524,589,891.1 
+  MPI Msg Count                     219,347.4 msgs
+  MsgSz <16 Count                    62,101.8 msgs
+  16<= MsgSz <256 Count              70,714.2 msgs
+  256<= MsgSz <4KiB Count            50,700.6 msgs
+  4KiB<= MsgSz <64KiB Count          35,830.8 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        63.3% 
+  MPI Msg Bytes                 494,194,622.3 
+  MPI Msg Count                     206,309.1 msgs
+  MsgSz <16 Count                    58,410.4 msgs
+  16<= MsgSz <256 Count              66,518.0 msgs
+  256<= MsgSz <4KiB Count            47,621.5 msgs
+  4KiB<= MsgSz <64KiB Count          33,759.2 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        63.0% 
+  MPI Msg Bytes                 491,748,114.3 
+  MPI Msg Count                     205,287.7 msgs
+  MsgSz <16 Count                    58,121.2 msgs
+  16<= MsgSz <256 Count              66,188.7 msgs
+  256<= MsgSz <4KiB Count            47,385.8 msgs
+  4KiB<= MsgSz <64KiB Count          33,592.1 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / cg_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        62.6% 
+  MPI Msg Bytes                 489,301,606.2 
+  MPI Msg Count                     204,266.4 msgs
+  MsgSz <16 Count                    57,832.0 msgs
+  16<= MsgSz <256 Count              65,859.4 msgs
+  256<= MsgSz <4KiB Count            47,150.0 msgs
+  4KiB<= MsgSz <64KiB Count          33,425.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / cg_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        62.6% 
+  MPI Msg Bytes                 489,301,606.2 
+  MPI Msg Count                     204,266.4 msgs
+  MsgSz <16 Count                    57,832.0 msgs
+  16<= MsgSz <256 Count              65,859.4 msgs
+  256<= MsgSz <4KiB Count            47,150.0 msgs
+  4KiB<= MsgSz <64KiB Count          33,425.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / cg_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        62.6% 
+  MPI Msg Bytes                 489,301,606.2 
+  MPI Msg Count                     204,266.4 msgs
+  MsgSz <16 Count                    57,832.0 msgs
+  16<= MsgSz <256 Count              65,859.4 msgs
+  256<= MsgSz <4KiB Count            47,150.0 msgs
+  4KiB<= MsgSz <64KiB Count          33,425.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / cg_ / MAIN__ / main / pe.273
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        69.8% 
+  MPI Msg Bytes                 544,950,400.0 
+  MPI Msg Count                     244,400.0 msgs
+  MsgSz <16 Count                    75,200.0 msgs
+  16<= MsgSz <256 Count              77,600.0 msgs
+  256<= MsgSz <4KiB Count            54,800.0 msgs
+  4KiB<= MsgSz <64KiB Count          36,800.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / cg_ / MAIN__ / main / pe.1603
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        69.8% 
+  MPI Msg Bytes                 544,950,400.0 
+  MPI Msg Count                     244,400.0 msgs
+  MsgSz <16 Count                    75,200.0 msgs
+  16<= MsgSz <256 Count              77,600.0 msgs
+  256<= MsgSz <4KiB Count            54,800.0 msgs
+  4KiB<= MsgSz <64KiB Count          36,800.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / cg_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        33.5% 
+  MPI Msg Bytes                 261,497,600.0 
+  MPI Msg Count                      65,800.0 msgs
+  MsgSz <16 Count                     9,400.0 msgs
+  16<= MsgSz <256 Count              19,400.0 msgs
+  256<= MsgSz <4KiB Count            18,600.0 msgs
+  4KiB<= MsgSz <64KiB Count          18,400.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.3% 
+  MPI Msg Bytes                   2,446,508.0 
+  MPI Msg Count                       1,021.3 msgs
+  MsgSz <16 Count                       289.2 msgs
+  16<= MsgSz <256 Count                 329.3 msgs
+  256<= MsgSz <4KiB Count               235.8 msgs
+  4KiB<= MsgSz <64KiB Count             167.1 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.3% 
+  MPI Msg Bytes                   2,446,508.0 
+  MPI Msg Count                       1,021.3 msgs
+  MsgSz <16 Count                       289.2 msgs
+  16<= MsgSz <256 Count                 329.3 msgs
+  256<= MsgSz <4KiB Count               235.8 msgs
+  4KiB<= MsgSz <64KiB Count             167.1 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / MAIN__ / main / pe.273
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.3% 
+  MPI Msg Bytes                   2,724,752.0 
+  MPI Msg Count                       1,222.0 msgs
+  MsgSz <16 Count                       376.0 msgs
+  16<= MsgSz <256 Count                 388.0 msgs
+  256<= MsgSz <4KiB Count               274.0 msgs
+  4KiB<= MsgSz <64KiB Count             184.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / MAIN__ / main / pe.1603
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.3% 
+  MPI Msg Bytes                   2,724,752.0 
+  MPI Msg Count                       1,222.0 msgs
+  MsgSz <16 Count                       376.0 msgs
+  16<= MsgSz <256 Count                 388.0 msgs
+  256<= MsgSz <4KiB Count               274.0 msgs
+  4KiB<= MsgSz <64KiB Count             184.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / dssum_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.2% 
+  MPI Msg Bytes                   1,307,488.0 
+  MPI Msg Count                         329.0 msgs
+  MsgSz <16 Count                        47.0 msgs
+  16<= MsgSz <256 Count                  97.0 msgs
+  256<= MsgSz <4KiB Count                93.0 msgs
+  4KiB<= MsgSz <64KiB Count              92.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.3% 
+  MPI Msg Bytes                   2,446,508.0 
+  MPI Msg Count                       1,021.3 msgs
+  MsgSz <16 Count                       289.2 msgs
+  16<= MsgSz <256 Count                 329.3 msgs
+  256<= MsgSz <4KiB Count               235.8 msgs
+  4KiB<= MsgSz <64KiB Count             167.1 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.3% 
+  MPI Msg Bytes                   2,446,508.0 
+  MPI Msg Count                       1,021.3 msgs
+  MsgSz <16 Count                       289.2 msgs
+  16<= MsgSz <256 Count                 329.3 msgs
+  256<= MsgSz <4KiB Count               235.8 msgs
+  4KiB<= MsgSz <64KiB Count             167.1 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / MAIN__ / main / pe.273
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.3% 
+  MPI Msg Bytes                   2,724,752.0 
+  MPI Msg Count                       1,222.0 msgs
+  MsgSz <16 Count                       376.0 msgs
+  16<= MsgSz <256 Count                 388.0 msgs
+  256<= MsgSz <4KiB Count               274.0 msgs
+  4KiB<= MsgSz <64KiB Count             184.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / MAIN__ / main / pe.1603
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.3% 
+  MPI Msg Bytes                   2,724,752.0 
+  MPI Msg Count                       1,222.0 msgs
+  MsgSz <16 Count                       376.0 msgs
+  16<= MsgSz <256 Count                 388.0 msgs
+  256<= MsgSz <4KiB Count               274.0 msgs
+  4KiB<= MsgSz <64KiB Count             184.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / gs_op_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.2% 
+  MPI Msg Bytes                   1,307,488.0 
+  MPI Msg Count                         329.0 msgs
+  MsgSz <16 Count                        47.0 msgs
+  16<= MsgSz <256 Count                  97.0 msgs
+  256<= MsgSz <4KiB Count                93.0 msgs
+  4KiB<= MsgSz <64KiB Count              92.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / pw_exec / auto_setup
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.9% 
+  MPI Msg Bytes                  30,395,268.8 
+  MPI Msg Count                      13,038.3 msgs
+  MsgSz <16 Count                     3,691.4 msgs
+  16<= MsgSz <256 Count               4,196.2 msgs
+  256<= MsgSz <4KiB Count             3,079.1 msgs
+  4KiB<= MsgSz <64KiB Count           2,071.5 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / auto_setup / gs_setup_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.9% 
+  MPI Msg Bytes                  30,395,268.8 
+  MPI Msg Count                      13,038.3 msgs
+  MsgSz <16 Count                     3,691.4 msgs
+  16<= MsgSz <256 Count               4,196.2 msgs
+  256<= MsgSz <4KiB Count             3,079.1 msgs
+  4KiB<= MsgSz <64KiB Count           2,071.5 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / auto_setup / gs_setup_ / proxy_setupds_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.9% 
+  MPI Msg Bytes                  30,395,268.8 
+  MPI Msg Count                      13,038.3 msgs
+  MsgSz <16 Count                     3,691.4 msgs
+  16<= MsgSz <256 Count               4,196.2 msgs
+  256<= MsgSz <4KiB Count             3,079.1 msgs
+  4KiB<= MsgSz <64KiB Count           2,071.5 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.9% 
+  MPI Msg Bytes                  30,395,268.8 
+  MPI Msg Count                      13,038.3 msgs
+  MsgSz <16 Count                     3,691.4 msgs
+  16<= MsgSz <256 Count               4,196.2 msgs
+  256<= MsgSz <4KiB Count             3,079.1 msgs
+  4KiB<= MsgSz <64KiB Count           2,071.5 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.9% 
+  MPI Msg Bytes                  30,395,268.8 
+  MPI Msg Count                      13,038.3 msgs
+  MsgSz <16 Count                     3,691.4 msgs
+  16<= MsgSz <256 Count               4,196.2 msgs
+  256<= MsgSz <4KiB Count             3,079.1 msgs
+  4KiB<= MsgSz <64KiB Count           2,071.5 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.273
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         4.3% 
+  MPI Msg Bytes                  33,850,176.0 
+  MPI Msg Count                      15,600.0 msgs
+  MsgSz <16 Count                     4,800.0 msgs
+  16<= MsgSz <256 Count               4,944.0 msgs
+  256<= MsgSz <4KiB Count             3,576.0 msgs
+  4KiB<= MsgSz <64KiB Count           2,280.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.1603
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         4.3% 
+  MPI Msg Bytes                  33,850,176.0 
+  MPI Msg Count                      15,600.0 msgs
+  MsgSz <16 Count                     4,800.0 msgs
+  16<= MsgSz <256 Count               4,944.0 msgs
+  256<= MsgSz <4KiB Count             3,576.0 msgs
+  4KiB<= MsgSz <64KiB Count           2,280.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / pw_exec / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         2.1% 
+  MPI Msg Bytes                  16,243,968.0 
+  MPI Msg Count                       4,200.0 msgs
+  MsgSz <16 Count                       600.0 msgs
+  16<= MsgSz <256 Count               1,236.0 msgs
+  256<= MsgSz <4KiB Count             1,224.0 msgs
+  4KiB<= MsgSz <64KiB Count           1,140.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / jl_crystal_router
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        17.0% 
+  MPI Msg Bytes                 132,613,255.4 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             272.6 msgs
+  64KiB<= MsgSz <1MiB Count             827.4 msgs
+==============================================================================
+  MPI_Isend / jl_crystal_router / jl_sarray_transfer_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        17.0% 
+  MPI Msg Bytes                 132,613,255.4 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             272.6 msgs
+  64KiB<= MsgSz <1MiB Count             827.4 msgs
+==============================================================================
+  MPI_Isend / jl_crystal_router / jl_sarray_transfer_ / shared_ids
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        17.0% 
+  MPI Msg Bytes                 132,613,255.4 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             272.6 msgs
+  64KiB<= MsgSz <1MiB Count             827.4 msgs
+==============================================================================
+  MPI_Isend / jl_crystal_router / jl_sarray_transfer_ / shared_ids / gs_setup_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        17.0% 
+  MPI Msg Bytes                 132,613,255.4 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             272.6 msgs
+  64KiB<= MsgSz <1MiB Count             827.4 msgs
+==============================================================================
+  MPI_Isend / jl_crystal_router / jl_sarray_transfer_ / shared_ids / gs_setup_ / proxy_setupds_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        17.0% 
+  MPI Msg Bytes                 132,613,255.4 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             272.6 msgs
+  64KiB<= MsgSz <1MiB Count             827.4 msgs
+==============================================================================
+  MPI_Isend / jl_crystal_router / jl_sarray_transfer_ / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        17.0% 
+  MPI Msg Bytes                 132,613,255.4 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             272.6 msgs
+  64KiB<= MsgSz <1MiB Count             827.4 msgs
+==============================================================================
+  MPI_Isend / jl_crystal_router / jl_sarray_transfer_ / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        17.0% 
+  MPI Msg Bytes                 132,613,255.4 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             272.6 msgs
+  64KiB<= MsgSz <1MiB Count             827.4 msgs
+==============================================================================
+  MPI_Isend / jl_crystal_router / jl_sarray_transfer_ / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.1456
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        17.5% 
+  MPI Msg Bytes                 136,398,440.0 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             254.0 msgs
+  64KiB<= MsgSz <1MiB Count             846.0 msgs
+==============================================================================
+  MPI_Isend / jl_crystal_router / jl_sarray_transfer_ / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.1630
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        17.3% 
+  MPI Msg Bytes                 135,280,180.0 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             258.0 msgs
+  64KiB<= MsgSz <1MiB Count             842.0 msgs
+==============================================================================
+  MPI_Isend / jl_crystal_router / jl_sarray_transfer_ / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.2046
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        15.6% 
+  MPI Msg Bytes                 121,539,696.0 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             349.0 msgs
+  64KiB<= MsgSz <1MiB Count             751.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / cr_exec
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        10.6% 
+  MPI Msg Bytes                  82,561,418.4 
+  MPI Msg Count                      13,266.0 msgs
+  MsgSz <16 Count                     4,522.5 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             3,490.7 msgs
+  4KiB<= MsgSz <64KiB Count           5,217.2 msgs
+  64KiB<= MsgSz <1MiB Count              35.6 msgs
+==============================================================================
+  MPI_Isend / cr_exec / auto_setup
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         6.8% 
+  MPI Msg Bytes                  53,387,726.2 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     2,250.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             1,233.9 msgs
+  4KiB<= MsgSz <64KiB Count           3,080.4 msgs
+  64KiB<= MsgSz <1MiB Count              35.6 msgs
+==============================================================================
+  MPI_Isend / cr_exec / auto_setup / gs_setup_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         6.8% 
+  MPI Msg Bytes                  53,387,726.2 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     2,250.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             1,233.9 msgs
+  4KiB<= MsgSz <64KiB Count           3,080.4 msgs
+  64KiB<= MsgSz <1MiB Count              35.6 msgs
+==============================================================================
+  MPI_Isend / cr_exec / auto_setup / gs_setup_ / proxy_setupds_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         6.8% 
+  MPI Msg Bytes                  53,387,726.2 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     2,250.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             1,233.9 msgs
+  4KiB<= MsgSz <64KiB Count           3,080.4 msgs
+  64KiB<= MsgSz <1MiB Count              35.6 msgs
+==============================================================================
+  MPI_Isend / cr_exec / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         6.8% 
+  MPI Msg Bytes                  53,387,726.2 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     2,250.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             1,233.9 msgs
+  4KiB<= MsgSz <64KiB Count           3,080.4 msgs
+  64KiB<= MsgSz <1MiB Count              35.6 msgs
+==============================================================================
+  MPI_Isend / cr_exec / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         6.8% 
+  MPI Msg Bytes                  53,387,726.2 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     2,250.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             1,233.9 msgs
+  4KiB<= MsgSz <64KiB Count           3,080.4 msgs
+  64KiB<= MsgSz <1MiB Count              35.6 msgs
+==============================================================================
+  MPI_Isend / cr_exec / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.273
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         7.6% 
+  MPI Msg Bytes                  59,173,248.0 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     1,800.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             1,380.0 msgs
+  4KiB<= MsgSz <64KiB Count           3,384.0 msgs
+  64KiB<= MsgSz <1MiB Count              36.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.439
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         7.6% 
+  MPI Msg Bytes                  59,040,960.0 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     2,400.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count               912.0 msgs
+  4KiB<= MsgSz <64KiB Count           3,252.0 msgs
+  64KiB<= MsgSz <1MiB Count              36.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.8% 
+  MPI Msg Bytes                  29,586,624.0 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     3,600.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count               864.0 msgs
+  4KiB<= MsgSz <64KiB Count           2,136.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.7% 
+  MPI Msg Bytes                  29,173,692.2 
+  MPI Msg Count                       6,666.0 msgs
+  MsgSz <16 Count                     2,272.5 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             2,256.7 msgs
+  4KiB<= MsgSz <64KiB Count           2,136.8 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.7% 
+  MPI Msg Bytes                  29,029,268.0 
+  MPI Msg Count                       6,633.0 msgs
+  MsgSz <16 Count                     2,261.2 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             2,245.5 msgs
+  4KiB<= MsgSz <64KiB Count           2,126.2 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / cg_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.7% 
+  MPI Msg Bytes                  28,884,843.8 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     2,250.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             2,234.4 msgs
+  4KiB<= MsgSz <64KiB Count           2,115.6 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / cg_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.7% 
+  MPI Msg Bytes                  28,884,843.8 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     2,250.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             2,234.4 msgs
+  4KiB<= MsgSz <64KiB Count           2,115.6 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / cg_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         3.7% 
+  MPI Msg Bytes                  28,884,843.8 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     2,250.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             2,234.4 msgs
+  4KiB<= MsgSz <64KiB Count           2,115.6 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / cg_ / MAIN__ / main / pe.273
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         4.1% 
+  MPI Msg Bytes                  32,044,800.0 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     1,800.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             2,400.0 msgs
+  4KiB<= MsgSz <64KiB Count           2,400.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / cg_ / MAIN__ / main / pe.439
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         4.1% 
+  MPI Msg Bytes                  31,920,000.0 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     2,400.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             2,000.0 msgs
+  4KiB<= MsgSz <64KiB Count           2,200.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / cg_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         2.1% 
+  MPI Msg Bytes                  16,022,400.0 
+  MPI Msg Count                       6,600.0 msgs
+  MsgSz <16 Count                     3,600.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count             2,000.0 msgs
+  4KiB<= MsgSz <64KiB Count           1,000.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     144,424.2 
+  MPI Msg Count                          33.0 msgs
+  MsgSz <16 Count                        11.2 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                11.2 msgs
+  4KiB<= MsgSz <64KiB Count              10.6 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     144,424.2 
+  MPI Msg Count                          33.0 msgs
+  MsgSz <16 Count                        11.2 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                11.2 msgs
+  4KiB<= MsgSz <64KiB Count              10.6 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / MAIN__ / main / pe.273
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     160,224.0 
+  MPI Msg Count                          33.0 msgs
+  MsgSz <16 Count                         9.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                12.0 msgs
+  4KiB<= MsgSz <64KiB Count              12.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / MAIN__ / main / pe.439
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     159,600.0 
+  MPI Msg Count                          33.0 msgs
+  MsgSz <16 Count                        12.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                10.0 msgs
+  4KiB<= MsgSz <64KiB Count              11.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / dssum_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                      80,112.0 
+  MPI Msg Count                          33.0 msgs
+  MsgSz <16 Count                        18.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                10.0 msgs
+  4KiB<= MsgSz <64KiB Count               5.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     144,424.2 
+  MPI Msg Count                          33.0 msgs
+  MsgSz <16 Count                        11.2 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                11.2 msgs
+  4KiB<= MsgSz <64KiB Count              10.6 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     144,424.2 
+  MPI Msg Count                          33.0 msgs
+  MsgSz <16 Count                        11.2 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                11.2 msgs
+  4KiB<= MsgSz <64KiB Count              10.6 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / MAIN__ / main / pe.273
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     160,224.0 
+  MPI Msg Count                          33.0 msgs
+  MsgSz <16 Count                         9.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                12.0 msgs
+  4KiB<= MsgSz <64KiB Count              12.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / MAIN__ / main / pe.439
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     159,600.0 
+  MPI Msg Count                          33.0 msgs
+  MsgSz <16 Count                        12.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                10.0 msgs
+  4KiB<= MsgSz <64KiB Count              11.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / cr_exec / gs_op_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                      80,112.0 
+  MPI Msg Count                          33.0 msgs
+  MsgSz <16 Count                        18.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                10.0 msgs
+  4KiB<= MsgSz <64KiB Count               5.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / cr_learn
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         5.3% 
+  MPI Msg Bytes                  41,029,396.5 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,475.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 1.9 msgs
+  4KiB<= MsgSz <64KiB Count             507.7 msgs
+  64KiB<= MsgSz <1MiB Count             215.3 msgs
+==============================================================================
+  MPI_Isend / cr_learn / auto_setup
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         5.3% 
+  MPI Msg Bytes                  41,029,396.5 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,475.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 1.9 msgs
+  4KiB<= MsgSz <64KiB Count             507.7 msgs
+  64KiB<= MsgSz <1MiB Count             215.3 msgs
+==============================================================================
+  MPI_Isend / cr_learn / auto_setup / gs_setup_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         5.3% 
+  MPI Msg Bytes                  41,029,396.5 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,475.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 1.9 msgs
+  4KiB<= MsgSz <64KiB Count             507.7 msgs
+  64KiB<= MsgSz <1MiB Count             215.3 msgs
+==============================================================================
+  MPI_Isend / cr_learn / auto_setup / gs_setup_ / proxy_setupds_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         5.3% 
+  MPI Msg Bytes                  41,029,396.5 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,475.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 1.9 msgs
+  4KiB<= MsgSz <64KiB Count             507.7 msgs
+  64KiB<= MsgSz <1MiB Count             215.3 msgs
+==============================================================================
+  MPI_Isend / cr_learn / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         5.3% 
+  MPI Msg Bytes                  41,029,396.5 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,475.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 1.9 msgs
+  4KiB<= MsgSz <64KiB Count             507.7 msgs
+  64KiB<= MsgSz <1MiB Count             215.3 msgs
+==============================================================================
+  MPI_Isend / cr_learn / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         5.3% 
+  MPI Msg Bytes                  41,029,396.5 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,475.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 1.9 msgs
+  4KiB<= MsgSz <64KiB Count             507.7 msgs
+  64KiB<= MsgSz <1MiB Count             215.3 msgs
+==============================================================================
+  MPI_Isend / cr_learn / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.273
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         5.9% 
+  MPI Msg Bytes                  46,240,864.0 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,400.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             558.0 msgs
+  64KiB<= MsgSz <1MiB Count             242.0 msgs
+==============================================================================
+  MPI_Isend / cr_learn / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.389
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         5.7% 
+  MPI Msg Bytes                  44,893,792.0 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,500.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             468.0 msgs
+  64KiB<= MsgSz <1MiB Count             232.0 msgs
+==============================================================================
+  MPI_Isend / cr_learn / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         2.7% 
+  MPI Msg Bytes                  21,413,024.0 
+  MPI Msg Count                       2,200.0 msgs
+  MsgSz <16 Count                     1,700.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                40.0 msgs
+  4KiB<= MsgSz <64KiB Count             360.0 msgs
+  64KiB<= MsgSz <1MiB Count             100.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / jl_comm_scan
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                         100.0 msgs
+  MsgSz <16 Count                       100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / jl_comm_scan / shared_ids
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                         100.0 msgs
+  MsgSz <16 Count                       100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / jl_comm_scan / shared_ids / gs_setup_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                         100.0 msgs
+  MsgSz <16 Count                       100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                         100.0 msgs
+  MsgSz <16 Count                       100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                         100.0 msgs
+  MsgSz <16 Count                       100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                         100.0 msgs
+  MsgSz <16 Count                       100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       4,400.0 
+  MPI Msg Count                         550.0 msgs
+  MsgSz <16 Count                       550.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.1
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         400.0 
+  MPI Msg Count                          50.0 msgs
+  MsgSz <16 Count                        50.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         400.0 
+  MPI Msg Count                          50.0 msgs
+  MsgSz <16 Count                        50.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_ALLREDUCE
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     240,800.0 
+  MPI Msg Count                      30,100.0 msgs
+  MsgSz <16 Count                    30,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_ALLREDUCE / gop_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     240,800.0 
+  MPI Msg Count                      30,100.0 msgs
+  MsgSz <16 Count                    30,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_ALLREDUCE / gop_ / glsc3_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     240,800.0 
+  MPI Msg Count                      30,100.0 msgs
+  MsgSz <16 Count                    30,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_ALLREDUCE / gop_ / glsc3_ / cg_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     240,800.0 
+  MPI Msg Count                      30,100.0 msgs
+  MsgSz <16 Count                    30,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_ALLREDUCE / gop_ / glsc3_ / cg_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     240,800.0 
+  MPI Msg Count                      30,100.0 msgs
+  MsgSz <16 Count                    30,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_ALLREDUCE / gop_ / glsc3_ / cg_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     240,800.0 
+  MPI Msg Count                      30,100.0 msgs
+  MsgSz <16 Count                    30,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_ALLREDUCE / gop_ / glsc3_ / cg_ / MAIN__ / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     240,800.0 
+  MPI Msg Count                      30,100.0 msgs
+  MsgSz <16 Count                    30,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_ALLREDUCE / gop_ / glsc3_ / cg_ / MAIN__ / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     240,800.0 
+  MPI Msg Count                      30,100.0 msgs
+  MsgSz <16 Count                    30,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_ALLREDUCE / gop_ / glsc3_ / cg_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                     240,800.0 
+  MPI Msg Count                      30,100.0 msgs
+  MsgSz <16 Count                    30,100.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Allreduce
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       2,400.0 
+  MPI Msg Count                         300.0 msgs
+  MsgSz <16 Count                       300.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Allreduce / jl_comm_allreduce
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       2,400.0 
+  MPI Msg Count                         300.0 msgs
+  MsgSz <16 Count                       300.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Allreduce / jl_comm_allreduce / auto_setup
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       2,400.0 
+  MPI Msg Count                         300.0 msgs
+  MsgSz <16 Count                       300.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Allreduce / jl_comm_allreduce / auto_setup / gs_setup_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       2,400.0 
+  MPI Msg Count                         300.0 msgs
+  MsgSz <16 Count                       300.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Allreduce / jl_comm_allreduce / auto_setup / gs_setup_ / proxy_setupds_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       2,400.0 
+  MPI Msg Count                         300.0 msgs
+  MsgSz <16 Count                       300.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Allreduce / jl_comm_allreduce / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       2,400.0 
+  MPI Msg Count                         300.0 msgs
+  MsgSz <16 Count                       300.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Allreduce / jl_comm_allreduce / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       2,400.0 
+  MPI Msg Count                         300.0 msgs
+  MsgSz <16 Count                       300.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Allreduce / jl_comm_allreduce / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       2,400.0 
+  MPI Msg Count                         300.0 msgs
+  MsgSz <16 Count                       300.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Allreduce / jl_comm_allreduce / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       2,400.0 
+  MPI Msg Count                         300.0 msgs
+  MsgSz <16 Count                       300.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Allreduce / jl_comm_allreduce / auto_setup / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       2,400.0 
+  MPI Msg Count                         300.0 msgs
+  MsgSz <16 Count                       300.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Send
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                          50.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                  50.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Send / jl_comm_scan
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                          50.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                  50.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Send / jl_comm_scan / shared_ids
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                          50.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                  50.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Send / jl_comm_scan / shared_ids / gs_setup_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                          50.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                  50.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Send / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                          50.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                  50.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Send / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                          50.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                  50.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Send / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                         799.6 
+  MPI Msg Count                          50.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                  50.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Send / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                       8,800.0 
+  MPI Msg Count                         550.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                 550.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Send / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.1
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                           0.0 
+  MPI Msg Count                           0.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_Send / jl_comm_scan / shared_ids / gs_setup_ / proxy_setupds_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                           0.0 
+  MPI Msg Count                           0.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_BCAST
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                          52.0 
+  MPI Msg Count                          13.0 msgs
+  MsgSz <16 Count                        13.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_BCAST / bcast_
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                          52.0 
+  MPI Msg Count                          13.0 msgs
+  MsgSz <16 Count                        13.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_BCAST / bcast_ / MAIN__
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                          52.0 
+  MPI Msg Count                          13.0 msgs
+  MsgSz <16 Count                        13.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_BCAST / bcast_ / MAIN__ / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                          52.0 
+  MPI Msg Count                          13.0 msgs
+  MsgSz <16 Count                        13.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_BCAST / bcast_ / MAIN__ / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                          52.0 
+  MPI Msg Count                          13.0 msgs
+  MsgSz <16 Count                        13.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_BCAST / bcast_ / MAIN__ / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                          52.0 
+  MPI Msg Count                          13.0 msgs
+  MsgSz <16 Count                        13.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+  MPI_BCAST / bcast_ / MAIN__ / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                         0.0% 
+  MPI Msg Bytes                          52.0 
+  MPI Msg Count                          13.0 msgs
+  MsgSz <16 Count                        13.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count               0.0 msgs
+==============================================================================
+
+Notes for table 5:
+
+  This table shows energy and power usage for the nodes with the
+    maximum, mean, and minimum usage, as well as the sum of usage over
+    all nodes.
+    Energy and power for accelerators is also shown, if applicable.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_energy ...
+
+Table 5:  Program energy and power usage (from Cray PM)
+
+    Node | Node Power |   Process | Node Id=[mmm]
+  Energy |        (W) |      Time |  PE=HIDE
+     (J) |            |           | 
+        
+ 745,292 | 15,842.507 | 47.043792 | Total
+|------------------------------------------------
+|  15,666 |    333.070 | 47.034021 | nid.888
+|  10,941 |    232.121 | 47.135961 | nid.864
+|  10,196 |    216.568 | 47.079451 | nid.846
+|================================================
+
+Notes for table 6:
+
+  This table shows values shown for HiMem calculated from information
+    in the /proc/self/numa_maps files captured near the end of the
+    program. It is the total size of all pages, including huge pages,
+    that were actually mapped into physical memory from both private
+    and shared memory segments.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O himem ...
+
+Table 6:  Memory High Water Mark by Numa Node
+
+   Process |     HiMem |     HiMem | Numanode
+     HiMem | Numa Node | Numa Node |  PE=HIDE
+ (MiBytes) |         0 |         1 | 
+           | (MiBytes) | (MiBytes) | 
+|----------------------------------------------
+|     112.1 |     107.7 |       4.4 | numanode.0
+|     111.9 |      13.3 |      98.6 | numanode.1
+|==============================================
+
+Notes for table 7:
+
+  This table shows total wall clock time for the ranks with the
+    maximum, mean, and minimum time, as well as the average across
+    ranks.
+    It also shows maximum memory usage from /proc/self/numa_maps for
+    those ranks, and on average.  The usage is total size of all
+    pages, including huge pages, that were actually mapped into
+    physical memory from both private and shared memory segments.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_time ...
+
+Table 7:  Wall Clock Time, Memory High Water Mark
+
+   Process |   Process | PE=[mmm]
+      Time |     HiMem | 
+           | (MiBytes) | 
+          
+ 47.043792 |     112.0 | Total
+|--------------------------------
+| 48.088100 |     111.3 | pe.75
+| 47.001503 |     109.0 | pe.1821
+| 46.997731 |     111.0 | pe.180
+|================================
+
+========================  Additional details  ========================
+
+
+
+General table notes:
+
+    The default notes for a table are based on the default definition of
+    the table, and do not account for the effects of command-line options
+    that may modify the content of the table.
+    
+    Detailed notes, produced by the pat_report -v option, do account for
+    all command-line options, and also show how data is aggregated, and
+    if the table content is limited by thresholds, rank selections, etc.
+    
+    An imbalance metric in a line is based on values in main threads
+    across multiple ranks, or on values across all threads, as applicable.
+    
+    An imbalance percent in a line is relative to the maximum value
+    for that line across ranks or threads, as applicable.
+    
+Experiment:  trace
+
+Original path to data file:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/Nekbone/Nekbone/test/example1/nekbone+pat+62995-790t/xf-files   (RTS, 2048 data files)
+
+Original program:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/Nekbone/Nekbone/test/example1/nekbone
+
+Instrumented with:  pat_build -g mpi nekbone
+
+Instrumented program:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/Nekbone/Nekbone/test/example1/./nekbone+pat
+
+Program invocation:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/Nekbone/Nekbone/test/example1/./nekbone+pat ex1
+
+Exit Status:  0 for 2,048 PEs
+
+Memory pagesize:  4 KiB
+
+Memory hugepagesize:  2 MiB
+
+Programming environment:  INTEL
+
+Runtime environment variables:
+  CRAYPAT_ALPS_COMPONENT=/opt/cray/pe/perftools/7.1.1/sbin/pat_alps
+  CRAYPAT_COMPILER_OPTIONS=1
+  CRAYPAT_LD_LIBRARY_PATH=/opt/cray/pe/gcc-libs:/opt/cray/gcc-libs:/opt/cray/pe/perftools/7.1.1/lib64
+  CRAYPAT_OPTS_EXECUTABLE=libexec64/opts
+  CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+  CRAYPE_VERSION=2.6.2
+  CRAY_LIBSCI_VERSION=19.06.1
+  DVS_VERSION=0.9.0
+  HUGETLB_DEFAULT_PAGE_SIZE=2M
+  HUGETLB_ELFMAP=W
+  HUGETLB_FORCE_ELFMAP=yes+
+  HUGETLB_MORECORE=yes
+  HUGETLB_MORECORE_HEAPBASE=10000000000
+  HUGETLB_VERBOSE=0
+  INTEL_MAJOR_VERSION=19
+  INTEL_MINOR_VERSION=19
+  INTEL_VERSION=19.0.3.199
+  LIBSCI_VERSION=19.06.1
+  MODULE_VERSION=3.2.11.4
+  MODULE_VERSION_STACK=3.2.11.4
+  MPICH_ABORT_ON_ERROR=1
+  MPICH_DIR=/opt/cray/pe/mpt/7.7.10/gni/mpich-intel/16.0
+  MPICH_MPIIO_DVS_MAXNODES=28
+  PAT_BUILD_PAPI_LIBDIR=/opt/cray/pe/papi/5.7.0.2/lib64
+  PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+  PERFTOOLS_VERSION=7.1.1
+  PMI_CONTROL_PORT=63200
+  PMI_CRAY_NO_SMP_ORDER=0
+  PMI_GNI_COOKIE=595329024:705560576
+  PMI_GNI_DEV_ID=0
+  PMI_GNI_LOC_ADDR=1046:1046
+  PMI_GNI_PTAG=54:55
+  PMI_NO_FORK=1
+
+Report time environment variables:
+    CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+    PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+
+Number of MPI control variables collected:  108
+
+  (To see the list, specify: -s mpi_cvar=show)
+
+Report command line options:  -T
+
+Operating system:
+  Linux 4.12.14-150.17_5.0.90-cray_ari_c #1 SMP Tue Apr 28 21:17:03 UTC 2020 (3e6e478)
+
+Instrumentation overhead could not be estimated.
+
+Number of traced functions that were called:  24
+
+  (To see the list, specify:  -s traced_functions=show)
+

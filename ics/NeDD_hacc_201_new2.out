@@ -1,0 +1,463 @@
+current nodes:
+[2750, 3206, 3207, 3208, 3209, 3210, 3211, 3220, 3221, 3222, 3223, 3224, 3225, 3226, 3227, 3228, 3229, 3230, 3231, 3232, 3233, 3234, 3235, 3236, 3719, 3720, 3721, 3722, 3723, 3724, 3725, 3726, 3727, 3732, 3733, 3734, 3735, 3736, 3737, 3738, 3739, 3740, 3741, 3742, 3743, 3744, 3745, 3746, 3747, 3748, 4075, 4076, 4077, 4078, 4079, 4080, 4081, 4082, 4083, 4084, 4085, 4086, 4087, 4088, 4089, 4090, 4091, 4092, 4093, 4094, 4095, 4096, 4097, 4098, 4177, 4178, 4179, 4180, 4181, 4182, 4183, 4184, 4185, 4186, 4187, 4188, 4189, 4190, 4191, 4192, 4193, 4194, 4195, 4196, 4197, 4198, 4199, 9456, 9457, 9458, 9459, 9460, 9461, 9462, 9463, 9464, 9465, 9466, 9467, 9468, 9469, 9470, 9471, 9472, 9473, 9474, 9475, 9476, 9477, 9478, 9479, 9480, 9481, 9482, 9729, 9730, 9731, 9732, 9733, 9734, 9735, 9736, 9737, 9738, 9739, 9740, 9741, 9742, 9743, 9748, 9749, 9750, 9751, 9752, 9753, 9754, 9755, 9756, 11020, 11021, 11022, 11023, 11028, 11029, 11030, 11031, 11032, 11033, 11034, 11035, 11036, 11037, 11038, 11039, 11040, 11041, 11042, 11043, 11044, 11045, 11046, 11047, 11048, 11049, 12261, 12262, 12263, 12264, 12265, 12266, 12267, 12268, 12269, 12270, 12271, 12272, 12273, 12274, 12275, 12276, 12277, 12278, 12279, 12280, 12281, 12282, 12283, 12284, 12285, 12286, 12287]
+Using knl nodes.
+Tue Jan 12 05:04:58 PST 2021
+
+jobid: 37864649
+====================
+iteration 0
+Congestor nodes:
+[9482, 11033, 12263, 11044, 3211, 9481, 3724, 4085, 3720, 4078, 11020, 4181, 4177, 3736, 4186, 12275, 11048, 11042, 4083, 3735, 9465, 12277, 3222, 11039, 4097, 3234, 3223, 11036, 3747, 9457, 9754, 9738, 12286, 12287, 11021, 4178, 4190, 9467, 3224, 4088, 9734, 4086, 4094, 3721, 3233, 3229, 4192, 4185, 9476, 12284, 3743, 3227, 9475, 4199, 3732, 9462, 4184, 12264, 4079, 3738, 4197, 3723, 9731, 9755]
+Tue Jan 12 05:04:58 PST 2021
+Tue Jan 12 05:05:28 PST 2021
+starting store daemon
+LR-localhost: OVIS_HOME is /project/projectdirs/m3231/yijia/ldms/ovis/build
+Env var is passed store mode is: store_csv
+LR-localhost: Storage container is /project/projectdirs/m3231/yijia/csv/37864649_0
+LR-localhost: Hostname is nid02750
+LR-localhost: /bin/hostName says ('nid02750\n', '')
+LR-nid02750: Component ID is 2750
+LR-nid02750: Input to store:
+prdcr_add name=LHP2750 host=nid02750 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP2750
+prdcr_add name=LHP3206 host=nid03206 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3206
+prdcr_add name=LHP3207 host=nid03207 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3207
+prdcr_add name=LHP3208 host=nid03208 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3208
+prdcr_add name=LHP3209 host=nid03209 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3209
+prdcr_add name=LHP3210 host=nid03210 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3210
+prdcr_add name=LHP3211 host=nid03211 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3211
+prdcr_add name=LHP3220 host=nid03220 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3220
+prdcr_add name=LHP3221 host=nid03221 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3221
+prdcr_add name=LHP3222 host=nid03222 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3222
+prdcr_add name=LHP3223 host=nid03223 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3223
+prdcr_add name=LHP3224 host=nid03224 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3224
+prdcr_add name=LHP3225 host=nid03225 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3225
+prdcr_add name=LHP3226 host=nid03226 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3226
+prdcr_add name=LHP3227 host=nid03227 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3227
+prdcr_add name=LHP3228 host=nid03228 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3228
+prdcr_add name=LHP3229 host=nid03229 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3229
+prdcr_add name=LHP3230 host=nid03230 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3230
+prdcr_add name=LHP3231 host=nid03231 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3231
+prdcr_add name=LHP3232 host=nid03232 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3232
+prdcr_add name=LHP3233 host=nid03233 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3233
+prdcr_add name=LHP3234 host=nid03234 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3234
+prdcr_add name=LHP3235 host=nid03235 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3235
+prdcr_add name=LHP3236 host=nid03236 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3236
+prdcr_add name=LHP3719 host=nid03719 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3719
+prdcr_add name=LHP3720 host=nid03720 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3720
+prdcr_add name=LHP3721 host=nid03721 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3721
+prdcr_add name=LHP3722 host=nid03722 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3722
+prdcr_add name=LHP3723 host=nid03723 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3723
+prdcr_add name=LHP3724 host=nid03724 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3724
+prdcr_add name=LHP3725 host=nid03725 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3725
+prdcr_add name=LHP3726 host=nid03726 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3726
+prdcr_add name=LHP3727 host=nid03727 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3727
+prdcr_add name=LHP3732 host=nid03732 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3732
+prdcr_add name=LHP3733 host=nid03733 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3733
+prdcr_add name=LHP3734 host=nid03734 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3734
+prdcr_add name=LHP3735 host=nid03735 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3735
+prdcr_add name=LHP3736 host=nid03736 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3736
+prdcr_add name=LHP3737 host=nid03737 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3737
+prdcr_add name=LHP3738 host=nid03738 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3738
+prdcr_add name=LHP3739 host=nid03739 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3739
+prdcr_add name=LHP3740 host=nid03740 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3740
+prdcr_add name=LHP3741 host=nid03741 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3741
+prdcr_add name=LHP3742 host=nid03742 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3742
+prdcr_add name=LHP3743 host=nid03743 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3743
+prdcr_add name=LHP3744 host=nid03744 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3744
+prdcr_add name=LHP3745 host=nid03745 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3745
+prdcr_add name=LHP3746 host=nid03746 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3746
+prdcr_add name=LHP3747 host=nid03747 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3747
+prdcr_add name=LHP3748 host=nid03748 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP3748
+prdcr_add name=LHP4075 host=nid04075 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4075
+prdcr_add name=LHP4076 host=nid04076 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4076
+prdcr_add name=LHP4077 host=nid04077 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4077
+prdcr_add name=LHP4078 host=nid04078 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4078
+prdcr_add name=LHP4079 host=nid04079 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4079
+prdcr_add name=LHP4080 host=nid04080 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4080
+prdcr_add name=LHP4081 host=nid04081 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4081
+prdcr_add name=LHP4082 host=nid04082 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4082
+prdcr_add name=LHP4083 host=nid04083 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4083
+prdcr_add name=LHP4084 host=nid04084 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4084
+prdcr_add name=LHP4085 host=nid04085 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4085
+prdcr_add name=LHP4086 host=nid04086 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4086
+prdcr_add name=LHP4087 host=nid04087 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4087
+prdcr_add name=LHP4088 host=nid04088 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4088
+prdcr_add name=LHP4089 host=nid04089 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4089
+prdcr_add name=LHP4090 host=nid04090 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4090
+prdcr_add name=LHP4091 host=nid04091 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4091
+prdcr_add name=LHP4092 host=nid04092 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4092
+prdcr_add name=LHP4093 host=nid04093 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4093
+prdcr_add name=LHP4094 host=nid04094 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4094
+prdcr_add name=LHP4095 host=nid04095 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4095
+prdcr_add name=LHP4096 host=nid04096 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4096
+prdcr_add name=LHP4097 host=nid04097 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4097
+prdcr_add name=LHP4098 host=nid04098 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4098
+prdcr_add name=LHP4177 host=nid04177 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4177
+prdcr_add name=LHP4178 host=nid04178 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4178
+prdcr_add name=LHP4179 host=nid04179 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4179
+prdcr_add name=LHP4180 host=nid04180 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4180
+prdcr_add name=LHP4181 host=nid04181 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4181
+prdcr_add name=LHP4182 host=nid04182 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4182
+prdcr_add name=LHP4183 host=nid04183 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4183
+prdcr_add name=LHP4184 host=nid04184 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4184
+prdcr_add name=LHP4185 host=nid04185 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4185
+prdcr_add name=LHP4186 host=nid04186 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4186
+prdcr_add name=LHP4187 host=nid04187 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4187
+prdcr_add name=LHP4188 host=nid04188 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4188
+prdcr_add name=LHP4189 host=nid04189 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4189
+prdcr_add name=LHP4190 host=nid04190 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4190
+prdcr_add name=LHP4191 host=nid04191 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4191
+prdcr_add name=LHP4192 host=nid04192 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4192
+prdcr_add name=LHP4193 host=nid04193 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4193
+prdcr_add name=LHP4194 host=nid04194 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4194
+prdcr_add name=LHP4195 host=nid04195 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4195
+prdcr_add name=LHP4196 host=nid04196 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4196
+prdcr_add name=LHP4197 host=nid04197 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4197
+prdcr_add name=LHP4198 host=nid04198 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4198
+prdcr_add name=LHP4199 host=nid04199 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP4199
+prdcr_add name=LHP9456 host=nid09456 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9456
+prdcr_add name=LHP9457 host=nid09457 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9457
+prdcr_add name=LHP9458 host=nid09458 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9458
+prdcr_add name=LHP9459 host=nid09459 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9459
+prdcr_add name=LHP9460 host=nid09460 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9460
+prdcr_add name=LHP9461 host=nid09461 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9461
+prdcr_add name=LHP9462 host=nid09462 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9462
+prdcr_add name=LHP9463 host=nid09463 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9463
+prdcr_add name=LHP9464 host=nid09464 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9464
+prdcr_add name=LHP9465 host=nid09465 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9465
+prdcr_add name=LHP9466 host=nid09466 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9466
+prdcr_add name=LHP9467 host=nid09467 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9467
+prdcr_add name=LHP9468 host=nid09468 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9468
+prdcr_add name=LHP9469 host=nid09469 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9469
+prdcr_add name=LHP9470 host=nid09470 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9470
+prdcr_add name=LHP9471 host=nid09471 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9471
+prdcr_add name=LHP9472 host=nid09472 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9472
+prdcr_add name=LHP9473 host=nid09473 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9473
+prdcr_add name=LHP9474 host=nid09474 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9474
+prdcr_add name=LHP9475 host=nid09475 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9475
+prdcr_add name=LHP9476 host=nid09476 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9476
+prdcr_add name=LHP9477 host=nid09477 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9477
+prdcr_add name=LHP9478 host=nid09478 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9478
+prdcr_add name=LHP9479 host=nid09479 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9479
+prdcr_add name=LHP9480 host=nid09480 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9480
+prdcr_add name=LHP9481 host=nid09481 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9481
+prdcr_add name=LHP9482 host=nid09482 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9482
+prdcr_add name=LHP9729 host=nid09729 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9729
+prdcr_add name=LHP9730 host=nid09730 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9730
+prdcr_add name=LHP9731 host=nid09731 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9731
+prdcr_add name=LHP9732 host=nid09732 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9732
+prdcr_add name=LHP9733 host=nid09733 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9733
+prdcr_add name=LHP9734 host=nid09734 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9734
+prdcr_add name=LHP9735 host=nid09735 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9735
+prdcr_add name=LHP9736 host=nid09736 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9736
+prdcr_add name=LHP9737 host=nid09737 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9737
+prdcr_add name=LHP9738 host=nid09738 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9738
+prdcr_add name=LHP9739 host=nid09739 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9739
+prdcr_add name=LHP9740 host=nid09740 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9740
+prdcr_add name=LHP9741 host=nid09741 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9741
+prdcr_add name=LHP9742 host=nid09742 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9742
+prdcr_add name=LHP9743 host=nid09743 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9743
+prdcr_add name=LHP9748 host=nid09748 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9748
+prdcr_add name=LHP9749 host=nid09749 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9749
+prdcr_add name=LHP9750 host=nid09750 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9750
+prdcr_add name=LHP9751 host=nid09751 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9751
+prdcr_add name=LHP9752 host=nid09752 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9752
+prdcr_add name=LHP9753 host=nid09753 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9753
+prdcr_add name=LHP9754 host=nid09754 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9754
+prdcr_add name=LHP9755 host=nid09755 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9755
+prdcr_add name=LHP9756 host=nid09756 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP9756
+prdcr_add name=LHP11020 host=nid11020 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11020
+prdcr_add name=LHP11021 host=nid11021 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11021
+prdcr_add name=LHP11022 host=nid11022 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11022
+prdcr_add name=LHP11023 host=nid11023 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11023
+prdcr_add name=LHP11028 host=nid11028 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11028
+prdcr_add name=LHP11029 host=nid11029 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11029
+prdcr_add name=LHP11030 host=nid11030 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11030
+prdcr_add name=LHP11031 host=nid11031 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11031
+prdcr_add name=LHP11032 host=nid11032 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11032
+prdcr_add name=LHP11033 host=nid11033 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11033
+prdcr_add name=LHP11034 host=nid11034 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11034
+prdcr_add name=LHP11035 host=nid11035 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11035
+prdcr_add name=LHP11036 host=nid11036 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11036
+prdcr_add name=LHP11037 host=nid11037 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11037
+prdcr_add name=LHP11038 host=nid11038 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11038
+prdcr_add name=LHP11039 host=nid11039 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11039
+prdcr_add name=LHP11040 host=nid11040 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11040
+prdcr_add name=LHP11041 host=nid11041 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11041
+prdcr_add name=LHP11042 host=nid11042 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11042
+prdcr_add name=LHP11043 host=nid11043 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11043
+prdcr_add name=LHP11044 host=nid11044 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11044
+prdcr_add name=LHP11045 host=nid11045 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11045
+prdcr_add name=LHP11046 host=nid11046 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11046
+prdcr_add name=LHP11047 host=nid11047 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11047
+prdcr_add name=LHP11048 host=nid11048 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11048
+prdcr_add name=LHP11049 host=nid11049 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP11049
+prdcr_add name=LHP12261 host=nid12261 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12261
+prdcr_add name=LHP12262 host=nid12262 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12262
+prdcr_add name=LHP12263 host=nid12263 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12263
+prdcr_add name=LHP12264 host=nid12264 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12264
+prdcr_add name=LHP12265 host=nid12265 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12265
+prdcr_add name=LHP12266 host=nid12266 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12266
+prdcr_add name=LHP12267 host=nid12267 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12267
+prdcr_add name=LHP12268 host=nid12268 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12268
+prdcr_add name=LHP12269 host=nid12269 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12269
+prdcr_add name=LHP12270 host=nid12270 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12270
+prdcr_add name=LHP12271 host=nid12271 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12271
+prdcr_add name=LHP12272 host=nid12272 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12272
+prdcr_add name=LHP12273 host=nid12273 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12273
+prdcr_add name=LHP12274 host=nid12274 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12274
+prdcr_add name=LHP12275 host=nid12275 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12275
+prdcr_add name=LHP12276 host=nid12276 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12276
+prdcr_add name=LHP12277 host=nid12277 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12277
+prdcr_add name=LHP12278 host=nid12278 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12278
+prdcr_add name=LHP12279 host=nid12279 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12279
+prdcr_add name=LHP12280 host=nid12280 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12280
+prdcr_add name=LHP12281 host=nid12281 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12281
+prdcr_add name=LHP12282 host=nid12282 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12282
+prdcr_add name=LHP12283 host=nid12283 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12283
+prdcr_add name=LHP12284 host=nid12284 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12284
+prdcr_add name=LHP12285 host=nid12285 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12285
+prdcr_add name=LHP12286 host=nid12286 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12286
+prdcr_add name=LHP12287 host=nid12287 xprt=sock port=10001 type=active interval=1000000
+prdcr_start name=LHP12287
+updtr_add name=LHU interval=1000000 offset=400
+updtr_prdcr_add name=LHU regex=LHP*
+updtr_start name=LHU
+load name=store_csv
+config name=store_csv path=/project/projectdirs/m3231/yijia/csv
+strgp_add name=LHSGN plugin=store_csv schema=aries_nic_mmr container=37864649_0
+strgp_start name=LHSGN
+strgp_add name=LHSGC plugin=store_csv schema=cray_aries_r container=37864649_0
+strgp_start name=LHSGC
+
+component 2750 storage pid: 193448
+mkdir: cannot create directory 'configs': File exists
+Tue Jan 12 05:05:38 PST 2021
+GPC checker started.
+starting LDMS..
+runLDMS() finish.
+Monitor end timestamp: 1610456858
+Starting sortCongestion()..
+Copying file..
+srun: error: Unable to confirm allocation for job 37864649: Transport endpoint is not connected
+srun: Check SLURM_JOB_ID environment variable. Expired or invalid job 37864649
+srun: error: Unable to confirm allocation for job 37864649: Unable to contact slurm controller (connect failure)
+srun: Check SLURM_JOB_ID environment variable. Expired or invalid job 37864649
+srun: error: Unable to confirm allocation for job 37864649: Unable to contact slurm controller (connect failure)
+srun: Check SLURM_JOB_ID environment variable. Expired or invalid job 37864649
+srun: error: Unable to confirm allocation for job 37864649: Unable to contact slurm controller (connect failure)
+srun: Check SLURM_JOB_ID environment variable. Expired or invalid job 37864649
+srun: error: Unable to confirm allocation for job 37864649: Unable to contact slurm controller (connect failure)
+srun: Check SLURM_JOB_ID environment variable. Expired or invalid job 37864649
+srun: error: Unable to confirm allocation for job 37864649: Unable to contact slurm controller (connect failure)
+srun: Check SLURM_JOB_ID environment variable. Expired or invalid job 37864649
+srun: error: Unable to confirm allocation for job 37864649: Unable to contact slurm controller (connect failure)
+srun: Check SLURM_JOB_ID environment variable. Expired or invalid job 37864649
+srun: Job 37864649 step creation temporarily disabled, retrying (Socket timed out on send/recv operation)
+srun: Step created for job 37864649
+slurmstepd: error: *** STEP 37864649.108 ON nid03211 CANCELLED AT 2021-01-12T15:05:11 DUE TO TIME LIMIT ***
+slurmstepd: error: *** STEP 37864649.0 ON nid02750 CANCELLED AT 2021-01-12T15:05:11 DUE TO TIME LIMIT ***
+srun: got SIGCONT
+srun: got SIGCONT
+srun: forcing job termination
+srun: forcing job termination

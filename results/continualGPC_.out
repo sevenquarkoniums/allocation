@@ -1,0 +1,19 @@
+NetworkLoad Tests v1.1
+  Test with 4352 MPI ranks (64 nodes)
+  13 nodes running Network Tests
+  51 nodes running Congestion Tests (min 51 nodes per congestor)
+
+  Legend
+   RR = random ring communication pattern
+   Lat = latency
+   BW = bandwidth
+   BW+Sync = bandwidth with barrier
++------------------------------------------------------------------------------+
+|                            Isolated Network Tests                            |
++---------------------------------+--------------+--------------+--------------+
+|                            Name |          Avg |          99% |        Units |
++---------------------------------+--------------+--------------+--------------+
+|          RR Two-sided Lat (8 B) |         12.5 |         23.0 |         usec |
++---------------------------------+--------------+--------------+--------------+
+| RR Two-sided BW+Sync (131072 B) |         61.8 |         51.1 |   MiB/s/rank |
++---------------------------------+--------------+--------------+--------------+

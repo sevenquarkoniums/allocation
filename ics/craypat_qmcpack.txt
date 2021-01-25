@@ -1,0 +1,826 @@
+CrayPat/X:  Version 7.1.1 Revision 7c0ddd79b  08/19/19 16:58:46
+
+Number of PEs (MPI ranks):   2,176
+                           
+Numbers of PEs per Node:        68  PEs on each of  32  Nodes
+                           
+Numbers of Threads per PE:       4
+                           
+Number of Cores per Socket:     68
+
+Execution start time:  Fri Jan 22 22:34:29 2021
+
+System name and speed:  nid03211  1.401 GHz (nominal)
+
+Intel Knights Landing CPU  Family:  6  Model: 87  Stepping:  1
+
+DRAM:  96 GiB DDR4-2400 on 1.4 GHz nodes
+
+MCDRAM: 7.2 GHz, 16 GiB available as quad, cache (100% cache)
+
+Current path to data file:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/QMCPACK/testrun/qmcpack+pat+129816-3211t   (RTS, 242 data files)
+
+
+Notes for table 1:
+
+  This table shows functions that have significant exclusive time,
+    averaged across ranks.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile ...
+
+Table 1:  Profile by Function Group and Function
+
+  Time% |       Time | Imb. Time |  Imb. |   Calls | Group
+        |            |           | Time% |         |  Function
+        |            |           |       |         |   PE=HIDE
+        |            |           |       |         |    Thread=HIDE
+       
+ 100.0% | 119.462301 |        -- |    -- | 6,108.2 | Total
+|-----------------------------------------------------------------------
+|  54.3% |  64.834300 | 41.242570 | 38.9% |     1.0 | USER
+||----------------------------------------------------------------------
+||  54.3% |  64.834300 | 41.242570 | 38.9% |     1.0 | main
+||======================================================================
+|  44.7% |  53.387501 |        -- |    -- | 2,693.0 | MPI_SYNC
+||----------------------------------------------------------------------
+||  30.3% |  36.170724 | 35.763985 | 98.9% |   101.0 | MPI_Reduce(sync)
+||   9.1% |  10.908727 |  4.776060 | 43.8% |   304.0 | MPI_Allreduce(sync)
+||   4.9% |   5.845214 |  5.639674 | 96.5% |   108.0 | MPI_Bcast(sync)
+|=======================================================================
+
+Notes for table 2:
+
+  This table shows functions that have the most significant exclusive
+    time, taking the maximum time across ranks and threads.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile_max ...
+
+Table 2:  Profile of maximum function times
+
+  Time% |       Time | Imb. Time |   Imb. | Function
+        |            |           |  Time% |  PE=[max,min]
+        |            |           |        |   Thread=HIDE
+|--------------------------------------------------------------
+| 100.0% | 106.076871 | 41.242570 |  38.9% | main
+||-------------------------------------------------------------
+|| 100.0% | 106.076871 |        -- |     -- | pe.0
+||  58.7% |  62.298751 |        -- |     -- | pe.17
+||=============================================================
+|  34.3% |  36.417014 | 35.763985 |  98.9% | MPI_Reduce(sync)
+||-------------------------------------------------------------
+||  34.3% |  36.417014 |        -- |     -- | pe.1618
+||   0.4% |   0.406740 |        -- |     -- | pe.0
+||=============================================================
+|  12.3% |  13.028467 |  4.776060 |  43.8% | MPI_Allreduce(sync)
+||-------------------------------------------------------------
+||  12.3% |  13.028467 |        -- |     -- | pe.17
+||   5.8% |   6.132666 |        -- |     -- | pe.2175
+||=============================================================
+|   6.3% |   6.668492 |  5.639674 |  96.5% | MPI_Bcast(sync)
+||-------------------------------------------------------------
+||   6.3% |   6.668492 |        -- |     -- | pe.891
+||   0.2% |   0.205540 |        -- |     -- | pe.0
+||=============================================================
+|   1.1% |   1.173750 |  0.813295 |  69.3% | MKL_Load_Lib
+||-------------------------------------------------------------
+||   1.1% |   1.173750 |  0.880313 | 100.0% | pe.2049
+||   0.2% |   0.200073 |  0.133382 | 100.0% | pe.656
+|==============================================================
+
+Notes for table 3:
+
+  This table shows functions that have the most significant exclusive
+    time, taking for each thread the average time across ranks.
+    The imbalance percentage is relative to the team observed to
+    participate in execution.
+    Use -s th=ALL to see individual thread values.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile_th_pe ...
+
+Table 3:  Profile by Function Group and Function
+
+  Time% |       Time | Imb. |  Imb. | Team |   Calls | Group
+        |            | Time | Time% | Size |         |  Function
+        |            |      |       |      |         |   Thread=HIDE
+        |            |      |       |      |         |    PE=HIDE
+       
+ 100.0% | 119.462301 |   -- |    -- |   -- | 6,108.2 | Total
+|-------------------------------------------------------------------------
+|  54.3% |  64.834300 |   -- |    -- |   -- |     1.0 | USER
+||------------------------------------------------------------------------
+||  54.3% |  64.834300 |   -- |    -- |    1 |     1.0 | main
+||========================================================================
+|  44.7% |  53.387501 |   -- |    -- |   -- | 2,693.0 | MPI_SYNC
+||------------------------------------------------------------------------
+||  30.3% |  36.170724 |   -- |    -- |    1 |   101.0 | MPI_Reduce(sync)
+||   9.1% |  10.908727 |   -- |    -- |    1 |   304.0 | MPI_Allreduce(sync)
+||   4.9% |   5.845214 |   -- |    -- |    1 |   108.0 | MPI_Bcast(sync)
+|=========================================================================
+
+Observation:  MPI Grid Detection
+
+    A 17x2x2x2x2x2x2x2 grid pattern was detected in sent message traffic.  Because only
+    0.9% of the total execution time was spent in MPI functions, modifying
+    the rank order is unlikely to significantly improve overall performance.
+
+
+Observation:  Metric-Based Rank Order
+
+    No rank order was suggested based on the USER Time metric because
+    that metric was already well balanced across the nodes.
+
+
+Observation:  MPI utilization
+
+    The time spent waiting for all required ranks to become available to
+    participate in MPI collectives is relatively high and is not evenly
+    balanced over all PEs.  Functions and callsites responsible for
+    consuming the most time can be found in the table generated by
+    pat_report -O callers+src (within the MPI_SYNC group).
+
+
+Notes for table 4:
+
+  This table shows the time in each thread, and the imbalance of time
+    across threads, taking for each thread the maximum time across
+    ranks.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O load_imbalance_thread ...
+
+Table 4:  Load Imbalance by Thread
+
+  Max. Time | Imb. Time |  Imb. | Thread
+            |           | Time% |  PE=HIDE
+           
+ 119.462301 | 89.532361 | 99.9% | Total
+|-----------------------------------------
+| 119.475529 |  0.013227 |  0.0% | thread.0
+|   1.173820 |  1.088161 | 92.7% | thread.2
+|   1.106338 |  1.020539 | 92.3% | thread.3
+|   0.792671 |  0.706670 | 89.2% | thread.1
+|=========================================
+
+Notes for table 5:
+
+  This table shows the ranks with maximum, mean, and minimum time for
+    functions with significant time, within the function groups. It
+    also shows MPI message statistics for functions in the MPI group.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O load_balance_m ...
+
+Table 5:  Load Balance with MPI Message Stats
+
+  Time% |       Time |   MPI |     MPI Msg |   Avg MPI | Group
+        |            |   Msg |       Bytes |  Msg Size |  PE=[mmm]
+        |            | Count |             |           |   Thread
+       
+ 100.0% | 119.462301 | 608.8 | 6,929,238.7 | 11,382.32 | Total
+|-----------------------------------------------------------------
+|  54.3% |  64.834300 |   0.0 |         0.0 |        -- | USER
+||----------------------------------------------------------------
+||  88.8% | 106.076871 |   0.0 |         0.0 |        -- | pe.0
+3|        |            |       |             |           |  thread.0
+||  54.2% |  64.761919 |   0.0 |         0.0 |        -- | pe.1515
+3|        |            |       |             |           |  thread.0
+||  52.1% |  62.298751 |   0.0 |         0.0 |        -- | pe.17
+3|        |            |       |             |           |  thread.0
+||================================================================
+|  44.7% |  53.387501 |   0.0 |         0.0 |        -- | MPI_SYNC
+||----------------------------------------------------------------
+||  46.5% |  55.580863 |   0.0 |         0.0 |        -- | pe.17
+3|        |            |       |             |           |  thread.0
+||  44.8% |  53.461832 |   0.0 |         0.0 |        -- | pe.1627
+3|        |            |       |             |           |  thread.0
+||  10.2% |  12.146841 |   0.0 |         0.0 |        -- | pe.0
+3|        |            |       |             |           |  thread.0
+|=================================================================
+
+Notes for table 6:
+
+  This table shows the MPI library functions that are used to send a
+    significant number of bytes, taking the average across sender
+    ranks of the sum of bytes sent from the sender to all destination
+    ranks. It also shows how many bytes are attributable to each of
+    its call paths. It also shows a count of messages and the number
+    of messages that fall into each bin of message sizes. For each
+    path, it shows the ranks that send the minimum, mean, and maximum
+    number of bytes.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O mpi_callers ...
+
+Table 6:  MPI Message Stats by Caller
+
+Function / Caller / PE=[mmm] / Thread=HIDE
+
+  
+===========================================================================
+  Total
+---------------------------------------------------------------------------
+  MPI Msg Bytes%                     100.0% 
+  MPI Msg Bytes                 6,929,238.7 
+  MPI Msg Count                       608.8 msgs
+  MsgSz <16 Count                     153.9 msgs
+  16<= MsgSz <256 Count               103.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count           302.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+===========================================================================
+  MPI_Allreduce
+---------------------------------------------------------------------------
+  MPI Msg Bytes%                      76.1% 
+  MPI Msg Bytes                 5,271,056.0 
+  MPI Msg Count                       304.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 2.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           302.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Allreduce / qmcplusplus::WalkerControlMPI::branch
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      75.6% 
+  MPI Msg Bytes                 5,236,088.0 
+  MPI Msg Count                       299.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           299.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Allreduce / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      75.6% 
+  MPI Msg Bytes                 5,236,088.0 
+  MPI Msg Count                       299.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           299.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Allreduce / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      75.6% 
+  MPI Msg Bytes                 5,236,088.0 
+  MPI Msg Count                       299.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           299.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Allreduce / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      75.6% 
+  MPI Msg Bytes                 5,236,088.0 
+  MPI Msg Count                       299.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           299.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Allreduce / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      75.6% 
+  MPI Msg Bytes                 5,236,088.0 
+  MPI Msg Count                       299.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           299.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Allreduce / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection / qmcplusplus::QMCMain::execute
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      75.6% 
+  MPI Msg Bytes                 5,236,088.0 
+  MPI Msg Count                       299.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           299.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Allreduce / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection / qmcplusplus::QMCMain::execute / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      75.6% 
+  MPI Msg Bytes                 5,236,088.0 
+  MPI Msg Count                       299.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           299.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Allreduce / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection / qmcplusplus::QMCMain::execute / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      75.6% 
+  MPI Msg Bytes                 5,236,088.0 
+  MPI Msg Count                       299.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           299.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Allreduce / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection / qmcplusplus::QMCMain::execute / main / pe.1088
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      75.6% 
+  MPI Msg Bytes                 5,236,088.0 
+  MPI Msg Count                       299.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           299.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Allreduce / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection / qmcplusplus::QMCMain::execute / main / pe.2175
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      75.6% 
+  MPI Msg Bytes                 5,236,088.0 
+  MPI Msg Count                       299.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count           299.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Bcast
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,503,195.0 
+  MPI Msg Count                       108.0 msgs
+  MsgSz <16 Count                     106.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put / qmcplusplus::HamiltonianFactory::addPseudoPotential
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put / qmcplusplus::HamiltonianFactory::addPseudoPotential / qmcplusplus::HamiltonianFactory::build
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put / qmcplusplus::HamiltonianFactory::addPseudoPotential / qmcplusplus::HamiltonianFactory::build / qmcplusplus::HamiltonianFactory::put
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put / qmcplusplus::HamiltonianFactory::addPseudoPotential / qmcplusplus::HamiltonianFactory::build / qmcplusplus::HamiltonianFactory::put / qmcplusplus::HamiltonianPool::put
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put / qmcplusplus::HamiltonianFactory::addPseudoPotential / qmcplusplus::HamiltonianFactory::build / qmcplusplus::HamiltonianFactory::put / qmcplusplus::HamiltonianPool::put / qmcplusplus::QMCMain::validateXML
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put / qmcplusplus::HamiltonianFactory::addPseudoPotential / qmcplusplus::HamiltonianFactory::build / qmcplusplus::HamiltonianFactory::put / qmcplusplus::HamiltonianPool::put / qmcplusplus::QMCMain::validateXML / qmcplusplus::QMCMain::execute
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put / qmcplusplus::HamiltonianFactory::addPseudoPotential / qmcplusplus::HamiltonianFactory::build / qmcplusplus::HamiltonianFactory::put / qmcplusplus::HamiltonianPool::put / qmcplusplus::QMCMain::validateXML / qmcplusplus::QMCMain::execute / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put / qmcplusplus::HamiltonianFactory::addPseudoPotential / qmcplusplus::HamiltonianFactory::build / qmcplusplus::HamiltonianFactory::put / qmcplusplus::HamiltonianPool::put / qmcplusplus::QMCMain::validateXML / qmcplusplus::QMCMain::execute / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put / qmcplusplus::HamiltonianFactory::addPseudoPotential / qmcplusplus::HamiltonianFactory::build / qmcplusplus::HamiltonianFactory::put / qmcplusplus::HamiltonianPool::put / qmcplusplus::QMCMain::validateXML / qmcplusplus::QMCMain::execute / main / pe.1088
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+  MPI_Bcast / qmcplusplus::ECPComponentBuilder::read_pp_file / qmcplusplus::ECPComponentBuilder::parse / qmcplusplus::ECPotentialBuilder::useXmlFormat / qmcplusplus::ECPotentialBuilder::put / qmcplusplus::HamiltonianFactory::addPseudoPotential / qmcplusplus::HamiltonianFactory::build / qmcplusplus::HamiltonianFactory::put / qmcplusplus::HamiltonianPool::put / qmcplusplus::QMCMain::validateXML / qmcplusplus::QMCMain::execute / main / pe.2175
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                      21.7% 
+  MPI Msg Bytes                 1,502,787.0 
+  MPI Msg Count                         6.0 msgs
+  MsgSz <16 Count                       4.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count               0.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             2.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   139,444.1 
+  MPI Msg Count                        47.9 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   139,444.1 
+  MPI Msg Count                        47.9 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   139,444.1 
+  MPI Msg Count                        47.9 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple / qmcplusplus::WalkerControlMPI::branch
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   139,444.1 
+  MPI Msg Count                        47.9 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   139,444.1 
+  MPI Msg Count                        47.9 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   139,444.1 
+  MPI Msg Count                        47.9 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   139,444.1 
+  MPI Msg Count                        47.9 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   139,444.1 
+  MPI Msg Count                        47.9 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection / qmcplusplus::QMCMain::execute
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   139,444.1 
+  MPI Msg Count                        47.9 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection / qmcplusplus::QMCMain::execute / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   139,444.1 
+  MPI Msg Count                        47.9 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.9 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection / qmcplusplus::QMCMain::execute / main / pe.2173
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       3.6% 
+  MPI Msg Bytes                   250,432.0 
+  MPI Msg Count                        86.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              86.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection / qmcplusplus::QMCMain::execute / main / pe.139
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       2.0% 
+  MPI Msg Bytes                   136,864.0 
+  MPI Msg Count                        47.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              47.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+  MPI_Isend / OOMPI_Port::Isend / qmcplusplus::WalkerControlMPI::swapWalkersSimple / qmcplusplus::WalkerControlMPI::branch / qmcplusplus::SimpleFixedNodeBranch::branch / qmcplusplus::DMC::run / qmcplusplus::QMCMain::runQMC / qmcplusplus::QMCMain::executeQMCSection / qmcplusplus::QMCMain::execute / main / pe.772
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                       1.1% 
+  MPI Msg Bytes                    72,800.0 
+  MPI Msg Count                        25.0 msgs
+  MsgSz <16 Count                       0.0 msgs
+  16<= MsgSz <256 Count                 0.0 msgs
+  256<= MsgSz <4KiB Count              25.0 msgs
+  4KiB<= MsgSz <64KiB Count             0.0 msgs
+  64KiB<= MsgSz <1MiB Count             0.0 msgs
+==============================================================================
+
+Notes for table 7:
+
+  This table shows energy and power usage for the nodes with the
+    maximum, mean, and minimum usage, as well as the sum of usage over
+    all nodes.
+    Energy and power for accelerators is also shown, if applicable.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_energy ...
+
+Table 7:  Program energy and power usage (from Cray PM)
+
+    Node |      Node |    Process | Node Id=[mmm]
+  Energy | Power (W) |       Time |  PE=HIDE
+     (J) |           |            |   Thread=HIDE
+        
+ 935,910 | 7,417.035 | 126.183893 | Total
+|------------------------------------------------
+|  30,529 |   241.598 | 126.361081 | nid.12452
+|  29,450 |   233.816 | 125.955418 | nid.5993
+|  27,546 |   219.039 | 125.758472 | nid.3211
+|================================================
+
+Notes for table 8:
+
+  This table shows total wall clock time for the ranks with the
+    maximum, mean, and minimum time, as well as the average across
+    ranks.
+    It also shows maximum memory usage from /proc/self/numa_maps for
+    those ranks, and on average.  The usage is total size of all
+    pages, including huge pages, that were actually mapped into
+    physical memory from both private and shared memory segments.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_time ...
+
+Table 8:  Wall Clock Time, Memory High Water Mark
+
+    Process |   Process | PE=[mmm]
+       Time |     HiMem |  Thread
+            | (MiBytes) | 
+           
+ 126.183893 |     137.6 | Total
+|---------------------------------
+| 347.684032 |     137.5 | pe.1078
+|            |           |  thread.0
+| 125.655021 |     136.9 | pe.691
+|            |           |  thread.0
+| 125.328293 |     136.6 | pe.37
+|            |           |  thread.0
+|=================================
+
+========================  Additional details  ========================
+
+
+
+General table notes:
+
+    The default notes for a table are based on the default definition of
+    the table, and do not account for the effects of command-line options
+    that may modify the content of the table.
+    
+    Detailed notes, produced by the pat_report -v option, do account for
+    all command-line options, and also show how data is aggregated, and
+    if the table content is limited by thresholds, rank selections, etc.
+    
+    An imbalance metric in a line is based on values in main threads
+    across multiple ranks, or on values across all threads, as applicable.
+    
+    An imbalance percent in a line is relative to the maximum value
+    for that line across ranks or threads, as applicable.
+    
+Experiment:  trace
+
+Original path to data file:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/QMCPACK/testrun/qmcpack+pat+129816-3211t/xf-files   (RTS, 2176 data files)
+
+Original program:
+  /global/cfs/cdirs/nstaff/cookbg/mpi/QMCPACK/qmcpack_ben/build_bgc/bin/qmcpack
+
+Instrumented with:  pat_build -g mpi qmcpack
+
+Instrumented program:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/QMCPACK/testrun/../qmcpack_ben/build_bgc/bin/qmcpack+pat
+
+Program invocation:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/QMCPACK/testrun/../qmcpack_ben/build_bgc/bin/qmcpack+pat simple-H2O.xml
+
+Exit Status:  0 for 2,176 PEs
+
+Thread start functions and creator functions:
+   972 threads:  MPI_Finalize <- __kmp_create_worker
+  2727 threads:  MPI_Finalize(sync) <- __kmp_create_worker
+  1965 threads:  MPI_Test <- __kmp_create_worker
+    27 threads:  _INTERNAL_26_______src_z_Linux_util_cpp_b9b5c47b::__kmp_launch_worker(void*) <- __kmp_create_worker
+  2176 threads:  main
+   837 threads:  main <- __kmp_create_worker
+
+Memory pagesize:  4 KiB
+
+Memory hugepagesize:  2 MiB
+
+Programming environment:  INTEL
+
+Runtime environment variables:
+  CRAYPAT_ALPS_COMPONENT=/opt/cray/pe/perftools/7.1.1/sbin/pat_alps
+  CRAYPAT_COMPILER_OPTIONS=1
+  CRAYPAT_LD_LIBRARY_PATH=/opt/cray/pe/gcc-libs:/opt/cray/gcc-libs:/opt/cray/pe/perftools/7.1.1/lib64
+  CRAYPAT_LITE=lite-samples
+  CRAYPAT_OPTS_EXECUTABLE=libexec64/opts
+  CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+  CRAYPE_VERSION=2.6.2
+  CRAY_LIBSCI_VERSION=19.06.1
+  DVS_VERSION=0.9.0
+  HUGETLB_DEFAULT_PAGE_SIZE=2M
+  HUGETLB_ELFMAP=W
+  HUGETLB_FORCE_ELFMAP=yes+
+  HUGETLB_MORECORE=yes
+  HUGETLB_MORECORE_HEAPBASE=10000000000
+  HUGETLB_VERBOSE=0
+  INTEL_MAJOR_VERSION=19
+  INTEL_MINOR_VERSION=19
+  INTEL_VERSION=19.0.3.199
+  LIBSCI_VERSION=19.06.1
+  MODULE_VERSION=3.2.11.4
+  MODULE_VERSION_STACK=3.2.11.4
+  MPICH_ABORT_ON_ERROR=1
+  MPICH_DIR=/opt/cray/pe/mpt/7.7.10/gni/mpich-intel/16.0
+  MPICH_GNI_ROUTING_MODE=ADAPTIVE_3
+  MPICH_MPIIO_DVS_MAXNODES=28
+  PAT_BUILD_PAPI_LIBDIR=/opt/cray/pe/papi/5.7.0.2/lib64
+  PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+  PERFTOOLS_VERSION=7.1.1
+  PMI_CONTROL_PORT=63207
+  PMI_CRAY_NO_SMP_ORDER=0
+  PMI_GNI_COOKIE=4283891712:2248671232
+  PMI_GNI_DEV_ID=0
+  PMI_GNI_LOC_ADDR=4235:4235
+  PMI_GNI_PTAG=123:124
+  PMI_NO_FORK=1
+
+Report time environment variables:
+    CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+    PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+
+Number of MPI control variables collected:  108
+
+  (To see the list, specify: -s mpi_cvar=show)
+
+Report command line options:  -o craypat_qmcpack.txt
+
+Operating system:
+  Linux 4.12.14-150.17_5.0.92-cray_ari_c #1 SMP Wed Dec 2 16:40:47 UTC 2020 (0d561ce)
+
+Instrumentation overhead could not be estimated.
+
+Number of traced functions that were called:  29
+
+  (To see the list, specify:  -s traced_functions=show)
+

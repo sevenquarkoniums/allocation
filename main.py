@@ -24,7 +24,7 @@ def main():
     #al.process(mode='rtrstall', counterSaved=0, saveFolder='counterOSU')
     #al.analyzeAlloc()
     #al.processFix(app='lammps', onlyTime=0, getSpan=0, ptile=1)
-    al.processNeDD(app='milc', getdiff=0, two=1)
+    al.processNeDD(app='miniMD', getdiff=0, two=1)
     #al.calcNode()
     #al.test()
     #al.getData(int(sys.argv[1]), int(sys.argv[2]))
@@ -918,7 +918,7 @@ class analysis(ldms):
             df.to_csv('resultFix_%s3.csv' % app, index=False)
         else:
             df.to_csv('resultFix_%s.csv' % app, index=False)
-        print('Time processed.')
+        print('Time processed.') # have been moved into folder cluster/
 
         if onlyTime:
             sys.exit(0)
@@ -1032,14 +1032,13 @@ class analysis(ldms):
         dfFlit['yellowGPC'] = [flit[x] for x in range(4, 4*run+1, 4)]
         if ptile:
             dfFlit.to_csv('fixGPC_autotime_%s_nodeflit.csv' % app, index=False)
-        print('finished.')
+        print('finished.') # have been moved into folder cluster/
 
     def processNeDD(self, app, getdiff, two):
         if two:
             cols = ['run','nedd','lowerRouterStall','fewerSwitch','random','antinedd']
-            suffix = '%s' % app
-            f = 'NeDDTwojob_%s.out' % suffix 
-            outname = 'NeDDTwoproc_miniMD_milc_2.csv'
+            f = 'NeDDTwojob_qmcpack_miniMD_2.out'
+            outname = 'NeDDTwoproc_qmcpack_miniMD_2.csv'
         else:
             cols += ['fewerNoCong']
             suffix = '%s_201_new' % app

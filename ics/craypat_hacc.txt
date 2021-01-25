@@ -1,0 +1,735 @@
+CrayPat/X:  Version 7.1.1 Revision 7c0ddd79b  08/19/19 16:58:46
+
+Number of PEs (MPI ranks):   2,048
+                           
+Numbers of PEs per Node:        64  PEs on each of  32  Nodes
+                           
+Numbers of Threads per PE:       1
+                           
+Number of Cores per Socket:     68
+
+Execution start time:  Fri Jan 22 23:01:18 2021
+
+System name and speed:  nid03161  1.401 GHz (nominal)
+
+Intel Knights Landing CPU  Family:  6  Model: 87  Stepping:  1
+
+DRAM:  96 GiB DDR4-2400 on 1.4 GHz nodes
+
+MCDRAM: 7.2 GHz, 16 GiB available as quad, cache (100% cache)
+
+Current path to data file:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/HACC/HACC_1_7/test/hacc_tpm+pat+136297-3161t   (RTS, 256 data files)
+
+
+Notes for table 1:
+
+  This table shows functions that have significant exclusive time,
+    averaged across ranks.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile ...
+
+Table 1:  Profile by Function Group and Function
+
+  Time% |      Time |     Imb. |   Imb. |    Calls | Group
+        |           |     Time |  Time% |          |  Function
+        |           |          |        |          |   PE=HIDE
+       
+ 100.0% | 48.269197 |       -- |     -- | 10,771.0 | Total
+|-------------------------------------------------------------------------
+|  49.7% | 23.995276 |       -- |     -- | 10,652.0 | MPI
+||------------------------------------------------------------------------
+||  34.3% | 16.536326 | 1.859123 |  10.1% |  3,744.0 | MPI_Wait
+||   8.1% |  3.888558 | 2.666996 |  40.7% |     26.0 | MPI_Cart_create
+||   6.9% |  3.339687 | 3.156321 |  48.6% |    312.0 | MPI_Waitall
+||========================================================================
+|  45.7% | 22.041331 | 5.260982 |  19.3% |      1.0 | USER
+||------------------------------------------------------------------------
+||  45.7% | 22.041331 | 5.260982 |  19.3% |      1.0 | main
+||========================================================================
+|   4.6% |  2.232590 |       -- |     -- |    118.0 | MPI_SYNC
+||------------------------------------------------------------------------
+||   2.6% |  1.231715 | 1.231641 | 100.0% |      1.0 | MPI_Init_thread(sync)
+||   1.4% |  0.653113 | 0.537547 |  82.3% |     51.0 | MPI_Allreduce(sync)
+|=========================================================================
+
+Notes for table 2:
+
+  This table shows functions that have the most significant exclusive
+    time, taking the maximum time across ranks and threads.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O profile_max ...
+
+Table 2:  Profile of maximum function times
+
+  Time% |      Time |     Imb. |   Imb. | Function
+        |           |     Time |  Time% |  PE=[max,min]
+|--------------------------------------------------------------
+| 100.0% | 27.302313 | 5.260982 |  19.3% | main
+||-------------------------------------------------------------
+|| 100.0% | 27.302313 |       -- |     -- | pe.0
+||  70.7% | 19.312421 |       -- |     -- | pe.1679
+||=============================================================
+|  67.4% | 18.395449 | 1.859123 |  10.1% | MPI_Wait
+||-------------------------------------------------------------
+||  67.4% | 18.395449 |       -- |     -- | pe.2037
+||  24.4% |  6.648279 |       -- |     -- | pe.0
+||=============================================================
+|  24.0% |  6.555553 | 2.666996 |  40.7% | MPI_Cart_create
+||-------------------------------------------------------------
+||  24.0% |  6.555553 |       -- |     -- | pe.1679
+||   3.3% |  0.910971 |       -- |     -- | pe.1631
+||=============================================================
+|  23.8% |  6.496007 | 3.156321 |  48.6% | MPI_Waitall
+||-------------------------------------------------------------
+||  23.8% |  6.496007 |       -- |     -- | pe.0
+||   7.3% |  1.981810 |       -- |     -- | pe.1997
+||=============================================================
+|   5.5% |  1.488202 | 0.537547 |  82.3% | MPI_Allreduce(sync)
+||-------------------------------------------------------------
+||   5.5% |  1.488202 |       -- |     -- | pe.8
+||   0.4% |  0.115566 |       -- |     -- | pe.1910
+||=============================================================
+|   4.6% |  1.266519 | 1.231641 | 100.0% | MPI_Init_thread(sync)
+||-------------------------------------------------------------
+||   4.6% |  1.266519 |       -- |     -- | pe.574
+||   0.0% |  0.000074 |       -- |     -- | pe.787
+||=============================================================
+|   1.5% |  0.414401 | 0.291359 |  83.8% | MPI_Barrier(sync)
+||-------------------------------------------------------------
+||   1.5% |  0.414401 |       -- |     -- | pe.14
+||   0.2% |  0.056304 |       -- |     -- | pe.1724
+|==============================================================
+
+Observation:  MPI Grid Detection
+
+    There appears to be point-to-point MPI communication in a 512 X 2 X
+    2 grid pattern. The 49.7% of the total execution time spent in MPI
+    functions might be reduced with a rank order that maximizes
+    communication between ranks on the same node. The effect of several
+    rank orders is estimated below.
+
+    No custom rank order was found that is better than the RoundRobin
+    order.
+
+    Rank Order    On-Node    On-Node  MPICH_RANK_REORDER_METHOD
+                 Bytes/PE  Bytes/PE%  
+                            of Total  
+                            Bytes/PE  
+
+    RoundRobin  7.298e+11     40.15%  0
+          Fold  6.649e+11     36.58%  2
+           SMP  5.885e+11     32.38%  1
+
+
+Observation:  Metric-Based Rank Order
+
+    No rank order was suggested based on the USER Time metric because
+    that metric was already well balanced across the nodes.
+
+
+Observation:  MPI utilization
+
+    The time spent on overall MPI communications is relatively high. 
+    Functions and callsites responsible for consuming the most time can
+    be found in the table generated by pat_report -O callers+src (within
+    the MPI group).
+
+
+Notes for table 3:
+
+  This table shows the ranks with maximum, mean, and minimum time for
+    functions with significant time, within the function groups. It
+    also shows MPI message statistics for functions in the MPI group.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O load_balance_m ...
+
+Table 3:  Load Balance with MPI Message Stats
+
+  Time% |      Time | MPI Msg | MPI Msg Bytes |    Avg MPI | Group
+        |           |   Count |               |   Msg Size |  PE=[mmm]
+       
+ 100.0% | 48.269197 | 2,287.0 | 944,556,048.5 | 413,010.95 | Total
+|---------------------------------------------------------------------
+|  49.7% | 23.995276 | 2,287.0 | 944,556,048.5 | 413,010.95 | MPI
+||--------------------------------------------------------------------
+||  56.1% | 27.090719 | 2,287.0 | 944,554,352.0 | 413,010.21 | pe.1679
+||  49.8% | 24.026455 | 2,287.0 | 944,547,266.0 | 413,007.11 | pe.1444
+||  37.1% | 17.893689 | 2,287.0 | 944,540,442.0 | 413,004.13 | pe.0
+||====================================================================
+|  45.7% | 22.041331 |     0.0 |           0.0 |         -- | USER
+||--------------------------------------------------------------------
+||  56.6% | 27.302313 |     0.0 |           0.0 |         -- | pe.0
+||  45.6% | 21.991746 |     0.0 |           0.0 |         -- | pe.1418
+||  40.0% | 19.312421 |     0.0 |           0.0 |         -- | pe.1679
+||====================================================================
+|   4.6% |  2.232590 |     0.0 |           0.0 |         -- | MPI_SYNC
+||--------------------------------------------------------------------
+||   6.5% |  3.139915 |     0.0 |           0.0 |         -- | pe.8
+||   4.5% |  2.157676 |     0.0 |           0.0 |         -- | pe.1062
+||   1.3% |  0.632469 |     0.0 |           0.0 |         -- | pe.1687
+|=====================================================================
+
+Notes for table 4:
+
+  This table shows the MPI library functions that are used to send a
+    significant number of bytes, taking the average across sender
+    ranks of the sum of bytes sent from the sender to all destination
+    ranks. It also shows how many bytes are attributable to each of
+    its call paths. It also shows a count of messages and the number
+    of messages that fall into each bin of message sizes. For each
+    path, it shows the ranks that send the minimum, mean, and maximum
+    number of bytes.
+    Note that this table includes both point to point and  collective
+    communications, using estimates for the latter based on a naive
+    implementation using the former, and does not reflect
+    optimizations by the MPI library.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O mpi_callers ...
+
+Table 4:  MPI Message Stats by Caller
+
+Function / Caller / PE=[mmm]
+
+  
+=============================================================================
+  Total
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                       100.0% 
+  MPI Msg Bytes                 944,556,048.5 
+  MPI Msg Count                       2,287.0 msgs
+  MsgSz <16 Count                        66.9 msgs
+  16<= MsgSz <256 Count                   3.9 msgs
+  256<= MsgSz <4KiB Count                16.1 msgs
+  4KiB<= MsgSz <64KiB Count             592.1 msgs
+  64KiB<= MsgSz <1MiB Count           1,464.0 msgs
+  1MiB<= MsgSz <16MiB Count             144.0 msgs
+=============================================================================
+  MPI_Isend
+-----------------------------------------------------------------------------
+  MPI Msg Bytes%                       100.0% 
+  MPI Msg Bytes                 944,527,356.5 
+  MPI Msg Count                       2,236.0 msgs
+  MsgSz <16 Count                        20.9 msgs
+  16<= MsgSz <256 Count                   2.9 msgs
+  256<= MsgSz <4KiB Count                16.1 msgs
+  4KiB<= MsgSz <64KiB Count             588.1 msgs
+  64KiB<= MsgSz <1MiB Count           1,464.0 msgs
+  1MiB<= MsgSz <16MiB Count             144.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        80.5% 
+  MPI Msg Bytes                 760,217,600.0 
+  MPI Msg Count                       1,872.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             576.0 msgs
+  64KiB<= MsgSz <1MiB Count           1,152.0 msgs
+  1MiB<= MsgSz <16MiB Count             144.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        42.9% 
+  MPI Msg Bytes                 405,274,624.0 
+  MPI Msg Count                         960.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             288.0 msgs
+  64KiB<= MsgSz <1MiB Count             576.0 msgs
+  1MiB<= MsgSz <16MiB Count              96.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3 / map2_poisson_backward_gradient
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        32.0% 
+  MPI Msg Bytes                 301,989,888.0 
+  MPI Msg Count                         480.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             384.0 msgs
+  1MiB<= MsgSz <16MiB Count              96.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3 / map2_poisson_backward_gradient / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        32.0% 
+  MPI Msg Bytes                 301,989,888.0 
+  MPI Msg Count                         480.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             384.0 msgs
+  1MiB<= MsgSz <16MiB Count              96.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3 / map2_poisson_backward_gradient / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        32.0% 
+  MPI Msg Bytes                 301,989,888.0 
+  MPI Msg Count                         480.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             384.0 msgs
+  1MiB<= MsgSz <16MiB Count              96.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3 / map2_poisson_backward_gradient / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        32.0% 
+  MPI Msg Bytes                 301,989,888.0 
+  MPI Msg Count                         480.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             384.0 msgs
+  1MiB<= MsgSz <16MiB Count              96.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3 / map2_poisson_backward_gradient / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        32.0% 
+  MPI Msg Bytes                 301,989,888.0 
+  MPI Msg Count                         480.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             384.0 msgs
+  1MiB<= MsgSz <16MiB Count              96.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3 / map2_poisson_forward
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        10.7% 
+  MPI Msg Bytes                 100,663,296.0 
+  MPI Msg Count                         192.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             192.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3 / map2_poisson_forward / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        10.7% 
+  MPI Msg Bytes                 100,663,296.0 
+  MPI Msg Count                         192.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             192.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3 / map2_poisson_forward / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        10.7% 
+  MPI Msg Bytes                 100,663,296.0 
+  MPI Msg Count                         192.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             192.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3 / map2_poisson_forward / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        10.7% 
+  MPI Msg Bytes                 100,663,296.0 
+  MPI Msg Count                         192.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             192.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_2_to_3 / map2_poisson_forward / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        10.7% 
+  MPI Msg Bytes                 100,663,296.0 
+  MPI Msg Count                         192.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             192.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        37.6% 
+  MPI Msg Bytes                 354,942,976.0 
+  MPI Msg Count                         912.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count             288.0 msgs
+  64KiB<= MsgSz <1MiB Count             576.0 msgs
+  1MiB<= MsgSz <16MiB Count              48.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2 / map2_poisson_backward_gradient
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        21.3% 
+  MPI Msg Bytes                 201,326,592.0 
+  MPI Msg Count                         384.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             384.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2 / map2_poisson_backward_gradient / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        21.3% 
+  MPI Msg Bytes                 201,326,592.0 
+  MPI Msg Count                         384.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             384.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2 / map2_poisson_backward_gradient / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        21.3% 
+  MPI Msg Bytes                 201,326,592.0 
+  MPI Msg Count                         384.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             384.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2 / map2_poisson_backward_gradient / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        21.3% 
+  MPI Msg Bytes                 201,326,592.0 
+  MPI Msg Count                         384.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             384.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2 / map2_poisson_backward_gradient / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        21.3% 
+  MPI Msg Bytes                 201,326,592.0 
+  MPI Msg Count                         384.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             384.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2 / map2_poisson_forward
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        16.0% 
+  MPI Msg Bytes                 150,994,944.0 
+  MPI Msg Count                         240.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             192.0 msgs
+  1MiB<= MsgSz <16MiB Count              48.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2 / map2_poisson_forward / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        16.0% 
+  MPI Msg Bytes                 150,994,944.0 
+  MPI Msg Count                         240.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             192.0 msgs
+  1MiB<= MsgSz <16MiB Count              48.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2 / map2_poisson_forward / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        16.0% 
+  MPI Msg Bytes                 150,994,944.0 
+  MPI Msg Count                         240.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             192.0 msgs
+  1MiB<= MsgSz <16MiB Count              48.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2 / map2_poisson_forward / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        16.0% 
+  MPI Msg Bytes                 150,994,944.0 
+  MPI Msg Count                         240.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             192.0 msgs
+  1MiB<= MsgSz <16MiB Count              48.0 msgs
+==============================================================================
+  MPI_Isend / redistribute_2_and_3 / distribution_3_to_2 / map2_poisson_forward / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        16.0% 
+  MPI Msg Bytes                 150,994,944.0 
+  MPI Msg Count                         240.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             192.0 msgs
+  1MiB<= MsgSz <16MiB Count              48.0 msgs
+==============================================================================
+==============================================================================
+  MPI_Isend / GridExchange::exchange
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        19.5% 
+  MPI Msg Bytes                 184,025,088.0 
+  MPI Msg Count                         312.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             312.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / GridExchange::exchange / GridExchange::exchangeGrid
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        19.5% 
+  MPI Msg Bytes                 184,025,088.0 
+  MPI Msg Count                         312.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             312.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / GridExchange::exchange / GridExchange::exchangeGrid / map2_poisson_backward_gradient
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        19.5% 
+  MPI Msg Bytes                 184,025,088.0 
+  MPI Msg Count                         312.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             312.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / GridExchange::exchange / GridExchange::exchangeGrid / map2_poisson_backward_gradient / main
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        19.5% 
+  MPI Msg Bytes                 184,025,088.0 
+  MPI Msg Count                         312.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             312.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / GridExchange::exchange / GridExchange::exchangeGrid / map2_poisson_backward_gradient / main / pe.0
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        19.5% 
+  MPI Msg Bytes                 184,025,088.0 
+  MPI Msg Count                         312.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             312.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / GridExchange::exchange / GridExchange::exchangeGrid / map2_poisson_backward_gradient / main / pe.1024
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        19.5% 
+  MPI Msg Bytes                 184,025,088.0 
+  MPI Msg Count                         312.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             312.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+  MPI_Isend / GridExchange::exchange / GridExchange::exchangeGrid / map2_poisson_backward_gradient / main / pe.2047
+------------------------------------------------------------------------------
+  MPI Msg Bytes%                        19.5% 
+  MPI Msg Bytes                 184,025,088.0 
+  MPI Msg Count                         312.0 msgs
+  MsgSz <16 Count                         0.0 msgs
+  16<= MsgSz <256 Count                   0.0 msgs
+  256<= MsgSz <4KiB Count                 0.0 msgs
+  4KiB<= MsgSz <64KiB Count               0.0 msgs
+  64KiB<= MsgSz <1MiB Count             312.0 msgs
+  1MiB<= MsgSz <16MiB Count               0.0 msgs
+==============================================================================
+
+Notes for table 5:
+
+  This table shows energy and power usage for the nodes with the
+    maximum, mean, and minimum usage, as well as the sum of usage over
+    all nodes.
+    Energy and power for accelerators is also shown, if applicable.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_energy ...
+
+Table 5:  Program energy and power usage (from Cray PM)
+
+    Node |      Node |   Process | Node Id=[mmm]
+  Energy | Power (W) |      Time |  PE=HIDE
+     (J) |           |           | 
+        
+ 357,904 | 6,221.963 | 57.522614 | Total
+|-----------------------------------------------
+|  14,776 |   194.712 | 75.888614 | nid.5993
+|  10,863 |   198.869 | 54.621829 | nid.3162
+|   9,415 |   184.708 | 50.973354 | nid.3493
+|===============================================
+
+Notes for table 6:
+
+  This table shows total wall clock time for the ranks with the
+    maximum, mean, and minimum time, as well as the average across
+    ranks.
+    It also shows maximum memory usage from /proc/self/numa_maps for
+    those ranks, and on average.  The usage is total size of all
+    pages, including huge pages, that were actually mapped into
+    physical memory from both private and shared memory segments.
+  For further explanation, see the "General table notes" below,
+    or use:  pat_report -v -O program_time ...
+
+Table 6:  Wall Clock Time, Memory High Water Mark
+
+    Process |   Process | PE=[mmm]
+       Time |     HiMem | 
+            | (MiBytes) | 
+           
+  57.522614 |     111.4 | Total
+|---------------------------------
+| 453.282988 |     111.9 | pe.638
+|  50.970730 |     110.7 | pe.641
+|  50.490392 |     111.6 | pe.494
+|=================================
+
+========================  Additional details  ========================
+
+
+
+General table notes:
+
+    The default notes for a table are based on the default definition of
+    the table, and do not account for the effects of command-line options
+    that may modify the content of the table.
+    
+    Detailed notes, produced by the pat_report -v option, do account for
+    all command-line options, and also show how data is aggregated, and
+    if the table content is limited by thresholds, rank selections, etc.
+    
+    An imbalance metric in a line is based on values in main threads
+    across multiple ranks, or on values across all threads, as applicable.
+    
+    An imbalance percent in a line is relative to the maximum value
+    for that line across ranks or threads, as applicable.
+    
+Experiment:  trace
+
+Original path to data file:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/HACC/HACC_1_7/test/hacc_tpm+pat+136297-3161t/xf-files   (RTS, 2048 data files)
+
+Original program:
+  /global/u1/c/cookbg/mpi/HACC/HACC_1_7/src/cpu/cori/hacc_tpm
+
+Instrumented with:  pat_build -g mpi hacc_tpm
+
+Instrumented program:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/HACC/HACC_1_7/test/../src/cpu/cori/hacc_tpm+pat
+
+Program invocation:
+  /global/project/projectdirs/m3231/yijia/cook/mpi/HACC/HACC_1_7/test/../src/cpu/cori/hacc_tpm+pat indat cmbM000.tf m000 INIT ALL_TO_ALL -w -R -N 32 -a final -f refresh -t 16x16x8
+
+Exit Status:  0 for 2,048 PEs
+
+Memory pagesize:  4 KiB
+
+Memory hugepagesize:  2 MiB
+
+Programming environment:  INTEL
+
+Runtime environment variables:
+  CRAYPAT_ALPS_COMPONENT=/opt/cray/pe/perftools/7.1.1/sbin/pat_alps
+  CRAYPAT_COMPILER_OPTIONS=1
+  CRAYPAT_LD_LIBRARY_PATH=/opt/cray/pe/gcc-libs:/opt/cray/gcc-libs:/opt/cray/pe/perftools/7.1.1/lib64
+  CRAYPAT_LITE=lite-samples
+  CRAYPAT_OPTS_EXECUTABLE=libexec64/opts
+  CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+  CRAYPE_VERSION=2.6.2
+  CRAY_LIBSCI_VERSION=19.06.1
+  DVS_VERSION=0.9.0
+  HUGETLB_DEFAULT_PAGE_SIZE=2M
+  HUGETLB_ELFMAP=W
+  HUGETLB_FORCE_ELFMAP=yes+
+  HUGETLB_MORECORE=yes
+  HUGETLB_MORECORE_HEAPBASE=10000000000
+  HUGETLB_VERBOSE=0
+  INTEL_MAJOR_VERSION=19
+  INTEL_MINOR_VERSION=19
+  INTEL_VERSION=19.0.3.199
+  LIBSCI_VERSION=19.06.1
+  MODULE_VERSION=3.2.11.4
+  MODULE_VERSION_STACK=3.2.11.4
+  MPICH_ABORT_ON_ERROR=1
+  MPICH_DIR=/opt/cray/pe/mpt/7.7.10/gni/mpich-intel/16.0
+  MPICH_GNI_ROUTING_MODE=ADAPTIVE_3
+  MPICH_MPIIO_DVS_MAXNODES=28
+  PAT_BUILD_PAPI_LIBDIR=/opt/cray/pe/papi/5.7.0.2/lib64
+  PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+  PERFTOOLS_VERSION=7.1.1
+  PMI_CONTROL_PORT=63960
+  PMI_CRAY_NO_SMP_ORDER=0
+  PMI_GNI_COOKIE=4119134208:4125360128
+  PMI_GNI_DEV_ID=0
+  PMI_GNI_LOC_ADDR=4185:4185
+  PMI_GNI_PTAG=123:124
+  PMI_NO_FORK=1
+
+Report time environment variables:
+    CRAYPAT_ROOT=/opt/cray/pe/perftools/7.1.1
+    PAT_REPORT_PRUNE_NAME=_cray$mt_execute_,_cray$mt_start_,__cray_hwpc_,f_cray_hwpc_,cstart,__pat_,pat_region_,PAT_,OMP.slave_loop,slave_entry,_new_slave_entry,_thread_pool_slave_entry,THREAD_POOL_join,__libc_start_main,_start,__start,start_thread,__wrap_,UPC_ADIO_,_upc_,upc_,__caf_,__pgas_,syscall,__device_stub
+
+Number of MPI control variables collected:  108
+
+  (To see the list, specify: -s mpi_cvar=show)
+
+Report command line options:  -o craypat_hacc.txt
+
+Operating system:
+  Linux 4.12.14-150.17_5.0.92-cray_ari_c #1 SMP Wed Dec 2 16:40:47 UTC 2020 (0d561ce)
+
+Instrumentation overhead could not be estimated.
+
+Number of traced functions that were called:  20
+
+  (To see the list, specify:  -s traced_functions=show)
+
